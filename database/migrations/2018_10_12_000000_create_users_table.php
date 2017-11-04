@@ -33,9 +33,12 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->rememberToken();
 
+        });
+        Schema::table('users', function($table) {
             $table->foreign('region_id')->references('id')->on('regions')->onDelete('set null');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null');
         });
+
     }
 
     /**
