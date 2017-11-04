@@ -16,8 +16,12 @@ class CreateRegionsTable extends Migration
         Schema::create('regions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->integer('leader_id')->unsigned();
             $table->timestamps();
+            $table->foreign('leader_id')->references('id')->on('leaders')->onDelete('set null');
+
         });
+
     }
 
     /**

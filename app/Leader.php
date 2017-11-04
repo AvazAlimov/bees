@@ -27,4 +27,8 @@ class Leader extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function region(){
+        return $this->hasOne('App\Region');
+    }
 }
