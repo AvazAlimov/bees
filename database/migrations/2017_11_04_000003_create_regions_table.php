@@ -18,10 +18,10 @@ class CreateRegionsTable extends Migration
             $table->string('name')->unique();
             $table->integer('leader_id')->unsigned();
             $table->timestamps();
-            $table->foreign('leader_id')->references('id')->on('leaders')->onDelete('set null');
-
         });
-
+        Schema::table('regions', function ($table){
+           $table->foreign('leader_id')->references('id')->on('leaders')->onDelete('set null');
+        });
     }
 
     /**
