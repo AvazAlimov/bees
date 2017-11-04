@@ -19,25 +19,22 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->tinyInteger('type');
-
-            $table->rememberToken();
-
-            $table->integer('region_id')->unsigned();
-            $table->integer('city_id')->unsigned();
+            $table->integer('region_id')->nullable()->unsigned();
+            $table->integer('city_id')->nullable()->unsigned();
             $table->string('neighborhood');
             $table->string('subject');
             $table->date('reg_date');
-            $table->string('inn',9);
-            $table->string('mfo',5);
+            $table->string('inn', 9);
+            $table->string('mfo', 5);
             $table->string('address');
-            $table->string('tel',13);
+            $table->string('phone', 13);
             $table->string('fullName');
             $table->integer('labors')->unsigned();
-
-            $table->foreign('region_id')->references('id')->on('regions');
-            $table->foreign('city_id')->references('id')->on('cities');
-
             $table->timestamps();
+            $table->rememberToken();
+
+            $table->foreign('region_id')->references('id')->on('regions')->onDelete('set null');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null');
         });
     }
 
