@@ -28,19 +28,9 @@
                     <label for="region" class="col-md-2">Viloyat:</label>
                     <div class="col-md-10">
                         <select class="form-control" name="region" id="region">
-                            <option value="0">Tashkent City</option>
-                            <option value="1">Tashkent</option>
-                            <option value="2">Andijan</option>
-                            <option value="3">Fergana</option>
-                            <option value="4">Namangan</option>
-                            <option value="5">Jizzakh</option>
-                            <option value="6">Samarkand</option>
-                            <option value="7">Kashkadarya</option>
-                            <option value="8">Bukhara</option>
-                            <option value="9">Nukus</option>
-                            <option value="10">Khorezm</option>
-                            <option value="11">Termiz</option>
-                            <option value="12">Karakalpak</option>
+                            @foreach($regions as $region)
+                                <option value="{{ $region->id }}">{{ $region->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
