@@ -24,21 +24,30 @@
     <body>
         <form action="{{route('web.submit.form')}}" method="post">
             {{csrf_field()}}
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="container" id="card">
                 <div class="col-md-12 form-group">
                     <label for="region" class="col-md-2">Viloyat:</label>
                     <div class="col-md-10">
                         <select class="form-control" name="region_id" id="region">
                             @foreach($regions as $region)
-                                <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                <option value="{{$region->id}}">{{ $region->name }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
-                    <label for="city" class="col-md-2">Tuman:</label>
+                    <label for="city_id" class="col-md-2">Tuman:</label>
                     <div class="col-md-10">
-                        <select class="form-control" name="city_id" id="region">
+                        <select class="form-control" name="city_id" id="city_id">
                             @foreach($cities as $city)
                                 <option value="{{$city->id}}">{{$city->name}}</option>
                             @endforeach
@@ -48,69 +57,69 @@
                 <div class="col-md-12 form-group">
                     <label for="neighborhood" class="col-md-2">Mahalla:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="neighborhood" id="neighborhood">
+                        <input type="text" class="form-control" name="neighborhood" id="neighborhood" value="{{old('neighborhood')}}">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="subject" class="col-md-2">Subyekt nomi:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="subject" id="subject">
+                        <input type="text" class="form-control" name="subject" id="subject" value="{{old('subject')}}">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="reg_date" class="col-md-2">Sana:</label>
                     <div class="col-md-10">
-                        <input type="date" class="form-control" name="reg_date" id="reg_date">
+                        <input type="date" class="form-control" name="reg_date" id="reg_date" value="{{old('reg_date')}}">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="inn" class="col-md-2">INN:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="inn" id="inn">
+                        <input type="text" class="form-control" name="inn" id="inn" value="{{old('inn')}}">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="mfo" class="col-md-2">Bank MFO:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="mfo" id="mfo">
+                        <input type="text" class="form-control" name="mfo" id="mfo" value="{{old('mfo')}}">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="address" class="col-md-2">Manzil:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="address" id="address">
+                        <input type="text" class="form-control" name="address" id="address" value="{{old('address')}}">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="phone" class="col-md-2">Telefon:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="phone" id="phone">
+                        <input type="text" class="form-control" name="phone" id="phone" value="{{old('phone')}}">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="email" class="col-md-2">Email:</label>
                     <div class="col-md-10">
-                        <input type="email" class="form-control" name="email" id="email">
+                        <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="fullName" class="col-md-2">Direktor:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="fullName" id="fullName">
+                        <input type="text" class="form-control" name="fullName" id="fullName" value="{{old('fullName')}}">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="activity" class="col-md-2">Faoliyat:</label>
                     <div class="col-md-10">
                             @foreach($activities as $activity)
-                                <input type="checkbox" name="activity" value="{{$activity->id}}" id="activity"> {{$activity->name}}<br>
+                                <input type="checkbox" name="activities[]" value="{{$activity->id}}" id="activity"> {{$activity->name}}<br>
                             @endforeach
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="labors" class="col-md-2">Ishchilar soni:</label>
                     <div class="col-md-10">
-                        <input type="number" class="form-control" name="labors" id="labors">
+                        <input type="number" class="form-control" name="labors" id="labors" value="{{old('labors')}}">
                     </div>
                 </div>
 

@@ -9,6 +9,7 @@ use App\Activity;
 use App\Region;
 use App\City;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class WebController extends Controller
 {
@@ -20,8 +21,8 @@ class WebController extends Controller
         return view('welcome')->withRegions($regions)->withCities($cities)->withActivities($activities);
     }
     public function submitForm(Request $request){
-        dd($request->all());
-       $request->validate([
+
+        $validator = Validator::make($request->all(),[
            'region_id' => 'required|exists:regions,id',
            'city_id' => 'required|exists:cities,id',
            'neighborhood' => 'required|max:255',
@@ -33,9 +34,15 @@ class WebController extends Controller
            'phone' => 'required|max:13',
            'email'=> 'required|email',
            'fullName' => 'required|max:255',
-           'labors' => 'required|numeric|min:0|max:0',
+           'labors' => 'required|numeric|min:0',
        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $user = new User($request->all());
+        $user->type = 0;
         $user->username = 'U0000000';
         $password = str_random(8);
         $user->password = Hash::make($password);
@@ -44,5 +51,6 @@ class WebController extends Controller
         $user->update(['username' => 'U'.sprintf("%07d", $user->id)]);
         $user->activities()->sync($request->activities, false);
 
+        return redirect()->back();
     }
 }
