@@ -11,9 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/test', function (){
-    echo sprintf("%07d", 8);
-});
+Route::get('/', 'Web\WebController@showform');
