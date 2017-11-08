@@ -22,12 +22,13 @@
         </style>
     </head>
     <body>
-        <form action="">
+        <form action="{{route('web.submit.form')}}" method="post">
+            {{csrf_field()}}
             <div class="container" id="card">
                 <div class="col-md-12 form-group">
                     <label for="region" class="col-md-2">Viloyat:</label>
                     <div class="col-md-10">
-                        <select class="form-control" name="region" id="region">
+                        <select class="form-control" name="region_id" id="region">
                             @foreach($regions as $region)
                                 <option value="{{ $region->id }}">{{ $region->name }}</option>
                             @endforeach
@@ -37,17 +38,17 @@
                 <div class="col-md-12 form-group">
                     <label for="city" class="col-md-2">Tuman:</label>
                     <div class="col-md-10">
-                        <select class="form-control" name="city" id="region">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
+                        <select class="form-control" name="city_id" id="region">
+                            @foreach($cities as $city)
+                                <option value="{{$city->id}}">{{$city->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
-                    <label for="mahalla" class="col-md-2">Mahalla:</label>
+                    <label for="neighborhood" class="col-md-2">Mahalla:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="mahalla" id="mahalla">
+                        <input type="text" class="form-control" name="neighborhood" id="neighborhood">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
@@ -57,9 +58,9 @@
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
-                    <label for="date" class="col-md-2">Sana:</label>
+                    <label for="reg_date" class="col-md-2">Sana:</label>
                     <div class="col-md-10">
-                        <input type="date" class="form-control" name="date" id="date">
+                        <input type="date" class="form-control" name="reg_date" id="reg_date">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
@@ -93,22 +94,17 @@
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
-                    <label for="director" class="col-md-2">Direktor:</label>
+                    <label for="fullName" class="col-md-2">Direktor:</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="director" id="director">
+                        <input type="text" class="form-control" name="fullName" id="fullName">
                     </div>
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="activity" class="col-md-2">Faoliyat:</label>
                     <div class="col-md-10">
-                        <select name="activity" class="form-control" id="activity" multiple>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="1">3</option>
-                            <option value="2">4</option>
-                            <option value="1">5</option>
-                        </select>
+                            @foreach($activities as $activity)
+                                <input type="checkbox" name="activity" value="{{$activity->id}}" id="activity"> {{$activity->name}}<br>
+                            @endforeach
                     </div>
                 </div>
                 <div class="col-md-12 form-group">

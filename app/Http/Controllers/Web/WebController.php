@@ -20,6 +20,7 @@ class WebController extends Controller
         return view('welcome')->withRegions($regions)->withCities($cities)->withActivities($activities);
     }
     public function submitForm(Request $request){
+        dd($request->all());
        $request->validate([
            'region_id' => 'required|exists:regions,id',
            'city_id' => 'required|exists:cities,id',

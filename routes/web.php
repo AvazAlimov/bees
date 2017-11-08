@@ -11,4 +11,5 @@
 |
 */
 
-Route::get('/', 'Web\WebController@showform');
+Route::get('/', 'Web\WebController@showForm')->name('web.show.form');
+Route::post('/form_submit', 'Web\WebController@submitForm')->name('web.submit.form');
