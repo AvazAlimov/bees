@@ -21,6 +21,7 @@ class CreateLeadersTable extends Migration
             $table->string('firstName');
             $table->string('email');
             $table->string('phone');
+            $table->timestamps();
         });
     }
 

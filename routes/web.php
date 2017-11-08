@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', function (){
+    echo sprintf("%07d", 8);
+});
