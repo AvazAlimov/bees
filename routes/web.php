@@ -14,9 +14,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function (){
-   return view('main');
-});
+Route::get('/', 'Web\WebController@showForm1')->name('web.show.form1');
+
 //Route::get('/', 'Web\WebController@showForm')->name('web.show.form');
 Route::post('/form_submit', 'Web\WebController@submitForm')->name('web.submit.form');
 
