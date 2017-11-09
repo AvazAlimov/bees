@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/', 'Web\WebController@showForm')->name('web.show.form');
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function (){
+   return view('main');
+});
+//Route::get('/', 'Web\WebController@showForm')->name('web.show.form');
 Route::post('/form_submit', 'Web\WebController@submitForm')->name('web.submit.form');
 
 
