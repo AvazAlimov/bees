@@ -4,16 +4,25 @@
     <style>
         .jumbotron {
             min-height: 600px;
-            background: #17234E url("http://www.beyondpesticides.org/dailynewsblog/wp-content/uploads/2013/07/hives.jpg") no-repeat left;
+            background: #17234E url("http://www.beyondpesticides.org/dailynewsblog/wp-content/uploads/2013/07/hives.jpg") no-repeat top;
             -webkit-background-size: cover;
             background-size: cover;
             border-radius: 0;
         }
+
+        #steps {
+            min-height: 400px;
+            background: #17234E url("https://www.muralswallpaper.com/app/uploads/honeycomb-texture-wallpaper-mural-plain.jpg") no-repeat top;
+            -webkit-background-size: cover;
+            background-size: cover;
+            border-radius: 0;
+        }
+
     </style>
 @endsection
 
 @section('content')
-    <div class="jumbotron">
+    <div class="jumbotron bg-warning">
     </div>
 
     <div id="register">
@@ -99,5 +108,9 @@
             </div>
 
         </form>
+    </div>
+
+    <div id="steps">
+
     </div>
 @endsection
