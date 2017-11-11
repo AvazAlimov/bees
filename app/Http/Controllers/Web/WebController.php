@@ -52,12 +52,8 @@ class WebController extends Controller
         }
         $user = new User($request->all());
         $user->type = 0;
-        $user->username = 'U0000000';
-        $password = str_random(8);
-        $user->password = Hash::make($password);
         $user->save();
 
-        $user->update(['username' => 'U'.sprintf("%07d", $user->id)]);
         $user->activities()->sync($request->activities, false);
 
         return redirect()->back();

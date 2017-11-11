@@ -40,4 +40,10 @@ class User extends Authenticatable
     public function region(){
         return $this->belongsTo('App\Region');
     }
+
+
+    public function routeNotificationForMail()
+    {
+        return $this->email;
+    }
 }

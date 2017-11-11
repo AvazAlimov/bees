@@ -31,4 +31,7 @@ class Leader extends Authenticatable
     public function region(){
         return $this->hasOne('App\Region');
     }
+    public function users(){
+        return $this->hasManyThrough('App\User','App\Region');
+    }
 }

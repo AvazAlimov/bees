@@ -15,9 +15,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Web\WebController@showForm1')->name('web.show.form1');
-
+Route::prefix('leader')->group(function(){
+    Route::get('login', 'Auth\LeaderLoginController@showLoginForm')->name('leader.login');
+    Route::post('login/submit', 'Auth\LeaderLoginController@login')->name('leader.login.submit');
+    Route::get('logout', 'Auth\LeaderLoginController@logout')->name('leader.logout');
+    Route::get('/', 'Leader\LeaderController@requestList')->name('leader.index');
+    Route::post('/confirm/user/{id}', 'Leader\LeaderController@acceptUser')->name('leader.user.accept');
+});
 //Route::get('/', 'Web\WebController@showForm')->name('web.show.form');
 Route::post('/form_submit', 'Web\WebController@submitForm')->name('web.submit.form');
+
 
 
 Route::get('setlocale/{locale}', function ($locale) {

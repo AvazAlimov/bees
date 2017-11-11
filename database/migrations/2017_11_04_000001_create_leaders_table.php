@@ -22,6 +22,7 @@ class CreateLeadersTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->timestamps();
+            $table->rememberToken();
         });
     }
 
