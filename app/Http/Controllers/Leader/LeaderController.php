@@ -26,6 +26,7 @@ class LeaderController extends Controller
         $password = str_random(8);
         $user->update(['username'=>'U'.sprintf("%07d", $user->id),'password'=>Hash::make($password)]);
         $data = ['username' => $user->username, 'password' => $password, 'name' => $user->fullName, 'url' =>'/login'];
+
         $user->notify(new UserConfirmationNotification($data));
         /*Mail::send(['html' => 'email.email-confirmation'], ['data' => $data], function ($message) use ($data) {
             $message->to($data['email'], $data['name'])->subject('Email-confirmation');

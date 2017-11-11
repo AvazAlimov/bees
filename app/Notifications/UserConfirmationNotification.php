@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -10,7 +11,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 class UserConfirmationNotification extends Notification
 {
     use Queueable;
-
+    public $data;
     /**
      * Create a new notification instance.
      *
@@ -18,7 +19,7 @@ class UserConfirmationNotification extends Notification
      */
     public function __construct($data)
     {
-        $this->data =$data;
+        $this->data = $data;
     }
 
     /**
@@ -42,7 +43,7 @@ class UserConfirmationNotification extends Notification
     {
         return (new MailMessage)
             ->subject('Asalari Iniga Hushkelibsiz')
-            ->markdown('emails.user.confirmation', $this->data);
+            ->markdown('emails.user.confirmation',['data' => $this->data]);
     }
 
     /**
