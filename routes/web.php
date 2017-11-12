@@ -30,6 +30,27 @@ Route::prefix('admin')->group(function (){
     Route::post('login/submit', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
+    Route::prefix('region')->group(function (){
+        Route::get('show/{id}','Admin\AdminRegionController@show')->name('region.show');
+        Route::get('delete/{id}','Admin\AdminRegionController@destroy')->name('region.delete');
+        Route::get('create','Admin\AdminRegionController@create')->name('region.create');
+    });
+    Route::prefix('leader')->group(function (){
+        Route::get('show/{id}','Admin\AdminLeaderController@show')->name('leader.show');
+        Route::get('delete/{id}','Admin\AdminLeaderController@destroy')->name('leader.delete');
+        Route::get('create','Admin\AdminLeaderController@create')->name('leader.create');
+    });
+    Route::prefix('city')->group(function (){
+        Route::get('show/{id}','Admin\AdminCityController@show')->name('city.show');
+        Route::get('delete/{id}','Admin\AdminCityController@destroy')->name('city.delete');
+        Route::get('create','Admin\AdminCityController@create')->name('city.create');
+    });
+    Route::prefix('activity')->group(function (){
+        Route::get('show/{id}','Admin\AdminActivityController@show')->name('activity.show');
+        Route::get('delete/{id}','Admin\AdminActivityController@destroy')->name('activity.delete');
+        Route::get('create','Admin\AdminActivityController@create')->name('activity.create');
+    });
+
 });
 
 Route::get('setlocale/{locale}', function ($locale) {
