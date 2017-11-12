@@ -16,11 +16,7 @@
         }
 
         #steps {
-            min-height: 400px;
-            background: #17234E url("https://www.muralswallpaper.com/app/uploads/honeycomb-texture-wallpaper-mural-plain.jpg") no-repeat top;
-            -webkit-background-size: cover;
-            background-size: cover;
-            border-radius: 0;
+            background: rgba(0, 0, 0, 0) url("https://www.toptal.com/designers/subtlepatterns/patterns/sayagata-400px.png") repeat scroll 0 0;
         }
 
         .nav-link {
@@ -476,7 +472,7 @@
     </div>
 
     <div id="steps">
-
+        <h1>HI</h1>
     </div>
 @endsection
 
