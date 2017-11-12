@@ -14,7 +14,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'Web\WebController@showForm1')->name('web.show.form1');
+Route::get('/', 'Web\WebController@showForm')->name('web.show.form');
 Route::prefix('leader')->group(function(){
     Route::get('login', 'Auth\LeaderLoginController@showLoginForm')->name('leader.login');
     Route::post('login/submit', 'Auth\LeaderLoginController@login')->name('leader.login.submit');

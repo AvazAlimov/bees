@@ -18,16 +18,9 @@ class WebController extends Controller
         $cities= City::all();
         $activities = Activity::all();
 
-        return view('welcome')->withRegions($regions)->withCities($cities)->withActivities($activities);
-    }
-
-    public function showForm1(){
-        $regions = Region::all();
-        $cities= City::all();
-        $activities = Activity::all();
-
         return view('main')->withRegions($regions)->withCities($cities)->withActivities($activities);
     }
+
 
     public function submitForm(Request $request){
 
