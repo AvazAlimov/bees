@@ -13,38 +13,93 @@ use Illuminate\Support\Facades\Validator;
 
 class WebController extends Controller
 {
-    public function showForm(){
+    public function showForm($type = null)
+    {
         $regions = Region::all();
-        $cities= City::all();
+        $cities = City::all();
         $activities = Activity::all();
 
         return view('main')->withRegions($regions)->withCities($cities)->withActivities($activities);
     }
 
 
-    public function submitForm(Request $request){
+    public function submitForm(Request $request, $type)
+    {
+        if($type == 1) {
+            $validator = Validator::make($request->all(), [
+                'region_id' => 'required|exists:regions,id',
+                'city_id' => 'required|exists:cities,id',
+                'neighborhood' => 'required|max:255',
+                'subject' => 'required|max:255',
+                'reg_date' => 'required',
+                'inn' => 'required|digits:9',
+                'bank_name' => 'required',
+                'mfo' => 'required|digits:5',
+                'address' => 'required|max:255',
+                'phone' => 'required|max:13|min:12',
+                'email' => 'required|email',
+                'fullName' => 'required|max:255',
+                'labors' => 'required|numeric|min:0',
+                'activities.*' =>'exists:activities,id'
+            ]);
+        }
+        if($type == 2){
+            $validator = Validator::make($request->all(), [
+                'region_id' => 'required|exists:regions,id',
+                'city_id' => 'required|exists:cities,id',
+                'neighborhood' => 'required|max:255',
+                'subject' => 'required|max:255',
+                'reg_date' => 'required',
+                'inn' => 'required|digits:9',
+                'bank_name' => 'required',
+                'mfo' => 'required|digits:5',
+                'address' => 'required|max:255',
+                'phone' => 'required|max:13|min:12',
+                'email' => 'required|email',
+                'fullName' => 'required|max:255',
+                'labors' => 'required|numeric|min:0',
+                'activities.*' =>'exists:activities,id'
+            ]);
+        }
+        if($type == 3){
+            $validator = Validator::make($request->all(), [
+                'region_id' => 'required|exists:regions,id',
+                'city_id' => 'required|exists:cities,id',
+                'neighborhood' => 'required|max:255',
+                'subject' => 'required|max:255',
+                'reg_date' => 'required',
+                'inn' => 'required|digits:9',
+                'bank_name' => 'required',
+                'mfo' => 'required|digits:5',
+                'address' => 'required|max:255',
+                'phone' => 'required|max:13|min:12',
+                'email' => 'required|email',
+                'fullName' => 'required|max:255',
+                'activities.*' =>'exists:activities,id'
+            ]);
+        }
+        if($type == 4){
+            $validator = Validator::make($request->all(), [
+                'region_id' => 'required|exists:regions,id',
+                'city_id' => 'required|exists:cities,id',
+                'neighborhood' => 'required|max:255',
+                'address' => 'required|max:255',
+                'phone' => 'required|max:13|min:12',
+                'email' => 'required|email',
+                'fullName' => 'required|max:255',
+                'activities.*' =>'exists:activities,id'
+            ]);
+        }
 
-        $validator = Validator::make($request->all(),[
-           'region_id' => 'required|exists:regions,id',
-           'city_id' => 'required|exists:cities,id',
-           'neighborhood' => 'required|max:255',
-           'subject' => 'required|max:255',
-           'reg_date' => 'required',
-           'inn'=> 'required|max:9',
-           'mfo' => 'required|max:5',
-           'address' => 'required|max:255',
-           'phone' => 'required|max:13',
-           'email'=> 'required|email',
-           'fullName' => 'required|max:255',
-           'labors' => 'required|numeric|min:0',
-       ]);
         if ($validator->fails()) {
-            return redirect()->back()
+            $type ='#user'.$type;
+            return redirect()->route('web.show.form',$type)
                 ->withErrors($validator)
                 ->withInput();
         }
+
         $user = new User($request->all());
-        $user->type = 0;
+        $user->type = $type;
         $user->save();
 
         $user->activities()->sync($request->activities, false);

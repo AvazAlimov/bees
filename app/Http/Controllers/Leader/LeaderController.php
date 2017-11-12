@@ -17,7 +17,7 @@ class LeaderController extends Controller
         $this->middleware('auth:leader');
     }
     public function requestList(){
-        $users = Auth::user()->users;
+        $users = Auth::user()->pandingUsers;
 
         return view('leader.index')->withUsers($users);
     }

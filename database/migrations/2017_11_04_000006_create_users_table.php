@@ -22,15 +22,15 @@ class CreateUsersTable extends Migration
             $table->integer('region_id')->nullable()->unsigned();
             $table->integer('city_id')->nullable()->unsigned();
             $table->string('neighborhood');
-            $table->string('subject');
-            $table->date('reg_date');
-            $table->string('inn', 9);
-            $table->string('bank_name');
-            $table->string('mfo', 5);
+            $table->string('subject')->nullable();
+            $table->date('reg_date')->nullable();
+            $table->string('inn', 9)->nullable();
+            $table->string('bank_name')->nullable();
+            $table->string('mfo', 5)->nullable();
             $table->string('address');
             $table->string('phone', 13);
             $table->string('fullName');
-            $table->integer('labors')->unsigned();
+            $table->integer('labors')->nullable()->unsigned();
             $table->timestamps();
             $table->rememberToken();
 
