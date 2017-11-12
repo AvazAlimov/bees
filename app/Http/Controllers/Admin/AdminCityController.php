@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,7 +40,13 @@ class AdminCityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+           'name'=>'required|unique:cities',
+            'region_id'=>'required|exists:regions,id',
+        ]);
+        $city = new City($request->all());
+        $city->save();
+        return redirect()->back()->with('message','City created successfully');
     }
 
     /**
@@ -73,7 +80,14 @@ class AdminCityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required|unique:cities,name,'.$id,
+            'region_id'=>'required|exists:regions,id',
+        ]);
+        $city = City::findOrFail($id);
+        $city->update($request->all());
+
+        return redirect()->back()->with('message','City updated successfully');
     }
 
     /**
@@ -84,6 +98,9 @@ class AdminCityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $city = City::findOrFail($id);
+        $city->delete();
+        return redirect()->back()->with('message','City deleted successfully');
+
     }
 }

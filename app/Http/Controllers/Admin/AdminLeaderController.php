@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Leader;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,7 +40,18 @@ class AdminLeaderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'username'=>'required|unique:leaders|min:6',
+            'password'=>'required|min:6',
+            'lastName'=>'required',
+            'firstName'=>'required',
+            'email' =>'required|email',
+            'phone'=>'required|max:13|min:12',
+        ]);
+       $leader = new Leader($request->all());
+       $leader->password = bcrypt($request->password);
+       $leader->save();
+       return redirect()->back()->with('message','Leader created successfully');
     }
 
     /**
@@ -73,7 +85,19 @@ class AdminLeaderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'username'=>'required|min:6|unique:leaders,username,'.$id,
+            'password'=>'required|min:6',
+            'lastName'=>'required',
+            'firstName'=>'required',
+            'email' =>'required|email',
+            'phone'=>'required|max:13|min:12',
+        ]);
+        $leader = Leader::findOrFail($id);
+        $leader->update($request->all());
+        $leader->password=bcrypt($request->password);
+        $leader->save();
+        return redirect()->back()->with('message','leader updated successfully');
     }
 
     /**
@@ -84,6 +108,8 @@ class AdminLeaderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $leader = Leader::findOrFail($id);
+        $leader->delete();
+        return redirect()->back()->with('message','Leader deleted successfully');
     }
 }

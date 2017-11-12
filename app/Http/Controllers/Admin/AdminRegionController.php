@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Region;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,7 +40,13 @@ class AdminRegionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required|unique:regions',
+//            'leader_id'=>'exists:leaders,id'
+        ]);
+        $region = new Region($request->all());
+        $region->save();
+        return redirect()->back()->with('message','Region created successfully');
     }
 
     /**
@@ -73,7 +80,14 @@ class AdminRegionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+           'name'=>'unique:regions,name,'.$id
+            //'leader_id'=>'exists:leaders,id'
+        ]);
+        $region = Region::findOrFail($id);
+        $region->update($request->all());
+
+        return redirect()->back()->with('message','Region updated successfully');
     }
 
     /**
@@ -84,6 +98,9 @@ class AdminRegionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $region = Region::findOrFail($id);
+        $region->delete();
+        return redirect()->back()->with('message','Region deleted successfully');
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Activity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -28,7 +29,7 @@ class AdminActivityController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -39,7 +40,12 @@ class AdminActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required|unique:activities'
+        ]);
+        $activity = new Activity($request->all());
+        $activity->save();
+        return redirect()->back()->with('message','Activity created successfully');
     }
 
     /**
@@ -73,7 +79,10 @@ class AdminActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required|unique:activities,name,'.$id
+        ]);
+        return redirect()->back()->with('message','Activity updated successfully');
     }
 
     /**
@@ -84,6 +93,8 @@ class AdminActivityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $activity =Activity::findOrFail($id);
+        $activity->delete();
+        return redirect()->back()->with('message','Activity deleted successfully');
     }
 }
