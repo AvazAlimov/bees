@@ -19,6 +19,10 @@
             background: rgba(0, 0, 0, 0) url("https://www.toptal.com/designers/subtlepatterns/patterns/sayagata-400px.png") repeat scroll 0 0;
         }
 
+        #contacts {
+            background: rgba(0, 0, 0, 0) url("https://www.toptal.com/designers/subtlepatterns/patterns/halftone-yellow.png") repeat scroll 0 0;
+        }
+
         .nav-link {
             color: #555;
         }
@@ -550,6 +554,16 @@
             </div>
             <br>
         </div>
+
+        <div id="contacts">
+            <br>
+            <div class="container text-center">
+                <h2 class="display-5">Боғланиш</h2>
+                <hr>
+                <br>
+            </div>
+            <div id="map" style="width:100%;height:500px"></div>
+        </div>
     </div>
 @endsection
 
@@ -585,4 +599,17 @@
             regionChanged('region_4');
         })
     </script>
+    <script>
+        function myMap() {
+            var myCenter = new google.maps.LatLng(41.310441,69.278460);
+            var mapCanvas = document.getElementById("map");
+            var mapOptions = {center: myCenter, zoom: 16};
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+            var marker = new google.maps.Marker({position:myCenter});
+            marker.setMap(map);
+
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
 @endsection
