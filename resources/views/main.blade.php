@@ -17,6 +17,15 @@
             background-size: cover;
             border-radius: 0;
         }
+
+        .nav-link {
+            color: #555;
+        }
+
+        .nav-link:hover {
+            color: #333;
+        }
+
     </style>
 @endsection
 
@@ -29,7 +38,7 @@
     <div id="register">
         <div class="container">
             <div class="card border-warning">
-                <div class="card-header">
+                <div class="card-header bg-warning">
                     <ul class="nav nav-tabs card-header-tabs" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="nav-user_1-tab" data-toggle="tab" href="#user_1" role="tab"
@@ -421,7 +430,6 @@
                 </div>
             </div>
         </div>
-
         <br>
     </div>
 
