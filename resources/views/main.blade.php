@@ -23,7 +23,7 @@
 @section('content')
     <div class="jumbotron bg-warning text-center">
         <img src="https://image.flaticon.com/icons/svg/614/614476.svg" alt="logo" style="width: 128px;">
-        <h1 class="display-4"><br>O'ZBEKISTON RESPUBLIKASI ASALARICHILARI <br> UYUSHMASI</h1>
+        <h1 class="display-5"><br>O'ZBEKISTON RESPUBLIKASI ASALARICHILARI <br> UYUSHMASI</h1>
     </div>
 
     <div id="register">

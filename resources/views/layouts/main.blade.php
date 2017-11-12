@@ -8,7 +8,11 @@
     <title>{{ config('app.name', 'O\'AU') }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Fira Sans', sans-serif;
+        }
         .navbar {
             box-shadow: 0 0 8px 0 #666;
         }
