@@ -3,11 +3,16 @@
 @section('style')
     <style>
         .jumbotron {
+            margin: 0;
             min-height: 400px;
             background: #17234E url("http://eskipaper.com/images/fence-flowers-nature-summer-1.jpg") no-repeat top;
             -webkit-background-size: cover;
             background-size: cover;
             border-radius: 0;
+        }
+
+        #register {
+            background: rgba(0, 0, 0, 0) url("https://www.toptal.com/designers/subtlepatterns/patterns/halftone-yellow.png") repeat scroll 0 0;
         }
 
         #steps {
@@ -36,6 +41,7 @@
     </div>
 
     <div id="register">
+        <br>
         <div class="container">
             <div class="card border-warning">
                 <div class="card-header bg-warning">
@@ -58,6 +64,7 @@
                         </li>
                     </ul>
                 </div>
+
                 <div class="card-body tab-content" id="nav-tabContent">
                     <form class="container tab-pane fade show active" aria-labelledby="nav-user_1-tab" id="user_1">
                         <div class="row">
