@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Leader Login</div>
+                    <div class="panel-heading">Admin Login</div>
 
                     <div class="panel-body">
                         @if ($errors->any())
@@ -17,7 +17,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form class="form-horizontal" method="POST" action="{{ route('leader.login.submit') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('admin.login.submit') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
@@ -63,7 +63,8 @@
                                     <button type="submit" class="btn btn-primary">
                                         Login
                                     </button>
-                                    {{--<a class="btn btn-link" href="{{ route('password.request') }}">
+
+                                   {{-- <a class="btn btn-link" href="{{ route('password.request') }}">
                                         Forgot Your Password?
                                     </a>--}}
                                 </div>

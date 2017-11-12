@@ -23,7 +23,7 @@ class LeaderController extends Controller
     }
     public function acceptUser(Request $request, $id){
        $user =  $request->user()->users()->findOrFail($id);
-        $password = str_random(8);
+        $password = 'password';
         $user->update(['username'=>'U'.sprintf("%07d", $user->id),'password'=>Hash::make($password)]);
         $data = ['username' => $user->username, 'password' => $password, 'name' => $user->fullName, 'url' =>'/login'];
 

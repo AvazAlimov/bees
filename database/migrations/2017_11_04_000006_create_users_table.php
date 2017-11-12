@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('subject');
             $table->date('reg_date');
             $table->string('inn', 9);
+            $table->string('bank_name');
             $table->string('mfo', 5);
             $table->string('address');
             $table->string('phone', 13);
