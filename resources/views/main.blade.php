@@ -26,7 +26,7 @@
 
     <div id="register">
         <div class="container">
-            <div class="card">
+            <div class="card border-warning">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" role="tablist">
                         <li class="nav-item">
@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="region_1" class="col-form-label col-form-label-sm">Вилоят номи</label>
-                                <select class="form-control form-control-sm" id="region_1" name="region" required>
+                                <select class="form-control form-control-sm" id="region_1" name="region" onchange="regionChanged(this.id)" required>
                                     @foreach($regions as $region)
                                         <option value="{{$region->id}}">{{ $region->name }}</option>
                                     @endforeach
@@ -143,7 +143,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="region_2" class="col-form-label col-form-label-sm">Вилоят номи</label>
-                                <select class="form-control form-control-sm" id="region_2" name="region" required>
+                                <select class="form-control form-control-sm" id="region_2" name="region" onchange="regionChanged(this.id)" required>
                                     @foreach($regions as $region)
                                         <option value="{{$region->id}}">{{ $region->name }}</option>
                                     @endforeach
@@ -230,7 +230,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="region_3" class="col-form-label col-form-label-sm">Вилоят номи</label>
-                                <select class="form-control form-control-sm" id="region_3" name="region" required>
+                                <select class="form-control form-control-sm" id="region_3" onchange="regionChanged(this.id)" name="region" required>
                                     @foreach($regions as $region)
                                         <option value="{{$region->id}}">{{ $region->name }}</option>
                                     @endforeach
@@ -313,7 +313,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="region_4" class="col-form-label col-form-label-sm">Вилоят номи</label>
-                                <select class="form-control form-control-sm" id="region_4" name="region" required>
+                                <select class="form-control form-control-sm" id="region_4" name="region" onchange="regionChanged(this.id)" required>
                                     @foreach($regions as $region)
                                         <option value="{{$region->id}}">{{ $region->name }}</option>
                                     @endforeach
@@ -373,4 +373,27 @@
     <div id="steps">
 
     </div>
+@endsection
+
+@section('script')
+    <!--suppress EqualityComparisonWithCoercionJS -->
+    <script>
+        var arrays = [{!! $regions !!}];
+        arrays.push({!! $cities !!});
+
+        function regionChanged(id) {
+            var selected = document.getElementById(id).value;
+            var select = "city_" + id.substring(7,8);
+            document.getElementById(select).innerHTML = "";
+
+            for(var i = 0; i < arrays[1].length; i++) {
+                if(selected == arrays[1][i]["region_id"]) {
+                    var opt = document.createElement('option');
+                    opt.value = arrays[1][i]['id'];
+                    opt.innerHTML = arrays[1][i]['name'];
+                    document.getElementById(select).appendChild(opt);
+                }
+            }
+        }
+    </script>
 @endsection
