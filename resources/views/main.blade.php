@@ -469,10 +469,8 @@
             </div>
         </div>
         <br>
-    </div>
-
-    <div id="steps">
-        <h1>HI</h1>
+        <div id="steps">
+        </div>
     </div>
 @endsection
 
