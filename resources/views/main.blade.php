@@ -15,7 +15,7 @@
             background: rgba(0, 0, 0, 0) url("https://www.toptal.com/designers/subtlepatterns/patterns/halftone-yellow.png") repeat scroll 0 0;
         }
 
-        #steps {
+        #about {
             background: rgba(0, 0, 0, 0) url("https://www.toptal.com/designers/subtlepatterns/patterns/sayagata-400px.png") repeat scroll 0 0;
         }
 
@@ -70,8 +70,9 @@
                     </div>
                 @endif
                 <div class="card-body tab-content" id="nav-tabContent">
-                    <form action="{{route('submit.form',1)}}" method="post" class="container tab-pane fade show active" aria-labelledby="nav-user_1-tab" id="user_1">
-                       {{csrf_field()}}
+                    <form action="{{route('submit.form',1)}}" method="post" class="container tab-pane fade show active"
+                          aria-labelledby="nav-user_1-tab" id="user_1">
+                        {{csrf_field()}}
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="region_1" class="col-form-label col-form-label-sm">Вилоят номи</label>
@@ -95,13 +96,15 @@
                             <div class="form-group col-md-6">
                                 <label for="mahalla_1" class="col-form-label col-form-label-sm">Маҳалла (МФЙ)
                                     номи</label>
-                                <input type="text" class="form-control form-control-sm" id="mahalla_1" name="neighborhood" value="{{old('neighborhood')}}"
+                                <input type="text" class="form-control form-control-sm" id="mahalla_1"
+                                       name="neighborhood" value="{{old('neighborhood')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="subject_1" class="col-form-label col-form-label-sm">Субъект (корхона, ЯТТ)
                                     номи</label>
-                                <input type="text" class="form-control form-control-sm" id="subject_1" name="subject" value="{{old('subject')}}"
+                                <input type="text" class="form-control form-control-sm" id="subject_1" name="subject"
+                                       value="{{old('subject')}}"
                                        required>
                             </div>
                         </div>
@@ -109,12 +112,14 @@
                             <div class="form-group col-md-6">
                                 <label for="date_1" class="col-form-label col-form-label-sm">Корхона давлат рўйҳатидан
                                     ўтган сана</label>
-                                <input type="date" class="form-control form-control-sm" id="date_1" name="reg_date" value="{{old('reg_date')}}"
+                                <input type="date" class="form-control form-control-sm" id="date_1" name="reg_date"
+                                       value="{{old('reg_date')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inn_1" class="col-form-label col-form-label-sm">ИНН</label>
-                                <input type="number" class="form-control form-control-sm" id="inn_1" name="inn" value="{{old('inn')}}"
+                                <input type="number" class="form-control form-control-sm" id="inn_1" name="inn"
+                                       value="{{old('inn')}}"
                                        required>
                             </div>
                         </div>
@@ -122,44 +127,51 @@
                             <div class="form-group col-md-6">
                                 <label for="bank_1" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
                                     номи</label>
-                                <input type="text" class="form-control form-control-sm" id="bank_1" name="bank_name" value="{{old('bank_name')}}"
+                                <input type="text" class="form-control form-control-sm" id="bank_1" name="bank_name"
+                                       value="{{old('bank_name')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="mfo_1" class="col-form-label col-form-label-sm">Банк МФО</label>
-                                <input type="number" class="form-control form-control-sm" id="mfo_1" name="mfo" value="{{old('mfo')}}"
+                                <input type="number" class="form-control form-control-sm" id="mfo_1" name="mfo"
+                                       value="{{old('mfo')}}"
                                        required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="address_1" class="col-form-label col-form-label-sm">Манзил</label>
-                                <input type="text" class="form-control form-control-sm" id="address_1" name="address" value="{{old('address')}}"
+                                <input type="text" class="form-control form-control-sm" id="address_1" name="address"
+                                       value="{{old('address')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="phone_1" class="col-form-label col-form-label-sm">Телефон рақами</label>
-                                <input type="text" class="form-control form-control-sm" id="phone_1" name="phone" value="{{old('phone')}}"
+                                <input type="text" class="form-control form-control-sm" id="phone_1" name="phone"
+                                       value="{{old('phone')}}"
                                        required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="email_1" class="col-form-label col-form-label-sm">Электрон почта</label>
-                                <input type="email" class="form-control form-control-sm" id="email_1" name="email" value="{{old('email')}}"
+                                <input type="email" class="form-control form-control-sm" id="email_1" name="email"
+                                       value="{{old('email')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="fullName_1" class="col-form-label col-form-label-sm">Корхона директори исми
                                     шарифи</label>
-                                <input type="text" class="form-control form-control-sm" id="fullName_1" name="fullName" value="{{old('fullName')}}"
+                                <input type="text" class="form-control form-control-sm" id="fullName_1" name="fullName"
+                                       value="{{old('fullName')}}"
                                        required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="labors_1" class="col-form-label col-form-label-sm">Ишчилар сони</label>
-                                <input type="number" class="form-control form-control-sm" id="labors_1" name="labors" value="{{old('labors')}}"
+                                <input type="number" class="form-control form-control-sm" id="labors_1" name="labors"
+                                       value="{{old('labors')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
@@ -167,7 +179,8 @@
                                     нечтасини танласа бўлади)</label>
                                 <div class="col-md-12">
                                     @foreach($activities as $activity)
-                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}" id="activity_1"> {{$activity->name}}<br>
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}"
+                                               id="activity_1"> {{$activity->name}}<br>
                                     @endforeach
                                 </div>
                             </div>
@@ -180,7 +193,8 @@
                         </div>
                     </form>
 
-                    <form action="{{route('submit.form', 2)}}" method="post" class="container tab-pane fade show" aria-labelledby="nav-user_2-tab" id="user_2">
+                    <form action="{{route('submit.form', 2)}}" method="post" class="container tab-pane fade show"
+                          aria-labelledby="nav-user_2-tab" id="user_2">
                         {{csrf_field()}}
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -205,13 +219,15 @@
                             <div class="form-group col-md-6">
                                 <label for="mahalla_2" class="col-form-label col-form-label-sm">Маҳалла (МФЙ)
                                     номи</label>
-                                <input type="text" class="form-control form-control-sm" id="mahalla_2" name="neighborhood" value="{{old('neighborhood')}}"
+                                <input type="text" class="form-control form-control-sm" id="mahalla_2"
+                                       name="neighborhood" value="{{old('neighborhood')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="subject_2" class="col-form-label col-form-label-sm">Субъект (корхона, ЯТТ)
                                     номи</label>
-                                <input type="text" class="form-control form-control-sm" id="subject_2" name="subject" value="{{old('subject')}}"
+                                <input type="text" class="form-control form-control-sm" id="subject_2" name="subject"
+                                       value="{{old('subject')}}"
                                        required>
                             </div>
                         </div>
@@ -219,12 +235,14 @@
                             <div class="form-group col-md-6">
                                 <label for="date_2" class="col-form-label col-form-label-sm">Корхона давлат рўйҳатидан
                                     ўтган сана</label>
-                                <input type="date" class="form-control form-control-sm" id="date_2" name="reg_date" value="{{old('reg_date')}}"
+                                <input type="date" class="form-control form-control-sm" id="date_2" name="reg_date"
+                                       value="{{old('reg_date')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inn_2" class="col-form-label col-form-label-sm">ИНН</label>
-                                <input type="number" class="form-control form-control-sm" id="inn_2" name="inn" value="{{old('inn')}}"
+                                <input type="number" class="form-control form-control-sm" id="inn_2" name="inn"
+                                       value="{{old('inn')}}"
                                        required>
                             </div>
                         </div>
@@ -232,44 +250,51 @@
                             <div class="form-group col-md-6">
                                 <label for="bank_2" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
                                     номи</label>
-                                <input type="text" class="form-control form-control-sm" id="bank_2" name="bank_name" value="{{old('bank_name')}}"
+                                <input type="text" class="form-control form-control-sm" id="bank_2" name="bank_name"
+                                       value="{{old('bank_name')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="mfo_2" class="col-form-label col-form-label-sm">Банк МФО</label>
-                                <input type="number" class="form-control form-control-sm" id="mfo_2" name="mfo" value="{{old('mfo')}}"
+                                <input type="number" class="form-control form-control-sm" id="mfo_2" name="mfo"
+                                       value="{{old('mfo')}}"
                                        required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="address_2" class="col-form-label col-form-label-sm">Манзил</label>
-                                <input type="text" class="form-control form-control-sm" id="address_2" name="address" value="{{old('address')}}"
+                                <input type="text" class="form-control form-control-sm" id="address_2" name="address"
+                                       value="{{old('address')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="phone_2" class="col-form-label col-form-label-sm">Телефон рақами</label>
-                                <input type="text" class="form-control form-control-sm" id="phone_2" name="phone" value="{{old('phone')}}"
+                                <input type="text" class="form-control form-control-sm" id="phone_2" name="phone"
+                                       value="{{old('phone')}}"
                                        required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="email_2" class="col-form-label col-form-label-sm">Электрон почта</label>
-                                <input type="email" class="form-control form-control-sm" id="email_2" name="email" value="{{old('email')}}"
+                                <input type="email" class="form-control form-control-sm" id="email_2" name="email"
+                                       value="{{old('email')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="fullName_2" class="col-form-label col-form-label-sm">Хўжалик раҳбари исми
                                     шарифи</label>
-                                <input type="text" class="form-control form-control-sm" id="fullName_2" name="fullName" value="{{old('fullName')}}"
+                                <input type="text" class="form-control form-control-sm" id="fullName_2" name="fullName"
+                                       value="{{old('fullName')}}"
                                        required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="labors_2" class="col-form-label col-form-label-sm">Ишчилар сони</label>
-                                <input type="number" class="form-control form-control-sm" id="labors_2" name="labors" value="{{old('labors')}}"
+                                <input type="number" class="form-control form-control-sm" id="labors_2" name="labors"
+                                       value="{{old('labors')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
@@ -277,7 +302,8 @@
                                     нечтасини танласа бўлади)</label>
                                 <div class="col-md-12">
                                     @foreach($activities as $activity)
-                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}" id="activity_2"> {{$activity->name}}<br>
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}"
+                                               id="activity_2"> {{$activity->name}}<br>
                                     @endforeach
                                 </div>
                             </div>
@@ -290,7 +316,8 @@
                         </div>
                     </form>
 
-                    <form action="{{route('submit.form', 3)}}" method="post" class="container tab-pane fade show" aria-labelledby="nav-user_3-tab" id="user_3">
+                    <form action="{{route('submit.form', 3)}}" method="post" class="container tab-pane fade show"
+                          aria-labelledby="nav-user_3-tab" id="user_3">
                         {{csrf_field()}}
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -315,13 +342,15 @@
                             <div class="form-group col-md-6">
                                 <label for="mahalla_3" class="col-form-label col-form-label-sm">Маҳалла (МФЙ)
                                     номи</label>
-                                <input type="text" class="form-control form-control-sm" id="mahalla_3" name="neighborhood" value="{{old('neighborhood')}}"
+                                <input type="text" class="form-control form-control-sm" id="mahalla_3"
+                                       name="neighborhood" value="{{old('neighborhood')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="subject_3" class="col-form-label col-form-label-sm">Субъект (корхона, ЯТТ)
                                     номи</label>
-                                <input type="text" class="form-control form-control-sm" id="subject_3" name="subject" value="{{old('subject')}}"
+                                <input type="text" class="form-control form-control-sm" id="subject_3" name="subject"
+                                       value="{{old('subject')}}"
                                        required>
                             </div>
                         </div>
@@ -329,12 +358,14 @@
                             <div class="form-group col-md-6">
                                 <label for="date_3" class="col-form-label col-form-label-sm">Корхона давлат рўйҳатидан
                                     ўтган сана</label>
-                                <input type="date" class="form-control form-control-sm" id="date_3" name="reg_date" value="{{old('reg_date')}}"
+                                <input type="date" class="form-control form-control-sm" id="date_3" name="reg_date"
+                                       value="{{old('reg_date')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inn_3" class="col-form-label col-form-label-sm">ИНН</label>
-                                <input type="number" class="form-control form-control-sm" id="inn_3" name="inn" value="{{old('inn')}}"
+                                <input type="number" class="form-control form-control-sm" id="inn_3" name="inn"
+                                       value="{{old('inn')}}"
                                        required>
                             </div>
                         </div>
@@ -342,37 +373,43 @@
                             <div class="form-group col-md-6">
                                 <label for="bank_3" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
                                     номи</label>
-                                <input type="text" class="form-control form-control-sm" id="bank_3" name="bank_name" value="{{old('bank_name')}}"
+                                <input type="text" class="form-control form-control-sm" id="bank_3" name="bank_name"
+                                       value="{{old('bank_name')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="mfo_3" class="col-form-label col-form-label-sm">Банк МФО</label>
-                                <input type="number" class="form-control form-control-sm" id="mfo_3" name="mfo" value="{{old('mfo')}}"
+                                <input type="number" class="form-control form-control-sm" id="mfo_3" name="mfo"
+                                       value="{{old('mfo')}}"
                                        required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="address_3" class="col-form-label col-form-label-sm">Манзил</label>
-                                <input type="text" class="form-control form-control-sm" id="address_3" name="address" value="{{old('address')}}"
+                                <input type="text" class="form-control form-control-sm" id="address_3" name="address"
+                                       value="{{old('address')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="phone_3" class="col-form-label col-form-label-sm">Телефон рақами</label>
-                                <input type="text" class="form-control form-control-sm" id="phone_3" name="phone" value="{{old('phone')}}"
+                                <input type="text" class="form-control form-control-sm" id="phone_3" name="phone"
+                                       value="{{old('phone')}}"
                                        required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="email_3" class="col-form-label col-form-label-sm">Электрон почта</label>
-                                <input type="email" class="form-control form-control-sm" id="email_3" name="email" value="{{old('email')}}"
+                                <input type="email" class="form-control form-control-sm" id="email_3" name="email"
+                                       value="{{old('email')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="fullName_3" class="col-form-label col-form-label-sm">Хўжалик раҳбари исми
                                     шарифи</label>
-                                <input type="text" class="form-control form-control-sm" id="fullName_3" name="fullName" value="{{old('fullName')}}"
+                                <input type="text" class="form-control form-control-sm" id="fullName_3" name="fullName"
+                                       value="{{old('fullName')}}"
                                        required>
                             </div>
                         </div>
@@ -382,7 +419,8 @@
                                     нечтасини танласа бўлади)</label>
                                 <div class="col-md-12">
                                     @foreach($activities as $activity)
-                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}" id="activity_3"> {{$activity->name}}<br>
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}"
+                                               id="activity_3"> {{$activity->name}}<br>
                                     @endforeach
                                 </div>
                             </div>
@@ -396,7 +434,8 @@
 
                     </form>
 
-                    <form action="{{route('submit.form', 4)}}" method="post" class="container tab-pane fade show" aria-labelledby="nav-user_4-tab" id="user_4">
+                    <form action="{{route('submit.form', 4)}}" method="post" class="container tab-pane fade show"
+                          aria-labelledby="nav-user_4-tab" id="user_4">
                         {{csrf_field()}}
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -421,31 +460,36 @@
                             <div class="form-group col-md-6">
                                 <label for="mahalla_4" class="col-form-label col-form-label-sm">Маҳалла (МФЙ)
                                     номи</label>
-                                <input type="text" class="form-control form-control-sm" id="mahalla_4" name="neighborhood" value="{{old('neighborhood')}}"
+                                <input type="text" class="form-control form-control-sm" id="mahalla_4"
+                                       name="neighborhood" value="{{old('neighborhood')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="fullName_4" class="col-form-label col-form-label-sm">ФИШ</label>
-                                <input type="text" class="form-control form-control-sm" id="fullName_4" name="fullName" value="{{old('fullName')}}"
+                                <input type="text" class="form-control form-control-sm" id="fullName_4" name="fullName"
+                                       value="{{old('fullName')}}"
                                        required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="address_4" class="col-form-label col-form-label-sm">Манзил</label>
-                                <input type="text" class="form-control form-control-sm" id="address_4" name="address" value="{{old('address')}}"
+                                <input type="text" class="form-control form-control-sm" id="address_4" name="address"
+                                       value="{{old('address')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="phone_4" class="col-form-label col-form-label-sm">Телефон рақами</label>
-                                <input type="text" class="form-control form-control-sm" id="phone_4" name="phone" value="{{old('phone')}}"
+                                <input type="text" class="form-control form-control-sm" id="phone_4" name="phone"
+                                       value="{{old('phone')}}"
                                        required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="email_4" class="col-form-label col-form-label-sm">Электрон почта</label>
-                                <input type="email" class="form-control form-control-sm" id="email_4" name="email" value="{{old('email')}}"
+                                <input type="email" class="form-control form-control-sm" id="email_4" name="email"
+                                       value="{{old('email')}}"
                                        required>
                             </div>
                             <div class="form-group col-md-6">
@@ -453,7 +497,8 @@
                                     нечтасини танласа бўлади)</label>
                                 <div class="col-md-12">
                                     @foreach($activities as $activity)
-                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}" id="activity_4"> {{$activity->name}}<br>
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}"
+                                               id="activity_4"> {{$activity->name}}<br>
                                     @endforeach
                                 </div>
                             </div>
@@ -469,10 +514,42 @@
             </div>
         </div>
         <br>
-    </div>
-
-    <div id="steps">
-        <h1>HI</h1>
+        <div id="about">
+            <br>
+            <div class="container text-center">
+                <h2 class="display-5">Биз ҳақимизда</h2>
+                <hr>
+                <img src="https://aloqabank.uz/gallery/aloqa1-2-1-bannery-na-vnutrennyuyu39.jpg"
+                     alt="Generic placeholder image">
+                <div>
+                    <br>
+                    <p class="text-justify">
+                        <strong>Bankning yuksak vazifasi</strong> - o'z mijozlariga ularning bizneslari talablariga
+                        javob beruvchi keng
+                        qamrovli bank xizmatlarini professional darajada taqdim etib, respublikada tadbirkorlikning
+                        mustahkamlanishiga ko'maklashish.
+                        <br>
+                        Ushbu vazifani amalga oshirishda AT «Aloqabank» doimiy ravishda o'zining korporativ
+                        qadriyatlariga asoslanib faoliyat yuritadi.
+                        <br>
+                        AT "Aloqabank" yirik tarkibiy bo'linmalariga Toshkent shaxridagi Amaliyot Boshqarmasi hamda
+                        Respublika hududlaridagi filiallar tarmog'i kiradi.
+                        <br>
+                        Xususiy va kichik biznes vakillari, dehqon va fermer xo’jaliklari, shuningdek aholining keng
+                        qatlamiga bank xizmatlari ko’rsatishni geografik kengaytirish maqsadida bank filiallari qoshida
+                        mini-banklar ochilgan.
+                        <br>
+                        Toshkent shahri hamda hududiy filiallar qoshida aloqa xizmatlari, kommunal va boshqa to’lovlar
+                        qabul qilish uchun bankning jamg’arma kassalari faoliyat yuritib bormoqda.
+                        <br>
+                        AT “Aloqabank” tomonidan valyuta ayirboshlash shoxobchalari ochilgan. Bankning butun dunyo
+                        bo’yicha Western Union, Zolotaya korona va Leader kabi tizimlari orqali pul o’tkazmalarini
+                        amalga oshirish uchun xalqaro pul o’tkazish shoxobchalari xizmat ko’rsatib kelmoqda.
+                    </p>
+                </div>
+            </div>
+            <br>
+        </div>
     </div>
 @endsection
 
@@ -501,7 +578,7 @@
 
         };
 
-        $(document).ready(function(){
+        $(document).ready(function () {
             regionChanged('region_1');
             regionChanged('region_2');
             regionChanged('region_3');
