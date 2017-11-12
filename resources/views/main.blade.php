@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .jumbotron {
-            min-height: 600px;
+            min-height: 400px;
             background: #17234E url("http://eskipaper.com/images/fence-flowers-nature-summer-1.jpg") no-repeat top;
             -webkit-background-size: cover;
             background-size: cover;
@@ -23,7 +23,7 @@
 @section('content')
     <div class="jumbotron bg-warning text-center">
         <img src="https://image.flaticon.com/icons/svg/614/614476.svg" alt="logo" style="width: 128px;">
-        <h1 class="display-5"><br>O'ZBEKISTON RESPUBLIKASI ASALARICHILARI <br> UYUSHMASI</h1>
+        <h1 class="display-5"><br>ЎЗБЕКИСТОН РЕСПУБЛИКАСИ АСАЛАРИЧИЛАРИ<br>УЮШМАСИ</h1>
     </div>
 
     <div id="register">

@@ -13,6 +13,7 @@
         body {
             font-family: 'Fira Sans', sans-serif;
         }
+
         .navbar {
             box-shadow: 0 0 8px 0 #666;
         }
@@ -37,22 +38,19 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#register">Register Subject <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#register">Аъзо бўлиш<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">About</a>
+                    <a class="nav-link" href="#about">Биз ҳақимизда</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contacts">Contacts</a>
+                    <a class="nav-link" href="#contacts">Боғланиш</a>
                 </li>
             </ul>
             <ul class="navbar-nav my-2 my-lg-0">
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        <a class="nav-link" href="{{ route('login') }}">Кириш</a>
                     </li>
                     @else
                         <li class="nav-item dropdown">
