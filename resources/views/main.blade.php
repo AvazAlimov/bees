@@ -395,5 +395,12 @@
                 }
             }
         }
+
+        window.onload = function() {
+            regionChanged('region_1');
+            regionChanged('region_2');
+            regionChanged('region_3');
+            regionChanged('region_4');
+        }
     </script>
 @endsection
