@@ -22,6 +22,8 @@ class TestTableSeeder extends Seeder
         Region::truncate();
         City::truncate();
         Activity::truncate();
+        User::truncate();
+        Admin::truncate();
         foreach (range(1,13) as $i)
         {
             Leader::create([
@@ -57,7 +59,34 @@ class TestTableSeeder extends Seeder
                'name'=> $faker->catchPhrase
             ]);
         }
+        foreach (range(1,3) as $i){
+            foreach (range(1, 3) as $j){
+                User::create([
+                    'username'=> null,
+                    'email'=>$faker->email,
+                    'password'=>null,
+                    'region_id' => $i,
+                    'city_id' =>$i,
+                    'neighborhood' => $faker->streetAddress,
+                    'subject' => $faker->userAgent,
+                    'bank_name'=>'Aloqa Bank',
+                    'reg_date'=>$faker->date(),
+                    'inn'=>'123456789',
+                    'mfo'=>'12345',
+                    'address' =>$faker->address,
+                    'phone'=>'+998908082443',
+                    'fullName'=>$faker->name,
+                    'labors'=>$faker->numberBetween(1,200),
+                    'type'=>$j
+                ]);
+            }
+        }
 
+        Admin::create([
+            'name'=>'Admin aka',
+            'username'=>'asalari',
+            'password'=>Hash::make('password'),
+        ]);
 
     }
 }

@@ -25,7 +25,12 @@ Route::prefix('leader')->group(function(){
 //Route::get('/', 'Web\WebController@showForm')->name('web.show.form');
 Route::post('/form_submit', 'Web\WebController@submitForm')->name('web.submit.form');
 
-
+Route::prefix('admin')->group(function (){
+    Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('login/submit', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+    Route::get('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
+});
 
 Route::get('setlocale/{locale}', function ($locale) {
     in_array($locale, \Config::get('app.locales'));
