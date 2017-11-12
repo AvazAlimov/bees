@@ -160,12 +160,18 @@
                             <div class="form-group col-md-6">
                                 <label for="activity_1" class="col-form-label col-form-label-sm">Фаолият тури (бир
                                     нечтасини танласа бўлади)</label>
-                                <select class="form-control form-control-sm" id="activity_1" name="activity" multiple>
+                                <div class="col-md-12">
                                     @foreach($activities as $activity)
-                                        <option value="{{$activity->id}}">{{$activity->name}}</option>
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}" id="activity_1"> {{$activity->name}}<br>
                                     @endforeach
-                                </select>
+                                </div>
                             </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-warning" value="Рўйхатдан ўтиш">
                         </div>
                     </form>
 
@@ -263,14 +269,19 @@
                             <div class="form-group col-md-6">
                                 <label for="activity_2" class="col-form-label col-form-label-sm">Фаолият тури (бир
                                     нечтасини танласа бўлади)</label>
-                                <select class="form-control form-control-sm" id="activity_2" name="activity" multiple>
+                                <div class="col-md-12">
                                     @foreach($activities as $activity)
-                                        <option value="{{$activity->id}}">{{$activity->name}}</option>
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}" id="activity_2"> {{$activity->name}}<br>
                                     @endforeach
-                                </select>
+                                </div>
                             </div>
                         </div>
 
+                        <hr>
+
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-warning" value="Рўйхатдан ўтиш">
+                        </div>
                     </form>
 
                     <form class="container tab-pane fade show" aria-labelledby="nav-user_3-tab" id="user_3">
@@ -362,12 +373,18 @@
                             <div class="form-group col-md-6">
                                 <label for="activity_3" class="col-form-label col-form-label-sm">Фаолият тури (бир
                                     нечтасини танласа бўлади)</label>
-                                <select class="form-control form-control-sm" id="activity_3" name="activity" multiple>
+                                <div class="col-md-12">
                                     @foreach($activities as $activity)
-                                        <option value="{{$activity->id}}">{{$activity->name}}</option>
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}" id="activity_3"> {{$activity->name}}<br>
                                     @endforeach
-                                </select>
+                                </div>
                             </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-warning" value="Рўйхатдан ўтиш">
                         </div>
 
                     </form>
@@ -426,12 +443,18 @@
                             <div class="form-group col-md-6">
                                 <label for="activity_4" class="col-form-label col-form-label-sm">Фаолият тури (бир
                                     нечтасини танласа бўлади)</label>
-                                <select class="form-control form-control-sm" id="activity_4" name="activity" multiple>
+                                <div class="col-md-12">
                                     @foreach($activities as $activity)
-                                        <option value="{{$activity->id}}">{{$activity->name}}</option>
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}" id="activity_4"> {{$activity->name}}<br>
                                     @endforeach
-                                </select>
+                                </div>
                             </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-warning" value="Рўйхатдан ўтиш">
                         </div>
                     </form>
                 </div>
@@ -467,10 +490,14 @@
         }
 
         window.onload = function () {
+
+        };
+
+        $(document).ready(function(){
             regionChanged('region_1');
             regionChanged('region_2');
             regionChanged('region_3');
             regionChanged('region_4');
-        }
+        })
     </script>
 @endsection
