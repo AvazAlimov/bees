@@ -35,9 +35,9 @@ class Leader extends Authenticatable
         return $this->hasManyThrough('App\User','App\Region');
     }
     public function acceptedUsers(){
-        return $this->users()->where('username',null);
+        return $this->users()->where('username','!=',null);
     }
     public function pandingUsers(){
-        return $this->users()->where('username','!=',null);
+        return $this->users()->where('username',null);
     }
 }

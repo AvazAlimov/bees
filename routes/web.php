@@ -14,7 +14,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/{type?}', 'Web\WebController@showForm')->name('web.show.form');
 Route::prefix('leader')->group(function(){
     Route::get('login', 'Auth\LeaderLoginController@showLoginForm')->name('leader.login');
     Route::post('login/submit', 'Auth\LeaderLoginController@login')->name('leader.login.submit');
@@ -57,6 +56,18 @@ Route::get('setlocale/{locale}', function ($locale) {
     in_array($locale, \Config::get('app.locales'));
     return redirect()->back()->withCookie(cookie()->forever('language', $locale));
 })->name('lang.switch');
-Auth::routes();
+
+
+Route::prefix('user')->group(function (){
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\LoginController@login');
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+    // Registration Routes...
+    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('register', 'Auth\RegisterController@register');
+
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/{type?}', 'Web\WebController@showForm')->name('web.show.form');

@@ -28,6 +28,7 @@ class LeaderController extends Controller
         $data = ['username' => $user->username, 'password' => $password, 'name' => $user->fullName, 'url' =>'/login'];
 
         $user->notify(new UserConfirmationNotification($data));
+        return redirect()->back()->with('message','Accepted successfully');
         /*Mail::send(['html' => 'email.email-confirmation'], ['data' => $data], function ($message) use ($data) {
             $message->to($data['email'], $data['name'])->subject('Email-confirmation');
         });*/
