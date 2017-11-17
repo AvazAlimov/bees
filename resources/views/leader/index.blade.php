@@ -13,9 +13,14 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     Идентификационный номер
-                                    заказа: {{ $user->id }}
+                                    заказа: #{{ $user->id }}
                                 </div>
+
                                 <div class="panel-body">
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Asalari turi:</strong></div>
+                                        <div class="col-md-8">{{ $user->typeName() }}</div>
+                                    </div>
                                     <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Viloyat:</strong></div>
                                         <div class="col-md-8">{{ $user->region->name }}</div>
@@ -84,7 +89,7 @@
                                             </form>
                                         </div>
                                         <div class="col-md-2">
-                                            <form>
+                                            <form method="post" action="{{route('leader.user.refuse', $user->id)}}" onsubmit="return confirm('Хотите отказать?');">
                                                 {{csrf_field()}}
                                                 <input type="submit" class="btn btn-block btn-warning form-group"
                                                        value="Отказать">
@@ -92,13 +97,12 @@
                                         </div>
                                         <div class="col-md-2">
                                             <form>
-                                                {{csrf_field()}}
                                                 <input type="submit" class="btn btn-block btn-primary form-group"
                                                        value="Изменить">
                                             </form>
                                         </div>
                                         <div class="col-md-2">
-                                            <form method="post" onsubmit="return confirm('Хотите удалить?');">
+                                            <form method="post" action="{{route('leader.user.refuse', $user->id)}}" onsubmit="return confirm('Хотите удалить?');">
                                                 {{csrf_field()}}
                                                 <input type="submit" class="btn btn-block btn-danger" value="Удалить">
                                             </form>
@@ -108,6 +112,9 @@
                             </div>
                         </div>
                     @endforeach
+                    <div class="col-md-12">
+                        {{ $users->links() }}
+                    </div>
                 </div>
             </div>
         </div>

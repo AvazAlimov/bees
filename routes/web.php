@@ -20,6 +20,9 @@ Route::prefix('leader')->group(function(){
     Route::get('logout', 'Auth\LeaderLoginController@logout')->name('leader.logout');
     Route::get('/', 'Leader\LeaderController@requestList')->name('leader.index');
     Route::post('/confirm/user/{id}', 'Leader\LeaderController@acceptUser')->name('leader.user.accept');
+    Route::post('/refuse/user/{id}', 'Leader\LeaderController@refuseUser')->name('leader.user.refuse');
+
+
 });
 //Route::get('/', 'Web\WebController@showForm')->name('web.show.form');
 Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit.form');
@@ -64,8 +67,8 @@ Route::prefix('user')->group(function (){
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
     // Registration Routes...
-    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-    Route::post('register', 'Auth\RegisterController@register');
+//    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+//    Route::post('register', 'Auth\RegisterController@register');
 
 });
 

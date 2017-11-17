@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $guard = 'web';
+
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +18,7 @@ class User extends Authenticatable
     protected $fillable = [
         'region_id', 'city_id', 'neighborhood', 'subject',
         'reg_date', 'inn', 'mfo', 'address', 'phone',
-        'email', 'fullName', 'labors', 'username',
+        'email', 'fullName', 'labors', 'username','state',
     ];
 
     /**
@@ -40,7 +40,10 @@ class User extends Authenticatable
     public function region(){
         return $this->belongsTo('App\Region');
     }
-
+    public function typeName(){
+        return $this->type == 1 ? 'Корхона/ЯТТ' : ($this->type == 2 ? 'Кўп тармоқли фермер хўжаликлари' :
+            ($this->type == 3 ? 'Деҳқон (шахсий ёрдамчи) хўжаликлари': 'Жисмоний шахс'));
+    }
 
     public function routeNotificationForMail()
     {
