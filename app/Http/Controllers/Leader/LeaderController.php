@@ -24,7 +24,7 @@ class LeaderController extends Controller
     public function acceptUser(Request $request, $id){
        $user =  $request->user()->users()->findOrFail($id);
         $password = 'password';
-        $user->update(['username'=>'U'.sprintf("%07d", $user->id),'password'=>bcrypt($password)]);
+        $user->update(['username'=>'U'.sprintf("%07d", $user->id),'password'=>bcrypt($password),'state'=>1]);
         $data = ['username' => $user->username, 'password' => $password, 'name' => $user->fullName, 'url' =>'/login'];
 
         $user->notify(new UserConfirmationNotification($data));
