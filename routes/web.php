@@ -28,15 +28,19 @@ Route::prefix('leader')->group(function(){
 Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit.form');
 
 Route::prefix('admin')->group(function (){
+    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
     Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('login/submit', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
-    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
     Route::prefix('region')->group(function (){
-        Route::get('show/{id}','Admin\AdminRegionController@show')->name('region.show');
-        Route::get('delete/{id}','Admin\AdminRegionController@destroy')->name('region.delete');
-        Route::get('create','Admin\AdminRegionController@create')->name('region.create');
+        Route::get('/delete/{id}','Admin\AdminRegionController@destroy')->name('region.delete');
+        Route::get('/create','Admin\AdminRegionController@create')->name('region.create');
+        Route::post('/store','Admin\AdminRegionController@store')->name('region.store');
+        Route::get('/edit/{id}','Admin\AdminRegionController@edit')->name('region.edit');
+        Route::post('/update/{id}', 'Admin\AdminRegionController@update')->name('region.update');
+
     });
+
     Route::prefix('leader')->group(function (){
         Route::get('show/{id}','Admin\AdminLeaderController@show')->name('leader.show');
         Route::get('delete/{id}','Admin\AdminLeaderController@destroy')->name('leader.delete');

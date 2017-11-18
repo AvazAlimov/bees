@@ -32,23 +32,20 @@
                         <div class="col-md-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <strong>{{ $region->name }}</strong>
+                                    <strong>{{ $region->name }} :  <i>{{$region->leader->firstName}} {{$region->leader->lastName}}</i></strong>
                                 </div>
                                 <div class="panel-footer">
                                     <table>
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <form action="{{ route('region.show', $region->id) }}"
-                                                      method="get">
+                                                <form action="{{ route('region.edit', $region->id) }}" method="GET">
                                                     <button type="submit" class="btn btn-primary pull-right">Изменить
                                                     </button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{ route('region.delete', $region->id) }}"
-                                                      method="post">
-                                                    {{ csrf_field() }}
+                                                <form action="{{ route('region.delete', $region->id) }}" method="get" onclick="return confirm('Хотите удалить')">
                                                     <button type="submit" class="btn btn-danger pull-right">Удалить
                                                     </button>
                                                 </form>
@@ -60,8 +57,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <form action="{{ route('region.create') }}" method="GET">
-                        {{ csrf_field() }}
+                    <form method="GET" action="{{ route('region.create')}}" >
                         <button type="submit" class="btn btn-primary pull-right">
                             Region Qo'shish
                         </button>
@@ -79,12 +75,6 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="media">
-                                        {{--
-                                                                                <div class="media-left">
-                                                                                    <img src="{{ "operator_file/".$operator->image }}" class="img-circle"
-                                                                                         style="width: 128px; height: 128px">
-                                                                                </div>
-                                        --}}
                                         <div class="media-body">
                                             <h3 class="media-heading">
                                                 Ismi: {{ $leader->firstName }} {{ $leader->lastName }}</h3>
@@ -223,7 +213,7 @@
         </div>
     </div>
 
-
+@endsection
 @section('scripts')
     <script>
         function switchSection(id) {
@@ -253,10 +243,6 @@
             switchSection(getCookie("admin"));
             var navs = document.getElementsByClassName("navs");
             navs[getCookie("admin").replace("section", "") - 1].className = "navs active";
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("navigation").style.display =
-                document.getElementById("container").style.display =
-                    document.getElementById("navbar").style.display = "block";
         }
     </script>
 @endsection

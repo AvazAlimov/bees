@@ -35,13 +35,11 @@ class LeaderController extends Controller
     }
     public function refuseUser(Request $request, $id){
         $user =  $request->user()->users()->findOrFail($id);
-
         $user->update(['state'=>2]);
         return redirect()->back()->with('message','Refused successfully');
     }
     public function destroyUser(Request $request, $id){
         $user =  $request->user()->users()->findOrFail($id);
-
         $user->delete();
         return redirect()->back()->with('message','Deleted successfully');
     }

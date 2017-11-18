@@ -16,7 +16,7 @@
 </head>
 <body>
     <div id="app">
-        <navbar class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <!-- Collapsed Hamburger -->
@@ -49,7 +49,6 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -68,8 +67,19 @@
                     </ul>
                 </div>
             </div>
-        </navbar>
-
+        </nav>
+        @if(Session::has('message'))
+            <div class="alert alert-success alert-dismissible col-md-6 col-lg-offset-3" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{Session::get('message')}}
+            </div>
+        @endif
+        @if(Session::has('error-message'))
+            <div class="alert alert-danger alert-dismissible col-md-6 col-lg-offset-3" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{Session::get('error-message')}}
+            </div>
+        @endif
         @yield('content')
     </div>
 
