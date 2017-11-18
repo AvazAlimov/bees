@@ -104,6 +104,6 @@ class WebController extends Controller
 
         $user->activities()->sync($request->activities, false);
 
-        return redirect()->back();
+        return redirect()->back()->with('message',"Sizning ro'yhatdan o'tish so'rovingiz qabul qilindi. Sizni qabul qilishganidan so'ng, telefon raqamingizga yoki pochtangizga login, parol yuboriladi");
     }
 }
