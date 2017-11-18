@@ -11,8 +11,6 @@
 |
 */
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 
 Route::prefix('leader')->group(function(){
     Route::get('login', 'Auth\LeaderLoginController@showLoginForm')->name('leader.login');
@@ -45,16 +43,27 @@ Route::prefix('admin')->group(function (){
         Route::get('show/{id}','Admin\AdminLeaderController@show')->name('leader.show');
         Route::get('delete/{id}','Admin\AdminLeaderController@destroy')->name('leader.delete');
         Route::get('create','Admin\AdminLeaderController@create')->name('leader.create');
+        Route::post('store','Admin\AdminLeaderController@store')->name('leader.store');
+        Route::get('edit/{id}','Admin\AdminLeaderController@edit')->name('leader.edit');
+        Route::post('update/{id}','Admin\AdminLeaderController@update')->name('leader.update');
+
+
     });
     Route::prefix('city')->group(function (){
-        Route::get('show/{id}','Admin\AdminCityController@show')->name('city.show');
+
         Route::get('delete/{id}','Admin\AdminCityController@destroy')->name('city.delete');
         Route::get('create','Admin\AdminCityController@create')->name('city.create');
+        Route::post('store','Admin\AdminCityController@store')->name('city.store');
+        Route::get('edit/{id}','Admin\AdminCityController@edit')->name('city.edit');
+        Route::post('update/{id}','Admin\AdminCityController@update')->name('city.update');
     });
     Route::prefix('activity')->group(function (){
-        Route::get('show/{id}','Admin\AdminActivityController@show')->name('activity.show');
+
         Route::get('delete/{id}','Admin\AdminActivityController@destroy')->name('activity.delete');
         Route::get('create','Admin\AdminActivityController@create')->name('activity.create');
+        Route::post('store','Admin\AdminActivityController@store')->name('activity.store');
+        Route::get('edit/{id}','Admin\AdminActivityController@edit')->name('activity.edit');
+        Route::post('update/{id}','Admin\AdminActivityController@update')->name('activity.update');
     });
 
 });
