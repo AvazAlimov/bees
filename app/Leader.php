@@ -37,7 +37,13 @@ class Leader extends Authenticatable
     public function acceptedUsers(){
         return $this->users()->where('state',1);
     }
-    public function pandingUsers(){
+    public function notAcceptedUsers(){
+        return $this->users()->where('state',-1);
+    }
+    public function consideredUsers(){
+        return $this->users()->where('state', '!=',0);
+    }
+    public function waitingUsers(){
         return $this->users()->where('state',0);
     }
 }

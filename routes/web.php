@@ -18,8 +18,10 @@ Route::prefix('leader')->group(function(){
     Route::get('logout', 'Auth\LeaderLoginController@logout')->name('leader.logout');
     Route::get('/', 'Leader\LeaderController@requestList')->name('leader.index');
     Route::post('/confirm/user/{id}', 'Leader\LeaderController@acceptUser')->name('leader.user.accept');
+    Route::post('/delete/user/{id}', 'Leader\LeaderController@destroyUser')->name('leader.user.delete');
     Route::post('/refuse/user/{id}', 'Leader\LeaderController@refuseUser')->name('leader.user.refuse');
-
+    Route::get('/accepted','Leader\LeaderController@search')->name('leader.search');
+    Route::get('/not_accepted','Leader\LeaderController@searchNotAccepted')->name('leader.search.notAccepted');
 
 });
 //Route::get('/', 'Web\WebController@showForm')->name('web.show.form');
@@ -46,7 +48,6 @@ Route::prefix('admin')->group(function (){
         Route::post('store','Admin\AdminLeaderController@store')->name('leader.store');
         Route::get('edit/{id}','Admin\AdminLeaderController@edit')->name('leader.edit');
         Route::post('update/{id}','Admin\AdminLeaderController@update')->name('leader.update');
-
 
     });
     Route::prefix('city')->group(function (){
