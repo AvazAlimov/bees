@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 
 Route::prefix('leader')->group(function(){
     Route::get('login', 'Auth\LeaderLoginController@showLoginForm')->name('leader.login');
@@ -20,6 +9,7 @@ Route::prefix('leader')->group(function(){
     Route::post('/confirm/user/{id}', 'Leader\LeaderController@acceptUser')->name('leader.user.accept');
     Route::post('/delete/user/{id}', 'Leader\LeaderController@destroyUser')->name('leader.user.delete');
     Route::post('/refuse/user/{id}', 'Leader\LeaderController@refuseUser')->name('leader.user.refuse');
+    Route::post('/retrieve/user/{id}', 'Leader\LeaderController@retrieveUser')->name('leader.user.retrieve');
     Route::get('/accepted','Leader\LeaderController@search')->name('leader.search');
     Route::get('/not_accepted','Leader\LeaderController@searchNotAccepted')->name('leader.search.notAccepted');
 

@@ -270,7 +270,7 @@
                                         <tr>
                                             <td>
                                                 <form method="post" onsubmit="return confirm('Восстановить?');"
-                                                      action="#">
+                                                      action="{{route('leader.user.retrieve',$user->id)}}">
                                                     {{csrf_field()}}
                                                     <input type="submit" class="btn btn-primary"
                                                            value="Восстановить">
@@ -420,7 +420,7 @@
                                         <tr>
                                             <td>
                                                 <form method="post" onsubmit="return confirm('Восстановить?');"
-                                                      action="#">
+                                                      action="{{route('leader.user.retrieve',$user->id)}}">
                                                     {{csrf_field()}}
                                                     <input type="submit" class="btn btn-primary"
                                                            value="Восстановить">

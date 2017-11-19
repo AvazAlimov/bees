@@ -27,7 +27,6 @@ class LeaderController extends Controller
 
         return view('leader.index')->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted);
     }
-
     public function acceptUser(Request $request, $id)
     {
         $user = $request->user()->users()->findOrFail($id);
@@ -35,23 +34,25 @@ class LeaderController extends Controller
         $user->update(['username' => 'U' . sprintf("%07d", $user->id), 'password' => bcrypt($password), 'state' => 1]);
         $data = ['username' => $user->username, 'password' => $password, 'name' => $user->fullName, 'url' => '/login'];
         $user->notify(new UserConfirmationNotification($data));
-        return redirect()->back()->with('message', 'Accepted successfully');
+        return redirect()->route('leader.index')->with('message', 'Accepted successfully');
     }
-
     public function refuseUser(Request $request, $id)
     {
         $user = $request->user()->users()->findOrFail($id);
         $user->update(['state' => -1]);
-        return redirect()->back()->with('message', 'Refused successfully');
+        return redirect()->route('leader.index')->with('message', 'Refused successfully');
     }
-
     public function destroyUser(Request $request, $id)
     {
         $user = $request->user()->users()->findOrFail($id);
         $user->delete();
-        return redirect()->back()->with('message', 'Deleted successfully');
+        return redirect()->route('leader.index')->with('message', 'Deleted successfully');
     }
-
+    public function retrieveUser(Request $request, $id){
+        $user = $request->user()->users()->findOrFail($id);
+        $user->update(['state'=>0]);
+        return redirect()->route('leader.index')->with('message', 'Retrieved successfully');
+    }
     public function search(Request $request)
     {
         $users = Auth::user();
@@ -218,7 +219,6 @@ class LeaderController extends Controller
         $notAccepted = $accepted_users->paginate(10, ['*'], 'accepted');
         $waiting_users = $users->waitingUsers()->orderBy('id', 'desc')->paginate(10, ['*'], 'waiting');
         $accepted_users = $users->acceptedUsers()->orderBy('id', 'desc')->paginate(10, ['*'], 'notAccepted');
-
         return view('leader.index')->withWaiting($waiting_users)->withAccepted($accepted_users)->withNotAccepted($notAccepted);
 
     }
