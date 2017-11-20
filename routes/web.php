@@ -12,6 +12,8 @@ Route::prefix('leader')->group(function(){
     Route::post('/retrieve/user/{id}', 'Leader\LeaderController@retrieveUser')->name('leader.user.retrieve');
     Route::get('/accepted','Leader\LeaderController@search')->name('leader.search');
     Route::get('/not_accepted','Leader\LeaderController@searchNotAccepted')->name('leader.search.notAccepted');
+    Route::get('/user/edit/{id}','Leader\LeaderController@editUser')->name('leader.user.edit');
+    Route::post('/user/update/{id}','Leader\LeaderController@updateUser')->name('leader.user.update');
 
 });
 //Route::get('/', 'Web\WebController@showForm')->name('web.show.form');

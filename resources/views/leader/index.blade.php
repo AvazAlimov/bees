@@ -105,7 +105,6 @@
                                             <div class="col-md-8"><span>{{$activity->name}}</span></div>
                                         @endforeach
                                     </div>
-
                                 </div>
                                 <div class="panel-footer">
                                     <div class="row">
@@ -124,7 +123,7 @@
                                             </form>
                                         </div>
                                         <div class="col-md-2">
-                                            <form>
+                                            <form action="{{route('leader.user.edit', $user->id)}}" method="get">
                                                 <input type="submit" class="btn btn-block btn-primary form-group"
                                                        value="Изменить">
                                             </form>

@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Leader;
 
 use App\Notifications\UserConfirmationNotification;
 use App\User;
+use App\Region;
+use App\City;
+use App\Activity;
+use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -222,5 +226,35 @@ class LeaderController extends Controller
         return view('leader.index')->withWaiting($waiting_users)->withAccepted($accepted_users)->withNotAccepted($notAccepted);
 
     }
+    public function editUser($id){
+        $user = Auth::user()->users()->findOrFail($id);
+        $regions = Region::all();
+        $cities = City::all();
+        $activities = Activity::all();
 
+        return view('user.user-update')->withUser($user)->withRegions($regions)->withCities($cities)->withActivities($activities);
+    }
+    public function updateUser(Request $request, $id){
+        $request->validate([
+            'region_id' => 'required|exists:regions,id',
+            'city_id' => 'required|exists:cities,id',
+            'neighborhood' => 'required|max:255',
+            'subject' => $request->type < 4 ?  'required|max:255' : '',
+            'reg_date' => $request->type < 4 ? 'required' : '',
+            'inn' => $request->type < 4 ? 'required|digits:9' : '',
+            'bank_name' => $request->type < 4 ?  'required' : '',
+            'mfo' => $request->type < 4 ? 'required|digits:5' : '',
+            'address' => 'required|max:255',
+            'phone' => 'required|max:13|min:12',
+            'email' => 'required|email',
+            'fullName' => 'required|max:255',
+            'labors' => $request->type < 4 ? 'required|numeric|min:0' : '',
+            'activities.*' =>'exists:activities,id',
+        ]);
+
+        $user = Auth::user()->users()->findOrFail($id);
+        $user->update($request->all());
+        $user->activities()->sync($request->activities, true);
+        return redirect()->route('leader.index')->with('message','User updated successfully');
+    }
 }
