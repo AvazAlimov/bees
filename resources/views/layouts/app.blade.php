@@ -47,9 +47,16 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                         @else
                             <li class="dropdown">
+                                @auth('admin')
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
+                                @endauth
+                                @auth('leader')
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    {{ Auth::user()->firstName }} {{ Auth::user()->lastName }}<span class="caret"></span>
+                                </a>
+                                @endauth
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
