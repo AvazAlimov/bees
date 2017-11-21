@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\City;
+use App\Region;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -29,7 +30,7 @@ class AdminCityController extends Controller
      */
     public function create()
     {
-        //
+        return view('city.city-create')->withRegions(Region::all());
     }
 
     /**
@@ -46,7 +47,7 @@ class AdminCityController extends Controller
         ]);
         $city = new City($request->all());
         $city->save();
-        return redirect()->back()->with('message','City created successfully');
+        return redirect()->route('admin.index')->with('message','City created successfully');
     }
 
     /**
@@ -68,7 +69,8 @@ class AdminCityController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        return view('city.city-update')->withCity(City::findOrFail($id))->withRegions(Region::all());
     }
 
     /**
@@ -87,7 +89,7 @@ class AdminCityController extends Controller
         $city = City::findOrFail($id);
         $city->update($request->all());
 
-        return redirect()->back()->with('message','City updated successfully');
+        return redirect()->route('admin.index')->with('message','City updated successfully');
     }
 
     /**

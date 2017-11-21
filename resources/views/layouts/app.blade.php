@@ -12,11 +12,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     @yield('styles')
 </head>
 <body>
     <div id="app">
-        <navbar class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <!-- Collapsed Hamburger -->
@@ -44,13 +45,18 @@
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
+                                @auth('admin')
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
+                                @endauth
+                                @auth('leader')
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    {{ Auth::user()->firstName }} {{ Auth::user()->lastName }}<span class="caret"></span>
+                                </a>
+                                @endauth
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -67,9 +73,23 @@
                             </li>
                         @endguest
                     </ul>
+
                 </div>
             </div>
-        </navbar>
+        </nav>
+        @yield('nav')
+        @if(Session::has('message'))
+            <div class="alert alert-success alert-dismissible col-md-6 col-lg-offset-3" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{Session::get('message')}}
+            </div>
+        @endif
+        @if(Session::has('error-message'))
+            <div class="alert alert-danger alert-dismissible col-md-6 col-lg-offset-3" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{Session::get('error-message')}}
+            </div>
+        @endif
 
         @yield('content')
     </div>

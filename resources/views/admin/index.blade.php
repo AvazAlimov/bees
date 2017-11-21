@@ -1,8 +1,6 @@
 @extends('layouts.app')
-
-@section('content')
-    <nav class="navbar navbar-default" id="navigation"
-         style="border-radius: 0; border-width: 0 0 thin 0;">
+@section('nav')
+    <nav class="navbar navbar-default" id="navigation">
         <ul class="nav navbar-nav">
             <li data-toggle="tab" class="navs"><a onclick="switchSection('section1')"><i class="fa fa-car"></i>
                     Viloyatlar</a></li>
@@ -15,12 +13,13 @@
             <li data-toggle="tab" class="navs"><a onclick="switchSection('section4')"><i class="fa fa-building"></i>
                     Faoliyatlar</a></li>
             {{--
-
                 <li data-toggle="tab" class="navs"><a onclick="switchSection('section4')"><i class="fa fa-file-excel-o"></i>
                         Экспорт в
                         Excel</a></li>--}}
         </ul>
     </nav>
+@endsection
+@section('content')
     <div class="container-fluid" id="container" style="padding: 0 20px 20px 20px;">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
@@ -32,23 +31,23 @@
                         <div class="col-md-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <strong>{{ $region->name }}</strong>
+                                    <strong>{{ $region->name }}@if($region->leader != null) :
+                                        <i>{{$region->leader->firstName}} {{$region->leader->lastName}}</i> @endif
+                                    </strong>
                                 </div>
                                 <div class="panel-footer">
                                     <table>
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <form action="{{ route('region.show', $region->id) }}"
-                                                      method="get">
+                                                <form action="{{ route('region.edit', $region->id) }}" method="GET">
                                                     <button type="submit" class="btn btn-primary pull-right">Изменить
                                                     </button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{ route('region.delete', $region->id) }}"
-                                                      method="post">
-                                                    {{ csrf_field() }}
+                                                <form action="{{ route('region.delete', $region->id) }}" method="get"
+                                                      onclick="return confirm('Хотите удалить')">
                                                     <button type="submit" class="btn btn-danger pull-right">Удалить
                                                     </button>
                                                 </form>
@@ -60,8 +59,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <form action="{{ route('region.create') }}" method="GET">
-                        {{ csrf_field() }}
+                    <form method="GET" action="{{ route('region.create')}}">
                         <button type="submit" class="btn btn-primary pull-right">
                             Region Qo'shish
                         </button>
@@ -79,12 +77,6 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="media">
-                                        {{--
-                                                                                <div class="media-left">
-                                                                                    <img src="{{ "operator_file/".$operator->image }}" class="img-circle"
-                                                                                         style="width: 128px; height: 128px">
-                                                                                </div>
-                                        --}}
                                         <div class="media-body">
                                             <h3 class="media-heading">
                                                 Ismi: {{ $leader->firstName }} {{ $leader->lastName }}</h3>
@@ -99,16 +91,14 @@
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <form action="{{ route('leader.show', $leader->id) }}" method="get">
-                                                    {{ csrf_field() }}
+                                                <form action="{{ route('leader.edit', $leader->id) }}" method="get">
                                                     <button type="submit" class="btn btn-primary pull-right">Изменить
                                                     </button>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form action="{{ route('leader.delete', $leader->id) }}"
-                                                      method="post">
-                                                    {{ csrf_field() }}
+                                                      onclick="return confirm('Хотите удалить')" method="get">
                                                     <button type="submit" class="btn btn-danger pull-right">Удалить
                                                     </button>
                                                 </form>
@@ -123,7 +113,6 @@
 
                     <div class="col-md-12">
                         <form action="{{ route('leader.create') }}" method="GET">
-                            {{ csrf_field() }}
                             <button type="submit" class="btn btn-primary pull-right">
                                 Добавить оператор
                             </button>
@@ -134,43 +123,44 @@
                     <div class="page-header">
                         <h2>Shaharlar</h2>
                     </div>
-                    @foreach ($cities as $city)
-                        <div class="col-md-6">
+                    @foreach($regions as $region)
+                        <div class="col-md-6" style="padding: 20px;">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <strong>{{ $city->region->name }}</strong>
+                                    <strong>{{ $region->name }}</strong>
                                 </div>
-                                <div class="panel-body">
-                                    <strong>{{ $city->name }}</strong>
-                                </div>
-                                <div class="panel-footer">
-                                    <table>
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <form action="{{ route('city.show', $city->id) }}"
-                                                      method="get">
-                                                    <button type="submit" class="btn btn-primary pull-right">Изменить
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="{{ route('city.delete', $city->id) }}"
-                                                      method="post">
-                                                    {{ csrf_field() }}
-                                                    <button type="submit" class="btn btn-danger pull-right">Удалить
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                @foreach ($region->cities as $city)
+                                    <div class="panel-body">
+                                        <strong>{{ $city->name }}</strong>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <table>
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <form action="{{ route('city.edit', $city->id) }}"
+                                                          method="get">
+                                                        <button type="submit" class="btn btn-primary pull-right">
+                                                            Изменить
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="{{ route('city.delete', $city->id) }}"
+                                                          onclick="return confirm('Хотите удалить')" method="get">
+                                                        <button type="submit" class="btn btn-danger pull-right">Удалить
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     @endforeach
                     <form action="{{ route('city.create') }}" method="GET">
-                        {{ csrf_field() }}
                         <button type="submit" class="btn btn-primary pull-right">
                             Shaharni Qo'shish
                         </button>
@@ -191,16 +181,16 @@
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <form action="{{ route('activity.show', $city->id) }}"
+                                                <form action="{{ route('activity.edit', $activity->id) }}"
                                                       method="get">
                                                     <button type="submit" class="btn btn-primary pull-right">Изменить
                                                     </button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{ route('activity.delete', $city->id) }}"
-                                                      method="post">
-                                                    {{ csrf_field() }}
+                                                <form action="{{ route('activity.delete', $activity->id) }}"
+                                                      method="get" onclick="return confirm('Хотите удалить')">
+
                                                     <button type="submit" class="btn btn-danger pull-right">Удалить
                                                     </button>
                                                 </form>
@@ -213,7 +203,6 @@
                         </div>
                     @endforeach
                     <form action="{{ route('activity.create') }}" method="GET">
-                        {{ csrf_field() }}
                         <button type="submit" class="btn btn-primary pull-right">
                             Faoliyatni Qo'shish
                         </button>
@@ -222,8 +211,7 @@
             </div>
         </div>
     </div>
-
-
+@endsection
 @section('scripts')
     <script>
         function switchSection(id) {
@@ -253,10 +241,6 @@
             switchSection(getCookie("admin"));
             var navs = document.getElementsByClassName("navs");
             navs[getCookie("admin").replace("section", "") - 1].className = "navs active";
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("navigation").style.display =
-                document.getElementById("container").style.display =
-                    document.getElementById("navbar").style.display = "block";
         }
     </script>
 @endsection

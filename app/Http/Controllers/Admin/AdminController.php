@@ -20,7 +20,6 @@ class AdminController extends Controller
         return view('admin.index')
             ->withRegions(Region::all())
             ->withLeaders(Leader::all())
-            ->withCities(City::all())
             ->withActivities(Activity::all());
     }
 }

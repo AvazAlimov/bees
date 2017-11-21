@@ -16,7 +16,7 @@ class Leader extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstName','lastName', 'email', 'password',
+        'firstName','lastName', 'email', 'password','username','phone'
     ];
 
     /**
@@ -35,9 +35,15 @@ class Leader extends Authenticatable
         return $this->hasManyThrough('App\User','App\Region');
     }
     public function acceptedUsers(){
-        return $this->users()->where('username','!=',null);
+        return $this->users()->where('state',1);
     }
-    public function pandingUsers(){
-        return $this->users()->where('username',null);
+    public function notAcceptedUsers(){
+        return $this->users()->where('state',-1);
+    }
+    public function consideredUsers(){
+        return $this->users()->where('state', '!=',0);
+    }
+    public function waitingUsers(){
+        return $this->users()->where('state',0);
     }
 }

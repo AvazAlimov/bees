@@ -29,7 +29,7 @@ class AdminActivityController extends Controller
      */
     public function create()
     {
-
+        return view('activity.activity-create');
     }
 
     /**
@@ -45,7 +45,7 @@ class AdminActivityController extends Controller
         ]);
         $activity = new Activity($request->all());
         $activity->save();
-        return redirect()->back()->with('message','Activity created successfully');
+        return redirect()->route('admin.index')->with('message','Activity created successfully');
     }
 
     /**
@@ -67,7 +67,7 @@ class AdminActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('activity.activity-update')->withActivity(Activity::findOrFail($id));
     }
 
     /**
@@ -82,7 +82,9 @@ class AdminActivityController extends Controller
         $request->validate([
             'name'=>'required|unique:activities,name,'.$id
         ]);
-        return redirect()->back()->with('message','Activity updated successfully');
+        $activity = Activity::findOrFail($id);
+        $activity->update($request->all());
+        return redirect()->route('admin.index')->with('message','Activity updated successfully');
     }
 
     /**
