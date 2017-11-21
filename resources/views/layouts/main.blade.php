@@ -95,10 +95,11 @@
             </div>
         </div>
     </div>
-
     @yield('content')
 </div>
-<script src="{{asset('dist/js/bootstrap.js')}}"></script>
+<script src="{{asset('dist/js/jquery-3.2.1.slim.min.js')}}"></script>
+<script src="{{asset('dist/js/popper.js')}}"></script>
+<script src="{{asset('dist/js/bootstrap.min.js')}}"></script>
 @if(Session::has('message'))
     <script>
         $("#userModal").modal();
