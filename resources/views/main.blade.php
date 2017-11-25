@@ -50,24 +50,36 @@
         <div class="container">
             <div class="card border-warning">
                 <div class="card-header bg-warning">
-                    <ul class="nav nav-tabs card-header-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="nav-user_1-tab" data-toggle="tab" href="#user_1" role="tab"
-                               aria-controls="user_1" aria-selected="true">Корхона/ЯТТ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="nav-user_2-tab" data-toggle="tab" href="#user_2" role="tab"
-                               aria-controls="user_2" aria-selected="true">Кўп тармоқли фермер хўжаликлари</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="nav-user_3-tab" data-toggle="tab" href="#user_3" role="tab"
-                               aria-controls="user_3" aria-selected="true">Деҳқон (шахсий ёрдамчи) хўжаликлари</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="nav-user_4-tab" data-toggle="tab" href="#user_4" role="tab"
-                               aria-controls="user_4" aria-selected="true">Жисмоний шахс</a>
-                        </li>
-                    </ul>
+                    {{--<ul class="nav nav-tabs card-header-tabs" role="tablist">--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link active" id="nav-user_1-tab" data-toggle="tab" href="#user_1" role="tab"--}}
+                               {{--aria-controls="user_1" aria-selected="true">Корхона/ЯТТ</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" id="nav-user_2-tab" data-toggle="tab" href="#user_2" role="tab"--}}
+                               {{--aria-controls="user_2" aria-selected="true">Кўп тармоқли фермер хўжаликлари</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" id="nav-user_3-tab" data-toggle="tab" href="#user_3" role="tab"--}}
+                               {{--aria-controls="user_3" aria-selected="true">Деҳқон (шахсий ёрдамчи) хўжаликлари</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" id="nav-user_4-tab" data-toggle="tab" href="#user_4" role="tab"--}}
+                               {{--aria-controls="user_4" aria-selected="true">Жисмоний шахс</a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="type" class="col-form-label col-form-label-sm">Type</label>
+                            <select id="type" class="form-control form-control-sm" onchange="changeType(this.id)">
+                                <option value="0" selected>Корхона/ЯТТ</option>
+                                <option value="1">Кўп тармоқли фермер хўжаликлари</option>
+                                <option value="2">Деҳқон (шахсий ёрдамчи) хўжаликлари</option>
+                                <option value="3">Жисмоний шахс</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -593,9 +605,12 @@
             }
         }
 
-        window.onload = function () {
-
-        };
+        function changeType(id) {
+            var selected = document.getElementById(id).selectedIndex + 1;
+            for(var i = 1; i < 5; i++)
+                document.getElementById("user_" + i).classList.remove("active");
+            document.getElementById("user_" + selected).classList.add("active");
+        }
 
         $(document).ready(function () {
             regionChanged('region_1');
@@ -612,9 +627,7 @@
             var map = new google.maps.Map(mapCanvas, mapOptions);
             var marker = new google.maps.Marker({position:myCenter});
             marker.setMap(map);
-
         }
     </script>
-
     <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
 @endsection
