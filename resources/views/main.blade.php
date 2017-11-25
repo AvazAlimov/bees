@@ -30,15 +30,20 @@
         .nav-link:hover {
             color: #333;
         }
+        .display-5
+        {
+            color:#582E2A;
+            font-style: Open Sans;
+            font-weight: Bold;
+        }
 
     </style>
 @endsection
 
 @section('content')
     <div class="jumbotron bg-warning text-center">
-        <img src="https://image.flaticon.com/icons/svg/614/614476.svg" alt="logo" style="width: 128px;">
+        <img src="/Resources/logo.png" alt="logo" style="width: 128px;">
         <h1 class="display-5"><br>ЎЗБЕКИСТОН РЕСПУБЛИКАСИ АСАЛАРИЧИЛАРИ<br>УЮШМАСИ</h1>
-
     </div>
 
     <div id="register">

@@ -32,7 +32,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">
-            <img src="https://image.flaticon.com/icons/svg/614/614476.svg" width="40" height="40" alt="">
+            <img src="/Resources/logo1.png" width="40" height="40" alt="">
         </a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
