@@ -23,13 +23,14 @@
             background: rgba(0, 0, 0, 0) url({{ asset('Resources/halftone-yellow.png') }}) repeat scroll 0 0;
         }
 
-        .nav-link {
-            color: #555;
-        }
+        /*.nav-link {*/
+            /*color: #555;*/
+        /*}*/
 
-        .nav-link:hover {
-            color: #333;
-        }
+        /*.nav-link:hover {*/
+            /*color: #333;*/
+        /*}*/
+
         .display-5
         {
             color:#582E2A;
@@ -619,6 +620,7 @@
             regionChanged('region_4');
         })
     </script>
+    <!--suppress JSUnresolvedVariable, JSUnresolvedFunction, JSUnusedLocalSymbols -->
     <script>
         function myMap() {
             var myCenter = new google.maps.LatLng(41.310441,69.278460);
