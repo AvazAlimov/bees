@@ -7,10 +7,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'O\'AU') }}</title>
     <link rel="stylesheet" href="{{asset('dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/css/font-awesome.min.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
     <style>
         body {
             font-family: 'Fira Sans', sans-serif;
+            background: rgba(0, 0, 0, 0) url({{ asset('Resources/halftone-yellow.png') }}) repeat scroll 0 0;
         }
 
         .navbar {
@@ -18,21 +20,25 @@
         }
 
         #app {
-            margin-top: 60px;
+            margin-top: 100px;
         }
     </style>
-    @yield('style')
+    <div id="app">
+        @yield('style')
+    </div>
 </head>
 <body>
 
 <div class="fixed-top">
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container">
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
                 aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">
-            <img src="https://image.flaticon.com/icons/svg/614/614476.svg" width="40" height="40" alt="">
+        <a class="navbar-brand" href="/">
+            <img src="{{ asset('/Resources/logo1.png') }}" width="40" height="40" alt="">
         </a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <div class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -63,6 +69,8 @@
                     </li>
                     @endguest
             </ul>
+        </div>
+
         </div>
     </nav>
 </div>
