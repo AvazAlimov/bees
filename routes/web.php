@@ -76,6 +76,7 @@ Route::get('/regions', function(){
     $items = $result->sortBy(function ($item){
         return $item[3];
     })->except(['0','1'])->unique('3')->pluck('1','3');
+
     foreach ($items as $key => $item){
         echo intval($key) . ' --- '. substr($item, 0,191) ."</br>";
         $result2 = Excel::load('hudud.xlsx')->getExcel()->getSheet(0)->toArray();
@@ -87,6 +88,12 @@ Route::get('/regions', function(){
             echo intval($key2) . ' ` ~ ` ~ `'. substr($item2, 0,191) ."</br>";
         }
     }
+    $result3 = Excel::load('banklar.xlsx')->getExcel()->getSheet(0)->toArray();
+    $result3 = collect($result3);
+    $items3 = $result3->sortBy(function ($item3){
+        return $item3[3];
+    })->except(['0'])->only(['0','1','2'])->all();
+    dd($items3);
 
     
 
