@@ -5,22 +5,22 @@
         .jumbotron {
             margin: 0;
             min-height: 400px;
-            background: #17234E url("http://eskipaper.com/images/fence-flowers-nature-summer-1.jpg") no-repeat top;
+            background: #17234E url({{ asset('Resources/background.jpg') }}) no-repeat center;
             -webkit-background-size: cover;
             background-size: cover;
             border-radius: 0;
         }
 
         #register {
-            background: rgba(0, 0, 0, 0) url("https://www.toptal.com/designers/subtlepatterns/patterns/halftone-yellow.png") repeat scroll 0 0;
+            background: rgba(0, 0, 0, 0) url({{ asset('Resources/halftone-yellow.png') }}) repeat scroll 0 0;
         }
 
         #about {
-            background: rgba(0, 0, 0, 0) url("https://www.toptal.com/designers/subtlepatterns/patterns/sayagata-400px.png") repeat scroll 0 0;
+            background: rgba(0, 0, 0, 0) url({{ asset('Resources/sayagata.png') }}) repeat scroll 0 0;
         }
 
         #contacts {
-            background: rgba(0, 0, 0, 0) url("https://www.toptal.com/designers/subtlepatterns/patterns/halftone-yellow.png") repeat scroll 0 0;
+            background: rgba(0, 0, 0, 0) url({{ asset('Resources/halftone-yellow.png') }}) repeat scroll 0 0;
         }
 
         .nav-link {
@@ -33,7 +33,6 @@
         .display-5
         {
             color:#582E2A;
-            font-style: Open Sans;
             font-weight: Bold;
         }
 
@@ -42,7 +41,7 @@
 
 @section('content')
     <div class="jumbotron bg-warning text-center">
-        <img src="/Resources/logo.png" alt="logo" style="width: 128px;">
+        <img src="{{ asset('Resources/logo.png') }}" alt="logo" style="width: 128px;">
         <h1 class="display-5"><br>ЎЗБЕКИСТОН РЕСПУБЛИКАСИ АСАЛАРИЧИЛАРИ<br>УЮШМАСИ</h1>
     </div>
 
