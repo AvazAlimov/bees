@@ -32,7 +32,6 @@ Route::prefix('admin')->group(function (){
         Route::post('/store','Admin\AdminRegionController@store')->name('region.store');
         Route::get('/edit/{id}','Admin\AdminRegionController@edit')->name('region.edit');
         Route::post('/update/{id}', 'Admin\AdminRegionController@update')->name('region.update');
-
     });
 
     Route::prefix('leader')->group(function (){
@@ -42,10 +41,8 @@ Route::prefix('admin')->group(function (){
         Route::post('store','Admin\AdminLeaderController@store')->name('leader.store');
         Route::get('edit/{id}','Admin\AdminLeaderController@edit')->name('leader.edit');
         Route::post('update/{id}','Admin\AdminLeaderController@update')->name('leader.update');
-
     });
     Route::prefix('city')->group(function (){
-
         Route::get('delete/{id}','Admin\AdminCityController@destroy')->name('city.delete');
         Route::get('create','Admin\AdminCityController@create')->name('city.create');
         Route::post('store','Admin\AdminCityController@store')->name('city.store');
@@ -53,7 +50,6 @@ Route::prefix('admin')->group(function (){
         Route::post('update/{id}','Admin\AdminCityController@update')->name('city.update');
     });
     Route::prefix('activity')->group(function (){
-
         Route::get('delete/{id}','Admin\AdminActivityController@destroy')->name('activity.delete');
         Route::get('create','Admin\AdminActivityController@create')->name('activity.create');
         Route::post('store','Admin\AdminActivityController@store')->name('activity.store');
