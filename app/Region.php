@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Region extends Model
 {
     protected $fillable = [
-        'name','leader_id'
+        'id','name','leader_id'
     ];
     public function cities(){
         return $this->hasMany('App\City');
