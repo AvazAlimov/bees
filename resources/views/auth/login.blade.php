@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .card {
-            border-color: #f0ad4e ;
+            border-color: #f0ad4e;
             box-shadow: 0 0 2px #888;
         }
 
@@ -39,12 +39,11 @@
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                                 <label for="username" class="col-md-12 control-label">Фойдаланувчи номи</label>
-
                                 <div class="col-md-12 input-group">
-                                    <span class="input-group-addon bg-warning"><i class="fa fa-user-o" aria-hidden="true"></i></span>
+                                    <span class="input-group-addon bg-warning"><i class="fa fa-user"
+                                                                                  aria-hidden="true"></i></span>
                                     <input id="username" type="text" class="form-control" name="username"
                                            value="{{ old('username') }}" required autofocus>
-
                                 </div>
                             </div>
 
@@ -52,9 +51,9 @@
                                 <label for="password" class="col-md-12 control-label">Парол</label>
 
                                 <div class="col-md-12 input-group">
-                                    <span class="input-group-addon bg-warning"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    <span class="input-group-addon bg-warning"><i class="fa fa-lock"
+                                                                                  aria-hidden="true"></i></span>
                                     <input id="password" type="password" class="form-control" name="password" required>
-
                                     @if ($errors->has('password'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
