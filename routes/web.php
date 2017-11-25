@@ -1,5 +1,7 @@
 <?php
 
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Collection;
 
 Route::prefix('leader')->group(function(){
     Route::get('login', 'Auth\LeaderLoginController@showLoginForm')->name('leader.login');
@@ -66,7 +68,36 @@ Route::get('setlocale/{locale}', function ($locale) {
     return redirect()->back()->withCookie(cookie()->forever('language', $locale));
 })->name('lang.switch');
 
+Route::get('/regions', function(){
 
+
+    $result = Excel::load('hudud.xlsx')->getExcel()->getSheet(0)->toArray();
+    $result = collect($result);
+    $items = $result->sortBy(function ($item){
+        return $item[3];
+    })->except(['0','1'])->unique('3')->pluck('1','3');
+
+    foreach ($items as $key => $item){
+        echo intval($key) . ' --- '. substr($item, 0,191) ."</br>";
+        $result2 = Excel::load('hudud.xlsx')->getExcel()->getSheet(0)->toArray();
+        $result2 = collect($result2);
+        $items2 = $result2->sortBy(function ($item){
+            return $item[3];
+        })->except(['0','1'])->where('3', sprintf("%02d", $key))->pluck('2','0');
+        foreach ($items2 as $key2 => $item2){
+            echo intval($key2) . ' ` ~ ` ~ `'. substr($item2, 0,191) ."</br>";
+        }
+    }
+    $result3 = Excel::load('banklar.xlsx')->getExcel()->getSheet(0)->toArray();
+    $result3 = collect($result3);
+    $items3 = $result3->sortBy(function ($item3){
+        return $item3[3];
+    })->except(['0'])->only(['0','1','2'])->all();
+    dd($items3);
+
+    
+
+});
 Route::prefix('user')->group(function (){
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login');
