@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Bank;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,8 +19,9 @@ class WebController extends Controller
         $regions = Region::all();
         $cities = City::all();
         $activities = Activity::all();
+        $banks = Bank::all();
 
-        return view('main')->withRegions($regions)->withCities($cities)->withActivities($activities);
+        return view('main')->withRegions($regions)->withCities($cities)->withActivities($activities)->withBanks($banks);
     }
 
 
