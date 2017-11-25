@@ -38,6 +38,7 @@
     <div class="jumbotron bg-warning text-center">
         <img src="https://image.flaticon.com/icons/svg/614/614476.svg" alt="logo" style="width: 128px;">
         <h1 class="display-5"><br>ЎЗБЕКИСТОН РЕСПУБЛИКАСИ АСАЛАРИЧИЛАРИ<br>УЮШМАСИ</h1>
+
     </div>
 
     <div id="register">

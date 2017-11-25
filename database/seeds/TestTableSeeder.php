@@ -8,6 +8,8 @@ use App\Region;
 use App\City;
 use App\Activity;
 use App\Admin;
+use Maatwebsite\Excel\Facades\Excel;
+
 class TestTableSeeder extends Seeder
 {
     /**
@@ -36,20 +38,26 @@ class TestTableSeeder extends Seeder
             ]);
         }
 
-        $regions = array();
-        array_push($regions,'Tashkent City', 'Tashkent','Andijan','Fergana','Namangan','Jizzakh','Samarkand','Kashkadarya','Bukhara','Nukus','Khorezm','Termiz','Karakalpak');
-        foreach (range(1,13) as $i){
+        $result = Excel::load(public_path('hudud.xlsx'))->getExcel()->getSheet(0)->toArray();
+        $result = collect($result);
+        $items = $result->sortBy(function ($item){
+            return $item[3];
+        })->except(['0','1'])->unique('3')->pluck('1','3');
+        foreach ($items as $key => $item){
             Region::create([
-                'name' => $regions[$i-1],
-                'leader_id'=>$i,
+                'id'=>$key,
+                'name' => substr($item,0,190),
             ]);
-        }
-
-        foreach (range(1,13) as $i) {
-            foreach (range(1, 3) as $j){
+            $result2 = Excel::load(public_path('hudud.xlsx'))->getExcel()->getSheet(0)->toArray();
+            $result2 = collect($result2);
+            $items2 = $result2->sortBy(function ($item){
+                return $item[3];
+            })->except(['0','1'])->where('3', sprintf("%02d", $key))->pluck('2','0');
+            foreach ($items2 as $key2 => $item2){
                 City::create([
-                   'name'=>$faker->city,
-                    'region_id'=>$i
+                    'id'=>$key2,
+                    'name'=>substr($item2,0,190),
+                    'region_id'=>$key
                 ]);
             }
         }
