@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 <div class="container">
@@ -62,7 +62,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     Login
                                 </button>
-
                             </div>
                         </div>
                     </form>
