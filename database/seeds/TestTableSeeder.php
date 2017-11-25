@@ -8,6 +8,7 @@ use App\Region;
 use App\City;
 use App\Activity;
 use App\Admin;
+use App\Bank;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TestTableSeeder extends Seeder
@@ -26,6 +27,7 @@ class TestTableSeeder extends Seeder
         Activity::truncate();
         User::truncate();
         Admin::truncate();
+        Bank::truncate();
         foreach (range(1,13) as $i)
         {
             Leader::create([
@@ -60,6 +62,15 @@ class TestTableSeeder extends Seeder
                     'region_id'=>$key
                 ]);
             }
+        }
+        $result3 = Excel::load(public_path('banklar.xlsx'))->getExcel()->getSheet(0)->toArray();
+        $result3 = collect($result3);
+        $items3 = $result3->except(['0','1'])->all();
+        foreach ($items3 as $key3 => $item3){
+            Bank::create([
+                'mfo'=> substr($item3[1], 0,5),
+                'name'=>substr($item3[8], 0,191),
+            ]);
         }
 
         foreach (range(1,6) as $i){

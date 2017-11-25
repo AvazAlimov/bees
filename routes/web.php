@@ -90,10 +90,11 @@ Route::get('/regions', function(){
     }
     $result3 = Excel::load('banklar.xlsx')->getExcel()->getSheet(0)->toArray();
     $result3 = collect($result3);
-    $items3 = $result3->sortBy(function ($item3){
-        return $item3[3];
-    })->except(['0'])->only(['0','1','2'])->all();
-    dd($items3);
+    $items3 = $result3->except(['0','1'])->all();
+    foreach ($items3 as $key3 => $item3){
+        echo intval($key3) . ' ` ~ ` ~ `'. substr($item3[1], 0,5) .'~ ~ ~'. substr($item3[8], 0,191)."</br>";
+    }
+
 
     
 
