@@ -28,8 +28,9 @@
                                 <label for="leader_id" class="col-md-3 control-label">Лидер:</label>
                                 <div class="col-md-9">
                                     <select id="leader_id" name="leader_id" class="col-md-6" >
+                                        <option value=""> </option>
                                         @foreach($leaders as $leader)
-                                            <option value="{{$leader->id}}" {{$region->leader->id == $leader->id ? "selected" : ""}}>{{$leader->firstName}} {{$leader->lastName}}</option>
+                                            <option value="{{$leader->id}}" {{$region->leader != null ? ($region->leader->id == $leader->id ? "selected" : "") : ""}}>{{$leader->firstName}} {{$leader->lastName}}</option>
                                         @endforeach
                                     </select >
                                     @if ($errors->has('leader_id'))
