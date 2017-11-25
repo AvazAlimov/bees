@@ -51,25 +51,24 @@
         <div class="container">
             <div class="card border-warning">
                 <div class="card-header bg-warning">
-                    {{--<ul class="nav nav-tabs card-header-tabs" role="tablist">--}}
-                        {{--<li class="nav-item">--}}
-                            {{--<a class="nav-link active" id="nav-user_1-tab" data-toggle="tab" href="#user_1" role="tab"--}}
-                               {{--aria-controls="user_1" aria-selected="true">Корхона/ЯТТ</a>--}}
-                        {{--</li>--}}
-                        {{--<li class="nav-item">--}}
-                            {{--<a class="nav-link" id="nav-user_2-tab" data-toggle="tab" href="#user_2" role="tab"--}}
-                               {{--aria-controls="user_2" aria-selected="true">Кўп тармоқли фермер хўжаликлари</a>--}}
-                        {{--</li>--}}
-                        {{--<li class="nav-item">--}}
-                            {{--<a class="nav-link" id="nav-user_3-tab" data-toggle="tab" href="#user_3" role="tab"--}}
-                               {{--aria-controls="user_3" aria-selected="true">Деҳқон (шахсий ёрдамчи) хўжаликлари</a>--}}
-                        {{--</li>--}}
-                        {{--<li class="nav-item">--}}
-                            {{--<a class="nav-link" id="nav-user_4-tab" data-toggle="tab" href="#user_4" role="tab"--}}
-                               {{--aria-controls="user_4" aria-selected="true">Жисмоний шахс</a>--}}
-                        {{--</li>--}}
-                    {{--</ul>--}}
-
+                    <!--ul class="nav nav-tabs card-header-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="nav-user_1-tab" data-toggle="tab" href="#user_1" role="tab"
+                               aria-controls="user_1" aria-selected="true">Корхона/ЯТТ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="nav-user_2-tab" data-toggle="tab" href="#user_2" role="tab"
+                               aria-controls="user_2" aria-selected="true">Кўп тармоқли фермер хўжаликлари</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="nav-user_3-tab" data-toggle="tab" href="#user_3" role="tab"
+                               aria-controls="user_3" aria-selected="true">Деҳқон (шахсий ёрдамчи) хўжаликлари</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="nav-user_4-tab" data-toggle="tab" href="#user_4" role="tab"
+                               aria-controls="user_4" aria-selected="true">Жисмоний шахс</a>
+                        </li>
+                    </ul-->
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="type" class="col-form-label col-form-label-sm">Type</label>
