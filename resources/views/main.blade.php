@@ -71,12 +71,12 @@
                     </ul-->
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="type" class="col-form-label col-form-label-sm">Type</label>
+                            <label for="type" class="col-form-label col-form-label-sm">Фойдаланувчи тури</label>
                             <select id="type" class="form-control form-control-sm" onchange="changeType(this.id)">
-                                <option value="0" selected>Корхона/ЯТТ</option>
+                                <option value="0" selected>Юридик корхоналар</option>
                                 <option value="1">Кўп тармоқли фермер хўжаликлари</option>
-                                <option value="2">Деҳқон (шахсий ёрдамчи) хўжаликлари</option>
-                                <option value="3">Жисмоний шахс</option>
+                                <option value="2">Якка тартибдаги тадбиркор</option>
+                                <option value="3">Чаҳсий ёрдамчи хўжалик</option>
                             </select>
                         </div>
                     </div>
