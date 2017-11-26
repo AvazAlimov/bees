@@ -168,8 +168,8 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="phone_1" class="col-form-label col-form-label-sm">Телефон рақами</label>
-                                <input type="text" class="form-control form-control-sm" id="phone_1" name="phone"
-                                       value="{{old('phone')}}"
+                                <input type="text" class="form-control form-control-sm phone" id="phone_1" name="phone"
+                                       value="{{old('phone') or '+'}}"
                                        required>
                             </div>
                         </div>
@@ -291,8 +291,8 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="phone_2" class="col-form-label col-form-label-sm">Телефон рақами</label>
-                                <input type="text" class="form-control form-control-sm" id="phone_2" name="phone"
-                                       value="{{old('phone')}}"
+                                <input type="text" class="form-control form-control-sm phone" id="phone_2" name="phone"
+                                       value="{{old('phone') or '+'}}"
                                        required>
                             </div>
                         </div>
@@ -414,8 +414,8 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="phone_3" class="col-form-label col-form-label-sm">Телефон рақами</label>
-                                <input type="text" class="form-control form-control-sm" id="phone_3" name="phone"
-                                       value="{{old('phone')}}"
+                                <input type="text" class="form-control form-control-sm phone" id="phone_3" name="phone"
+                                       value="{{old('phone') or '+'}}"
                                        required>
                             </div>
                         </div>
@@ -501,8 +501,8 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="phone_4" class="col-form-label col-form-label-sm">Телефон рақами</label>
-                                <input type="text" class="form-control form-control-sm" id="phone_4" name="phone"
-                                       value="{{old('phone')}}"
+                                <input type="text" class="form-control form-control-sm phone" id="phone_4" name="phone"
+                                       value="{{old('phone') or '+'}}"
                                        required>
                             </div>
                         </div>
@@ -617,6 +617,12 @@
             regionChanged('region_2');
             regionChanged('region_3');
             regionChanged('region_4');
+            $('.phone').mask('+AAB (00) 000-00-00', {
+                'translation': {
+                    A: {pattern: /[9]/},
+                    B: {pattern: /[8]/}
+                }
+            });
         })
     </script>
     <!--suppress JSUnresolvedVariable, JSUnresolvedFunction, JSUnusedLocalSymbols -->

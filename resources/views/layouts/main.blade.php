@@ -48,29 +48,29 @@
             </ul>
             <ul class="navbar-nav my-2 my-lg-0">
                 @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Кириш</a>
-                </li>
-                @else
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            {{ \Illuminate\Support\Facades\Auth::user()->username }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                Logout
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Кириш</a>
                     </li>
-                    @endguest
+                    @else
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                {{ \Illuminate\Support\Facades\Auth::user()->username }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    Logout
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </a>
+                            </div>
+                        </li>
+                        @endguest
             </ul>
         </div>
     </nav>
@@ -97,14 +97,19 @@
     </div>
     @yield('content')
 </div>
-<script src="{{asset('dist/js/jquery-3.2.1.slim.min.js')}}"></script>
-<script src="{{asset('dist/js/popper.js')}}"></script>
-<script src="{{asset('dist/js/bootstrap.min.js')}}"></script>
+
+<script src="{{ asset('dist/js/jquery-3.2.1.slim.min.js') }}"></script>
+<script src="{{ asset('dist/js/popper.js') }}"></script>
+<script src="{{ asset('dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('dist/js/jquery.mask.min.js') }}"></script>
+
 @if(Session::has('message'))
     <script>
         $("#userModal").modal();
     </script>
 @endif
+
 @yield('script')
+
 </body>
 </html>
