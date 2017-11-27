@@ -623,7 +623,11 @@
                     B: {pattern: /[8]/}
                 }
             });
+            @if($type != null)
+                document.getElementById('type').selectedIndex = {!!  $type !!} - 1;
+            @endif
         })
+
     </script>
     <!--suppress JSUnresolvedVariable, JSUnresolvedFunction, JSUnusedLocalSymbols -->
     <script>

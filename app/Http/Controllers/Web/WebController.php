@@ -21,7 +21,7 @@ class WebController extends Controller
         $activities = Activity::all();
         $banks = Bank::all();
 
-        return view('main')->withRegions($regions)->withCities($cities)->withActivities($activities)->withBanks($banks);
+        return view('main')->withRegions($regions)->withCities($cities)->withActivities($activities)->withBanks($banks)->withType($type);
     }
 
 
@@ -45,7 +45,6 @@ class WebController extends Controller
             ]);
 
         if ($validator->fails()) {
-            $type ='#user'.$type;
             return redirect()->route('web.show.form',$type)
                 ->withErrors($validator)
                 ->withInput();
