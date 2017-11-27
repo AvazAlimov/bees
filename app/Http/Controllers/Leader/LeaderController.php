@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Kozz\Laravel\Facades\Guzzle;
 
 class LeaderController extends Controller
 {
@@ -38,6 +39,9 @@ class LeaderController extends Controller
         $user->update(['username' => 'U' . sprintf("%07d", $user->id), 'password' => bcrypt($password), 'state' => 1]);
         $data = ['username' => $user->username, 'password' => $password, 'name' => $user->fullName, 'url' => '/login'];
         $user->notify(new UserConfirmationNotification($data));
+//        $client = new Guzzle();
+//        $request_2 = $client->post('http://91.204.239.42:8081/re-smsbroker',[],[]);
+
         return redirect()->route('leader.index')->with('message', 'Accepted successfully');
     }
     public function refuseUser(Request $request, $id)
