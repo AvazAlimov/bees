@@ -149,14 +149,14 @@
                             <label for="mfo_1" class="col-form-label col-form-label-sm">Банк МФО</label>
                             <input type="number" class="form-control form-control-sm" id="mfo_1" name="mfo"
                                    value="{{old('mfo')}}"
-                                   required>
+                                   required v-model="mfo">
                         </div>
                             <div class="form-group col-md-6">
                                 <label for="bank_1" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
                                     номи</label>
                                 <input type="text" class="form-control form-control-sm" id="bank_1" name="bank_name"
                                        value="{{old('bank_name')}}"
-                                       required>
+                                       required v-model="bank">
                             </div>
                         </div>
                         <div class="row">
@@ -631,9 +631,48 @@
             @endif
             for(var i = 0; i < arrays[2].length; i++)
                 mfos.push(arrays[2][i]['mfo']);
-        })
-
+        });
     </script>
+
+    <script src="{{ asset('js/vue.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/lodash.min.js') }}" type="text/javascript"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#register',
+            data: {
+                mfo: '',
+                bank: '',
+                address: '',
+                refresh: false
+            },
+            watch: {
+                mfo: function() {
+                    this.address = '';
+                    if(this.mfo.length > 0) {
+                        this.lookupAddress();
+                    }
+                }
+            },
+            methods: {
+                lookupAddress: _.debounce(function() {
+                    var app = this;
+                    app.bank = "Searching...";
+                    var found = false;
+                    for(var i = 0; i < mfos.length; i++)
+                        if(mfos[i] === app.mfo){
+                            found = true;
+                            app.bank = arrays[2][i]['name'];
+                            break;
+                        }
+
+                    if(!found)
+                        app.bank = 'Topilmadi';
+                }, 500)
+            }
+        });
+    </script>
+
     <!--suppress JSUnresolvedVariable, JSUnresolvedFunction, JSUnusedLocalSymbols -->
     <script>
         function myMap() {
