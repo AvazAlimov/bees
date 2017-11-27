@@ -147,9 +147,7 @@
                             <div class="form-group col-md-6">
                                 <label for="mfo_1" class="col-form-label col-form-label-sm">Банк МФО</label>
                                 <input type="text" class="form-control form-control-sm bankmfo" id="mfo_1" name="mfo"
-                                       value="{{old('mfo')}}"
-                                       required v-model="mfo"
-                                       list="mfos"/>
+                                       value="{{old('mfo')}}" required minlength="5" v-model="mfo" list="mfos"/>
                                 <datalist id="mfos">
                                     @foreach($banks as $bank)
                                         <option>{{ $bank->mfo }}</option>
@@ -635,8 +633,9 @@
             $('.bankmfo').mask('00000');
 
             @if($type != null)
-            document.getElementById('type').selectedIndex = {!!  $type !!} -1;
-                    @endif
+                document.getElementById('type').selectedIndex = {!! $type !!} - 1;
+            @endif
+
             for (var i = 0; i < arrays[2].length; i++)
                 mfos.push(arrays[2][i]['mfo']);
         });
@@ -645,6 +644,7 @@
     <script src="{{ asset('js/vue.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/lodash.min.js') }}" type="text/javascript"></script>
 
+    <!--suppress JSUnusedLocalSymbols -->
     <script>
         var app = new Vue({
             el: '#register',
