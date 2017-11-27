@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('style')
+    <link href="{{ asset('css/typeahead.css') }}"/>
     <style>
         .jumbotron {
             margin: 0;
@@ -146,16 +147,16 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
+                            <label for="mfo_1" class="col-form-label col-form-label-sm">Банк МФО</label>
+                            <input type="number" class="form-control form-control-sm" id="mfo_1" name="mfo"
+                                   value="{{old('mfo')}}"
+                                   required>
+                        </div>
+                            <div class="form-group col-md-6">
                                 <label for="bank_1" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
                                     номи</label>
                                 <input type="text" class="form-control form-control-sm" id="bank_1" name="bank_name"
                                        value="{{old('bank_name')}}"
-                                       required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="mfo_1" class="col-form-label col-form-label-sm">Банк МФО</label>
-                                <input type="number" class="form-control form-control-sm" id="mfo_1" name="mfo"
-                                       value="{{old('mfo')}}"
                                        required>
                             </div>
                         </div>
@@ -585,10 +586,12 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('js/typeahead.js') }}"></script>
     <!--suppress EqualityComparisonWithCoercionJS -->
     <script>
         var arrays = [{!! $regions !!}];
         arrays.push({!! $cities !!});
+        arrays.push({!! $banks !!});
 
         function regionChanged(id) {
             var selected = document.getElementById(id).value;
