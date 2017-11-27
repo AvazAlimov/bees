@@ -24,16 +24,15 @@
         }
 
         /*.nav-link {*/
-            /*color: #555;*/
+        /*color: #555;*/
         /*}*/
 
         /*.nav-link:hover {*/
-            /*color: #333;*/
+        /*color: #333;*/
         /*}*/
 
-        .display-5
-        {
-            color:#582E2A;
+        .display-5 {
+            color: #582E2A;
             font-weight: Bold;
         }
 
@@ -146,17 +145,23 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
-                            <label for="mfo_1" class="col-form-label col-form-label-sm">Банк МФО</label>
-                            <input type="number" class="form-control form-control-sm" id="mfo_1" name="mfo"
-                                   value="{{old('mfo')}}"
-                                   required v-model="mfo">
-                        </div>
+                                <label for="mfo_1" class="col-form-label col-form-label-sm">Банк МФО</label>
+                                <input type="text" class="form-control form-control-sm bankmfo" id="mfo_1" name="mfo"
+                                       value="{{old('mfo')}}"
+                                       required v-model="mfo"
+                                       list="mfos"/>
+                                <datalist id="mfos">
+                                    @foreach($banks as $bank)
+                                        <option>{{ $bank->mfo }}</option>
+                                    @endforeach
+                                </datalist>
+                            </div>
                             <div class="form-group col-md-6">
                                 <label for="bank_1" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
                                     номи</label>
                                 <input type="text" class="form-control form-control-sm" id="bank_1" name="bank_name"
                                        value="{{old('bank_name')}}"
-                                       required v-model="bank">
+                                       required v-model="bank" readonly>
                             </div>
                         </div>
                         <div class="row">
@@ -609,7 +614,7 @@
 
         function changeType(id) {
             var selected = document.getElementById(id).selectedIndex + 1;
-            for(var i = 1; i < 5; i++)
+            for (var i = 1; i < 5; i++)
                 document.getElementById("user_" + i).classList.remove("active");
             document.getElementById("user_" + selected).classList.add("active");
         }
@@ -626,10 +631,13 @@
                     B: {pattern: /[8]/}
                 }
             });
+
+            $('.bankmfo').mask('00000');
+
             @if($type != null)
-                document.getElementById('type').selectedIndex = {!!  $type !!} - 1;
-            @endif
-            for(var i = 0; i < arrays[2].length; i++)
+            document.getElementById('type').selectedIndex = {!!  $type !!} -1;
+                    @endif
+            for (var i = 0; i < arrays[2].length; i++)
                 mfos.push(arrays[2][i]['mfo']);
         });
     </script>
@@ -647,27 +655,26 @@
                 refresh: false
             },
             watch: {
-                mfo: function() {
+                mfo: function () {
                     this.address = '';
-                    if(this.mfo.length > 0) {
+                    if (this.mfo.length > 0) {
                         this.lookupAddress();
                     }
                 }
             },
             methods: {
-                lookupAddress: _.debounce(function() {
+                lookupAddress: _.debounce(function () {
                     var app = this;
                     app.bank = "Searching...";
                     var found = false;
-                    for(var i = 0; i < mfos.length; i++)
-                        if(mfos[i] === app.mfo){
+                    for (var i = 0; i < mfos.length; i++)
+                        if (mfos[i] === app.mfo) {
                             found = true;
                             app.bank = arrays[2][i]['name'];
                             break;
                         }
-
-                    if(!found)
-                        app.bank = 'Topilmadi';
+                    if (!found)
+                        app.bank = '';
                 }, 500)
             }
         });
@@ -676,11 +683,11 @@
     <!--suppress JSUnresolvedVariable, JSUnresolvedFunction, JSUnusedLocalSymbols -->
     <script>
         function myMap() {
-            var myCenter = new google.maps.LatLng(41.310441,69.278460);
+            var myCenter = new google.maps.LatLng(41.310441, 69.278460);
             var mapCanvas = document.getElementById("map");
             var mapOptions = {center: myCenter, zoom: 16};
             var map = new google.maps.Map(mapCanvas, mapOptions);
-            var marker = new google.maps.Marker({position:myCenter});
+            var marker = new google.maps.Marker({position: myCenter});
             marker.setMap(map);
         }
     </script>
