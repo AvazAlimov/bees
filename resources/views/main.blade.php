@@ -272,17 +272,15 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
+                                <label for="mfo_2" class="col-form-label col-form-label-sm">Банк МФО</label>
+                                <input type="text" class="form-control form-control-sm bankmfo" id="mfo_2" name="mfo"
+                                       value="{{old('mfo')}}" v-model="mfo" list="mfos" minlength="5" required>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label for="bank_2" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
                                     номи</label>
                                 <input type="text" class="form-control form-control-sm" id="bank_2" name="bank_name"
-                                       value="{{old('bank_name')}}"
-                                       required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="mfo_2" class="col-form-label col-form-label-sm">Банк МФО</label>
-                                <input type="number" class="form-control form-control-sm" id="mfo_2" name="mfo"
-                                       value="{{old('mfo')}}"
-                                       required>
+                                       value="{{old('bank_name')}}" readonly required v-model="bank">
                             </div>
                         </div>
                         <div class="row">
@@ -395,17 +393,15 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
+                                <label for="mfo_3" class="col-form-label col-form-label-sm">Банк МФО</label>
+                                <input type="text" class="form-control form-control-sm bankmfo" id="mfo_3" name="mfo"
+                                       value="{{old('mfo')}}" v-model="mfo" list="mfos" minlength="5" required>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label for="bank_3" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
                                     номи</label>
                                 <input type="text" class="form-control form-control-sm" id="bank_3" name="bank_name"
-                                       value="{{old('bank_name')}}"
-                                       required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="mfo_3" class="col-form-label col-form-label-sm">Банк МФО</label>
-                                <input type="number" class="form-control form-control-sm" id="mfo_3" name="mfo"
-                                       value="{{old('mfo')}}"
-                                       required>
+                                       value="{{old('bank_name')}}" readonly required v-model="bank">
                             </div>
                         </div>
                         <div class="row">
@@ -633,8 +629,8 @@
             $('.bankmfo').mask('00000');
 
             @if($type != null)
-                document.getElementById('type').selectedIndex = {!! $type !!} - 1;
-            @endif
+            document.getElementById('type').selectedIndex = {!! $type !!} -1;
+                    @endif
 
             for (var i = 0; i < arrays[2].length; i++)
                 mfos.push(arrays[2][i]['mfo']);
