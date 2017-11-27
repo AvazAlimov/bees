@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 @section('style')
-    <link href="{{ asset('css/typeahead.css') }}"/>
     <style>
         .jumbotron {
             margin: 0;
@@ -586,12 +585,12 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/typeahead.js') }}"></script>
     <!--suppress EqualityComparisonWithCoercionJS -->
     <script>
         var arrays = [{!! $regions !!}];
         arrays.push({!! $cities !!});
         arrays.push({!! $banks !!});
+        var mfos = [];
 
         function regionChanged(id) {
             var selected = document.getElementById(id).value;
@@ -615,6 +614,7 @@
             document.getElementById("user_" + selected).classList.add("active");
         }
 
+
         $(document).ready(function () {
             regionChanged('region_1');
             regionChanged('region_2');
@@ -629,6 +629,8 @@
             @if($type != null)
                 document.getElementById('type').selectedIndex = {!!  $type !!} - 1;
             @endif
+            for(var i = 0; i < arrays[2].length; i++)
+                mfos.push(arrays[2][i]['mfo']);
         })
 
     </script>
