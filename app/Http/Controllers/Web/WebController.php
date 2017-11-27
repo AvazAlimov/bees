@@ -19,8 +19,8 @@ class WebController extends Controller
         $regions = Region::all();
         $cities = City::all();
         $activities = Activity::all();
-        $banks = Bank::all();
-
+        $banks = Bank::select('mfo','name')->get()->toArray();
+        
         return view('main')->withRegions($regions)->withCities($cities)->withActivities($activities)->withBanks($banks)->withType($type);
     }
 
