@@ -56,6 +56,13 @@ Route::prefix('admin')->group(function (){
         Route::get('edit/{id}','Admin\AdminActivityController@edit')->name('activity.edit');
         Route::post('update/{id}','Admin\AdminActivityController@update')->name('activity.update');
     });
+    Route::prefix('family')->group(function (){
+        Route::get('delete/{id}','Admin\AdminFamilyController@destroy')->name('family.delete');
+        Route::get('create','Admin\AdminFamilyController@create')->name('family.create');
+        Route::post('store','Admin\AdminFamilyController@store')->name('family.store');
+        Route::get('edit/{id}','Admin\AdminFamilyController@edit')->name('family.edit');
+        Route::post('update/{id}','Admin\AdminFamilyController@update')->name('family.update');
+    });
 
 });
 
@@ -65,8 +72,6 @@ Route::get('setlocale/{locale}', function ($locale) {
 })->name('lang.switch');
 
 Route::get('/regions', function(){
-
-
     $result = Excel::load('hudud.xlsx')->getExcel()->getSheet(0)->toArray();
     $result = collect($result);
     $items = $result->sortBy(function ($item){

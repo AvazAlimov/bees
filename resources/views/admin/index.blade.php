@@ -12,6 +12,8 @@
             </li>
             <li data-toggle="tab" class="navs"><a onclick="switchSection('section4')"><i class="fa fa-building"></i>
                     Faoliyatlar</a></li>
+            <li data-toggle="tab" class="navs"><a onclick="switchSection('section5')"><i class="fa fa-building"></i>
+                    Asalari Zotlari</a></li>
             {{--
                 <li data-toggle="tab" class="navs"><a onclick="switchSection('section4')"><i class="fa fa-file-excel-o"></i>
                         Экспорт в
@@ -205,6 +207,48 @@
                     <form action="{{ route('activity.create') }}" method="GET">
                         <button type="submit" class="btn btn-primary pull-right">
                             Faoliyatni Qo'shish
+                        </button>
+                    </form>
+                </div>
+                <div id="section5" class="section">
+                    <div class="page-header">
+                        <h2>Asalari Zotlari</h2>
+                    </div>
+                    @foreach ($families as $activity)
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>{{ $activity->name }}</strong>
+                                </div>
+                                <div class="panel-footer">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <form action="{{ route('family.edit', $activity->id) }}"
+                                                      method="get">
+                                                    <button type="submit" class="btn btn-primary pull-right">Изменить
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('family.delete', $activity->id) }}"
+                                                      method="get" onclick="return confirm('Хотите удалить')">
+
+                                                    <button type="submit" class="btn btn-danger pull-right">Удалить
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    <form action="{{ route('family.create') }}" method="GET">
+                        <button type="submit" class="btn btn-primary pull-right">
+                            Asalari Zotini Qo'shish
                         </button>
                     </form>
                 </div>
