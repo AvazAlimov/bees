@@ -7,6 +7,7 @@ use App\User;
 use App\Region;
 use App\City;
 use App\Activity;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 use Kozz\Laravel\Facades\Guzzle;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request as Req;
+use GuzzleHttp\Psr7\Response;
 class LeaderController extends Controller
 {
     public function __construct()
@@ -41,23 +43,29 @@ class LeaderController extends Controller
         $data = ['username' => $user->username, 'password' => $password, 'name' => $user->fullName, 'url' => '/login'];
         $client = new Client();
         $headers = ['Content-Type'=>'text/xml','charset'=>'UTF-8'];
-        $content = '<bulk-request
-        login="AloqaBank_HTTP"
-        password="a$#L0Q@"
-        ref-id="1"
-        delivery-notification-requested="true"
-        version="1.0">
+        $content = '
+        <bulk-request login="AloqaBank_HTTP" password="a$#L0Q@" ref-id="1" delivery-notification-requested="true" version="1.0">
         <message id="1"
             msisdn="'.$user->phone.'"
             validity-period="3"
             priority="1">
-            <content type="text/plain">Siz royhatdan o\'tdingiz<br>Login: '.$data['username'].'<br>Password: '. $data['password'].'
+            <content type="text/plain">Siz royhatdan o\'tdingiz 
+            Login: '.$data['username'].' 
+            Password: '. $data['password'].'
             </content>
         </message>
         </bulk-request>';
         $request = new Req('POST', 'http://91.204.239.42:8081/re-smsbroker', $headers, $content);
-        $response = $client->send($request, ['timeout' => 2]);
-        $user->notify(new UserConfirmationNotification($data));
+        $response = $client->send($request);
+        $body = $response->getBody();
+        echo $body;
+        // Cast to a string: { ... }
+        $body->seek(0);
+        // Rewind the body
+        $body->read(1024);
+        // Read bytes of the body
+//        $user->notify(new UserConfirmationNotification($data));
+
         return redirect()->route('leader.index')->with('message', 'Accepted successfully');
     }
     public function refuseUser(Request $request, $id)
