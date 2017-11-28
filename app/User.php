@@ -34,6 +34,9 @@ class User extends Authenticatable
     public function activities(){
         return $this->belongsToMany('App\Activity','works');
     }
+    public function families(){
+        return $this->belongsToMany('App\Family','breads');
+    }
     public function city(){
         return $this->belongsTo('App\City');
     }

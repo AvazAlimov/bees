@@ -9,6 +9,7 @@ use App\City;
 use App\Activity;
 use App\Admin;
 use App\Bank;
+use App\Family;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TestTableSeeder extends Seeder
@@ -27,6 +28,7 @@ class TestTableSeeder extends Seeder
         Activity::truncate();
         User::truncate();
         Admin::truncate();
+        Family::truncate();
         Bank::truncate();
         foreach (range(1, 13) as $i) {
             Leader::create([
@@ -74,6 +76,11 @@ class TestTableSeeder extends Seeder
 
         foreach (range(1, 6) as $i) {
             Activity::create([
+                'name' => $faker->catchPhrase
+            ]);
+        }
+        foreach (range(1, 6) as $i) {
+            Family::create([
                 'name' => $faker->catchPhrase
             ]);
         }

@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('phone', 13);
             $table->string('fullName');
             $table->integer('bees_count')->nullable();
-            $table->string('bees_breed')->nullable();
+
             $table->integer('labors')->nullable()->unsigned();
             $table->timestamps();
             $table->rememberToken();

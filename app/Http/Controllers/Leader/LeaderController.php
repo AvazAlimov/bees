@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Leader;
 
+use App\Family;
 use App\Notifications\UserConfirmationNotification;
 use App\User;
 use App\Region;
@@ -259,8 +260,10 @@ class LeaderController extends Controller
         $regions = Region::all();
         $cities = City::all();
         $activities = Activity::all();
+        $families = Family::all();
 
-        return view('user.user-update')->withUser($user)->withRegions($regions)->withCities($cities)->withActivities($activities);
+        return view('user.user-update')->withUser($user)->withRegions($regions)->withCities($cities)
+            ->withActivities($activities)->withFamilies($families);
     }
     public function updateUser(Request $request, $id){
         $request->validate([
@@ -278,11 +281,13 @@ class LeaderController extends Controller
             'fullName' => 'required|max:255',
             'labors' => $request->type < 4 ? 'required|numeric|min:0' : '',
             'activities.*' =>'exists:activities,id',
+            'families.*' =>'exists:families,id',
         ]);
 
         $user = Auth::user()->users()->findOrFail($id);
         $user->update($request->all());
         $user->activities()->sync($request->activities, true);
+        $user->families()->sync($request->families, true);
         return redirect()->route('leader.index')->with('message','User updated successfully');
     }
 }

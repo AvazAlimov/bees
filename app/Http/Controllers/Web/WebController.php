@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Bank;
+use App\Family;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,8 +21,10 @@ class WebController extends Controller
         $cities = City::all();
         $activities = Activity::all();
         $banks = Bank::select('mfo','name')->get();
+        $families = Family::all();
         
-        return view('main')->withRegions($regions)->withCities($cities)->withActivities($activities)->withBanks($banks)->withType($type);
+        return view('main')->withRegions($regions)->withCities($cities)
+            ->withActivities($activities)->withBanks($banks)->withType($type)->withFamilies($families);
     }
 
 
@@ -39,6 +42,7 @@ class WebController extends Controller
                 'address' => 'required|max:255',
                 'phone' => 'required|max:13|min:12',
                 'email' => 'required|email',
+                'families.*' =>'exists:families,id',
                 'fullName' => 'required|max:255',
                 'labors' => $type < 3 ? 'required|numeric|min:0' : '',
                 'activities.*' =>'exists:activities,id',
@@ -55,6 +59,7 @@ class WebController extends Controller
         $user->save();
 
         $user->activities()->sync($request->activities, false);
+        $user->families()->sync($request->families, false);
 
         return redirect()->back()->with('message',"Sizning ro'yhatdan o'tish so'rovingiz qabul qilindi. Sizni qabul qilishganidan so'ng, telefon raqamingizga yoki pochtangizga login, parol yuboriladi");
     }
