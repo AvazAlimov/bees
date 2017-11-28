@@ -31,8 +31,8 @@
                     aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#">
-                <img src="/Resources/logo1.png" width="40" height="40" alt="">
+            <a class="navbar-brand" href="/">
+                <img src="{{ asset('/Resources/logo1.png') }}" width="40" height="40" alt="">
             </a>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -51,26 +51,26 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Кириш</a>
                         </li>
-                    @else
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                {{ \Illuminate\Support\Facades\Auth::user()->username }}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    Logout
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                          style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    {{ \Illuminate\Support\Facades\Auth::user()->username }}
                                 </a>
-                            </div>
-                        </li>
-                    @endguest
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                        Logout
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                              style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </a>
+                                </div>
+                            </li>
+                            @endguest
                 </ul>
             </div>
         </div>

@@ -561,8 +561,8 @@
             <div class="container text-center">
                 <h2 class="display-5">Биз ҳақимизда</h2>
                 <hr>
-                <img src="https://aloqabank.uz/gallery/aloqa1-2-1-bannery-na-vnutrennyuyu39.jpg"
-                     alt="Generic placeholder image">
+                {{--<img src="https://aloqabank.uz/gallery/aloqa1-2-1-bannery-na-vnutrennyuyu39.jpg"--}}
+                     {{--alt="Generic placeholder image" class="img-responsive">--}}
                 <div>
                     <br>
                     <p class="text-justify">
