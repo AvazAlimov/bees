@@ -46,6 +46,7 @@ class WebController extends Controller
                 'families.*' =>'exists:families,id',
                 'fullName' => 'required|max:255',
                 'labors' => $type < 3 ? 'required|numeric|min:0' : '',
+                'bees_count' =>'required|numeric|min:0',
                 'activities.*' =>'exists:activities,id',
             ]);
 
