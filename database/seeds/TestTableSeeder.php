@@ -100,7 +100,7 @@ class TestTableSeeder extends Seeder
                 'inn' => '123456789',
                 'mfo' => '12345',
                 'address' => $faker->address,
-                'phone' => '+998908082443',
+                'phone' => '998908082443',
                 'fullName' => $faker->name,
                 'labors' => $faker->numberBetween(1, 200),
                 'type' => random_int(1,4)
@@ -113,5 +113,8 @@ class TestTableSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
+        $region = Region::findOrFail(35);
+        $region->leader_id = 1;
+        $region->save();
     }
 }

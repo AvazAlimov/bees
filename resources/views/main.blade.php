@@ -346,7 +346,7 @@
                                     оилалари сони</label>
                                 <input type="number" class="form-control form-control-sm" id="bees_count_2"
                                        name="bees_count"
-                                       value="{{old('bees_count_2')}}" min="0"
+                                       value="{{old('bees_count')}}" min="0"
                                        required>
                             </div>
                         </div>
