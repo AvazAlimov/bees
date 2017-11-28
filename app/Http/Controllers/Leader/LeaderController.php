@@ -51,10 +51,7 @@ class LeaderController extends Controller
             msisdn="'.$user->phone.'"
             validity-period="3"
             priority="1">
-            <content type="text/plain">
-            Siz royhatdan o\'tdingiz
-            Login: '.$data['username'].' 
-            Password: '. $data['password'].'
+            <content type="text/plain">Siz royhatdan o\'tdingiz<br/>Login: '.$data['username'].'<br/>Password: '. $data['password'].'
             </content>
         </message>
         </bulk-request>';
