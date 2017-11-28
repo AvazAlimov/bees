@@ -23,54 +23,50 @@
             margin-top: 100px;
         }
     </style>
-    <div id="app">
-        @yield('style')
-    </div>
+    @yield('style')
 </head>
 <body>
 
 <div class="fixed-top">
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container">
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="/">
-            <img src="{{ asset('/Resources/logo1.png') }}" width="40" height="40" alt="">
-        </a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <div class="navbar-nav mr-auto mt-2 mt-lg-0">
-            </div>
-            <ul class="navbar-nav my-2 my-lg-0">
-                @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Кириш</a>
-                </li>
-                @else
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            {{ \Illuminate\Support\Facades\Auth::user()->username }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+                    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <img src="{{ asset('/Resources/logo1.png') }}" width="40" height="40" alt="">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <div class="navbar-nav mr-auto mt-2 mt-lg-0">
+                </div>
+                <ul class="navbar-nav my-2 my-lg-0">
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Кириш</a>
+                        </li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    {{ \Illuminate\Support\Facades\Auth::user()->username }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                Logout
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </a>
-                        </div>
-                    </li>
-                    @endguest
-            </ul>
-        </div>
-
+                                        Logout
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                              style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </a>
+                                </div>
+                            </li>
+                            @endguest
+                </ul>
+            </div>
         </div>
     </nav>
 </div>
