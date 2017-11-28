@@ -276,7 +276,7 @@ class LeaderController extends Controller
             'bank_name' => $request->type < 4 ?  'required' : '',
             'mfo' => $request->type < 4 ? 'required|digits:5' : '',
             'address' => 'required|max:255',
-            'phone' => 'required|max:13|min:12',
+            'phone' => 'required|max:19|min:12',
             'email' => 'required|email',
             'fullName' => 'required|max:255',
             'labors' => $request->type < 4 ? 'required|numeric|min:0' : '',
