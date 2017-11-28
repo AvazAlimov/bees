@@ -200,19 +200,19 @@
                                        required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="beenumber_1" class="col-form-label col-form-label-sm">Боқлаётган асалари
+                                <label for="bees_count_1" class="col-form-label col-form-label-sm">Боқлаётган асалари
                                     оилалари сони</label>
-                                <input type="number" class="form-control form-control-sm" id="beenumber_1"
-                                       name="beenumber" min="0"
-                                       value="{{old('beenumber')}}"
+                                <input type="number" class="form-control form-control-sm" id="bees_count_1"
+                                       name="bees_count" min="0"
+                                       value="{{old('bees_count')}}"
                                        required>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="activity_1" class="col-form-label col-form-label-sm">Фаолият тури (бир
-                                    нечтасини танласа бўлади)</label>
+                                <label for="activity_1" class="col-form-label col-form-label-sm">Боқилаётган асалари
+                                    зотлари</label>
                                 <div class="col-md-12">
                                     @foreach($activities as $activity)
                                         <input type="checkbox" name="activities[]" value="{{$activity->id}}"
@@ -342,6 +342,26 @@
                                        required>
                             </div>
                             <div class="form-group col-md-6">
+                                <label for="bees_count_2" class="col-form-label col-form-label-sm">Боқлаётган асалари
+                                    оилалари сони</label>
+                                <input type="number" class="form-control form-control-sm" id="bees_count_2"
+                                       name="bees_count"
+                                       value="{{old('bees_count_2')}}" min="0"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="activity_2" class="col-form-label col-form-label-sm">Боқилаётган асалари
+                                    зотлари</label>
+                                <div class="col-md-12">
+                                    @foreach($activities as $activity)
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}"
+                                               id="activity_2"> {{$activity->name}}<br>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label for="activity_2" class="col-form-label col-form-label-sm">Фаолият тури (бир
                                     нечтасини танласа бўлади)</label>
                                 <div class="col-md-12">
@@ -352,9 +372,7 @@
                                 </div>
                             </div>
                         </div>
-
                         <hr>
-
                         <div class="text-center">
                             <input type="submit" class="btn btn-warning" value="Рўйхатдан ўтиш">
                         </div>
@@ -457,6 +475,26 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
+                                <label for="bees_count_3" class="col-form-label col-form-label-sm">Боқлаётган асалари
+                                    оилалари сони</label>
+                                <input type="number" class="form-control form-control-sm" id="bees_count_3"
+                                       name="bees_count"
+                                       value="{{old('bees_count')}}" min="0"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="activity_3" class="col-form-label col-form-label-sm">Боқилаётган асалари
+                                    зотлари</label>
+                                <div class="col-md-12">
+                                    @foreach($activities as $activity)
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}"
+                                               id="activity_3"> {{$activity->name}}<br>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label for="activity_3" class="col-form-label col-form-label-sm">Фаолият тури (бир
                                     нечтасини танласа бўлади)</label>
                                 <div class="col-md-12">
@@ -467,13 +505,10 @@
                                 </div>
                             </div>
                         </div>
-
                         <hr>
-
                         <div class="text-center">
                             <input type="submit" class="btn btn-warning" value="Рўйхатдан ўтиш">
                         </div>
-
                     </form>
 
                     <form action="{{route('submit.form', 4)}}" method="post" class="container tab-pane fade show"
@@ -533,6 +568,26 @@
                                 <input type="email" class="form-control form-control-sm" id="email_4" name="email"
                                        value="{{old('email')}}"
                                        required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="bees_count_4" class="col-form-label col-form-label-sm">Боқлаётган асалари
+                                    оилалари сони</label>
+                                <input type="number" class="form-control form-control-sm" id="bees_count_4"
+                                       name="bees_count"
+                                       value="{{old('bees_count')}}" min="0"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="activity_4" class="col-form-label col-form-label-sm">Боқилаётган асалари
+                                    зотлари</label>
+                                <div class="col-md-12">
+                                    @foreach($activities as $activity)
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}"
+                                               id="activity_4"> {{$activity->name}}<br>
+                                    @endforeach
+                                </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="activity_4" class="col-form-label col-form-label-sm">Фаолият тури (бир
