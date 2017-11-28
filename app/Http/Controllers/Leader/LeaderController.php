@@ -285,7 +285,7 @@ class LeaderController extends Controller
         ]);
 
         $user = Auth::user()->users()->findOrFail($id);
-        $user->update($request->all());
+        $user->update([$request->except('phone'),'phone' => preg_replace('/\D/', '', $request->phone)]);
         $user->activities()->sync($request->activities, true);
         $user->families()->sync($request->families, true);
         return redirect()->route('leader.index')->with('message','User updated successfully');

@@ -30,6 +30,7 @@ class WebController extends Controller
 
     public function submitForm(Request $request, $type)
     {
+
             $validator = Validator::make($request->all(), [
                 'region_id' => 'required|exists:regions,id',
                 'city_id' => 'required|exists:cities,id',
@@ -40,7 +41,7 @@ class WebController extends Controller
                 'bank_name' => $type < 4 ?  'required' : '',
                 'mfo' => $type < 4 ? 'required|digits:5' : '',
                 'address' => 'required|max:255',
-                'phone' => 'required|max:13|min:12',
+                'phone' => 'required|max:19|min:12',
                 'email' => 'required|email',
                 'families.*' =>'exists:families,id',
                 'fullName' => 'required|max:255',
@@ -54,7 +55,8 @@ class WebController extends Controller
                 ->withInput();
         }
 
-        $user = new User($request->all());
+        $user = new User($request->except('phone'));
+        $user->phone = preg_replace('/\D/', '', $request->phone);
         $user->type = $type;
         $user->save();
 

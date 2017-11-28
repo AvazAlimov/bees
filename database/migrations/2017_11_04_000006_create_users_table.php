@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('bank_name')->nullable();
             $table->string('mfo', 5)->nullable();
             $table->string('address');
-            $table->string('phone', 13);
+            $table->string('phone', 19);
             $table->string('fullName');
             $table->integer('bees_count')->nullable();
 
