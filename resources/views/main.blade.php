@@ -191,12 +191,34 @@
                                        required>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="labors_1" class="col-form-label col-form-label-sm">Ишчилар сони</label>
                                 <input type="number" class="form-control form-control-sm" id="labors_1" name="labors"
-                                       value="{{old('labors')}}"
+                                       value="{{old('labors')}}" min="0"
                                        required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="beenumber_1" class="col-form-label col-form-label-sm">Боқлаётган асалари
+                                    оилалари сони</label>
+                                <input type="number" class="form-control form-control-sm" id="beenumber_1"
+                                       name="beenumber" min="0"
+                                       value="{{old('beenumber')}}"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="activity_1" class="col-form-label col-form-label-sm">Фаолият тури (бир
+                                    нечтасини танласа бўлади)</label>
+                                <div class="col-md-12">
+                                    @foreach($activities as $activity)
+                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}"
+                                               id="activity_1"> {{$activity->name}}<br>
+                                    @endforeach
+                                </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="activity_1" class="col-form-label col-form-label-sm">Фаолият тури (бир
