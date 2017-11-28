@@ -42,18 +42,16 @@ class LeaderController extends Controller
         $password = str_random(8);
         $user->update(['username' => 'U' . sprintf("%07d", $user->id), 'password' => bcrypt($password), 'state' => 1]);
         $data = ['username' => $user->username, 'password' => $password, 'name' => $user->fullName, 'url' => '/login'];
+
         $client = new Client();
         $headers = ['Content-Type'=>'text/xml','charset'=>'UTF-8'];
         $content = '
-        <bulk-request login="AloqaBank_HTTP" password="a$#L0Q@" ref-id="1" delivery-notification-requested="true" version="1.0">
-        <message id="1"
-            msisdn="'.$user->phone.'"
-            validity-period="3"
-            priority="1">
-            <content type="text/plain">Siz royhatdan o\'tdingiz 
-            Login: '.$data['username'].' 
-            Password: '. $data['password'].'
-            </content>
+        <bulk-request login="'.config('aloqa.login').'" password="'.config('aloqa.password').'" ref-id="1" delivery-notification-requested="true" version="1.0">
+        <message id="1" msisdn="'.$user->phone.'" validity-period="3" priority="1">
+        <content type="text/plain">Siz royhatdan o\'tdingiz
+        Login: '.$data['username'].'
+        Password: '. $data['password'].'
+        </content>
         </message>
         </bulk-request>';
         $request = new Req('POST', 'http://91.204.239.42:8081/re-smsbroker', $headers, $content);
