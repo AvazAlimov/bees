@@ -6,6 +6,8 @@ use App\Leader;
 use App\Notifications\LeaderConfirmationNotification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Psr7\Request as Req;
+use GuzzleHttp\Client;
 
 class AdminLeaderController extends Controller
 {
@@ -55,6 +57,25 @@ class AdminLeaderController extends Controller
 
 //        $data = ['username' => $request->username, 'password' => $request->password, 'name' => $request->firstName.' '.$request->lastName, 'url' =>'/leader/login'];
 //        $leader->notify(new LeaderConfirmationNotification($data));
+          $client = new Client();
+        $headers = ['Content-Type'=>'text/xml','charset'=>'UTF-8'];
+        $content = '
+        <bulk-request login="'.config('aloqa.login').'" password="'.config('aloqa.password').'" ref-id="1" delivery-notification-requested="true" version="1.0">
+        <message id="1" msisdn="'.$user->phone.'" validity-period="3" priority="1">
+        <content type="text/plain">Siz royhatdan o\'tdingiz
+        Login: '.$request->username.'
+        Password: '. $request->password.'
+        </content>
+        </message>
+        </bulk-request>';
+        $request = new Req('POST', 'http://91.204.239.42:8081/re-smsbroker', $headers, $content);
+        $response = $client->send($request);
+        $body = $response->getBody();
+        echo $body;
+        // Cast to a string: { ... }
+        $body->seek(0);
+        // Rewind the body
+        $body->read(1024);
 
         return redirect()->route('admin.index')->with('message','Leader created successfully');
     }

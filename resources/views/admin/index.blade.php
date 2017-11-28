@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 @section('nav')
     <nav class="navbar navbar-default" id="navigation">
         <ul class="nav navbar-nav">
