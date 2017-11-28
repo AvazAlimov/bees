@@ -72,10 +72,10 @@
                         <div class="form-group col-md-6">
                             <label for="type" class="col-form-label col-form-label-sm">Фойдаланувчи тури</label>
                             <select id="type" class="form-control form-control-sm" onchange="changeType(this.id)">
-                                <option value="0" selected>Юридик корхоналар</option>
+                                <option value="0" selected>Юридик корхоналар (МЧЖ, ХК, ҚК)</option>
                                 <option value="1">Кўп тармоқли фермер хўжаликлари</option>
                                 <option value="2">Якка тартибдаги тадбиркор</option>
-                                <option value="3">Чаҳсий ёрдамчи хўжалик</option>
+                                <option value="3">Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)</option>
                             </select>
                         </div>
                     </div>
@@ -137,9 +137,9 @@
                                        required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inn_1" class="col-form-label col-form-label-sm">ИНН</label>
-                                <input type="number" class="form-control form-control-sm" id="inn_1" name="inn"
-                                       value="{{old('inn')}}" maxlength="9"
+                                <label for="inn_1" class="col-form-label col-form-label-sm">СТИР (ИНН)</label>
+                                <input type="text" class="form-control form-control-sm inn" id="inn_1" name="inn"
+                                       value="{{old('inn')}}" minlength="9"
                                        required>
                             </div>
                         </div>
@@ -286,9 +286,9 @@
                                        required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inn_2" class="col-form-label col-form-label-sm">ИНН</label>
-                                <input type="number" class="form-control form-control-sm" id="inn_2" name="inn"
-                                       value="{{old('inn')}}" maxlength="9"
+                                <label for="inn_2" class="col-form-label col-form-label-sm">СТИР (ИНН)</label>
+                                <input type="text" class="form-control form-control-sm inn" id="inn_2" name="inn"
+                                       value="{{old('inn')}}" minlength="9"
                                        required>
                             </div>
                         </div>
@@ -407,9 +407,9 @@
                                        required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inn_3" class="col-form-label col-form-label-sm">ИНН</label>
-                                <input type="number" class="form-control form-control-sm" id="inn_3" name="inn"
-                                       value="{{old('inn')}}" maxlength="9"
+                                <label for="inn_3" class="col-form-label col-form-label-sm">СТИР (ИНН)</label>
+                                <input type="text" class="form-control form-control-sm inn" id="inn_3" name="inn"
+                                       value="{{old('inn')}}" minlength="9"
                                        required>
                             </div>
                         </div>
@@ -561,8 +561,9 @@
             <div class="container text-center">
                 <h2 class="display-5">Биз ҳақимизда</h2>
                 <hr>
+
                 {{--<img src="https://aloqabank.uz/gallery/aloqa1-2-1-bannery-na-vnutrennyuyu39.jpg"--}}
-                     {{--alt="Generic placeholder image" class="img-responsive">--}}
+                {{--alt="Generic placeholder image" class="img-responsive">--}}
                 <div>
                     <br>
                     <p class="text-justify">
@@ -649,6 +650,11 @@
             });
 
             $('.bankmfo').mask('00000');
+            $('.inn').mask('000000000', {
+                'translation': {
+                    0: {pattern: /[0-9*]/}
+                }
+            });
 
             @if($type != null)
             document.getElementById('type').selectedIndex = {!! $type !!} -1;
