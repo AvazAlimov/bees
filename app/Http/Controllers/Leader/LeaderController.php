@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Kozz\Laravel\Facades\Guzzle;
-
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request as Req;
 class LeaderController extends Controller
 {
     public function __construct()
@@ -35,14 +36,31 @@ class LeaderController extends Controller
     public function acceptUser(Request $request, $id)
     {
         $user = $request->user()->users()->findOrFail($id);
-        $password = 'password';
+        $password = str_random(8);
         $user->update(['username' => 'U' . sprintf("%07d", $user->id), 'password' => bcrypt($password), 'state' => 1]);
         $data = ['username' => $user->username, 'password' => $password, 'name' => $user->fullName, 'url' => '/login'];
+        $client = new Client();
+        $headers = ['Content-Type'=>'text/xml','charset'=>'UTF-8'];
+        $content = '<bulk-request
+        login="AloqaBank_HTTP"
+        password="a$#L0Q@"
+        ref-id="1"
+        delivery-notification-requested="true"
+        version="1.0">
+        <message id="1"
+            msisdn="'.$user->phone.'"
+            validity-period="3"
+            priority="1">
+            <content type="text/plain">
+            Siz royhatdan o\'tdingiz
+            Login: '.$data['username'].' 
+            Password: '. $data['password'].'
+            </content>
+        </message>
+        </bulk-request>';
+        $request = new Req('POST', 'http://91.204.239.42:8081/re-smsbroker', $headers, $content);
+        $response = $client->send($request, ['timeout' => 2]);
         $user->notify(new UserConfirmationNotification($data));
-//    $client = new Guzzle();
-//    $request_2 = $client->post('http://91.204.239.42:8081/re-smsbroker',[],[]);
-
-
         return redirect()->route('leader.index')->with('message', 'Accepted successfully');
     }
     public function refuseUser(Request $request, $id)
@@ -73,7 +91,7 @@ class LeaderController extends Controller
                 $accepted_users = $accepted_users->where(function ($query) use ($request) {
                     $query
                         ->whereHas('activities', function ($query) use ($request) {
-                        $query->where('name', 'LIKE', "%$request->search%");
+                            $query->where('name', 'LIKE', "%$request->search%");
                         })
                         ->orWhereHas('region', function ($query) use ($request) {
                             $query->where('name', 'LIKE', "%$request->search%");
