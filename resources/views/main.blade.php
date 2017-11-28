@@ -139,7 +139,7 @@
                             <div class="form-group col-md-6">
                                 <label for="inn_1" class="col-form-label col-form-label-sm">ИНН</label>
                                 <input type="number" class="form-control form-control-sm" id="inn_1" name="inn"
-                                       value="{{old('inn')}}"
+                                       value="{{old('inn')}}" maxlength="9"
                                        required>
                             </div>
                         </div>
@@ -288,7 +288,7 @@
                             <div class="form-group col-md-6">
                                 <label for="inn_2" class="col-form-label col-form-label-sm">ИНН</label>
                                 <input type="number" class="form-control form-control-sm" id="inn_2" name="inn"
-                                       value="{{old('inn')}}"
+                                       value="{{old('inn')}}" maxlength="9"
                                        required>
                             </div>
                         </div>
@@ -409,7 +409,7 @@
                             <div class="form-group col-md-6">
                                 <label for="inn_3" class="col-form-label col-form-label-sm">ИНН</label>
                                 <input type="number" class="form-control form-control-sm" id="inn_3" name="inn"
-                                       value="{{old('inn')}}"
+                                       value="{{old('inn')}}" maxlength="9"
                                        required>
                             </div>
                         </div>
