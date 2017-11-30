@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <form class="for-horizontal" method="POST" action="{{ route('leader.user.update', $user->id) }}">
+                <form class="for-horizontal" method="POST" action="{{ route('admin.user.update', $user->id) }}">
                     {{ csrf_field() }}
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -144,6 +144,13 @@
                                            required>
                                 </div>
                                 <div class="form-group col-md-6">
+                                    <label for="labors_1" class="col-form-label col-form-label-sm">Боқлаётган асалари оилалари сони</label>
+                                    <input type="number" class="form-control form-control-sm" id="labors_1"
+                                           name="bees_count"
+                                           value="{{$user->bees_count}}"
+                                           required>
+                                </div>
+                                <div class="form-group col-md-6">
                                     <label for="activity_1" class="col-form-label col-form-label-sm">Фаолият тури (бир
                                         нечтасини танласа бўлади)</label>
                                     <div class="col-md-12">
@@ -159,7 +166,7 @@
                                         зотлари</label>
                                     <div class="col-md-12">
                                         @foreach($families as $activity)
-                                            <input type="checkbox" name="activities[]" value="{{$activity->id}}"
+                                            <input type="checkbox" name="families[]" value="{{$activity->id}}"
                                                    id="activity_1" {{$user->families->contains('id', $activity->id) ? "checked" : ""}}> {{$activity->name}}
                                             <br>
                                         @endforeach

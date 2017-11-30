@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Leader;
 
+use App\Bank;
 use App\Family;
 use App\Notifications\UserConfirmationNotification;
 use App\User;
@@ -49,8 +50,8 @@ class LeaderController extends Controller
         <bulk-request login="'.config('aloqa.login').'" password="'.config('aloqa.password').'" ref-id="1" delivery-notification-requested="true" version="1.0">
         <message id="1" msisdn="'.$user->phone.'" validity-period="3" priority="1">
         <content type="text/plain">Siz royhatdan o\'tdingiz
-        Login: '.$data['username'].'
-        Password: '. $data['password'].'
+Login: '.$data['username'].'
+Parol: '. $data['password'].'
         </content>
         </message>
         </bulk-request>';
@@ -259,9 +260,10 @@ class LeaderController extends Controller
         $cities = City::all();
         $activities = Activity::all();
         $families = Family::all();
+        $banks = Bank::all();
 
         return view('user.user-update')->withUser($user)->withRegions($regions)->withCities($cities)
-            ->withActivities($activities)->withFamilies($families);
+            ->withActivities($activities)->withFamilies($families)->withBanks($banks);
     }
     public function updateUser(Request $request, $id){
         $request->validate([

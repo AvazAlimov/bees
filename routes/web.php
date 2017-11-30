@@ -33,7 +33,6 @@ Route::prefix('admin')->group(function (){
         Route::get('/edit/{id}','Admin\AdminRegionController@edit')->name('region.edit');
         Route::post('/update/{id}', 'Admin\AdminRegionController@update')->name('region.update');
     });
-
     Route::prefix('leader')->group(function (){
         Route::get('show/{id}','Admin\AdminLeaderController@show')->name('leader.show');
         Route::get('delete/{id}','Admin\AdminLeaderController@destroy')->name('leader.delete');
@@ -62,6 +61,14 @@ Route::prefix('admin')->group(function (){
         Route::post('store','Admin\AdminFamilyController@store')->name('family.store');
         Route::get('edit/{id}','Admin\AdminFamilyController@edit')->name('family.edit');
         Route::post('update/{id}','Admin\AdminFamilyController@update')->name('family.update');
+    });
+    Route::prefix('user')->group(function(){
+        Route::post('/confirm/user/{id}', 'Admin\AdminUserController@store')->name('admin.user.accept');
+        Route::post('/delete/user/{id}', 'Admin\AdminUserController@destroy')->name('admin.user.delete');
+        Route::post('/refuse/user/{id}', 'Admin\AdminUserController@refuse')->name('admin.user.refuse');
+        Route::post('/retrieve/user/{id}', 'Admin\AdminUserController@retrieve')->name('admin.user.retrieve');
+        Route::get('/user/edit/{id}','Admin\AdminUserController@edit')->name('admin.user.edit');
+        Route::post('/user/update/{id}','Admin\AdminUserController@update')->name('admin.user.update');
     });
 
 });
@@ -95,9 +102,6 @@ Route::get('/regions', function(){
     foreach ($items3 as $key3 => $item3){
         echo intval($key3) . ' ` ~ ` ~ `'. substr($item3[1], 0,5) .'~ ~ ~'. substr($item3[8], 0,191)."</br>";
     }
-
-
-    
 
 });
 Route::prefix('user')->group(function (){

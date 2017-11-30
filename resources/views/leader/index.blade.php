@@ -100,11 +100,26 @@
                                         <div class="col-md-8">{{ $user->fullName }} </div>
                                     </div>
                                     <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Ишчилар сони сони:</strong></div>
+                                        <div class="col-md-8">{{ $user->labors}}</div>
+                                    </div>
+                                    <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Faloliyat turlari:</strong></div>
                                         @foreach($user->activities as $activity)
                                             <div class="col-md-8"><span>{{$activity->name}}</span></div>
                                         @endforeach
                                     </div>
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Боқлаётган асалари оилалари сони:</strong></div>
+                                        <div class="col-md-8">{{ $user->bees_count}}</div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Boqilayotgan asalari zotlari:</strong></div>
+                                        @foreach($user->families as $activity)
+                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
+                                        @endforeach
+                                    </div>
+
                                 </div>
                                 <div class="panel-footer">
                                     <div class="row">
@@ -261,7 +276,12 @@
                                             <div class="col-md-8"><span>{{$activity->name}}</span></div>
                                         @endforeach
                                     </div>
-
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Boqilayotgan asalari zotlari:</strong></div>
+                                        @foreach($user->families as $activity)
+                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <div class="panel-footer">
                                     <table>
@@ -411,7 +431,12 @@
                                             <div class="col-md-8"><span>{{$activity->name}}</span></div>
                                         @endforeach
                                     </div>
-
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Boqilayotgan asalari zotlari:</strong></div>
+                                        @foreach($user->families as $activity)
+                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <div class="panel-footer">
                                     <table>

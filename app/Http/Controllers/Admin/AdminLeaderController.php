@@ -57,14 +57,14 @@ class AdminLeaderController extends Controller
 
 //        $data = ['username' => $request->username, 'password' => $request->password, 'name' => $request->firstName.' '.$request->lastName, 'url' =>'/leader/login'];
 //        $leader->notify(new LeaderConfirmationNotification($data));
-          $client = new Client();
+        $client = new Client();
         $headers = ['Content-Type'=>'text/xml','charset'=>'UTF-8'];
         $content = '
         <bulk-request login="'.config('aloqa.login').'" password="'.config('aloqa.password').'" ref-id="1" delivery-notification-requested="true" version="1.0">
-        <message id="1" msisdn="'.$user->phone.'" validity-period="3" priority="1">
+        <message id="1" msisdn="'.$leader->phone.'" validity-period="3" priority="1">
         <content type="text/plain">Siz royhatdan o\'tdingiz
-        Login: '.$request->username.'
-        Password: '. $request->password.'
+Login: '.$request->username.'
+Parol: '. $request->password.'
         </content>
         </message>
         </bulk-request>';
@@ -123,8 +123,28 @@ class AdminLeaderController extends Controller
         $leader->update($request->except(['password']));
         if($request->password != null)
             $leader->password=bcrypt($request->password);
-
         $leader->save();
+        if($request->password != null) {
+            $client = new Client();
+            $headers = ['Content-Type' => 'text/xml', 'charset' => 'UTF-8'];
+            $content = '
+        <bulk-request login="' . config('aloqa.login') . '" password="' . config('aloqa.password') . '" ref-id="1" delivery-notification-requested="true" version="1.0">
+        <message id="1" msisdn="' . $leader->phone . '" validity-period="3" priority="1">
+        <content type="text/plain">Sizning login va parolingiz
+Login: '.$leader->username.'
+Parol: '.$request->password.'
+        </content>
+        </message>
+        </bulk-request>';
+            $request = new Req('POST', 'http://91.204.239.42:8081/re-smsbroker', $headers, $content);
+            $response = $client->send($request);
+            $body = $response->getBody();
+            echo $body;
+            // Cast to a string: { ... }
+            $body->seek(0);
+            // Rewind the body
+            $body->read(1024);
+        }
         return redirect()->route('admin.index')->with('message','leader updated successfully');
     }
 

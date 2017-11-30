@@ -18,7 +18,7 @@ class User extends Authenticatable
     protected $fillable = [
         'region_id', 'city_id', 'neighborhood', 'subject',
         'reg_date', 'inn', 'mfo', 'address', 'phone',
-        'email', 'fullName', 'labors', 'username','state','password'
+        'email', 'fullName', 'labors', 'username','state','password','bees_count',
     ];
 
     /**
@@ -44,8 +44,8 @@ class User extends Authenticatable
         return $this->belongsTo('App\Region');
     }
     public function typeName(){
-        return $this->type == 1 ? 'Корхона/ЯТТ' : ($this->type == 2 ? 'Кўп тармоқли фермер хўжаликлари' :
-            ($this->type == 3 ? 'Деҳқон (шахсий ёрдамчи) хўжаликлари': 'Жисмоний шахс'));
+        return $this->type == 1 ? 'Юридик корхоналар (МЧЖ, ХК, ҚК)' : ($this->type == 2 ? 'Кўп тармоқли фермер хўжаликлари' :
+            ($this->type == 3 ? 'Якка тартибдаги тадбиркор': 'Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)'));
     }
 
     public function routeNotificationForMail()
