@@ -70,7 +70,6 @@ Route::prefix('admin')->group(function (){
         Route::get('/user/edit/{id}','Admin\AdminUserController@edit')->name('admin.user.edit');
         Route::post('/user/update/{id}','Admin\AdminUserController@update')->name('admin.user.update');
     });
-
 });
 
 Route::get('setlocale/{locale}', function ($locale) {

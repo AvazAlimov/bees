@@ -133,9 +133,9 @@ Parol: '. $data['password'].'
             'activities.*' =>'exists:activities,id',
             'families.*' =>'exists:families,id',
         ]);
-
+        $request->phone = preg_replace('/\D/', '', $request->phone);
         $user = User::findOrFail($id);
-        $user->update([$request->except('phone'),'phone' => preg_replace('/\D/', '', $request->phone)]);
+        $user->update($request->all());
         $user->activities()->sync($request->activities, true);
         $user->families()->sync($request->families, true);
         return redirect()->route('admin.index')->with('message','User updated successfully');
