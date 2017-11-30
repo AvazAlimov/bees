@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Asalari turi:</strong></div>
+                                        <div class="col-md-4"><strong>Foydalanuvchi turi:</strong></div>
                                         <div class="col-md-8">{{ $user->typeName() }}</div>
                                     </div>
                                     <div class="form-group col-md-12">
@@ -211,7 +211,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Asalari turi:</strong></div>
+                                        <div class="col-md-4"><strong>Foydalanuvchi turi:</strong></div>
                                         <div class="col-md-8">{{ $user->typeName() }}</div>
                                     </div>
                                     <div class="form-group col-md-12">
@@ -366,7 +366,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Asalari turi:</strong></div>
+                                        <div class="col-md-4"><strong>Foydalanuvchi turi:</strong></div>
                                         <div class="col-md-8">{{ $user->typeName() }}</div>
                                     </div>
                                     <div class="form-group col-md-12">
