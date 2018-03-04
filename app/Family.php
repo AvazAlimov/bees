@@ -18,4 +18,8 @@ class Family extends Model
     public function users(){
         return $this->belongsToMany('App\User');
     }
+
+    public function realizations(){
+        return $this->belongsToMany('App\Realization', 'family_realization');
+    }
 }
