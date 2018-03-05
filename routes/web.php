@@ -62,6 +62,13 @@ Route::prefix('admin')->group(function (){
         Route::get('edit/{id}','Admin\AdminFamilyController@edit')->name('family.edit');
         Route::post('update/{id}','Admin\AdminFamilyController@update')->name('family.update');
     });
+    Route::prefix('equipment')->group(function (){
+        Route::get('delete/{id}','Admin\AdminEquipmentController@destroy')->name('equipment.delete');
+        Route::get('create','Admin\AdminEquipmentController@create')->name('equipment.create');
+        Route::post('store','Admin\AdminEquipmentController@store')->name('equipment.store');
+        Route::get('edit/{id}','Admin\AdminEquipmentController@edit')->name('equipment.edit');
+        Route::post('update/{id}','Admin\AdminEquipmentController@update')->name('equipment.update');
+    });
     Route::prefix('user')->group(function(){
         Route::post('/confirm/user/{id}', 'Admin\AdminUserController@store')->name('admin.user.accept');
         Route::post('/delete/user/{id}', 'Admin\AdminUserController@destroy')->name('admin.user.delete');

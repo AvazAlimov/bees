@@ -15,10 +15,12 @@
             <li data-toggle="tab" class="navs"><a onclick="switchSection('section5')"><i class="fa fa-building"></i>
                     Asalari Zotlari</a></li>
             <li data-toggle="tab" class="navs"><a onclick="switchSection('section6')"><i class="fa fa-building"></i>
-                    Заказы</a></li>
+                    Jihoz Turlari</a></li>
             <li data-toggle="tab" class="navs"><a onclick="switchSection('section7')"><i class="fa fa-building"></i>
-                    Принятые заказы</a></li>
+                    Заказы</a></li>
             <li data-toggle="tab" class="navs"><a onclick="switchSection('section8')"><i class="fa fa-building"></i>
+                    Принятые заказы</a></li>
+            <li data-toggle="tab" class="navs"><a onclick="switchSection('section9')"><i class="fa fa-building"></i>
                     Непринятые заказы</a></li>
         </ul>
     </nav>
@@ -256,6 +258,48 @@
                 </div>
                 <div id="section6" class="section">
                     <div class="page-header">
+                        <h2>Jihoz Turlari</h2>
+                    </div>
+                    @foreach ($equipments as $activity)
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>{{ $activity->name }}</strong>
+                                </div>
+                                <div class="panel-footer">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <form action="{{ route('equipment.edit', $activity->id) }}"
+                                                      method="get">
+                                                    <button type="submit" class="btn btn-primary pull-right">Изменить
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('equipment.delete', $activity->id) }}"
+                                                      method="get" onclick="return confirm('Хотите удалить')">
+
+                                                    <button type="submit" class="btn btn-danger pull-right">Удалить
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    <form action="{{ route('equipment.create') }}" method="GET">
+                        <button type="submit" class="btn btn-primary pull-right">
+                            Jihoz Turlarini Qo'shish
+                        </button>
+                    </form>
+                </div>
+                <div id="section7" class="section">
+                    <div class="page-header">
                         <h2>Запросы </h2>
                     </div>
                     @foreach($waiting as $user)
@@ -384,7 +428,7 @@
                         {{ $waiting->links() }}
                     </div>
                 </div>
-                <div id="section7" class="section">
+                <div id="section8" class="section">
                     <div class="page-header">
                         <h2>Принятые заказы</h2>
                     </div>
@@ -499,7 +543,7 @@
                         {{ $accepted->links() }}
                     </div>
                 </div>
-                <div id="section8" class="section">
+                <div id="section9" class="section">
                     <div class="page-header">
                         <h2>Непринятые заказы</h2>
                     </div>

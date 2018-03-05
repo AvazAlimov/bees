@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Activity;
 use App\City;
+use App\Equipment;
 use App\Family;
 use App\Leader;
 use App\Region;
@@ -27,6 +28,7 @@ class AdminController extends Controller
             ->withRegions(Region::all())
             ->withLeaders(Leader::all())
             ->withActivities(Activity::all())
+            ->withEquipments(Equipment::all())
             ->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted)
             ->withFamilies(Family::all());
 
