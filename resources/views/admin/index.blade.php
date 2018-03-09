@@ -6,13 +6,13 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
                     Asosiy sozlamalar </a>
                 <ul class="dropdown-menu">
-                    <li data-toggle="tab" class="navs"><a onclick="switchSection('section1')"><i class="fa fa-users"></i>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section1')"><i class="fa fa-users"></i>
                             Viloyatlar</a>
                     </li>
-                    <li data-toggle="tab" class="navs"><a onclick="switchSection('section2')"><i class="fa fa-users"></i>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section2')"><i class="fa fa-users"></i>
                             Rahbarlar</a>
                     </li>
-                    <li data-toggle="tab" class="navs"><a onclick="switchSection('section3')"><i class="fa fa-money"></i>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section3')"><i class="fa fa-money"></i>
                             Shaharlar</a>
                     </li>
                 </ul>
@@ -21,11 +21,11 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
                     Turlar</a>
                 <ul class="dropdown-menu">
-                    <li data-toggle="tab" class="navs"><a onclick="switchSection('section4')"><i class="fa fa-building"></i>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section4')"><i class="fa fa-building"></i>
                             Faoliyatlar</a></li>
-                    <li data-toggle="tab" class="navs"><a onclick="switchSection('section5')"><i class="fa fa-building"></i>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section5')"><i class="fa fa-building"></i>
                             Asalari Zotlari</a></li>
-                    <li data-toggle="tab" class="navs"><a onclick="switchSection('section6')"><i class="fa fa-building"></i>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section6')"><i class="fa fa-building"></i>
                             Jihoz Turlari</a></li>
                 </ul>
             </li>
@@ -34,11 +34,11 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
                     Заказы</a>
                 <ul class="dropdown-menu">
-                    <li data-toggle="tab" class="navs"><a onclick="switchSection('section7')"><i class="fa fa-building"></i>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section7')"><i class="fa fa-building"></i>
                             Заказы</a></li>
-                    <li data-toggle="tab" class="navs"><a onclick="switchSection('section8')"><i class="fa fa-building"></i>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section8')"><i class="fa fa-building"></i>
                             Принятые заказы</a></li>
-                    <li data-toggle="tab" class="navs"><a onclick="switchSection('section9')"><i class="fa fa-building"></i>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section9')"><i class="fa fa-building"></i>
                             Непринятые заказы</a></li>
                 </ul>
             </li>
@@ -710,8 +710,12 @@
 
         window.onload = function () {
             switchSection(getCookie("admin"));
-            var navs = document.getElementsByClassName("navs");
-            navs[getCookie("admin").replace("section", "") - 1].className = "navs active";
+            var navs = document.getElementsByClassName("navs2");
+            navs[getCookie("admin").replace("section", "") - 1].className = "navs2 active";
+            $(navs[getCookie("admin").replace("section", "") - 1]).filter(function(){
+                return $(this).parent().parent().is('li')
+            }).parent().parent().addClass('active');
+
         }
     </script>
 @endsection

@@ -16,6 +16,7 @@ class CreateEquipmentsTable extends Migration
         Schema::create('equipments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+
             $table->timestamps();
         });
     }
