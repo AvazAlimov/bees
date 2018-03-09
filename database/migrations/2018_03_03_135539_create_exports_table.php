@@ -15,17 +15,18 @@ class CreateExportsTable extends Migration
     {
         Schema::create('exports', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('annual_power')->unsigned()->nullable();
+            $table->double('annual_power')->unsigned();
             $table->integer('shops_count')->unsigned();
-            $table->string('shops_address')->nullable();
-            $table->double('packed_honey')->unsigned()->nullable();
-            $table->double('inside_quantity')->unsigned()->nullable();
-            $table->integer('inside_price')->unsigned()->nullable();
-            $table->double('outside_quantity')->unsigned()->nullable();
-            $table->integer('outside_price')->unsigned()->nullable();
+            $table->string('shops_address');
+            $table->double('packed_honey')->unsigned();
+            $table->double('inside_quantity')->unsigned();
+            $table->integer('inside_price')->unsigned();
+            $table->double('outside_quantity')->unsigned();
+            $table->integer('outside_price')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
+            $table->integer('month')->unsigned();
+            $table->integer('year')->unsigned();
             $table->timestamps();
         });
     }

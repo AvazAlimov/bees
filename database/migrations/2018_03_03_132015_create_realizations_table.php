@@ -15,16 +15,18 @@ class CreateRealizationsTable extends Migration
     {
         Schema::create('realizations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('family_count')->unsigned()->nullable();
-            $table->double('annual_prog')->unsigned()->nullable();
-            $table->double('produced_honey')->unsigned()->nullable();
-            $table->double('reserve')->unsigned()->nullable();
-            $table->double('realized_quantity')->unsigned()->nullable();
-            $table->integer('realized_price')->unsigned()->nullable();
-            $table->double('stock_quantity')->unsigned()->nullable();
-            $table->integer('stock_price')->unsigned()->nullable();
+            $table->integer('family_count')->unsigned();
+            $table->double('annual_prog')->unsigned();
+            $table->double('produced_honey')->unsigned();
+            $table->double('reserve')->unsigned();
+            $table->double('realized_quantity')->unsigned();
+            $table->integer('realized_price')->unsigned();
+            $table->double('stock_quantity')->unsigned();
+            $table->integer('stock_price')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('month')->unsigned();
+            $table->integer('year')->unsigned();
             $table->timestamps();
         });
     }
