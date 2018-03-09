@@ -29,7 +29,6 @@
                             Jihoz Turlari</a></li>
                 </ul>
             </li>
-
             <li class="dropdown navs">
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
                     Заказы</a>
@@ -42,7 +41,15 @@
                             Непринятые заказы</a></li>
                 </ul>
             </li>
+            <li class="dropdown navs">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
+                    Hisobot</a>
+                <ul class="dropdown-menu">
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section10')"><i class="fa fa-building"></i>
+                            Hisobot</a></li>
 
+                </ul>
+            </li>
         </ul>
     </nav>
 @endsection
@@ -678,6 +685,12 @@
                     <div class="col-md-12">
                         {{ $notAccepted->links() }}
                     </div>
+                </div>
+                <div id="section10" class="section">
+                    <div class="page-header">
+                        <h2>Hisobotlar</h2>
+                    </div>
+                   <h1>Mashetga Yozarsiz</h1>
                 </div>
             </div>
         </div>
