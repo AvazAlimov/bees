@@ -23,6 +23,7 @@ Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit
 
 Route::prefix('admin')->group(function (){
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
+    Route::get('index', 'Admin\AdminController@index2')->name('admin.index2');
     Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('login/submit', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');

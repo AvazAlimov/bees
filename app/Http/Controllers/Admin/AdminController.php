@@ -33,4 +33,18 @@ class AdminController extends Controller
             ->withFamilies(Family::all());
 
     }
+    public function index2(){
+
+        $waiting_users = User::where('state',0)->orderBy('id', 'desc')->paginate(10, ['*'], 'waiting');
+        $accepted = User::where('state',1)->orderBy('id', 'desc')->paginate(10, ['*'], 'accepted');
+        $notAccepted = User::where('state',-1)->orderBy('id', 'desc')->paginate(10, ['*'], 'notAccepted');
+        return view('admin.index2')
+            ->withRegions(Region::all())
+            ->withLeaders(Leader::all())
+            ->withActivities(Activity::all())
+            ->withEquipments(Equipment::all())
+            ->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted)
+            ->withFamilies(Family::all());
+
+    }
 }
