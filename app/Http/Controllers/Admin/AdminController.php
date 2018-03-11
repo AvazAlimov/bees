@@ -9,6 +9,7 @@ use App\Family;
 use App\Leader;
 use App\Region;
 use App\User;
+use App\Realization;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -30,7 +31,7 @@ class AdminController extends Controller
             ->withActivities(Activity::all())
             ->withEquipments(Equipment::all())
             ->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted)
-            ->withFamilies(Family::all());
+            ->withFamilies(Family::all())->withRealizations(Realization::all());
 
     }
 }

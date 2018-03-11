@@ -10,6 +10,7 @@ use App\Activity;
 use App\Admin;
 use App\Bank;
 use App\Family;
+use App\Realization;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TestTableSeeder extends Seeder
@@ -30,6 +31,7 @@ class TestTableSeeder extends Seeder
         Admin::truncate();
         Family::truncate();
         Bank::truncate();
+        Realization::truncate();
         foreach (range(1, 13) as $i) {
             Leader::create([
                 'username' => 'U' . sprintf("%07d", $i),
@@ -107,6 +109,21 @@ class TestTableSeeder extends Seeder
             ]);
         }
 
+        foreach(range(1, 20) as $i){
+            Realization::create([
+                'family_count' => $faker->numberBetween(1, 5),
+                'annual_prog' => $faker->numberBetween(100,2000),
+                'produced_honey' => $faker->numberBetween(100, 2000),
+                'reserve' => $faker->numberBetween(500, 4000),
+                'realized_quantity' => $faker->numberBetween(100, 2000),
+                'realized_price' => $faker->numberBetween(1000, 100000),
+                'stock_quantity' =>$faker->numberBetween(100, 2000),
+                'stock_price' => $faker->numberBetween(1000, 100000),
+                'user_id' => $faker->numberBetween(1, 6),
+                'month' => $faker->numberBetween(1, 12),
+                'year' => $faker->numberBetween(2017, 2018),
+            ]);
+        }
         Admin::create([
             'name' => 'Admin aka',
             'username' => 'asalari',

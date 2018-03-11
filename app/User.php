@@ -52,4 +52,8 @@ class User extends Authenticatable
     {
         return $this->email;
     }
+
+    public function realizations(){
+        return $this->hasOne('App\Realizations');
+    }
 }

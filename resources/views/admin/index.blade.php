@@ -1,4 +1,8 @@
 @extends('layouts.app-admin')
+@section('styles')
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+@stop
 @section('nav')
     <nav class="navbar navbar-default" id="navigation">
         <ul class="nav navbar-nav" style="display:block; width: 100%">
@@ -691,12 +695,65 @@
                         <h2>Hisobotlar</h2>
                     </div>
                    <h1>Mashetga Yozarsiz</h1>
+                    <table id="example" class="table table-bordered realization-theader" cellspacing="0" width="100%">
+                        
+                          <col>
+                          <colgroup span="2"></colgroup>
+                          <colgroup span="2"></colgroup>
+                          <tr>
+                            <th rowspan="2">Худуд</th>
+                            <th rowspan="2">Уюшмага аъзо субъектлар сони</th>
+                            <th colspan="3" scope="colgroup">Субъектлар</th>
+                            <th rowspan="2">Мавсум бошидаги асал захираси</th>
+                            <th rowspan="2">Ишлаб чикариш хажми (Прогноз)</th>
+                            <th rowspan="2">Ишлаб чикариш хажми (Факт)</th>
+                            <th colspan="2" scope="colgroup">Реализация килинган асал микдори</th>
+                            <th colspan="2" scope="colgroup">Асал захираси</th>
+                          </tr>
+                          <tr>
+                            <th scope="col">Дехкон (щахсий йордамчи) хужаликлари</th>
+                            <th scope="col">Куп тамокли фермер хужаликлари</th>
+                            <th scope="col">Юридик шахслар</th>
+                            <th scope="col">Кг</th>
+                            <th scope="col">Сум</th>
+                            <th scope="col">Кг</th>
+                            <th scope="col">Сум</th>
+                          </tr>
+                        
+                        <tbody class="realization-tbody">
+                            @foreach($realizations as $real)
+                            <tr>
+
+                                <td>{{$real->user->region->name}}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                      </table>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @section('scripts')
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script>
     <script>
         function switchSection(id) {
             document.cookie = "admin=" + id + ";";
