@@ -1,7 +1,8 @@
 @extends('layouts.app-admin')
 @section('styles')
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+    <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css" rel="stylesheet">
 @stop
 @section('nav')
     <nav class="navbar navbar-default" id="navigation">
@@ -697,9 +698,7 @@
                    <h1>Mashetga Yozarsiz</h1>
                     <table id="example" class="table table-bordered realization-theader" cellspacing="0" width="100%">
                         
-                          <col>
-                          <colgroup span="2"></colgroup>
-                          <colgroup span="2"></colgroup>
+                          <thead>
                           <tr>
                             <th rowspan="2">Худуд</th>
                             <th rowspan="2">Уюшмага аъзо субъектлар сони</th>
@@ -719,11 +718,10 @@
                             <th scope="col">Кг</th>
                             <th scope="col">Сум</th>
                           </tr>
-                        
+                        </thead>
                         <tbody class="realization-tbody">
                             @foreach($realizations as $real)
                             <tr>
-
                                 <td>{{$real->user->region->name}}</td>
                                 <td></td>
                                 <td></td>
@@ -746,14 +744,10 @@
     </div>
 @endsection
 @section('scripts')
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        } );
-    </script>
+    <script src="{{asset('js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+
     <script>
         function switchSection(id) {
             document.cookie = "admin=" + id + ";";
@@ -785,6 +779,15 @@
             $(navs[getCookie("admin").replace("section", "") - 1]).filter(function(){
                 return $(this).parent().parent().is('li')
             }).parent().parent().addClass('active');
+            $('#example').DataTable({
+                    "columnDefs": [ {
+                        "targets": [-2,-1],
+                        "orderable": false
+                    }],
+                    rowGroup: {
+                        dataSrc: 1
+                    }
+                });
 
         }
     </script>
