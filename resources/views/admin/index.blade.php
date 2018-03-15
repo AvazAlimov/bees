@@ -1,6 +1,5 @@
 @extends('layouts.app-admin')
 @section('styles')
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     <link href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css" rel="stylesheet">
 @stop

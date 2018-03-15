@@ -16,10 +16,9 @@ class CreateProducedEquipmentsTable extends Migration
         Schema::create('produced_equipments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('equipment_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->integer('production_id')->unsigned();
             $table->double('volume');
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('production_id')->references('id')->on('productions')->onDelete('cascade');
             $table->foreign('equipment_id')->references('id')->on('equipments')->onDelete('cascade');
             $table->timestamps();
         });
