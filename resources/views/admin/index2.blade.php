@@ -702,36 +702,38 @@
                                <th rowspan="2">#</th>
                                <th rowspan="2">Ишлаб чиқарувчи номи</th>
                                <th rowspan="2">Ҳудуд номи</th>
+                               <th rowspan="2">Вилоят номи</th>
+                               @for($i=0; $i<$maxNumber; $i++)
                                <th colspan="2">Ишлаб чиқариладиган жиҳоз</th>
+                               @endfor
                            </tr>
+                           @if($maxNumber != 0)
                            <tr>
+                               @for($i=0; $i<$maxNumber; $i++)
                                <th>Тури</th>
                                <th>Ҳажми</th>
+                               @endfor
                            </tr>
+                           @endif
                            </thead>
-                           <tbody>
-                           <tr>
-                               <td >1</td>
-                               <td >"Шифо асали" МЧЖ</td>
-                               <td>асака тумани</td>
-                               <td>Мум парда</td>
-                               <td>100</td>
-                           </tr>
-                           <tr>
-                               <td >1</td>
-                               <td >"Шифо асали" МЧЖ</td>
-                               <td>асака тумани</td>
-                               <td>Xf парда</td>
-                               <td>100</td>
-                           </tr>
 
+                           <tbody>
+                           @foreach($productions as $par => $production)
                            <tr>
-                               <td>0</td>
-                               <td>фвфқв Вфқв МфқвфқЧЖ</td>
-                               <td>вқфқв вфқв</td>
-                               <td>Rsda</td>
-                               <td>100</td>
+                               <td>{{$loop->iteration}}</td>
+                               <td>{{$production->user->subject}}</td>
+                               <td>{{$production->user->city->name}}</td>
+                               <td>{{$production->user->region->name}}</td>
+                               @foreach($production->equipments as $key=>$equipment)
+                                    <td>{{$equipment->name}}</td>
+                                    <td>{{$equipment->pivot->volume}}</td>
+                               @endforeach
+                               @for($i=$production->equipments->count(); $i<$maxNumber; $i++)
+                                   <td></td>
+                                   <td></td>
+                                @endfor
                            </tr>
+                           @endforeach
 
 
                            </tbody>
@@ -778,12 +780,8 @@
                 return $(this).parent().parent().is('li')
             }).parent().parent().addClass('active');
                 $('#example').DataTable({
-                    "columnDefs": [ {
-                        "targets": [-2,-1],
-                        "orderable": false
-                    }],
                     rowGroup: {
-                        dataSrc: 1
+                        dataSrc: 3
                     }
                 });
         }

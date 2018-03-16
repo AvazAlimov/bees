@@ -56,4 +56,11 @@ class User extends Authenticatable
     public function realizations(){
         return $this->hasMany('App\Realization');
     }
+    public function productions(){
+        return $this->hasMany(Production::class);
+    }
+    public function lastProduction(){
+        return $this->productions()->orderByDesc('year')->take(1);
+    }
+
 }
