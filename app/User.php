@@ -63,4 +63,5 @@ class User extends Authenticatable
         return $this->productions()->orderByDesc('year')->take(1);
     }
 
+
 }

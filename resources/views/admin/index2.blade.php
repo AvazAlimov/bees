@@ -51,8 +51,9 @@
                     Hisobot</a>
                 <ul class="dropdown-menu">
                     <li data-toggle="tab" class="navs2"><a onclick="switchSection('section10')"><i class="fa fa-building"></i>
-                            Hisobot</a></li>
-
+                            Ишлаб чиқариш</a></li>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section11')"><i class="fa fa-building"></i>
+                            Йетказиб бериш</a></li>
                 </ul>
             </li>
         </ul>
@@ -693,52 +694,82 @@
                 </div>
                 <div id="section10" class="section">
                     <div class="page-header">
-                        <h2>Hisobotlar</h2>
+                        <h2>Ишлаб чиқариш</h2>
                     </div>
-                   <div class="row">
-                       <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                           <thead>
-                           <tr>
-                               <th rowspan="2">#</th>
-                               <th rowspan="2">Ишлаб чиқарувчи номи</th>
-                               <th rowspan="2">Ҳудуд номи</th>
-                               <th rowspan="2">Вилоят номи</th>
-                               @for($i=0; $i<$maxNumber; $i++)
-                               <th colspan="2">Ишлаб чиқариладиган жиҳоз</th>
-                               @endfor
-                           </tr>
-                           @if($maxNumber != 0)
-                           <tr>
-                               @for($i=0; $i<$maxNumber; $i++)
-                               <th>Тури</th>
-                               <th>Ҳажми</th>
-                               @endfor
-                           </tr>
-                           @endif
-                           </thead>
-
-                           <tbody>
-                           @foreach($productions as $par => $production)
-                           <tr>
-                               <td>{{$loop->iteration}}</td>
-                               <td>{{$production->user->subject}}</td>
-                               <td>{{$production->user->city->name}}</td>
-                               <td>{{$production->user->region->name}}</td>
-                               @foreach($production->equipments as $key=>$equipment)
-                                    <td>{{$equipment->name}}</td>
-                                    <td>{{$equipment->pivot->volume}}</td>
-                               @endforeach
-                               @for($i=$production->equipments->count(); $i<$maxNumber; $i++)
-                                   <td></td>
-                                   <td></td>
+                    <div class="row">
+                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th rowspan="2">#</th>
+                                <th rowspan="2">Ишлаб чиқарувчи номи</th>
+                                <th rowspan="2">Ҳудуд номи</th>
+                                <th rowspan="2">Вилоят номи</th>
+                                @for($i=0; $i<$maxNumber; $i++)
+                                    <th colspan="2">Ишлаб чиқариладиган жиҳоз</th>
                                 @endfor
-                           </tr>
-                           @endforeach
+                                <th rowspan="2">Созлаш</th>
+                            </tr>
+                            @if($maxNumber != 0)
+                                <tr>
+                                    @for($i=0; $i<$maxNumber; $i++)
+                                        <th>Тури</th>
+                                        <th>Ҳажми</th>
+                                    @endfor
+                                </tr>
+                            @endif
+                            </thead>
+
+                            <tbody>
+                            @foreach($productions as $par => $production)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$production->user->subject}}</td>
+                                    <td>{{$production->user->city->name}}</td>
+                                    <td>{{$production->user->region->name}}</td>
+                                    @foreach($production->equipments as $key=>$equipment)
+                                        <td>{{$equipment->name}} ({{$equipment->volume_name}})</td>
+                                        <td>{{$equipment->pivot->volume}}</td>
+                                    @endforeach
+                                    @for($i=$production->equipments->count(); $i<$maxNumber; $i++)
+                                        <td></td>
+                                        <td></td>
+                                    @endfor
+                                    <td class="no-sort no-click">
+                                        <a href="#" onclick="return confirm('Ushbu ma\'lumotni o\'chirib tashlamoqchimisiz');" title="Удалить" class="btn btn-sm btn-danger pull-right delete" style="margin: 5px;">
+                                            <i class="fa fa-trash"></i> <span class="hidden-xs hidden-sm">O'chirish</span>
+                                        </a>
+                                        <a href="#" title="Редактирование" class="btn btn-sm btn-primary pull-right edit" style="margin: 5px;">
+                                            <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm">O'zgartirish</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
 
 
-                           </tbody>
-                       </table>
-                   </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="section11" class="section">
+                    <div class="page-header">
+                        <h2>Йетказиб бериш</h2>
+                    </div>
+                    <div class="row">
+                        <table id="delivery" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ишлаб чиқарувчи номи</th>
+                                <th>Ҳудуд номи</th>
+                                <th>Вилоят номи</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -779,11 +810,37 @@
             $(navs[getCookie("admin").replace("section", "") - 1]).filter(function(){
                 return $(this).parent().parent().is('li')
             }).parent().parent().addClass('active');
-                $('#example').DataTable({
-                    rowGroup: {
-                        dataSrc: 3
-                    }
-                });
+            $('#example').DataTable({
+                "language": {
+                    "paginate": {
+                        "previous": "Oldingi",
+                        "next": "Keyingi"
+                    },
+                    "lengthMenu": "Хар бир сахифа учун _MENU_ йозувларни кўрсатиш",
+                    "zeroRecords": "Хеч нарса топилмади",
+                    "search":   "Қидириш:",
+                    "info": "_PAGES_ дан _PAGE_ таси сахифа кўрсатилган",
+                    "infoEmpty": "Йозувлар мавжуд эмас",
+                    "infoFiltered": "(жами _MAX_ йозувлар филти килинган)"
+                },
+                rowGroup: {
+                    dataSrc: 3
+                }
+            });
+            $('#delivery').DataTable({
+                "language": {
+                    "paginate": {
+                        "previous": "Oldingi",
+                        "next": "Keyingi"
+                    },
+                    "lengthMenu": "Хар бир сахифа учун _MENU_ йозувларни кўрсатиш",
+                    "zeroRecords": "Хеч нарса топилмади",
+                    "search":   "Қидириш:",
+                    "info": "_PAGES_ дан _PAGE_ таси сахифа кўрсатилган",
+                    "infoEmpty": "Йозувлар мавжуд эмас",
+                    "infoFiltered": "(жами _MAX_ йозувлар филти килинган)"
+                }
+            });
         }
     </script>
 @endsection
