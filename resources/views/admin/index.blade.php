@@ -83,13 +83,6 @@
                                                     </button>
                                                 </form>
                                             </td>
-                                            <td>
-                                                <form action="{{ route('region.delete', $region->id) }}" method="get"
-                                                      onclick="return confirm('Хотите удалить')">
-                                                    <button type="submit" class="btn btn-danger pull-right">Удалить
-                                                    </button>
-                                                </form>
-                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
