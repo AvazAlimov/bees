@@ -45,7 +45,7 @@ class User extends Authenticatable
     }
     public function typeName(){
         return $this->type == 1 ? 'Юридик корхоналар (МЧЖ, ХК, ҚК)' : ($this->type == 2 ? 'Кўп тармоқли фермер хўжаликлари' :
-            ($this->type == 3 ? 'Якка тартибдаги тадбиркор': 'Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)'));
+            ($this->type == 3 ? 'Якка тартибдаги тадбиркор' : 'Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)'));
     }
 
     public function routeNotificationForMail()
@@ -54,6 +54,6 @@ class User extends Authenticatable
     }
 
     public function realizations(){
-        return $this->hasOne('App\Realizations');
+        return $this->hasMany('App\Realization');
     }
 }

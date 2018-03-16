@@ -691,18 +691,18 @@
                         {{ $notAccepted->links() }}
                     </div>
                 </div>
+            </div>
                 <div id="section10" class="section">
                     <div class="page-header">
                         <h2>Hisobotlar</h2>
                     </div>
                    <h1>Mashetga Yozarsiz</h1>
-                    <table id="example" class="table table-bordered realization-theader" cellspacing="0" width="100%">
-                        
+                    <table id="example" class="table table-bordered realization-theader" cellspacing="0" width="100%">                        
                           <thead>
                           <tr>
                             <th rowspan="2">Худуд</th>
                             <th rowspan="2">Уюшмага аъзо субъектлар сони</th>
-                            <th colspan="3" scope="colgroup">Субъектлар</th>
+                            <th colspan="4" scope="colgroup">Субъектлар</th>
                             <th rowspan="2">Мавсум бошидаги асал захираси</th>
                             <th rowspan="2">Ишлаб чикариш хажми (Прогноз)</th>
                             <th rowspan="2">Ишлаб чикариш хажми (Факт)</th>
@@ -713,6 +713,7 @@
                             <th scope="col">Дехкон (щахсий йордамчи) хужаликлари</th>
                             <th scope="col">Куп тамокли фермер хужаликлари</th>
                             <th scope="col">Юридик шахслар</th>
+                            <th scope="col">Якка тартибдаги тадбиркор</th>
                             <th scope="col">Кг</th>
                             <th scope="col">Сум</th>
                             <th scope="col">Кг</th>
@@ -720,9 +721,13 @@
                           </tr>
                         </thead>
                         <tbody class="realization-tbody">
-                            @foreach($realizations as $real)
+                            @foreach($regions as $region)
                             <tr>
-                                <td>{{$real->user->region->name}}</td>
+                                @foreach($region->users as $user)
+                                
+                                @endforeach
+                                <td>{{$region->name}}</td>
+                                <td>{!!$region->users!=null?$region->users->count():0!!}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -739,14 +744,14 @@
                         </tbody>
                       </table>
                 </div>
-            </div>
+            
         </div>
     </div>
 @endsection
 @section('scripts')
     <script src="{{asset('js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
-    <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+    {{-- <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script> --}}
 
     <script>
         function switchSection(id) {

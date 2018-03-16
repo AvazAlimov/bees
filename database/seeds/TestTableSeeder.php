@@ -88,7 +88,7 @@ class TestTableSeeder extends Seeder
         }
 
 
-        for($i = 10; $i<=60; $i=$i+10) {
+        for($i = 2; $i<=85; $i+=7) {
             User::create([
                 'username' => null,
                 'email' => $faker->email,
@@ -108,6 +108,8 @@ class TestTableSeeder extends Seeder
                 'type' => random_int(1,4)
             ]);
         }
+
+
 
         foreach(range(1, 20) as $i){
             Realization::create([
