@@ -683,7 +683,7 @@
                         {{ $notAccepted->links() }}
                     </div>
                 </div>
-            </div>
+            
                 <div id="section10" class="section">
                     <div class="page-header">
                         <h2>Hisobotlar</h2>
@@ -736,7 +736,7 @@
                         </tbody>
                       </table>
                 </div>
-            
+            </div>
         </div>
     </div>
 @endsection

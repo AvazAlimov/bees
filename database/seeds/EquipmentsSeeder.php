@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Equipment;
 use App\Production;
 use App\ProducedEquipments;
+use App\Delivery;
 class EquipmentsSeeder extends Seeder
 {
     /**
@@ -139,7 +140,7 @@ class EquipmentsSeeder extends Seeder
         Equipment::truncate();
         foreach(range(1, 20) as $i){
             Equipment::create([
-                'name' => $faker->word,
+                'name' => $faker->word.$i,
                 'volume_name'=>$faker->word
             ]);
         }
@@ -161,6 +162,22 @@ class EquipmentsSeeder extends Seeder
                 ]);
             }
         }
+
+        Delivery::truncate();
+        foreach (range(1, 10) as $key) {
+                    Delivery::create([
+                        'subject' => $faker->userAgent,
+                        'address' => $faker->address,
+                        'family_count' => $faker->numberBetween(1, 100),
+                        'really_delivered' => $faker->numberBetween(1, 80),
+                        'price' => $faker->numberBetween(100000, 900000),
+                        'factory_name' => $faker->userAgent,
+                        'name' => $faker->name,
+                        'phone' => $faker->phoneNumber,
+                        'city_id' => $key,
+                        'region_id' => City::findOrFail($key)->region->id,
+                    ]);
+                }        
 
     }
 }
