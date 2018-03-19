@@ -57,7 +57,7 @@ class AdminController extends Controller
             ->withActivities(Activity::all())
             ->withEquipments(Equipment::all())
             ->withMaxNumber(collect($productions->pluck('cnt'))->max())
-            ->withProductions($productions->get())
+            ->withProductions($productions->get('month','year'))
             ->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted)
             ->withFamilies(Family::all());
 

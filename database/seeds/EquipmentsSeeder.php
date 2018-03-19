@@ -90,27 +90,29 @@ class EquipmentsSeeder extends Seeder
             ]);
         }
 
-
-        for($i = 10; $i<=60; $i=$i+10) {
-            User::create([
-                'username' => null,
-                'email' => $faker->email,
-                'password' => null,
-                'region_id' => City::findOrFail($i)->region->id,
-                'city_id' => $i,
-                'neighborhood' => $faker->streetAddress,
-                'subject' => $faker->userAgent,
-                'bank_name' => 'Aloqa Bank',
-                'reg_date' => $faker->date(),
-                'inn' => '123456789',
-                'mfo' => '12345',
-                'address' => $faker->address,
-                'phone' => '998908082443',
-                'fullName' => $faker->name,
-                'labors' => $faker->numberBetween(1, 200),
-                'type' => random_int(1,4)
-            ]);
+        foreach (range(1,20) as $item) {
+            for ($i = 2; $i <= 85; $i += 7) {
+                User::create([
+                    'username' => null,
+                    'email' => $faker->email,
+                    'password' => null,
+                    'region_id' => City::findOrFail($i)->region->id,
+                    'city_id' => $i,
+                    'neighborhood' => $faker->streetAddress,
+                    'subject' => $faker->sentence(6),
+                    'bank_name' => 'Aloqa Bank',
+                    'reg_date' => $faker->date(),
+                    'inn' => '123456789',
+                    'mfo' => '12345',
+                    'address' => $faker->address,
+                    'phone' => '998908082443',
+                    'fullName' => $faker->name,
+                    'labors' => $faker->numberBetween(1, 200),
+                    'type' => random_int(1, 4)
+                ]);
+            }
         }
+
 
         foreach(range(1, 20) as $i){
             Realization::create([
