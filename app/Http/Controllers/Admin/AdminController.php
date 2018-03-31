@@ -47,7 +47,10 @@ class AdminController extends Controller
         $accepted = User::where('state',1);
         $notAccepted = User::where('state',-1)->orderBy('id', 'desc')->paginate(10, ['*'], 'notAccepted');
 
-        $numbers = DB::select(DB::raw('SELECT id from (SELECT * FROM productions as pro WHERE year=(SELECT MAX(year) FROM productions as p WHERE p.user_id=pro.user_id)) as Shox WHERE month=(SELECT MAX(month) FROM productions as s WHERE s.user_id=Shox.user_id)'));
+        $numbers = DB::select(DB::raw("SELECT * FROM (SELECT * FROM productions as pro 
+        WHERE year=(SELECT MAX(year) FROM productions as p WHERE p.user_id=pro.user_id)) as Shox
+        WHERE month=(SELECT MAX(month) FROM productions as s WHERE s.user_id=Shox.user_id and s.year = Shox.year)"));
+
         $productions = Production::whereIn('id',collect($numbers)->pluck('id'))->withCount('equipments as cnt')->orderByDesc('year')->orderByDesc('month');
 
         $accepted= $accepted->orderBy('id', 'desc')->paginate(10, ['*'], 'accepted');

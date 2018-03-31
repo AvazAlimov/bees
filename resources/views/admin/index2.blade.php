@@ -693,11 +693,18 @@
                     </div>
                 </div>
                 <div id="section10" class="section">
-                    <div class="page-header">
-                        <h2>Ишлаб чиқариш</h2>
+                    <div class="page-header clearfix">
+                        <div class="col-md-6">
+                            <h2 class="">Ишлаб чиқариш</h2>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="btn btn-success btn-add-new pull-right" style="margin-top: 22px;">
+                                <i class="fa fa-plus"></i> <span>Добавить</span>
+                            </a>
+                        </div>
                     </div>
                     <div class="row">
-                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="example" class="table table-striped table-bordered cell-border" cellspacing="0">
                             <thead>
                             <tr>
                                 <th rowspan="2">#</th>
@@ -713,7 +720,7 @@
                                 <tr>
                                     @for($i=0; $i<$maxNumber; $i++)
                                         <th>Тури</th>
-                                        <th>Ҳажми</th>
+                                        <th>Ҳажми </th>
                                     @endfor
                                 </tr>
                             @endif
@@ -751,8 +758,15 @@
                     </div>
                 </div>
                 <div id="section11" class="section">
-                    <div class="page-header">
-                        <h2>Йетказиб бериш</h2>
+                    <div class="page-header clearfix">
+                        <div class="col-md-6">
+                            <h2 class="">Йетказиб бериш</h2>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="btn btn-success btn-add-new pull-right" style="margin-top: 22px;">
+                                <i class="fa fa-plus"></i> <span>Добавить</span>
+                            </a>
+                        </div>
                     </div>
                     <div class="row">
                         <table id="delivery" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -762,6 +776,7 @@
                                 <th>Ишлаб чиқарувчи номи</th>
                                 <th>Ҳудуд номи</th>
                                 <th>Вилоят номи</th>
+                                <th>Созлаш</th>
                             </tr>
                             </thead>
 
@@ -779,6 +794,13 @@
     <script src="{{asset('js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
     <script>
         function switchSection(id) {
             document.cookie = "admin=" + id + ";";
@@ -810,7 +832,36 @@
             $(navs[getCookie("admin").replace("section", "") - 1]).filter(function(){
                 return $(this).parent().parent().is('li')
             }).parent().parent().addClass('active');
+
             $('#example').DataTable({
+                "dom":"lBfrtip",
+                "buttons":[
+                    {
+                        extend: 'excelHtml5',
+                        title:"Ишлаб чиқариш",
+                        filename:"Ишлаб чиқариш",
+                        className:"btn btn-success pull-left",
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        },
+                        //--------------------------
+                        customize : function (xlsx) {
+                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                            var col = $('col', sheet);
+                            col.each(function (index) {
+                                if(index > 3 && index%2 !== 0)
+                                    $(this).attr('width',8);
+                            });
+                        },
+                        text: 'Excel',
+                        buttons: [
+                            'excel'
+                        ]
+                    }
+                ],
+                "columnDefs": [
+                    { "width": "10px", "targets": "_all" }
+                ],
                 "language": {
                     "paginate": {
                         "previous": "Oldingi",
@@ -823,11 +874,40 @@
                     "infoEmpty": "Йозувлар мавжуд эмас",
                     "infoFiltered": "(жами _MAX_ йозувлар филти килинган)"
                 },
+                "scrollX": true,
                 rowGroup: {
                     dataSrc: 3
                 }
             });
             $('#delivery').DataTable({
+                "dom":"lBfrtip",
+                "buttons":[
+                    {
+                        extend: 'excelHtml5',
+                        title:"Йетказиб бериш",
+                        filename:"Йетказиб бериш",
+                        className:"btn btn-success pull-left",
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        },
+                        //--------------------------
+                        /*customize : function (xlsx) {
+                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                            var col = $('col', sheet);
+                            col.each(function (index) {
+                                if(index > 3 && index%2 !== 0)
+                                    $(this).attr('width',8);
+                            });
+                        },*/
+                        text: 'Excel',
+                        buttons: [
+                            'excel'
+                        ]
+                    }
+                ],
+                "columnDefs": [
+                    { "width": "10px", "targets": "_all" }
+                ],
                 "language": {
                     "paginate": {
                         "previous": "Oldingi",
@@ -839,7 +919,8 @@
                     "info": "_PAGES_ дан _PAGE_ таси сахифа кўрсатилган",
                     "infoEmpty": "Йозувлар мавжуд эмас",
                     "infoFiltered": "(жами _MAX_ йозувлар филти килинган)"
-                }
+                },
+                "scrollX": true
             });
         }
     </script>

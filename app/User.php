@@ -59,9 +59,5 @@ class User extends Authenticatable
     public function productions(){
         return $this->hasMany(Production::class);
     }
-    public function lastProduction(){
-        return $this->productions()->orderByDesc('year')->take(1);
-    }
-
 
 }
