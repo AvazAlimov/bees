@@ -91,7 +91,7 @@ class EquipmentsSeeder extends Seeder
         }
 
 
-        for($i = 10; $i<=60; $i=$i+10) {
+        for($i = 2; $i<=85; $i+=7) {
             User::create([
                 'username' => null,
                 'email' => $faker->email,
