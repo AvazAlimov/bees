@@ -3,6 +3,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     <link href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css" rel="stylesheet">
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 @stop
 @section('nav')
     <nav class="navbar navbar-default" id="navigation">
@@ -689,7 +690,6 @@
                     <div class="page-header">
                         <h2>Hisobotlar</h2>
                     </div>
-                   <h1>Mashetga Yozarsiz</h1>
                     <table id="example" class="table table-bordered realization-theader" cellspacing="0" width="100%">                        
                           <thead>
                           <tr>
@@ -714,24 +714,21 @@
                           </tr>
                         </thead>
                         <tbody class="realization-tbody">
-                            @foreach($regions as $region)
+                            @foreach($tableRows as $row)
                             <tr>
-                                @foreach($region->users as $user)
-                                
-                                @endforeach
-                                <td>{{$region->name}}</td>
-                                <td>{!!$region->users!=null?$region->users->count():0!!}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$row->region}}</td>
+                                <td>{{$row->total}}</td>
+                                <td>{{$row->type4_count}}</td>
+                                <td>{{$row->type2_count}}</td>
+                                <td>{{$row->type1_count}}</td>
+                                <td>{{$row->type3_count}}</td>
+                                <td>{!!$row->reserves==null?0:$row->reserves!!}</td>
+                                <td>{!!$row->annual_prog==null?0:$row->annual_prog!!}</td>
+                                <td>{!!$row->produced_honey==null?0:$row->produced_honey!!}</td>
+                                <td>{!!$row->realized_quantity==null?0:$row->realized_quantity!!}</td>
+                                <td>{!!$row->realized_price==null?0:$row->realized_price!!}</td>
+                                <td>{!!$row->stock_quantity==null?0:$row->stock_quantity!!}</td>
+                                <td>{!!$row->stock_price==null?0:$row->stock_price!!}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -745,6 +742,11 @@
     <script src="{{asset('js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
     {{-- <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script> --}}
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
     <script>
         function switchSection(id) {
@@ -778,6 +780,28 @@
                 return $(this).parent().parent().is('li')
             }).parent().parent().addClass('active');
             $('#example').DataTable({
+                "dom":"lBfrtip",
+                "buttons":[
+                    {
+                        extend: 'excelHtml5',
+                        title:"Ишлаб чиқариш",
+                        filename:"Ишлаб чиқариш",
+                        className:"btn btn-success pull-left",
+                        //--------------------------
+                        customize : function (xlsx) {
+                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                            var col = $('col', sheet);
+                            col.each(function (index) {
+                                if(index > 3 && index%2 !== 0)
+                                    $(this).attr('width',8);
+                            });
+                        },
+                        text: 'Excel',
+                        buttons: [
+                            'excel'
+                        ]
+                    }
+                ],
                     "columnDefs": [ {
                         "targets": [-2,-1],
                         "orderable": false
