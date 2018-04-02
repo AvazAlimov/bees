@@ -40,8 +40,8 @@ class CreateUsersTable extends Migration
 
         });
         Schema::table('users', function($table) {
-            $table->foreign('region_id')->references('id')->on('regions')->onDelete('set null');
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null');
+            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
         });
 
     }

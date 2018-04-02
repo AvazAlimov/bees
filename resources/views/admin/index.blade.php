@@ -53,6 +53,8 @@
                 <ul class="dropdown-menu">
                     <li data-toggle="tab" class="navs2"><a onclick="switchSection('section10')"><i class="fa fa-building"></i>
                             Hisobot</a></li>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section11')"><i class="fa fa-building"></i>
+                            Subyektlar Haqida</a></li>
 
                 </ul>
             </li>
@@ -690,7 +692,7 @@
                     <div class="page-header">
                         <h2>Hisobotlar</h2>
                     </div>
-                    <table id="example" class="table table-bordered realization-theader" cellspacing="0" width="100%">                        
+                    <table class="table table-bordered realization-theader example" cellspacing="0" width="100%">                        
                           <thead>
                           <tr>
                             <th rowspan="2">Худуд</th>
@@ -734,7 +736,50 @@
                         </tbody>
                       </table>
                 </div>
-            
+                <div id="section11" class="section">
+                    <div class="page-header">
+                        <h2>O'zbekiston asalarichilari uyushmasiga a'zo subyektlar to'g'risida ma'lumot</h2>
+                    </div>
+                    <table class="table table-bordered realization-theader example" cellspacing="0" width="100%">                        
+                          <thead>
+                          <tr>
+                            <th rowspan="2">Худуд</th>
+                            <th rowspan="2">Туман номи</th>
+                            <th rowspan="2">Уюшмага аъзо субъектлар сони</th>
+                            <th colspan="3" scope="colgroup">Субъектлар</th>
+                            <th colspan="3" scope="colgroup">Фаолият тури</th>
+                            <th rowspan="2" scope="colgroup">Боқилаётган асалари оилалари сони</th>
+                            <th rowspan="2" scope="colgroup">Ишчилар сони</th>
+                          </tr>
+                          <tr>
+                            <th scope="col">Юридик шахслар (МЧЖ, ХК, ҚК, ДХ)</th>
+                            <th scope="col">ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари</th>
+                            <th scope="col">Шахсий ёрдамчи хўжаликлари (жисмоний шахслар)</th>
+                            <th scope="col">Асалари боқиш ва асал етиштириш</th>
+                            <th scope="col">Асални қайта ишлаш ва сотиш</th>
+                            <th scope="col">Асаларичилик учун асбоб-ускуна ва инвентарлар ишлаб чиқариш</th>
+                          </tr>
+                        </thead>
+                        <tbody class="realization-tbody">
+                            @foreach($section11 as $row)
+                            <tr>
+                                <td>{{$row->region_name}}</td>
+                                <td>{{$row->city_name}}</td>
+                                <td>{{$row->total}}</td>
+                                <td>{{$row->yuridik}}</td>
+                                <td>{{$row->yakka}}</td>
+                                <td>{{$row->jismoniy}}</td>
+                                <td>{!!null!!}</td>
+                                <td>{!!null!!}</td>
+                                <td>{!!null!!}</td>
+                                <td>{!!$row->bees_count==null?0:$row->bees_count!!}</td>
+                                <td>{!!$row->labors==null?0:$row->labors!!}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                      </table>
+                </div>
+
         </div>
     </div>
 @endsection
@@ -749,6 +794,8 @@
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
     <script>
+
+
         function switchSection(id) {
             document.cookie = "admin=" + id + ";";
             var section = document.getElementsByClassName('section');
@@ -779,7 +826,7 @@
             $(navs[getCookie("admin").replace("section", "") - 1]).filter(function(){
                 return $(this).parent().parent().is('li')
             }).parent().parent().addClass('active');
-            $('#example').DataTable({
+            $('.example').DataTable({
                 "dom":"lBfrtip",
                 "buttons":[
                     {
@@ -810,7 +857,6 @@
                         dataSrc: 1
                     }
                 });
-
         }
     </script>
 @endsection
