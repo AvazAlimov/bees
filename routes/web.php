@@ -22,6 +22,9 @@ Route::prefix('leader')->group(function(){
 Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit.form');
 
 Route::prefix('admin')->group(function (){
+    Route::get('test','Admin\AdminController@ishlab');
+    Route::get('ishlabchiqarish','Admin\AdminController@ishlabchiqarish')->name('ishlabchiqarish.data');
+    Route::get('ishlabchiqarish/excel','Admin\AdminController@ishlabchiqarishExport')->name('ishlabchiqarish.export');
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
     Route::get('index', 'Admin\AdminController@index2')->name('admin.index2');
     Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');

@@ -64,7 +64,7 @@
     <div class="container-fluid" id="container" style="padding: 0 20px 20px 20px;">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div id="section10" class="section">
+                <div id="section10" class="section" >
                     <div class="page-header clearfix">
                         <div class="col-md-6">
                             <h2 class="">Ишлаб чиқариш</h2>
