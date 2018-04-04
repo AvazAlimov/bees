@@ -23,6 +23,9 @@ Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit
 
 Route::prefix('admin')->group(function (){
     Route::get('test','Admin\AdminController@ishlab');
+    Route::get('swot','Admin\AdminController@swot');
+    Route::get('get/swot/{id?}','Admin\AdminController@getSwot')->name('getSwot');
+    Route::get('get/regions','Admin\AdminController@getRegion')->name('getRegion');
     Route::get('ishlabchiqarish','Admin\AdminController@ishlabchiqarish')->name('ishlabchiqarish.data');
     Route::get('ishlabchiqarish/excel','Admin\AdminController@ishlabchiqarishExport')->name('ishlabchiqarish.export');
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
