@@ -88,26 +88,27 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div id="section10" class="section">
-                    <div class="page-header clearfix">
+                    {{--<div class="page-header clearfix">
                         <div class="col-md-4">
-                            <h2 class="pull-left">Ишлаб чиқариш </h2>
-                            <div>
-                                <a href="{{route('ishlabchiqarish.export')}}" class="btn btn-success" tabindex="0"
-                                   aria-controls="example"
-                                   style="margin-top: 20px; margin-left: 20px;">Excel
-                                </a>
-                            </div>
+                            <h2 >Ишлаб чиқариш </h2>
                         </div>
                         <div class="col-md-8">
                             <a href="#" class="btn btn-success btn-add-new pull-right" style="margin-top: 22px;">
                                 <i class="fa fa-plus"></i> <span>Добавить</span>
                             </a>
                         </div>
-                    </div>
+                    </div>--}}
                     <div class="row">
                         <div class="page-header">
-                            <h2>Hisobotlar</h2>
+                            <h2 class="pull-left">Hisobotlar</h2>
+                            <div>
+                                <a href="{{route('region.export')}}" class="btn btn-success" tabindex="0"
+                                   aria-controls="example"
+                                   style="margin-top: 20px; margin-left: 20px;">Excel
+                                </a>
+                            </div>
                         </div>
+
                         <table id="example1" class="table table-bordered realization-theader" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -131,9 +132,26 @@
                                 <th scope="col">Сум</th>
                             </tr>
                             </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Жами:</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top: 30px;">
                         <div class="page-header">
                             <h2>O'zbekiston asalarichilari uyushmasiga a'zo subyektlar to'g'risida ma'lumot</h2>
                         </div>
@@ -157,7 +175,6 @@
                                 <th scope="col">Асаларичилик учун асбоб-ускуна ва инвентарлар ишлаб чиқариш</th>
                             </tr>
                             </thead>
-
                         </table>
                     </div>
                 </div>
@@ -240,16 +257,12 @@
                      }
                      }*/
                 ],
-
-                "dom": "frtip",
-                "columnDefs": [
-                    {"width": "10px", "targets": "_all"}
-                ],
                 "language": {
                     "paginate": {
                         "previous": "Oldingi",
                         "next": "Keyingi"
                     },
+                    "processing": "Qidirilyapti",
                     "lengthMenu": "Хар бир сахифа учун _MENU_ йозувларни кўрсатиш",
                     "zeroRecords": "Хеч нарса топилмади",
                     "search": "Қидириш:",
@@ -270,11 +283,13 @@
                 return $(this).parent().parent().is('li')
             }).parent().parent().addClass('active');
            var table1 = $('#example1').DataTable({
+               pageLength: 25,
+               lengthChange: false,
+               paging:false,
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route('getRegion') !!}',
                 columns: [
-
                     {
                         data: 'region',
                         className: 'details-control'
@@ -323,16 +338,12 @@
                      }
                      }*/
                 ],
-
-                "dom": "frtip",
-                "columnDefs": [
-                    {"width": "10px", "targets": "_all"}
-                ],
                 "language": {
                     "paginate": {
                         "previous": "Oldingi",
                         "next": "Keyingi"
                     },
+                    "processing": "Qidirilyapti",
                     "lengthMenu": "Хар бир сахифа учун _MENU_ йозувларни кўрсатиш",
                     "zeroRecords": "Хеч нарса топилмади",
                     "search": "Қидириш:",
@@ -340,7 +351,7 @@
                     "infoEmpty": "Йозувлар мавжуд эмас",
                     "infoFiltered": "(жами _MAX_ йозувлар филти килинган)"
                 },
-                "scrollX": true,
+                "scrollX": true
            });
             fetch_data(params);
             $('#example1 tbody').on('click', 'td.details-control', function () {
