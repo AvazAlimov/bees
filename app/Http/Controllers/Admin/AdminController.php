@@ -40,7 +40,7 @@ class AdminController extends Controller
                             ->groupBy('cities.name')
                             ->withCount(['user as total', 'user as yuridik' => function ($query) {$query->where('users.type', '<', 3);}, 'user as yakka' => function ($query) {$query->where('users.type', 3);}, 'user as jismoniy' => function ($query) {$query->where('users.type', 4);}])
                             ->get();
-                             
+
         return view('admin.index')
             ->withRegions(Region::all())
             ->withLeaders(Leader::all())
@@ -109,6 +109,7 @@ class AdminController extends Controller
                     $array[$key]['equipments'][$i]['name']= "";
                     $array[$key]['equipments'][$i]['volume']= "";
                 }
+                
         return DataTables::of($array)
             ->make(true);
     }
