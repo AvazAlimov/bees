@@ -23,7 +23,7 @@ Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit
 
 Route::prefix('admin')->group(function (){
     Route::get('test','Admin\AdminController@ishlab');
-    Route::get('swot','Admin\AdminController@swot');
+    Route::get('swot','Admin\AdminController@swot')->name('swot');
     Route::get('get/swot/{id?}','Admin\AdminController@getSwot')->name('getSwot');
     Route::get('get/regions','Admin\AdminController@getRegion')->name('getRegion');
     Route::get('region/excel','Admin\AdminController@regionExport')->name('region.export');

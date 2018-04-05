@@ -69,15 +69,12 @@
                 </ul>
             </li>
             <li class="dropdown navs">
-                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
+                <a class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-users"></i>
                     Hisobot</a>
                 <ul class="dropdown-menu">
                     <li data-toggle="tab" class="navs2"><a onclick="switchSection('section10')"><i
                                     class="fa fa-building"></i>
                             Ишлаб чиқариш</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section11')"><i
-                                    class="fa fa-building"></i>
-                            Йетказиб бериш</a></li>
                 </ul>
             </li>
         </ul>
@@ -87,6 +84,9 @@
     <div class="container-fluid" id="container" style="padding: 0 20px 20px 20px;">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+                @for($i=1; $i<10; $i++)
+                    <div id="section{{$i}}" class="section"></div>
+                @endfor
                 <div id="section10" class="section">
                     {{--<div class="page-header clearfix">
                         <div class="col-md-4">
