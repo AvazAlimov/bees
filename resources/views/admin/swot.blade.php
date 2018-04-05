@@ -153,7 +153,13 @@
                     </div>
                     <div class="row" style="margin-top: 30px;">
                         <div class="page-header">
-                            <h2>O'zbekiston asalarichilari uyushmasiga a'zo subyektlar to'g'risida ma'lumot</h2>
+                            <h2 class="pull-left">O'zbekiston asalarichilari uyushmasiga a'zo subyektlar to'g'risida ma'lumot</h2>
+                            <div>
+                                <a id="swot-export" href="{{route('swot.export')}}" class="btn btn-success" tabindex="0"
+                                   aria-controls="example"
+                                   style="margin-top: 20px; margin-left: 20px;">Excel
+                                </a>
+                            </div>
                         </div>
                         <table id="example2" class="table table-bordered realization-theader " cellspacing="0" width="100%">
                             <thead>
@@ -362,6 +368,7 @@
                 $('#example2').DataTable().destroy();
 
                 fetch_data(id);
+                $("#swot-export").attr("href",  '{!! route('swot.export') !!}'+'/'+id);
                 $('html,body').animate({
                         scrollTop: $("#example2").offset().top-200},
                     'slow');

@@ -26,7 +26,8 @@ Route::prefix('admin')->group(function (){
     Route::get('swot','Admin\AdminController@swot');
     Route::get('get/swot/{id?}','Admin\AdminController@getSwot')->name('getSwot');
     Route::get('get/regions','Admin\AdminController@getRegion')->name('getRegion');
-    Route::get('get/regions/excel','Admin\AdminController@regionExport')->name('region.export');
+    Route::get('region/excel','Admin\AdminController@regionExport')->name('region.export');
+    Route::get('excel/{id?}','Admin\AdminController@swotExport')->name('swot.export');
     Route::get('ishlabchiqarish','Admin\AdminController@ishlabchiqarish')->name('ishlabchiqarish.data');
     Route::get('ishlabchiqarish/excel','Admin\AdminController@ishlabchiqarishExport')->name('ishlabchiqarish.export');
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
