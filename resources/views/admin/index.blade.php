@@ -1,9 +1,9 @@
 @extends('layouts.app-admin')
 @section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-    <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+{{--    <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     <link href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css" rel="stylesheet">
-    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">--}}
 @stop
 @section('nav')
     <nav class="navbar navbar-default" id="navigation">
@@ -51,11 +51,8 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
                     Hisobot</a>
                 <ul class="dropdown-menu">
-                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section10')"><i class="fa fa-building"></i>
+                    <li class="navs2"><a onclick="switchSection('section10')" href="{{route('swot')}}"><i class="fa fa-building"></i>
                             Hisobot</a></li>
-                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section11')"><i class="fa fa-building"></i>
-                            Subyektlar Haqida</a></li>
-
                 </ul>
             </li>
         </ul>
@@ -687,8 +684,10 @@
                         {{ $notAccepted->links() }}
                     </div>
                 </div>
+                <div id="section10" class="section"></div>
             </div>
-                <div id="section10" class="section">
+
+               {{-- <div id="section10" class="section">
                     <div class="page-header">
                         <h2>Hisobotlar</h2>
                     </div>
@@ -778,21 +777,21 @@
                             @endforeach
                         </tbody>
                       </table>
-                </div>
+                </div>--}}
 
         </div>
     </div>
 @endsection
 @section('scripts')
-    <script src="{{asset('js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
+   {{-- <script src="{{asset('js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
-    {{-- <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script> --}}
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>--}}
+    {{-- <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script> --}}
 
     <script>
 
@@ -827,7 +826,7 @@
             $(navs[getCookie("admin").replace("section", "") - 1]).filter(function(){
                 return $(this).parent().parent().is('li')
             }).parent().parent().addClass('active');
-            $('.example').DataTable({
+           /* $('.example').DataTable({
                 "dom":"lBfrtip",
                 "buttons":[
                     {
@@ -857,7 +856,7 @@
                     rowGroup: {
                         dataSrc: 1
                     }
-                });
+                });*/
         }
 
         /* Formatting function for row details - modify as you need */

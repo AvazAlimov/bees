@@ -42,7 +42,7 @@
 @section('content')
     <div class="jumbotron bg-warning text-center">
         <img src="{{ asset('Resources/logo.png') }}" alt="logo" style="width: 128px;">
-        <h1 class="display-5"><br>ЎЗБЕКИСТОН РЕСПУБЛИКАСИ АСАЛАРИЧИЛАРИ<br>УЮШМАСИ</h1>
+        <h1 class="display-5"><br>ЎЗБЕКИСТОН АСАЛАРИЧИЛАРИ<br>УЮШМАСИ</h1>
     </div>
 
     <div id="register">
@@ -57,7 +57,7 @@
                                 <option value="0" selected>Юридик корхоналар (МЧЖ, ХК, ҚК)</option>
                                 <option value="1">Кўп тармоқли фермер хўжаликлари</option>
                                 <option value="2">Якка тартибдаги тадбиркор</option>
-                                <option value="3">Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)</option>
+                                <option value="3">Шахсий ёрдамчи хўжалик (Жисмоний шахслар)</option>
                             </select>
                         </div>
                     </div>
@@ -604,27 +604,23 @@
                 <div>
                     <br>
                     <p class="text-justify">
-                        <strong>Bankning yuksak vazifasi</strong> - o'z mijozlariga ularning bizneslari talablariga
-                        javob beruvchi keng
-                        qamrovli bank xizmatlarini professional darajada taqdim etib, respublikada tadbirkorlikning
-                        mustahkamlanishiga ko'maklashish.
+                        "Ўзбекистон асаларичилари" уюшмаси Ўзбекистон Республикаси Президентининг 2017 йил 16 октябрдаги ПҚ-3327 сонли қарорига асосан асаларичилик тармоғини бошқариш, тизимини тубдан такомиллаштириш, тармоқда наслчилик ишларини илмий асосда ташкил этиш, асаларичилик хўжаликлари фаолияти самарадорлигини ошириш, асал маҳсулотлари ишлаб чиқариш ҳажми ва турларини янада кўпайтириш, асални қайта ишлаш бўйича замонавий технологияларни жорий этиш, соҳанинг экспорт салоҳиятини ошириш, шунингдек, асаларичилик соҳасидаги илғор тажрибаларни республикамизнинг барча ҳудудларида татбиқ этиш мақсадида ташкил этилган.
                         <br>
-                        Ushbu vazifani amalga oshirishda AT «Aloqabank» doimiy ravishda o'zining korporativ
-                        qadriyatlariga asoslanib faoliyat yuritadi.
+                        <strong>Уюшманинг асосий вазифалари:</strong>
                         <br>
-                        AT "Aloqabank" yirik tarkibiy bo'linmalariga Toshkent shaxridagi Amaliyot Boshqarmasi hamda
-                        Respublika hududlaridagi filiallar tarmog'i kiradi.
+                        •	асаларичилик тармоғини ривожлантиришга қаратилган норматив-хуқуқий базани ишлаб чиқишда иштирок этиш;
                         <br>
-                        Xususiy va kichik biznes vakillari, dehqon va fermer xo’jaliklari, shuningdek aholining keng
-                        qatlamiga bank xizmatlari ko’rsatishni geografik kengaytirish maqsadida bank filiallari qoshida
-                        mini-banklar ochilgan.
+                        •	асаларичилик тармоғини ривожлантириш дастурларини амалга оширишни мувофиқлаштириш, ягона илмий-техника, технологик, инвестиция ва экспорт сиёсатини амалга оширишни мувофиқлаштириш;
                         <br>
-                        Toshkent shahri hamda hududiy filiallar qoshida aloqa xizmatlari, kommunal va boshqa to’lovlar
-                        qabul qilish uchun bankning jamg’arma kassalari faoliyat yuritib bormoqda.
+                        •	олий ва ўрта махсус, касб-ҳунар таълими, шу жумладан, хорижий муассасаларда асаларичилик тармоғига кадрлар тайёрлаш, қайта тайёрлаш ва уларнинг малакасини ошириш ишларини самарали ташкил этиш ва мувофиқлаштиришда иштирок этиш.
                         <br>
-                        AT “Aloqabank” tomonidan valyuta ayirboshlash shoxobchalari ochilgan. Bankning butun dunyo
-                        bo’yicha Western Union, Zolotaya korona va Leader kabi tizimlari orqali pul o’tkazmalarini
-                        amalga oshirish uchun xalqaro pul o’tkazish shoxobchalari xizmat ko’rsatib kelmoqda.
+                        <strong>Уюшманинг асосий фаолият йўналишлари:</strong>
+                        <br>
+                        •	маҳаллий ижро этувчи ҳокимият органлари ва манфаатдор ташкилотлар билан ҳамкорликда асаларичилик хўжаликларини ўрмон фонди ерларига, тоғ ва тоғолди ҳудудларига, табиий пичанзор ва яйловларга ҳамда қишлоқ хўжалиги ерларига жойлаштиришни амалга ошириш;
+                        <br>
+                        •	асаларилар учун сунъий озуқалар ишлаб чиқаришни марказлашган ҳолда ташкил этишга кўмаклашиш ва ушбу тажрибани кенг қўллаш ҳисобига асаларичилик хўжаликларининг озуқа базасини мустаҳкамлаш;
+                        <br>
+                        •	асалари касалликларининг олдини олиш, даволаш ва ташхис қўйиш бўйича замонавий ва илғор усулларни жорий этиш ишларига кўмаклашиш;
                     </p>
                 </div>
             </div>
@@ -636,6 +632,9 @@
             <div class="container text-center">
                 <h2 class="display-5">Боғланиш</h2>
                 <hr>
+                <br>
+                <h3>Тошкент Шаҳар, Алишер Навоий шоҳ кўчаси, 40 А уй</h3>
+                <h3>(0371) 200 70 00</h3>
                 <br>
             </div>
             <div id="map" style="width:100%;height:500px"></div>
@@ -752,5 +751,5 @@
             marker.setMap(map);
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo3ndgX7wPYPEsnAsGiqW0Qxem1Ni4TW4&callback=myMap"></script>
 @endsection
