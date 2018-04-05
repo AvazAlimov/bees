@@ -2,7 +2,10 @@
 @section('styles')
     <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     <style>
-        table.dataTable tr.group td{font-weight:bold;background-color:#e0e0e0}
+        table.dataTable tr.group td {
+            font-weight: bold;
+            background-color: #e0e0e0
+        }
     </style>
 @endsection
 @section('nav')
@@ -12,13 +15,16 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
                     Asosiy sozlamalar </a>
                 <ul class="dropdown-menu">
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section1')"><i class="fa fa-users"></i>
+                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section1')"><i
+                                    class="fa fa-users"></i>
                             Viloyatlar</a>
                     </li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section2')"><i class="fa fa-users"></i>
+                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section2')"><i
+                                    class="fa fa-users"></i>
                             Rahbarlar</a>
                     </li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section3')"><i class="fa fa-money"></i>
+                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section3')"><i
+                                    class="fa fa-money"></i>
                             Shaharlar</a>
                     </li>
                 </ul>
@@ -27,11 +33,14 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
                     Turlar</a>
                 <ul class="dropdown-menu">
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section4')"><i class="fa fa-building"></i>
+                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section4')"><i
+                                    class="fa fa-building"></i>
                             Faoliyatlar</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section5')"><i class="fa fa-building"></i>
+                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section5')"><i
+                                    class="fa fa-building"></i>
                             Asalari Zotlari</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section6')"><i class="fa fa-building"></i>
+                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section6')"><i
+                                    class="fa fa-building"></i>
                             Jihoz Turlari</a></li>
                 </ul>
             </li>
@@ -39,11 +48,14 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
                     Заказы</a>
                 <ul class="dropdown-menu">
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section7')"><i class="fa fa-building"></i>
+                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section7')"><i
+                                    class="fa fa-building"></i>
                             Заказы</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section8')"><i class="fa fa-building"></i>
+                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section8')"><i
+                                    class="fa fa-building"></i>
                             Принятые заказы</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section9')"><i class="fa fa-building"></i>
+                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section9')"><i
+                                    class="fa fa-building"></i>
                             Непринятые заказы</a></li>
                 </ul>
             </li>
@@ -51,9 +63,11 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
                     Hisobot</a>
                 <ul class="dropdown-menu">
-                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section10')"><i class="fa fa-building"></i>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section10')"><i
+                                    class="fa fa-building"></i>
                             Ишлаб чиқариш</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section11')"><i class="fa fa-building"></i>
+                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section11')"><i
+                                    class="fa fa-building"></i>
                             Йетказиб бериш</a></li>
                 </ul>
             </li>
@@ -64,7 +78,7 @@
     <div class="container-fluid" id="container" style="padding: 0 20px 20px 20px;">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div id="section10" class="section" >
+                <div id="section10" class="section">
                     <div class="page-header clearfix">
                         <div class="col-md-6">
                             <h2 class="">Ишлаб чиқариш</h2>
@@ -74,15 +88,15 @@
                                 <i class="fa fa-plus"></i> <span>Добавить</span>
                             </a>
                         </div>
-                    </div>
+                    </div>{{--
                     <div class="row">
                         <table id="example" class="table table-striped table-bordered cell-border" cellspacing="0">
                             <thead>
                             <tr>
-                                <th rowspan="2">#</th>
-                                <th rowspan="2">Ишлаб чиқарувчи номи</th>
-                                <th rowspan="2">Ҳудуд номи</th>
-                                <th rowspan="2">Вилоят номи</th>
+                                <th >#</th>
+                                <th >Ишлаб чиқарувчи номи</th>
+                                <th >Ҳудуд номи</th>
+                                <th >Вилоят номи</th>
                                 @for($i=0; $i<$maxNumber; $i++)
                                     <th colspan="2">Ишлаб чиқариладиган жиҳоз</th>
                                 @endfor
@@ -123,11 +137,9 @@
                                     </td>
                                 </tr>
                             @endforeach
-
-
                             </tbody>
                         </table>
-                    </div>
+                    </div>--}}
                 </div>
                 <div id="section11" class="section">
                     <div class="page-header clearfix">
@@ -153,7 +165,56 @@
                             </thead>
 
                             <tbody>
+                            <tr role="row">
+                                <td>1</td>
+                                <td>sdasdasad</td>
+                                <td>production->user->subject</td>
+                                <td>production->user->city->name</td>
+                                <td>production->user->region->name</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <div>
+                                        <table>
+                                            <thead>
+                                            <tr role="row">
+                                                <th>Subgrid 1
+                                                </th>
+                                                <th >Subgrid 2
+                                                </th>
+                                                <th>Subgrid 3
+                                                </th>
+                                                <th >Subgrid 4
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr role="row" >
+                                                <td>Some data</td>
+                                                <td>Some more data here</td>
+                                                <td>Some really loooonnggg data in this column</td>
+                                                <td>Yet more data</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
 
+                            <tr role="row">
+                                <td>1</td>
+                                <td>sdasdasad</td>
+                                <td>production->user->subject</td>
+                                <td>production->user->city->name</td>
+                                <td>production->user->region->name</td>
+                            </tr>
+                            <tr role="row">
+                                <td>1</td>
+                                <td>sdasdasad</td>
+                                <td>production->user->subject</td>
+                                <td>production->user->city->name</td>
+                                <td>production->user->region->name</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -201,28 +262,28 @@
             switchSection(getCookie("admin"));
             var navs = document.getElementsByClassName("navs2");
             navs[getCookie("admin").replace("section", "") - 1].className = "navs2 active";
-            $(navs[getCookie("admin").replace("section", "") - 1]).filter(function(){
+            $(navs[getCookie("admin").replace("section", "") - 1]).filter(function () {
                 return $(this).parent().parent().is('li')
             }).parent().parent().addClass('active');
 
             $('#example').DataTable({
-                "dom":"lBfrtip",
-                "buttons":[
+                "dom": "lBfrtip",
+                "buttons": [
                     {
                         extend: 'excelHtml5',
-                        title:"Ишлаб чиқариш",
-                        filename:"Ишлаб чиқариш",
-                        className:"btn btn-success pull-left",
+                        title: "Ишлаб чиқариш",
+                        filename: "Ишлаб чиқариш",
+                        className: "btn btn-success pull-left",
                         exportOptions: {
                             columns: ':not(:last-child)'
                         },
                         //--------------------------
-                        customize : function (xlsx) {
+                        customize: function (xlsx) {
                             var sheet = xlsx.xl.worksheets['sheet1.xml'];
                             var col = $('col', sheet);
                             col.each(function (index) {
-                                if(index > 3 && index%2 !== 0)
-                                    $(this).attr('width',8);
+                                if (index > 3 && index % 2 !== 0)
+                                    $(this).attr('width', 8);
                             });
                         },
                         text: 'Excel',
@@ -232,7 +293,7 @@
                     }
                 ],
                 "columnDefs": [
-                    { "width": "10px", "targets": "_all" }
+                    {"width": "10px", "targets": "_all"}
                 ],
                 "language": {
                     "paginate": {
@@ -241,7 +302,7 @@
                     },
                     "lengthMenu": "Хар бир сахифа учун _MENU_ йозувларни кўрсатиш",
                     "zeroRecords": "Хеч нарса топилмади",
-                    "search":   "Қидириш:",
+                    "search": "Қидириш:",
                     "info": "_PAGES_ дан _PAGE_ таси сахифа кўрсатилган",
                     "infoEmpty": "Йозувлар мавжуд эмас",
                     "infoFiltered": "(жами _MAX_ йозувлар филти килинган)"
@@ -251,49 +312,7 @@
                     dataSrc: 3
                 }
             });
-            $('#delivery').DataTable({
-                "dom":"lBfrtip",
-                "buttons":[
-                    {
-                        extend: 'excelHtml5',
-                        title:"Йетказиб бериш",
-                        filename:"Йетказиб бериш",
-                        className:"btn btn-success pull-left",
-                        exportOptions: {
-                            columns: ':not(:last-child)'
-                        },
-                        //--------------------------
-                        /*customize : function (xlsx) {
-                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                            var col = $('col', sheet);
-                            col.each(function (index) {
-                                if(index > 3 && index%2 !== 0)
-                                    $(this).attr('width',8);
-                            });
-                        },*/
-                        text: 'Excel',
-                        buttons: [
-                            'excel'
-                        ]
-                    }
-                ],
-                "columnDefs": [
-                    { "width": "10px", "targets": "_all" }
-                ],
-                "language": {
-                    "paginate": {
-                        "previous": "Oldingi",
-                        "next": "Keyingi"
-                    },
-                    "lengthMenu": "Хар бир сахифа учун _MENU_ йозувларни кўрсатиш",
-                    "zeroRecords": "Хеч нарса топилмади",
-                    "search":   "Қидириш:",
-                    "info": "_PAGES_ дан _PAGE_ таси сахифа кўрсатилган",
-                    "infoEmpty": "Йозувлар мавжуд эмас",
-                    "infoFiltered": "(жами _MAX_ йозувлар филти килинган)"
-                },
-                "scrollX": true
-            });
+            $('#delivery').DataTable({});
         }
     </script>
 @endsection
