@@ -27,23 +27,20 @@ class HugeAmounSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        Production::truncate();
-        foreach (range(1, 4060) as $item)
-        {
-            Production::create([
-                'user_id' => $item,
-                'month'=>$faker->month,
-                'year'=>$faker->year
+       Delivery::truncate();
+        for($key = 2; $key<=85; $key+=7) {
+            Delivery::create([
+                'subject' => $faker->sentence(4),
+                'type' => $faker->sentence(2),
+                'city_id' => $key,
+                'region_id' => City::findOrFail($key)->region->id,
+                'activity' => $faker->sentence(3),
+                'family_count' => $faker->numberBetween(1, 100),
+                'inn' => '123456789',
+                'name'=>$faker->name,
+                'phone'=>$faker->phoneNumber,
+                'labors'=>$faker->numberBetween(1, 100)
             ]);
         }
-        foreach (range(1, 4060) as $item)
-        {
-            Production::create([
-                'user_id' => $item,
-                'month'=>$faker->month,
-                'year'=>$faker->year
-            ]);
-        }
-
     }
 }

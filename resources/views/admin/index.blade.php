@@ -51,8 +51,12 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
                     Hisobot</a>
                 <ul class="dropdown-menu">
-                    <li class="navs2"><a onclick="switchSection('section10')" href="{{route('swot')}}"><i class="fa fa-building"></i>
-                            Hisobot</a></li>
+                    <li class="navs2"><a href="{{route('swot')}}"><i class="fa fa-building"></i>
+                            Свод</a></li>
+                    <li class="navs2"><a href="{{route('nomma')}}"><i class="fa fa-building"></i>
+                            Номма-ном</a></li>
+                    <li class="navs2"><a href="{{route('ishlabchiqarish')}}"><i class="fa fa-building"></i>
+                            Ишлаб чиқариш</a></li>
                 </ul>
             </li>
         </ul>

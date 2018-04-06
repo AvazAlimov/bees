@@ -22,8 +22,10 @@ Route::prefix('leader')->group(function(){
 Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit.form');
 
 Route::prefix('admin')->group(function (){
-    Route::get('test','Admin\AdminController@ishlab');
-    Route::get('swot','Admin\AdminController@swot')->name('swot');
+    Route::get('nomma-nom','Admin\AdminController@nomma')->name('nomma');
+    Route::get('get/nomma-nom','Admin\AdminController@getNomma')->name('getNomma');
+    Route::get('ishlab-chiqarish','Admin\AdminController@ishlab')->name('ishlabchiqarish');
+    Route::get('svod','Admin\AdminController@swot')->name('swot');
     Route::get('get/swot/{id?}','Admin\AdminController@getSwot')->name('getSwot');
     Route::get('get/regions','Admin\AdminController@getRegion')->name('getRegion');
     Route::get('region/excel','Admin\AdminController@regionExport')->name('region.export');
