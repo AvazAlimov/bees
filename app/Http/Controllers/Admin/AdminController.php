@@ -28,12 +28,71 @@ class AdminController extends Controller
     public function nomma(){
         $sums = Delivery::select(DB::raw('SUM(family_count) as sum_bees_count'), DB::raw('SUM(labors) as sum_labors'))->first();
 
-        return view('admin.nomma-nom')->withSums($sums);
+        return view('admin.nomma-nom')->withSums($sums)->withRegions(Region::all())->withCities(City::all());
+    }
+    public function submitNomma(Request $request){
+        $request->validate([
+            'subject'=>'required',
+            'type'=>'required',
+            'region'=>'required|numeric',
+            'city'=>'required|numeric',
+            'activity'=>'required',
+            'family_count'=>'required|numeric',
+            'inn'=>'required',
+            'name'=>'required',
+            'phone'=>'required',
+            'labors'=>'required|numeric'
+         ]);
+        $delivery = new Delivery;
+        $delivery->subject = $request->subject;
+        $delivery->type = $request->type;
+        $delivery->region_id = $request->region;
+        $delivery->city_id = $request->city;
+        $delivery->activity = $request->activity;
+        $delivery->family_count =$request->family_count;
+        $delivery->inn = $request->inn;
+        $delivery->name = $request->name;
+        $delivery->phone =  $request->phone;
+        $delivery->labors = $request->labors;
+        $delivery->save();
+        return redirect()->back()->with('message',"Jadval muvofaqiyatli ro'yhatdan o'tdi");
+    }
+    public function deleteNomma($id){
+       $delivery = Delivery::findOrFail($id);
+       $delivery->delete();
+       return redirect()->back()->with('message',"Jadval muvofaqiyatli ro'yhatdan o'chirildi");
+    }
+    public function updateNomma(Request $request, $id)
+    {
+        $request->validate([
+            'subject'=>'required',
+            'type'=>'required',
+            'region'=>'required|numeric',
+            'city'=>'required|numeric',
+            'activity'=>'required',
+            'family_count'=>'required|numeric',
+            'inn'=>'required',
+            'name'=>'required',
+            'phone'=>'required',
+            'labors'=>'required|numeric'
+        ]);
+        $delivery = Delivery::findOrFail($id);
+        $delivery->subject = $request->subject;
+        $delivery->type = $request->type;
+        $delivery->region_id = $request->region;
+        $delivery->city_id = $request->city;
+        $delivery->activity = $request->activity;
+        $delivery->family_count =$request->family_count;
+        $delivery->inn = $request->inn;
+        $delivery->name = $request->name;
+        $delivery->phone =  $request->phone;
+        $delivery->labors = $request->labors;
+        $delivery->save();
     }
     public function getNomma(){
      $deliveries= Delivery::join('regions','regions.id','deliveries.region_id')
           ->join('cities','cities.id','deliveries.city_id')
-          ->select('deliveries.id','deliveries.subject','deliveries.type','regions.name as region','cities.name as city','deliveries.activity','deliveries.family_count','deliveries.inn','deliveries.name','deliveries.phone','deliveries.labors')
+          ->select('deliveries.id','deliveries.subject','deliveries.type','regions.name as region','cities.name as city','deliveries.activity','deliveries.family_count','deliveries.inn','deliveries.name','deliveries.phone','deliveries.labors','regions.id as region_id', 'cities.id as city_id')
         ->get();
 
      return DataTables::of($deliveries)->make(true);

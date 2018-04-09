@@ -101,9 +101,9 @@
                     <div class="row">
                         <div class="page-header clearfix">
                             <div>
-                                <a data-toggle="modal" data-target="#myModal" class="btn btn-primary pull-right"
+                                <a  onclick="showModal()" class="btn btn-primary pull-right"
                                    tabindex="0"
-                                   aria-controls="example">Қошиш
+                                   aria-controls="example">Қўшиш
                                 </a>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                                 </th>
                                 <th>Тел рақами</th>
                                 <th>Ишчилар сони</th>
-                                {{--<td>Худуд</td>--}}
+                                <td>Созлаш</td>
                             </tr>
                             </thead>
                             <tfoot>
@@ -141,6 +141,7 @@
                                 <td></td>
                                 <td></td>
                                 <th>{{$sums->sum_labors}}</th>
+                                <th></th>
                             </tr>
 
                             </tfoot>
@@ -160,23 +161,92 @@
                     <h4 class="modal-title">Номма-ном маьлумот қўшиш</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{route('submit.nomma')}}" method="post">
+                        {{csrf_field()}}
                         <div class="form-group row">
                             <label for="subject" class="col-md-2 col-form-label">Субъект номи</label>
                             <div class="col-md-8">
-                                <input class="form-control" type="text" value="" id="subject">
+                                <input class="form-control subject" type="text" name="subject" value="" id="subject" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="type" class="col-md-2 col-form-label">Ташкилий ҳуқуқий шакли</label>
                             <div class="col-md-8">
-                                <input class="form-control" type="text" value="" id="type">
+                                <input class="form-control type" type="text" name="type" value="" id="type" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="region" class="col-md-2 col-form-label">Ҳудуд номи</label>
+                            <label for="region" class="col-md-2 col-form-label">Вилоят номи</label>
                             <div class="col-md-8">
-                                {{--<select class="form-control" type="text" value="" id="region">--}}
+                                <select class="form-control" id="region" name="region"
+                                        onchange="regionChanged(this.id)" required>
+                                    @foreach($regions as $region)
+                                        <option value="{{$region->id}}">{{ $region->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="city" class="col-md-2 col-form-label">Туман/шаҳар номи</label>
+                            <div class="col-md-8">
+                                <select class="form-control city" id="city" name="city" required>
+                                    @foreach($cities as $city)
+                                        <option value="{{$city->id}}">{{$city->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="activity" class="col-md-2 col-form-label">Фаолият тури</label>
+                            <div class="col-md-8">
+                                <input class="form-control activity" type="text" value="" name="activity" id="activity" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="family_count" class="col-md-2 col-form-label">Aсалари оилалари сони</label>
+                            <div class="col-md-8">
+                                <input class="form-control family_count" type="number" value="" name="family_count" id="family_count" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inn" class="col-md-2 col-form-label">ИНН</label>
+                            <div class="col-md-8">
+                                <input class="form-control inn" type="number" value="" name="inn" id="inn" minlength="9" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-2 col-form-label">Корхона директори
+                                Исм-Шарифи</label>
+                            <div class="col-md-8">
+                                <input class="form-control name" type="text" value="" name="name" id="name" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="phone" class="col-md-2 col-form-label">Телефон рақами</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control phone" id="phone" name="phone"
+                                       value="{{old('phone') or '+'}}"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="labors" class="col-md-2 col-form-label">Ишчилар сони</label>
+                            <div class="col-md-8">
+                                <input class="form-control labors" type="number" value="" name="labors" id="labors" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-primary" id="btn_edit">Қўшиш</button>
                             </div>
                         </div>
                     </form>
@@ -184,6 +254,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 @section('scripts')
     <script src="{{asset('js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
@@ -195,10 +266,82 @@
     <script src="{{asset('js/jszip.min.js')}}"></script>
     <script src="{{asset('js/buttons.html5.min.js')}}"></script>
     <script src="{{asset('js/buttons.print.min.js')}}"></script>
+    <script src="{{ asset('dist/js/jquery.mask.min.js') }}"></script>
     <script>
-        $(document).ready(function () {
+        var arrays = [{!! $regions !!}];
+        arrays.push({!! $cities !!});
+        var table1;
+        function regionChanged(id) {
+            var selected = document.getElementById(id).value;
+            var select = "city";
+            document.getElementById(select).innerHTML = "";
 
-            var table1 = $('#example1').DataTable({
+            for (var i = 0; i < arrays[1].length; i++) {
+                if (selected == arrays[1][i]["region_id"]) {
+                    var opt = document.createElement('option');
+                    opt.value = arrays[1][i]['id'];
+                    opt.innerHTML = arrays[1][i]['name'];
+                    document.getElementById(select).appendChild(opt);
+                }
+            }
+        }
+        function showModal() {
+            var myModal = "#myModal";
+            var href='{{route('submit.nomma')}}';
+            $(myModal).modal();
+            $(myModal).attr('href',href);
+            $(myModal).find('.subject').val("");
+            $(myModal).find('.type').val("");
+            $(myModal).find('#region').val("");
+            $(myModal).find('#region').change();
+            $(myModal).find('#city').val("");
+            $(myModal).find('#city').change();
+
+//            $(myModal).find('.city').val(data.city_id).change();
+            $(myModal).find('.activity').val("");
+            $(myModal).find('.family_count').val("");
+            $(myModal).find('.inn').val("");
+            $(myModal).find('.name').val("");
+            $(myModal).find('.phone').val("");
+            $(myModal).find('.labors').val("");
+            $("#btn_edit").html('Қўшиш');
+        }
+        function editNomma(id) {
+            var data = table1.rows().data()[id];
+            var href='{{route('update.nomma', null)}}';
+            var myModal = "#myModal";
+            $(myModal).modal();
+            $(myModal).attr('href',href+'/'+data.id);
+            $(myModal).find('.subject').val(data.subject);
+            $(myModal).find('.type').val(data.type);
+            $(myModal).find('#region').val(data.region_id);
+            $(myModal).find('#region').change();
+            $(myModal).find('#city').val(data.city_id);
+            $(myModal).find('#city').change();
+
+//            $(myModal).find('.city').val(data.city_id).change();
+            $(myModal).find('.activity').val(data.activity);
+            $(myModal).find('.family_count').val(data.family_count);
+            $(myModal).find('.inn').val(data.inn);
+            $(myModal).find('.name').val(data.name);
+            $(myModal).find('.phone').val(data.phone);
+            $(myModal).find('.labors').val(data.labors);
+            $("#btn_edit").html('Ўзгартириш');
+        }
+        $(document).ready(function () {
+            regionChanged('region');
+            $('.phone').mask('+AAB (00) 000-00-00', {
+                'translation': {
+                    A: {pattern: /[9]/},
+                    B: {pattern: /[8]/}
+                }
+            });
+            $('.inn').mask('000000000', {
+                'translation': {
+                    0: {pattern: /[0-9*]/}
+                }
+            });
+             table1 = $('#example1').DataTable({
                 rowGroup: {
                     dataSrc: 'region'
                 },
@@ -216,7 +359,14 @@
                     {data: 'inn'},
                     {data: 'name'},
                     {data: 'phone'},
-                    {data: 'labors'}
+                    {data: 'labors'},
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            var href='{{route('delete.nomma', null)}}';
+                            return '<a href="'+href+'/'+data.id+'" onclick="return confirm(\'Ростанхам ўчиришни истайсизми\')" title="Удалить" class="btn btn-sm btn-danger pull-right delete"> <span class="">Ўчириш</span> </a>' +
+                                '<a onclick="editNomma('+meta.row+')" title="Редактирование" class="btn btn-sm btn-primary pull-right edit"> <span class="">Ўзгартириш</span></a>';
+                        }
+                    }
                 ],
                 "language": {
                     "paginate": {
@@ -233,6 +383,7 @@
                 },
                 "scrollX": true
             });
+
         });
     </script>
     {{-- <script>
