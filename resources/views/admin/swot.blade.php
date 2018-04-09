@@ -117,7 +117,7 @@
                             <tr>
                                 <th rowspan="2">Худуд</th>
                                 <th rowspan="2">Уюшмага аъзо субъектлар сони</th>
-                                <th colspan="4" scope="colgroup">Субъектлар</th>
+                                <th colspan="3" scope="colgroup">Субъектлар</th>
                                 <th rowspan="2">Мавсум бошидаги асал захираси</th>
                                 <th rowspan="2">Ишлаб чикариш хажми (Прогноз)</th>
                                 <th rowspan="2">Ишлаб чикариш хажми (Факт)</th>
@@ -125,10 +125,9 @@
                                 <th colspan="2" scope="colgroup">Асал захираси</th>
                             </tr>
                             <tr>
-                                <th scope="col">Дехкон (щахсий йордамчи) хужаликлари</th>
-                                <th scope="col">Куп тамокли фермер хужаликлари</th>
-                                <th scope="col">Юридик шахслар</th>
-                                <th scope="col">Якка тартибдаги тадбиркор</th>
+                                <th scope="col">Юридик шахслар (МЧЖ, ХК, ҚК, ДХ)</th>
+                                <th scope="col">ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари</th>
+                                <th scope="col">Шахсий ёрдамчи хўжаликлари (жисмоний шахслар)</th>
                                 <th scope="col">Кг</th>
                                 <th scope="col">Сум</th>
                                 <th scope="col">Кг</th>
@@ -138,18 +137,17 @@
                             <tfoot>
                             <tr>
                                 <th>Жами:</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th>{{$total[0]->total != null ? $total[0]->total : 0 }}</th>
+                                <th>{{$total[0]->yuridik != null ? $total[0]->yuridik : 0}}</th>
+                                <th>{{$total[0]->yakka != null ? $total[0]->yakka : 0}}</th>
+                                <th>{{$total[0]->jismoniy != null ? $total[0]->jismoniy: 0}}</th>
+                                <th>{{$total[0]->reserves != null ? $total[0]->reserves : 0}}</th>
+                                <th>{{$total[0]->annual_prog != null ? $total[0]->annual_prog : 0}}</th>
+                                <th>{{$total[0]->produced_honey != null ? $total[0]->produced_honey  : 0}}</th>
+                                <th>{{$total[0]->realized_quantity != null ? $total[0]->realized_quantity: 0}}</th>
+                                <th>{{$total[0]->realized_price != null ? $total[0]->realized_price : 0}}</th>
+                                <th>{{$total[0]->stock_quantity != null ? $total[0]->stock_quantity : 0}}</th>
+                                <th>{{$total[0]->stock_price != null ? $total[0]->stock_price: 0}}</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -171,7 +169,7 @@
                                 <th rowspan="2">Туман номи</th>
                                 <th rowspan="2">Уюшмага аъзо субъектлар сони</th>
                                 <th colspan="3" scope="colgroup">Субъектлар</th>
-                                <th colspan="3" scope="colgroup">Фаолият тури</th>
+                                <th colspan="{{$activities->count()}}" scope="colgroup">Фаолият тури</th>
                                 <th rowspan="2" scope="colgroup">Боқилаётган асалари оилалари сони</th>
                                 <th rowspan="2" scope="colgroup">Ишчилар сони</th>
                             </tr>
@@ -179,9 +177,9 @@
                                 <th scope="col">Юридик шахслар (МЧЖ, ХК, ҚК, ДХ)</th>
                                 <th scope="col">ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари</th>
                                 <th scope="col">Шахсий ёрдамчи хўжаликлари (жисмоний шахслар)</th>
-                                <th scope="col">Асалари боқиш ва асал етиштириш</th>
-                                <th scope="col">Асални қайта ишлаш ва сотиш</th>
-                                <th scope="col">Асаларичилик учун асбоб-ускуна ва инвентарлар ишлаб чиқариш</th>
+                                @foreach($activities as $activity)
+                                    <th scope="col">{{$activity->name}}</th>
+                                @endforeach
                             </tr>
                             </thead>
                         </table>
@@ -240,21 +238,13 @@
                     {data: 'yuridik'},
                     {data: 'yakka'},
                     {data: 'jismoniy'},
+                    @foreach($activities as $activity)
                     {
                         data: null,
                         orderable: false,
                         defaultContent: ''
                     },
-                    {
-                        data: null,
-                        orderable: false,
-                        defaultContent: ''
-                    },
-                    {
-                        data: null,
-                        orderable: false,
-                        defaultContent: ''
-                    },
+                    @endforeach
                     {
                         data: 'bees_count',
                         defaultContent: 0
@@ -299,10 +289,9 @@
                         className: 'details-control'
                     },
                     {data: 'total'},
-                    {data: 'type4_count'},
-                    {data: 'type2_count'},
-                    {data: 'type1_count'},
-                    {data: 'type3_count'},
+                    {data: 'yuridik'},
+                    {data: 'yakka'},
+                    {data: 'jismoniy'},
                     {
                         data: 'reserves',
                         defaultContent: 0

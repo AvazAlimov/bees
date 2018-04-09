@@ -27,6 +27,7 @@ Route::prefix('admin')->group(function (){
     Route::post('nomma-nom/submit','Admin\AdminController@submitNomma')->name('submit.nomma');
     Route::get('nomma-nom/delete/{id}','Admin\AdminController@deleteNomma')->name('delete.nomma');
     Route::post('nomma-nom/update/{id}','Admin\AdminController@updateNomma')->name('update.nomma');
+    Route::get('nomma-nom/export', 'Admin\AdminController@exportNomma')->name('export.nomma');
     Route::get('ishlab-chiqarish','Admin\AdminController@ishlab')->name('ishlabchiqarish');
     Route::get('svod','Admin\AdminController@swot')->name('swot');
     Route::get('get/swot/{id?}','Admin\AdminController@getSwot')->name('getSwot');

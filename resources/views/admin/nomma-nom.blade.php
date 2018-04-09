@@ -96,11 +96,15 @@
                         <div>
                             <h2 class="text-center">Ўзбекситон асаларичилари уюшмасига азо субьектлар тўғрисида
                                 номма-ном МАЪЛУМОТ </h2>
-                        </div>
+                                                  </div>
                     </div>
                     <div class="row">
                         <div class="page-header clearfix">
+
                             <div>
+                                <a id="swot-export" href="{{route('export.nomma')}}" class="btn btn-success pull-left" tabindex="0"
+                                   aria-controls="example">Excel
+                                </a>
                                 <a  onclick="showModal()" class="btn btn-primary pull-right"
                                    tabindex="0"
                                    aria-controls="example">Қўшиш
