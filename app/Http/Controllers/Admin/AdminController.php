@@ -26,11 +26,14 @@ class AdminController extends Controller
     }
     public function getRegion(){
         $groupByRegion = DB::select(DB::raw('SELECT count(*) as total,(SELECT id from regions where regions.id=us.region_id) as id, (SELECT name from regions where regions.id=us.region_id) as region, (SELECT count(*) from users as usr where usr.type=1 AND us.region_id=usr.region_id) as type1_count, (SELECT count(*) from users as usr where usr.type=2 AND us.region_id=usr.region_id) as type2_count, (SELECT count(*) from users as usr where usr.type=3 AND us.region_id=usr.region_id) as type3_count, (SELECT count(*) from users as usr where usr.type=4 AND us.region_id=usr.region_id) as type4_count, (SELECT sum(reserve) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as reserves, (SELECT sum(annual_prog) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as annual_prog, (SELECT sum(produced_honey) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as produced_honey, (SELECT sum(realized_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_quantity, (SELECT sum(realized_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_price, (SELECT sum(stock_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_quantity, (SELECT sum(stock_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_price from users as us  group by region_id'));
+
+        $total = DB::select(DB::raw('SELECT count(*) as total, (SELECT count(*) from users where users.type=1) as type1_count, (SELECT count(*) from users where users.type=2) as type2_count, (SELECT count(*) from users where users.type=3) as type3_count, (SELECT count(*) from users where users.type=4) as type4_count, (SELECT sum(reserve) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as reserves, (SELECT sum(annual_prog) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as annual_prog, (SELECT sum(produced_honey) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as produced_honey, (SELECT sum(realized_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as realized_quantity, (SELECT sum(realized_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as realized_price, (SELECT sum(stock_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as stock_quantity, (SELECT sum(stock_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as stock_price from users'));
+
         return DataTables::of($groupByRegion)
             ->make(true);
     }
     public function regionExport(){
-        $groupByRegion = DB::select(DB::raw('SELECT count(*) as total, (SELECT name from regions where regions.id=us.region_id) as region, (SELECT count(*) from users as usr where usr.type=1 AND us.region_id=usr.region_id) as type1_count, (SELECT count(*) from users as usr where usr.type=2 AND us.region_id=usr.region_id) as type2_count, (SELECT count(*) from users as usr where usr.type=3 AND us.region_id=usr.region_id) as type3_count, (SELECT count(*) from users as usr where usr.type=4 AND us.region_id=usr.region_id) as type4_count, (SELECT sum(reserve) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as reserves, (SELECT sum(annual_prog) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as annual_prog, (SELECT sum(produced_honey) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as produced_honey, (SELECT sum(realized_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_quantity, (SELECT sum(realized_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_price, (SELECT sum(stock_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_quantity, (SELECT sum(stock_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_price from users as us  group by region_id'));
+        $groupByRegion = DB::select(DB::raw('SELECT count(*) as total,(SELECT id from regions where regions.id=us.region_id) as id, (SELECT name from regions where regions.id=us.region_id) as region, (SELECT count(*) from users as usr where usr.type=1 AND us.region_id=usr.region_id) as type1_count, (SELECT count(*) from users as usr where usr.type=2 AND us.region_id=usr.region_id) as type2_count, (SELECT count(*) from users as usr where usr.type=3 AND us.region_id=usr.region_id) as type3_count, (SELECT count(*) from users as usr where usr.type=4 AND us.region_id=usr.region_id) as type4_count, (SELECT sum(reserve) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as reserves, (SELECT sum(annual_prog) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as annual_prog, (SELECT sum(produced_honey) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as produced_honey, (SELECT sum(realized_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_quantity, (SELECT sum(realized_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_price, (SELECT sum(stock_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_quantity, (SELECT sum(stock_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_price from users as us  group by region_id'));
         /*Excel::create('Етиштирилган ҳамда реализация қилинган асал миқдори тўғрисидаги ҳисобот.', function ($excel) use ($groupByRegion) {
             Excel::selectSheetsByIndex(0)->load('swot.xlsx');
         })->download('xls');*/
@@ -54,17 +57,19 @@ class AdminController extends Controller
         if($id == null){
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
                 ->join('regions', 'regions.id', 'cities.region_id')
-                ->select('cities.name as city_name', 'regions.name as region_name', DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'))
-                ->groupBy('cities.name')
+                ->select( 'regions.name as region_name', 'cities.name as city_name')
                 ->withCount(['user as total', 'user as yuridik' => function ($query) {$query->where('users.type', '<', 3);}, 'user as yakka' => function ($query) {$query->where('users.type', 3);}, 'user as jismoniy' => function ($query) {$query->where('users.type', 4);}])
+                ->addSelect(DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'))
+                ->groupBy('cities.name')
                 ->get();
         }else{
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
                 ->join('regions', 'regions.id', 'cities.region_id')
-                ->where('regions.id',$id)
-                ->select('cities.id as id','cities.name as city_name', 'regions.name as region_name', DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'))
-                ->groupBy('cities.name')
+                ->where('regions.id', $id)
+                ->select( 'regions.name as region_name', 'cities.name as city_name')
                 ->withCount(['user as total', 'user as yuridik' => function ($query) {$query->where('users.type', '<', 3);}, 'user as yakka' => function ($query) {$query->where('users.type', 3);}, 'user as jismoniy' => function ($query) {$query->where('users.type', 4);}])
+                ->addSelect(DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'))
+                ->groupBy('cities.name')
                 ->get();
 
         }
@@ -75,17 +80,19 @@ class AdminController extends Controller
         if($id == null){
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
                 ->join('regions', 'regions.id', 'cities.region_id')
-                ->select('cities.name as city_name', 'regions.name as region_name', DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'))
-                ->groupBy('cities.name')
+                ->select( 'regions.name as region_name', 'cities.name as city_name')
                 ->withCount(['user as total', 'user as yuridik' => function ($query) {$query->where('users.type', '<', 3);}, 'user as yakka' => function ($query) {$query->where('users.type', 3);}, 'user as jismoniy' => function ($query) {$query->where('users.type', 4);}])
+                ->addSelect(DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'))
+                ->groupBy('cities.name')
                 ->get();
         }else{
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
                 ->join('regions', 'regions.id', 'cities.region_id')
-                ->where('regions.id',$id)
-                ->select('cities.id as id','cities.name as city_name', 'regions.name as region_name', DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'))
-                ->groupBy('cities.name')
+                ->where('regions.id', $id)
+                ->select( 'regions.name as region_name', 'cities.name as city_name')
                 ->withCount(['user as total', 'user as yuridik' => function ($query) {$query->where('users.type', '<', 3);}, 'user as yakka' => function ($query) {$query->where('users.type', 3);}, 'user as jismoniy' => function ($query) {$query->where('users.type', 4);}])
+                ->addSelect(DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'))
+                ->groupBy('cities.name')
                 ->get();
 
         }
@@ -149,11 +156,6 @@ class AdminController extends Controller
             ->withProductions($productions->get('month','year'))
             ->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted)
             ->withFamilies(Family::all());
-    }
-
-    public function index3(){
-        $groupByCity = User::groupBy('city_id')->withCount('id');
-        dd($groupByCity); 
     }
 
     public function ishlab(){
