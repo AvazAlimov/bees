@@ -59,16 +59,16 @@
                             Непринятые заказы</a></li>
                 </ul>
             </li>
-            <li class="dropdown navs">
+            <li class="dropdown navs active">
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
                     Hisobot</a>
                 <ul class="dropdown-menu">
-                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section10')"><i
-                                    class="fa fa-building"></i>
+                    <li class="navs2"><a href="{{route('swot')}}"><i class="fa fa-building"></i>
+                            Свод</a></li>
+                    <li class="navs2"><a href="{{route('nomma')}}"><i class="fa fa-building"></i>
+                            Номма-ном</a></li>
+                    <li class="navs2 active"><a><i class="fa fa-building"></i>
                             Ишлаб чиқариш</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section11')"><i
-                                    class="fa fa-building"></i>
-                            Йетказиб бериш</a></li>
                 </ul>
             </li>
         </ul>
@@ -135,36 +135,7 @@
     <script src="{{asset('js/buttons.print.min.js')}}"></script>
 
     <script>
-        function switchSection(id) {
-            document.cookie = "admin=" + id + ";";
-            var section = document.getElementsByClassName('section');
-            for (var i = 0; i < section.length; i++)
-                section[i].style.display = "none";
-            document.getElementById(id).style.display = "block";
-        }
-
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "section1";
-        }
-
         window.onload = function () {
-            switchSection(getCookie("admin"));
-            var navs = document.getElementsByClassName("navs2");
-            navs[getCookie("admin").replace("section", "") - 1].className = "navs2 active";
-            $(navs[getCookie("admin").replace("section", "") - 1]).filter(function () {
-                return $(this).parent().parent().is('li')
-            }).parent().parent().addClass('active');
             var maxNumber = '{!! $maxNumber !!}';
             $('#example').DataTable({
 

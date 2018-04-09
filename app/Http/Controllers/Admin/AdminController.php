@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Activity;
 use App\City;
+use App\Delivery;
 use App\Equipment;
 use App\Family;
 use App\Leader;
@@ -23,6 +24,20 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+    }
+    public function nomma(){
+        $sums = Delivery::select(DB::raw('SUM(family_count) as sum_bees_count'), DB::raw('SUM(labors) as sum_labors'))->first();
+
+        return view('admin.nomma-nom')->withSums($sums);
+    }
+    public function getNomma(){
+     $deliveries= Delivery::join('regions','regions.id','deliveries.region_id')
+          ->join('cities','cities.id','deliveries.city_id')
+          ->select('deliveries.id','deliveries.subject','deliveries.type','regions.name as region','cities.name as city','deliveries.activity','deliveries.family_count','deliveries.inn','deliveries.name','deliveries.phone','deliveries.labors')
+        ->get();
+
+     return DataTables::of($deliveries)->make(true);
+
     }
     public function getRegion(){
         $groupByRegion = DB::select(DB::raw('SELECT count(*) as total,(SELECT id from regions where regions.id=us.region_id) as id, (SELECT name from regions where regions.id=us.region_id) as region, (SELECT count(*) from users as usr where usr.type=1 AND us.region_id=usr.region_id) as type1_count, (SELECT count(*) from users as usr where usr.type=2 AND us.region_id=usr.region_id) as type2_count, (SELECT count(*) from users as usr where usr.type=3 AND us.region_id=usr.region_id) as type3_count, (SELECT count(*) from users as usr where usr.type=4 AND us.region_id=usr.region_id) as type4_count, (SELECT sum(reserve) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as reserves, (SELECT sum(annual_prog) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as annual_prog, (SELECT sum(produced_honey) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as produced_honey, (SELECT sum(realized_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_quantity, (SELECT sum(realized_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_price, (SELECT sum(stock_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_quantity, (SELECT sum(stock_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_price from users as us  group by region_id'));

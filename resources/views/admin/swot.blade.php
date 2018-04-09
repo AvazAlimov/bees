@@ -68,12 +68,15 @@
                             Непринятые заказы</a></li>
                 </ul>
             </li>
-            <li class="dropdown navs">
+            <li class="dropdown navs active">
                 <a class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-users"></i>
                     Hisobot</a>
                 <ul class="dropdown-menu">
-                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section10')"><i
-                                    class="fa fa-building"></i>
+                    <li class="navs2 active"><a><i class="fa fa-building"></i>
+                            Свод</a></li>
+                    <li class="navs2"><a href="{{route('nomma')}}"><i class="fa fa-building"></i>
+                            Номма-ном</a></li>
+                    <li class="navs2"><a href="{{route('ishlabchiqarish')}}"><i class="fa fa-building"></i>
                             Ишлаб чиқариш</a></li>
                 </ul>
             </li>
@@ -282,12 +285,7 @@
         }
         $(document).ready(function() {
             var params = '';
-            switchSection(getCookie("admin"));
-            var navs = document.getElementsByClassName("navs2");
-            navs[getCookie("admin").replace("section", "") - 1].className = "navs2 active";
-            $(navs[getCookie("admin").replace("section", "") - 1]).filter(function () {
-                return $(this).parent().parent().is('li')
-            }).parent().parent().addClass('active');
+
            var table1 = $('#example1').DataTable({
                pageLength: 25,
                lengthChange: false,
