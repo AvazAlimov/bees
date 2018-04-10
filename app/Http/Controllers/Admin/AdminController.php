@@ -173,9 +173,11 @@ class AdminController extends Controller
         if($id == null){
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
                 ->join('regions', 'regions.id', 'cities.region_id')
+                ->join('works', 'works.user_id', 'users.id')
+                ->leftJoin('activities','activities.id','=','works.activity_id')
                 ->select( 'regions.name as region_name', 'cities.name as city_name')
                 ->withCount(['user as total', 'user as yuridik' => function ($query) {$query->where('users.type', '<', 3);}, 'user as yakka' => function ($query) {$query->where('users.type', 3);}, 'user as jismoniy' => function ($query) {$query->where('users.type', 4);}])
-                ->addSelect(DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'))
+                ->addSelect(DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'), DB::raw('count(activities.id) as qwerty'))
                 ->groupBy('cities.name')
                 ->get();
         }else{
@@ -189,6 +191,7 @@ class AdminController extends Controller
                 ->get();
 
         }
+
         return DataTables::of($groupByCity)
             ->make(true);
     }

@@ -42,5 +42,6 @@ class HugeAmounSeeder extends Seeder
                 'labors'=>$faker->numberBetween(1, 100)
             ]);
         }
+
     }
 }
