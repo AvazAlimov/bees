@@ -126,7 +126,7 @@ Parol: '. $data['password'].'
             'mfo' => $request->type < 4 ? 'required|digits:5' : '',
             'address' => 'required|max:255',
             'phone' => 'required|max:19|min:12',
-            'email' => 'required|email',
+            'email' => 'email',
             'fullName' => 'required|max:255',
             'labors' => $request->type < 4 ? 'required|numeric|min:0' : '',
             'bees_count' => 'required|numeric|min:0',

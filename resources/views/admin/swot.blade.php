@@ -224,13 +224,22 @@
             return "section1";
         }
         function fetch_data(params) {
+            var url;
+
+            if(params) {
+                url = '{!! route('getSwot') !!}' + '/' + params;
+            }else{
+                url = '{!! route('getSwot') !!}';
+            }
             var table2 = $('#example2').DataTable({
                 rowGroup: {
                     dataSrc: 'region_name'
                 },
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('getSwot') !!}'+'/'+params,
+                ajax: {
+                    url: url
+                },
                 columns: [
                     {data: 'region_name'},
                     {data: 'city_name'},
@@ -238,13 +247,13 @@
                     {data: 'yuridik'},
                     {data: 'yakka'},
                     {data: 'jismoniy'},
-                    @foreach($activities as $activity)
+                        @foreach($activities as $activity)
                     {
                         data: null,
                         orderable: false,
                         defaultContent: ''
                     },
-                    @endforeach
+                        @endforeach
                     {
                         data: 'bees_count',
                         defaultContent: 0
@@ -276,10 +285,10 @@
         $(document).ready(function() {
             var params = '';
 
-           var table1 = $('#example1').DataTable({
-               pageLength: 25,
-               lengthChange: false,
-               paging:false,
+            var table1 = $('#example1').DataTable({
+                pageLength: 25,
+                lengthChange: false,
+                paging:false,
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route('getRegion') !!}',
@@ -345,7 +354,7 @@
                     "infoFiltered": "(жами _MAX_ йозувлар филти килинган)"
                 },
                 "scrollX": true
-           });
+            });
             fetch_data(params);
             $('#example1 tbody').on('click', 'td.details-control', function () {
                 var tr = $(this).closest('tr');

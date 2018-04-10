@@ -55,8 +55,7 @@
                             <label for="type" class="col-form-label col-form-label-sm">Фойдаланувчи тури</label>
                             <select id="type" class="form-control form-control-sm" onchange="changeType(this.id)">
                                 <option value="0" selected>Юридик корхоналар (МЧЖ, ХК, ҚК)</option>
-                                <option value="1">Кўп тармоқли фермер хўжаликлари</option>
-                                <option value="2">Якка тартибдаги тадбиркор</option>
+                                <option value="2">ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари</option>
                                 <option value="3">Шахсий ёрдамчи хўжалик (Жисмоний шахслар)</option>
                             </select>
                         </div>
@@ -162,8 +161,7 @@
                             <div class="form-group col-md-6">
                                 <label for="email_1" class="col-form-label col-form-label-sm">Электрон почта</label>
                                 <input type="email" class="form-control form-control-sm" id="email_1" name="email"
-                                       value="{{old('email')}}"
-                                       required>
+                                       value="{{old('email')}}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="fullName_1" class="col-form-label col-form-label-sm">Корхона директори исми

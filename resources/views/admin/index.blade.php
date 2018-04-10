@@ -182,11 +182,11 @@
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <form action="{{ route('city.delete', $city->id) }}"
-                                                          onclick="return confirm('Хотите удалить')" method="get">
-                                                        <button type="submit" class="btn btn-danger pull-right">Удалить
-                                                        </button>
-                                                    </form>
+                                                    {{--<form action="{{ route('city.delete', $city->id) }}"--}}
+                                                          {{--onclick="return confirm('Хотите удалить')" method="get">--}}
+                                                        {{--<button type="submit" class="btn btn-danger pull-right">Удалить--}}
+                                                        {{--</button>--}}
+                                                    {{--</form>--}}
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -798,8 +798,6 @@
     {{-- <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script> --}}
 
     <script>
-
-
         function switchSection(id) {
             document.cookie = "admin=" + id + ";";
             var section = document.getElementsByClassName('section');
@@ -864,58 +862,8 @@
         }
 
         /* Formatting function for row details - modify as you need */
-function format ( d ) {
-    // `d` is the original data object for the row
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-        '<tr>'+
-            '<td>Full name:</td>'+
-            '<td>'+d.name+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Extension number:</td>'+
-            '<td>'+d.extn+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Extra info:</td>'+
-            '<td>And any further details here (images etc)...</td>'+
-        '</tr>'+
-    '</table>';
-}
+
  
-$(document).ready(function() {
-    var table = $('#example').DataTable( {
-        "ajax": "../ajax/data/objects.txt",
-        "columns": [
-            {
-                "className":      'details-control',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ''
-            },
-            { "data": "name" },
-            { "data": "position" },
-            { "data": "office" },
-            { "data": "salary" }
-        ],
-        "order": [[1, 'asc']]
-    } );
-     
-    // Add event listener for opening and closing details
-    $('#example tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
- 
-        if ( row.child.isShown() ) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            row.child( format(row.data()) ).show();
-            tr.addClass('shown');
-        }
-    } );
-} );
+
     </script>
 @endsection

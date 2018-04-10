@@ -42,13 +42,9 @@
                                 <div class="form-group col-md-6">
                                     <label for="type" class="col-form-label col-form-label-sm">Асалари тури</label>
                                     <select class="form-control" name="type" id="type">
-                                        <option>Asalari turi</option>
-                                        <option value="1" {{$user->type == 1 ? "selected" : ""}}>Юридик корхоналар (МЧЖ, ХК, ҚК)</option>
-                                        <option value="2" {{$user->type == 2 ? "selected" : ""}}>Кўп тармоқли фермер хўжаликлари
-                                        </option>
-                                        <option value="3" {{$user->type == 3 ? "selected" : ""}}>Якка тартибдаги тадбиркор
-                                        </option>
-                                        <option value="4" {{$user->type == 4 ? "selected" : ""}}>Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)</option>
+                                        <option value="1" {{$user->type < 3 ? "selected" : ''}}>Юридик корхоналар (МЧЖ, ХК, ҚК)</option>
+                                        <option value="3" {{$user->type == 3 ? "selected" : ''}}>ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари</option>
+                                        <option value="4" {{$user->type == 4? "selected" : ''}}>Шахсий ёрдамчи хўжалик (Жисмоний шахслар)</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
