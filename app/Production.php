@@ -11,7 +11,8 @@ class Production extends Model
         return $this->belongsTo('App\User');
     }
     public function equipments(){
-        return $this->belongsToMany(Equipment::class,'produced_equipments')->withPivot('volume');
+        return $this->belongsToMany(Equipment::class,'produced_equipments')
+            ->orderBy('equipment_id','asc')->withPivot('volume');
     }
 
 }

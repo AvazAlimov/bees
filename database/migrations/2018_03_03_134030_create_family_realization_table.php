@@ -19,6 +19,7 @@ class CreateFamilyRealizationTable extends Migration
 
             $table->integer('realization_id')->unsigned();
             $table->foreign('realization_id')->references('id')->on('realizations')->onDelete('cascade');
+            $table->primary(['family_id','realization_id']);
         });
     }
 

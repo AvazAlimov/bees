@@ -13,7 +13,7 @@ use App\Realization;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Equipment;
 use App\Production;
-use App\ProducedEquipments;
+use App\ProducedEquipment;
 use App\Delivery;
 
 class HugeAmounSeeder extends Seeder
@@ -26,21 +26,42 @@ class HugeAmounSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-
-       Delivery::truncate();
-        for($key = 2; $key<=85; $key+=7) {
-            Delivery::create([
-                'subject' => $faker->sentence(4),
-                'type' => $faker->sentence(2),
-                'city_id' => $key,
-                'region_id' => City::findOrFail($key)->region->id,
-                'activity' => $faker->sentence(3),
-                'family_count' => $faker->numberBetween(1, 100),
-                'inn' => '123456789',
-                'name'=>$faker->name,
-                'phone'=>$faker->phoneNumber,
-                'labors'=>$faker->numberBetween(1, 100)
+        Equipment::truncate();
+        foreach(range(1, 20) as $i){
+            Equipment::create([
+                'name' => $faker->word.$i,
+                'volume_name'=>$faker->word
             ]);
+        }
+        Production::truncate();
+        foreach (range(1, 50) as $i) {
+            $user = User::find($i);
+            if ($user != null) {
+                Production::create([
+                    'user_id' => $i,
+                    'month' => $faker->month,
+                    'year' => $faker->year
+                ]);
+            }
+        }
+        ProducedEquipment::truncate();
+        foreach (range(1, 10) as $k) {
+            foreach (range(1, 8) as $i)
+            {
+                ProducedEquipment::create([
+                    'equipment_id' => $i,
+                    'production_id' => $k,
+                    'volume' => $faker->randomFloat(1, 0, 100),
+                ]);
+            }
+            foreach (range(9, 16) as $i)
+            {
+                ProducedEquipment::create([
+                    'equipment_id' => $i,
+                    'production_id' => $k,
+                    'volume' => $faker->randomFloat(1, 0, 100),
+                ]);
+            }
         }
 
     }

@@ -14,13 +14,15 @@ class CreateProducedEquipmentsTable extends Migration
     public function up()
     {
         Schema::create('produced_equipments', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('equipment_id')->unsigned();
             $table->integer('production_id')->unsigned();
             $table->double('volume');
+            $table->primary(['equipment_id','production_id']);
+            $table->timestamps();
+        });
+        Schema::table('produced_equipments', function ($table) {
             $table->foreign('production_id')->references('id')->on('productions')->onDelete('cascade');
             $table->foreign('equipment_id')->references('id')->on('equipments')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

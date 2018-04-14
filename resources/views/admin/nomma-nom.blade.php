@@ -174,7 +174,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{route('submit.nomma')}}" method="post">
+                    <form id="form"  method="POST">
                         {{csrf_field()}}
                         <div class="form-group row">
                             <label for="subject" class="col-md-2 col-form-label">Субъект номи</label>
@@ -293,7 +293,7 @@
             var myModal = "#myModal";
             var href='{{route('submit.nomma')}}';
             $(myModal).modal();
-            $(myModal).attr('href',href);
+            $(myModal).find('#form').attr('action',href);
             $(myModal).find('.subject').val("");
             $(myModal).find('.type').val("");
             $(myModal).find('#region').val("");
@@ -314,8 +314,9 @@
             var data = table1.rows().data()[id];
             var href='{{route('update.nomma', null)}}';
             var myModal = "#myModal";
+
             $(myModal).modal();
-            $(myModal).attr('href',href+'/'+data.id);
+            $(myModal).find('#form').attr('action',href+'/'+data.id);
             $(myModal).find('.subject').val(data.subject);
             $(myModal).find('.type').val(data.type);
             $(myModal).find('#region').val(data.region_id);

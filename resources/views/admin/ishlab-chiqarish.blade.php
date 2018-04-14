@@ -81,10 +81,11 @@
                 <div id="section10" class="section">
                     <div class="page-header clearfix">
                         <div class="col-md-4">
-                            <h2 class="pull-left">Ишлаб чиқариш   </h2>
-                            <div >
-                                <a href="{{route('ishlabchiqarish.export')}}" class="btn btn-success" tabindex="0" aria-controls="example"
-                                        style="margin-top: 20px; margin-left: 20px;" >Excel
+                            <h2 class="pull-left">Ишлаб чиқариш </h2>
+                            <div>
+                                <a href="{{route('ishlabchiqarish.export')}}" class="btn btn-success" tabindex="0"
+                                   aria-controls="example"
+                                   style="margin-top: 20px; margin-left: 20px;">Excel
                                 </a>
                             </div>
                         </div>
@@ -98,26 +99,90 @@
                         <table id="example" class="table table-striped table-bordered cell-border" cellspacing="0">
                             <thead>
                             <tr>
-                                <th rowspan="2">#</th>
-                                <th rowspan="2">Ишлаб чиқарувчи номи</th>
-                                <th rowspan="2">Ҳудуд номи</th>
-                                <th rowspan="2">Вилоят номи</th>
-                                @for($i=0; $i<$maxNumber; $i++)
-                                    <th colspan="2">Ишлаб чиқариладиган жиҳоз</th>
-                                @endfor
-                                <th rowspan="2">Созлаш</th>
+                                <th>#</th>
+                                <th>Ишлаб чиқарувчи номи</th>
+                                <th>Ҳудуд номи</th>
+                                <th>Вилоят номи</th>
+                                @foreach($equipments as $equipment)
+                                    <th>{{$equipment->name }} ({{$equipment->volume_name}})</th>
+                                @endforeach
+                                <th>Созлаш</th>
                             </tr>
-                            @if($maxNumber != 0)
-                                <tr>
-                                    @for($i=0; $i<$maxNumber; $i++)
-                                        <th>Тури</th>
-                                        <th>Ҳажми</th>
-                                    @endfor
-                                </tr>
-                            @endif
                             </thead>
+                            <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>Жами</th>
+                                @foreach($equipments as $equipment)
+                                    <th></th>
+                                @endforeach
+                                <th></th>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Номма-ном маьлумот қўшиш</h4>
+                </div>
+                <div class="modal-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{route('update.ishlabchiqarish', null)}}" id="form" method="post">
+                        {{csrf_field()}}
+                        <div class="form-group row">
+                            <label for="subject" class="col-md-2 col-form-label">Субъект номи</label>
+                            <div class="col-md-8">
+                                <input class="form-control subject" type="text" value="" id="subject" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="region" class="col-md-2 col-form-label">Ҳудуд номи</label>
+                            <div class="col-md-8">
+                                <input class="form-control region" type="text" value="" id="region" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="city" class="col-md-2 col-form-label">Вилоят номи</label>
+                            <div class="col-md-8">
+                                <input class="form-control city" type="text" value="" id="city" readonly>
+                            </div>
+                        </div>
+                        @foreach($equipments as $equipment)
+                            <div class="form-group row">
+                                <label for="equipments_{{$equipment->id}}"
+                                       class="col-md-2 col-form-label">{{$equipment->name}} ({{$equipment->volume_name}})</label>
+                                <div class="col-md-8">
+                                    <input class="form-control equipments1_{{$equipment->id}}" type="number" value="" step="any"
+                                           name="equipments[{{$equipment->id}}][volume]" id="equipments1_{{$equipment->id}}">
+                                    <input class="form-control equipments2_{{$equipment->id}}" type="hidden" value="" step="any"
+                                           name="equipments[{{$equipment->id}}][id]" id="equipments2_{{$equipment->id}}">
+                                </div>
+                            </div>
+                        @endforeach
+                        <div class="form-group row">
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-primary" id="btn_edit">Ўзгартириш</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -135,37 +200,58 @@
     <script src="{{asset('js/buttons.print.min.js')}}"></script>
 
     <script>
+        var table1 ;
+        function editNomma(id) {
+            var data = table1.rows().data()[id];
+            var href='{{route('update.ishlabchiqarish', null)}}';
+            var myModal = "#myModal";
+            $(myModal).modal();
+            $(myModal).find('#form').attr('action',href+'/'+data.id);
+            $(myModal).find('.subject').val(data.user.subject);
+            $(myModal).find('.region').val(data.user.region.name);
+            $(myModal).find('.city').val(data.user.city.name);
+            var i;
+            @foreach($equipments as $equipment)
+            i='{{$equipment->id}}';
+            $(myModal).find('#equipments1_{{$equipment->id}}').val(data.equipments[i].volume);
+            $(myModal).find('#equipments2_{{$equipment->id}}').val(data.equipments[i].equipment_id);
+            @endforeach
+             $("#btn_edit").html('Ўзгартириш');
+        }
         window.onload = function () {
-            var maxNumber = '{!! $maxNumber !!}';
-            $('#example').DataTable({
-
+           table1 = $('#example').DataTable({
                 rowGroup: {
                     dataSrc: 'user.region.name'
                 },
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('ishlabchiqarish.data') !!}',
+                ajax: {
+                    url: '{!! route('ishlabchiqarish.data') !!}',
+                    type: 'POST',
+                    data: {
+                        '_token': '{{ csrf_token() }}'
+                    }
+                },
                 columns: [
                     {data: 'id'},
                     {data: 'user.subject'},
-                    {data: 'user.city.name'},
                     {data: 'user.region.name'},
-                        @for($i =0; $i<$maxNumber; $i++)
+                    {data: 'user.city.name'},
+                        @foreach($equipments as $i=> $equipment)
                     {
-                        data: 'equipments.{{$i}}.name'
+                        data: 'equipments.{{$equipment->id}}.volume'
                     },
-                    {data: 'equipments.{{$i}}.volume'},
-                        @endfor
+                        @endforeach
                     {
-                        data: null, render: function (data, type, full, meta) {
-                        return '<a href="' + data.id + '">Here</a>';
+                        data: null,
+                        render: function (data, type, full, meta) {
+                            var href = '{{route('delete.ishlabchiqarish', null)}}';
+                            return '<a href="' + href + '/' + data.id + '" onclick="return confirm(\'Ростанхам ўчиришни истайсизми\')" title="Удалить" class="btn btn-sm btn-danger pull-right delete"> <span class="">Ўчириш</span> </a>' +
+                                '<a onclick="editNomma(' + meta.row + ')" title="Редактирование" class="btn btn-sm btn-primary pull-right edit"> <span class="">Ўзгартириш</span></a>';
                         }
                     }
                 ],
                 "dom": "frtip",
-                "columnDefs": [
-                    {"width": "10px", "targets": "_all"}
-                ],
                 "language": {
                     "paginate": {
                         "previous": "Oldingi",
@@ -180,6 +266,7 @@
                 },
                 "scrollX": true
             });
+
         }
     </script>
 @endsection

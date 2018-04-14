@@ -8,6 +8,7 @@ use App\Delivery;
 use App\Equipment;
 use App\Family;
 use App\Leader;
+use App\ProducedEquipment;
 use App\Production;
 use App\Region;
 use App\User;
@@ -16,6 +17,7 @@ use function foo\func;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
@@ -91,6 +93,8 @@ class AdminController extends Controller
         $delivery->phone =  $request->phone;
         $delivery->labors = $request->labors;
         $delivery->save();
+        return redirect()->back()->with('message',"Jadval muvofaqiyatli o'zgartirildi");
+
     }
     public function getNomma(){
      $deliveries= Delivery::join('regions','regions.id','deliveries.region_id')
@@ -170,22 +174,14 @@ class AdminController extends Controller
         return view('admin.swot')->withTotal($total)->withActivities($activities);
     }
     public function getSwot($id = null){
-        $activities = Activity::all();
         if($id == null){
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
                 ->join('regions', 'regions.id', 'cities.region_id')
-                ->join('works', 'works.user_id', 'users.id')
-                ->leftJoin('activities','activities.id','=','works.activity_id')
                 ->select( 'regions.name as region_name', 'cities.name as city_name')
                 ->withCount(['user as total', 'user as yuridik' => function ($query) {$query->where('users.type', '<', 3);}, 'user as yakka' => function ($query) {$query->where('users.type', 3);}, 'user as jismoniy' => function ($query) {$query->where('users.type', 4);}])
-                ->addSelect(DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'), DB::raw('count(activities.id) as qwerty'))
-                ->groupBy('cities.name');
-
-                foreach ($activities as $key => $activity) {
-                    $groupByCity= $groupByCity->addSelect(DB::raw('SELECT count(*) from activities as key'.$key));
-                }
-                $groupByCity->get();
-
+                ->addSelect(DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'))
+                ->groupBy('cities.name')
+                ->get();
         }else{
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
                 ->join('regions', 'regions.id', 'cities.region_id')
@@ -286,13 +282,14 @@ class AdminController extends Controller
     }
 
     public function ishlab(){
-        $numbers = DB::select(DB::raw("SELECT * FROM (SELECT * FROM productions as pro 
+    /*    $numbers = DB::select(DB::raw("SELECT * FROM (SELECT * FROM productions as pro
         WHERE year=(SELECT MAX(year) FROM productions as p WHERE p.user_id=pro.user_id)) as Shox
         WHERE month=(SELECT MAX(month) FROM productions as s WHERE s.user_id=Shox.user_id and s.year = Shox.year)"));
 
-        $productions = Production::whereIn('id',collect($numbers)->pluck('id'))->withCount('equipments as cnt')->orderByDesc('year')->orderByDesc('month');
-        $maxNumber = collect($productions->pluck('cnt'))->max();
-        return view('admin.ishlab-chiqarish')->withMaxNumber($maxNumber);
+        $productions = Production::whereIn('id',collect($numbers)->pluck('id'))->withCount('equipments as cnt')->orderByDesc('year')->orderByDesc('month');*/
+        $equipments = Equipment::orderBy('id', 'asc')->get();
+        ($equipments->count());
+        return view('admin.ishlab-chiqarish')->withEquipments($equipments);
     }
     public function ishlabchiqarish(){
         $numbers = DB::select(DB::raw("SELECT * FROM (SELECT * FROM productions as pro 
@@ -308,17 +305,38 @@ class AdminController extends Controller
                 $quer->select('id','name');
             }])->select(['id','region_id','city_id','subject'])->get();
         }])->with(['equipments' => function($query){
-            $query->select('name', 'volume');
+            $query->select('name', 'volume','equipment_id');
         }])->select('id','user_id')->get()->toArray();
-        foreach ($array as $key=>$item)
-            if(count($item['equipments']) < $maxNumber)
-                for($i = count($item['equipments']); $i<$maxNumber; $i++){
-                    $array[$key]['equipments'][$i]['name']= "";
-                    $array[$key]['equipments'][$i]['volume']= "";
-                }
-                
+
         return DataTables::of($array)
             ->make(true);
+    }
+    public function deleteIshlabchiqarish($id){
+        $equipment = Production::findOrFail($id);
+        $equipment->delete();
+        return redirect()->back()->with('message',"Jadval muvofaqiyatli ro'yhatdan o'chirildi");
+    }
+    public function updateIshlabchiqarish(Request $request, $id){
+
+     $validation = Validator::make($request->all(), [
+         'equipments.id.*'=>'exists:equipments,id',
+         'equipments.volume.*'=>'nullable|numeric'
+      ]);
+     if($validation->fails())
+         dd($validation->errors());
+    $production = Production::findOrFail($id);
+    $production->equipments()->detach();
+    foreach ($request->equipments as $equipment)
+    {
+
+        if($equipment['volume'] != null){
+            $prod_eq = Equipment::findOrFail(intval($equipment['id']));
+            $production->equipments()->attach($prod_eq,['volume'=>$equipment['volume']]);
+        }
+    }
+
+        return redirect()->back()->with('message',"Jadval muvofaqiyatli o'zgartirildi");
+
     }
     public function ishlabchiqarishExport(){
         $numbers = DB::select(DB::raw("SELECT * FROM (SELECT * FROM productions as pro 
