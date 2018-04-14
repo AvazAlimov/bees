@@ -170,6 +170,7 @@ class AdminController extends Controller
         return view('admin.swot')->withTotal($total)->withActivities($activities);
     }
     public function getSwot($id = null){
+        $activities = Activity::all();
         if($id == null){
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
                 ->join('regions', 'regions.id', 'cities.region_id')
@@ -178,8 +179,13 @@ class AdminController extends Controller
                 ->select( 'regions.name as region_name', 'cities.name as city_name')
                 ->withCount(['user as total', 'user as yuridik' => function ($query) {$query->where('users.type', '<', 3);}, 'user as yakka' => function ($query) {$query->where('users.type', 3);}, 'user as jismoniy' => function ($query) {$query->where('users.type', 4);}])
                 ->addSelect(DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'), DB::raw('count(activities.id) as qwerty'))
-                ->groupBy('cities.name')
-                ->get();
+                ->groupBy('cities.name');
+
+                foreach ($activities as $key => $activity) {
+                    $groupByCity= $groupByCity->addSelect(DB::raw('SELECT count(*) from activities as key'.$key));
+                }
+                $groupByCity->get();
+
         }else{
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
                 ->join('regions', 'regions.id', 'cities.region_id')
