@@ -108,7 +108,7 @@ class AdminController extends Controller
     public function swot()
     {
         $total = DB::select(DB::raw('SELECT count(*) as total, (SELECT count(*) from users where users.type<3) as yuridik, (SELECT count(*) from users where users.type=3) as yakka, (SELECT count(*) from users where users.type=4) as jismoniy, (SELECT sum(reserve) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as reserves, (SELECT sum(annual_prog) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as annual_prog, (SELECT sum(produced_honey) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as produced_honey, (SELECT sum(realized_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as realized_quantity, (SELECT sum(realized_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as realized_price, (SELECT sum(stock_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as stock_quantity, (SELECT sum(stock_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as stock_price from users'));
-        $activities = Activity::all();
+        $activities = Activity::orderBy('id','desc')->get();
         return view('admin.swot')->withTotal($total)->withActivities($activities);
     }
 
@@ -169,7 +169,7 @@ class AdminController extends Controller
     }*/
     public function ishlab()
     {
-/*            $numbers = DB::select(DB::raw("SELECT * FROM (SELECT * FROM productions as pro
+    /*      $numbers = DB::select(DB::raw("SELECT * FROM (SELECT * FROM productions as pro
             WHERE year=(SELECT MAX(year) FROM productions as p WHERE p.user_id=pro.user_id)) as Shox
             WHERE month=(SELECT MAX(month) FROM productions as s WHERE s.user_id=Shox.user_id and s.year = Shox.year)"));
 

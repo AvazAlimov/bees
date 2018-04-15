@@ -246,9 +246,7 @@
                     {data: 'jismoniy'},
                         @foreach($activities as $activity)
                     {
-                        data: null,
-                        orderable: false,
-                        defaultContent: ''
+                        data: 'activity{{$activity->id}}'
                     },
                         @endforeach
                     {
