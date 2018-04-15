@@ -158,6 +158,7 @@ class AdminExcelController extends Controller
 
                     $sheet->appendRow((5 + $key), $array);
                 }
+                $sheet->setAutoSize(true);
                 $sheet->setBorder('A3:' . end($column2) . ($collection->count() + 4), 'thin');
 
             });
