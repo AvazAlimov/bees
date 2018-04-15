@@ -83,6 +83,8 @@ class AdminExcelController extends Controller
                     $total[0]->produced_honey != null ? $total[0]->produced_honey : 0, $total[0]->realized_quantity != null ? $total[0]->realized_quantity : 0,
                     $total[0]->realized_price != null ? $total[0]->realized_price : 0, $total[0]->stock_quantity != null ? $total[0]->stock_quantity : 0,
                     $total[0]->stock_price != null ? $total[0]->stock_price : 0]);
+
+                $sheet->setBorder('A5:L'.(count($collection)+5), 'thin');
             });
 
 
@@ -227,7 +229,7 @@ class AdminExcelController extends Controller
 
 
         Excel::create('Ishlab Chiqarish', function ($excel) use ($array, $column1, $column2, $col_eq, $sum) {
-            $excel->sheet('Лист 1', function ($sheet) use ($array, $column1, $column2, $col_eq, $sum) {
+            $excel->sheet(0, function ($sheet) use ($array, $column1, $column2, $col_eq, $sum) {
                 $sheet->mergeCells('A2:A3')->mergeCells('B2:B3')->mergeCells('C2:C3')->mergeCells('D2:D3')
                     ->mergeCells(reset($column2) . '2:' . end($column2) . '2');
                 $sheet->appendRow(2, $column1)->appendRow(3, $col_eq);
