@@ -99,24 +99,27 @@
                         <table id="example" class="table table-striped table-bordered cell-border" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Ишлаб чиқарувчи номи</th>
-                                <th>Ҳудуд номи</th>
-                                <th>Вилоят номи</th>
+                                <th rowspan="2">#</th>
+                                <th rowspan="2">Ишлаб чиқарувчи номи</th>
+                                <th rowspan="2">Ҳудуд номи</th>
+                                <th rowspan="2">Вилоят номи</th>
+                               <th colspan="{{$equipments->count()}}">Ишлаб чиқариладиган жиҳозлап</th>
+                                <th rowspan="2">Созлаш</th>
+                            </tr>
+                            <tr>
                                 @foreach($equipments as $equipment)
                                     <th>{{$equipment->name }} ({{$equipment->volume_name}})</th>
                                 @endforeach
-                                <th>Созлаш</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th></th>
-                                <th></th>
-                                <th></th>
                                 <th>Жами</th>
-                                @foreach($equipments as $equipment)
-                                    <th></th>
+                                <th></th>
+                                <th></th>
+                                @foreach($sum as $item)
+                                    <th>{{$item}}</th>
                                 @endforeach
                                 <th></th>
                             </tr>

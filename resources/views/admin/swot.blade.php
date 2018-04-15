@@ -8,12 +8,9 @@
         }
 
         td.details-control {
-            background: url('http://icons.iconarchive.com/icons/custom-icon-design/flatastic-1/512/add-1-icon.png') no-repeat center center;
+            background: white ;
+            background-size: 10px 10px;
             cursor: pointer;
-        }
-
-        tr.shown td.details-control {
-            background: url('https://cdn3.iconfinder.com/data/icons/softwaredemo/PNG/256x256/Minus_Circle_Green.png') no-repeat center center;
         }
     </style>
 @endsection

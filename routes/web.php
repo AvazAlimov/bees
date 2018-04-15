@@ -23,22 +23,23 @@ Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit
 
 Route::prefix('admin')->group(function (){
     Route::get('nomma-nom','Admin\AdminController@nomma')->name('nomma');
-    Route::get('get/nomma-nom','Admin\AdminController@getNomma')->name('getNomma');
+    Route::get('get/nomma-nom','Admin\AdminAjaxController@getNomma')->name('getNomma');
     Route::post('nomma-nom/submit','Admin\AdminController@submitNomma')->name('submit.nomma');
     Route::get('nomma-nom/delete/{id}','Admin\AdminController@deleteNomma')->name('delete.nomma');
     Route::post('nomma-nom/update/{id}','Admin\AdminController@updateNomma')->name('update.nomma');
-    Route::get('nomma-nom/export', 'Admin\AdminController@exportNomma')->name('export.nomma');
+    Route::get('nomma-nom/export', 'Admin\AdminExcelController@exportNomma')->name('export.nomma');
     Route::get('ishlabchiqarish','Admin\AdminController@ishlab')->name('ishlabchiqarish');
     Route::get('svod','Admin\AdminController@swot')->name('swot');
-    Route::get('get/swot/{id?}','Admin\AdminController@getSwot')->name('getSwot');
-    Route::get('get/regions','Admin\AdminController@getRegion')->name('getRegion');
-    Route::get('region/excel','Admin\AdminController@regionExport')->name('region.export');
-    Route::get('excel/{id?}','Admin\AdminController@swotExport')->name('swot.export');
+    Route::get('get/swot/{id?}','Admin\AdminAjaxController@getSwot')->name('getSwot');
+    Route::get('get/regions','Admin\AdminAjaxController@getRegion')->name('getRegion');
+    Route::get('region/excel','Admin\AdminExcelController@regionExport')->name('region.export');
+    Route::get('excel/{id?}','Admin\AdminExcelController@swotExport')->name('swot.export');
+
     Route::any('get/ishlabchiqarish','Admin\AdminAjaxController@ishlabchiqarish')->name('ishlabchiqarish.data');
     Route::get('ishlabchiqarish/delete/{id}','Admin\AdminController@deleteIshlabchiqarish')->name('delete.ishlabchiqarish');
     Route::post('ishlabchiqarish/update/{id}','Admin\AdminController@updateIshlabchiqarish')->name('update.ishlabchiqarish');
+    Route::get('ishlabchiqarish/excel','Admin\AdminExcelController@ishlabchiqarishExport')->name('ishlabchiqarish.export');
 
-    Route::get('ishlabchiqarish/excel','Admin\AdminController@ishlabchiqarishExport')->name('ishlabchiqarish.export');
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
     Route::get('index', 'Admin\AdminController@index2')->name('admin.index2');
     Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
