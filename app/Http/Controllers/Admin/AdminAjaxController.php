@@ -87,7 +87,7 @@ class AdminAjaxController extends Controller
 
     public function getSwot($id = null)
     {
-        $equipments = Equipment::orderBy('id','asc')->get();
+        $activities = Activity::orderBy('id','asc')->get();
 
         if ($id == null) {
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
@@ -120,8 +120,8 @@ class AdminAjaxController extends Controller
 
 
         }
-        foreach ($equipments as $equipment){
-            $groupByCity->addSelect(DB::raw('COUNT(CASE WHEN activity_id = '.$equipment->id.' then activity_id end) as activity'.$equipment->id));
+        foreach ($activities as $activity){
+            $groupByCity->addSelect(DB::raw('COUNT(CASE WHEN activity_id = '.$activity->id.' then activity_id end) as activity'.$activity->id));
         }
 
         $groupByCity->groupBy('cities.id');
