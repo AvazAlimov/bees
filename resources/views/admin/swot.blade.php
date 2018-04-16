@@ -235,7 +235,11 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: url
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        '_token': '{{ csrf_token() }}'
+                    }
                 },
                 columns: [
                     {data: 'region_name'},
@@ -286,7 +290,13 @@
                 paging:false,
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('getRegion') !!}',
+                ajax: {
+                    url: '{!! route('getRegion') !!}',
+                    type: 'POST',
+                    data: {
+                        '_token': '{{ csrf_token() }}'
+                    }
+                },
                 columns: [
                     {
                         data: 'region',

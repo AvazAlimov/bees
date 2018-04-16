@@ -23,15 +23,15 @@ Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit
 
 Route::prefix('admin')->group(function (){
     Route::get('nomma-nom','Admin\AdminController@nomma')->name('nomma');
-    Route::get('get/nomma-nom','Admin\AdminAjaxController@getNomma')->name('getNomma');
+    Route::any('get/nomma-nom','Admin\AdminAjaxController@getNomma')->name('getNomma');
     Route::post('nomma-nom/submit','Admin\AdminController@submitNomma')->name('submit.nomma');
     Route::get('nomma-nom/delete/{id}','Admin\AdminController@deleteNomma')->name('delete.nomma');
     Route::post('nomma-nom/update/{id}','Admin\AdminController@updateNomma')->name('update.nomma');
     Route::get('nomma-nom/export', 'Admin\AdminExcelController@exportNomma')->name('export.nomma');
     Route::get('ishlabchiqarish','Admin\AdminController@ishlab')->name('ishlabchiqarish');
     Route::get('svod','Admin\AdminController@swot')->name('swot');
-    Route::get('get/swot/{id?}','Admin\AdminAjaxController@getSwot')->name('getSwot');
-    Route::get('get/regions','Admin\AdminAjaxController@getRegion')->name('getRegion');
+    Route::any('get/swot/{id?}','Admin\AdminAjaxController@getSwot')->name('getSwot');
+    Route::any('get/regions','Admin\AdminAjaxController@getRegion')->name('getRegion');
     Route::get('region/excel','Admin\AdminExcelController@regionExport')->name('region.export');
     Route::get('excel/{id?}','Admin\AdminExcelController@swotExport')->name('swot.export');
 
