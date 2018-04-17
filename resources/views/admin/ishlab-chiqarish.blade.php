@@ -89,11 +89,6 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <a href="#" class="btn btn-success btn-add-new pull-right" style="margin-top: 22px;">
-                                <i class="fa fa-plus"></i> <span>Добавить</span>
-                            </a>
-                        </div>
                     </div>
                     <div class="row">
                         <table id="example" class="table table-striped table-bordered cell-border" cellspacing="0">

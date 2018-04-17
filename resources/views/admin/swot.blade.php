@@ -258,11 +258,6 @@
                         defaultContent: 0
                     },
                     {data: 'labors'}
-                    /* {
-                     data: null, render: function (data, type, full, meta) {
-                     return '<a href="' + data.id + '">Here</a>';
-                     }
-                     }*/
                 ],
                 "language": {
                     "paginate": {

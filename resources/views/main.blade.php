@@ -54,7 +54,7 @@
                         <div class="form-group col-md-6">
                             <label for="type" class="col-form-label col-form-label-sm">Фойдаланувчи тури</label>
                             <select id="type" class="form-control form-control-sm" onchange="changeType(this.id)">
-                                <option value="0" selected>Юридик корхоналар (МЧЖ, ХК, ҚК)</option>
+                                <option value="1" selected>Юридик корхоналар (МЧЖ, ХК, ҚК)</option>
                                 <option value="2">ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари</option>
                                 <option value="3">Шахсий ёрдамчи хўжалик (Жисмоний шахслар)</option>
                             </select>
@@ -71,7 +71,7 @@
                     </div>
                 @endif
                 <div class="card-body tab-content" id="nav-tabContent">
-                    <form action="{{route('submit.form',1)}}" method="post" class="container tab-pane fade show active"
+                  {{--  <form action="{{route('submit.form',1)}}" method="post" class="container tab-pane fade show active"
                           aria-labelledby="nav-user_1-tab" id="user_1">
                         {{csrf_field()}}
                         <div class="row">
@@ -218,8 +218,8 @@
                             <input type="submit" class="btn btn-warning" value="Рўйхатдан ўтиш">
                         </div>
                     </form>
-
-                    <form action="{{route('submit.form', 2)}}" method="post" class="container tab-pane fade show"
+--}}
+                    <form action="{{route('submit.form', 2)}}" method="post" class="container tab-pane fade show active"
                           aria-labelledby="nav-user_2-tab" id="user_2">
                         {{csrf_field()}}
                         <div class="row">
@@ -664,15 +664,14 @@
         }
 
         function changeType(id) {
-            var selected = document.getElementById(id).selectedIndex + 1;
-            for (var i = 1; i < 5; i++)
+            var selected = document.getElementById(id).selectedIndex + 2;
+            for (var i = 2; i < 5; i++)
                 document.getElementById("user_" + i).classList.remove("active");
             document.getElementById("user_" + selected).classList.add("active");
         }
 
 
         $(document).ready(function () {
-            regionChanged('region_1');
             regionChanged('region_2');
             regionChanged('region_3');
             regionChanged('region_4');

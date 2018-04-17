@@ -41,7 +41,6 @@ Route::prefix('admin')->group(function (){
     Route::get('ishlabchiqarish/excel','Admin\AdminExcelController@ishlabchiqarishExport')->name('ishlabchiqarish.export');
 
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
-    Route::get('index', 'Admin\AdminController@index2')->name('admin.index2');
     Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('login/submit', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
@@ -140,5 +139,6 @@ Route::prefix('user')->group(function (){
 
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user', 'HomeController@index')->name('home');
+Route::get('/user/settings','HomeController@settings')->name('settings');
 Route::get('/{type?}', 'Web\WebController@showForm')->name('web.show.form');

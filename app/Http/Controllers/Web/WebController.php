@@ -42,7 +42,7 @@ class WebController extends Controller
                 'mfo' => $type < 4 ? 'required|digits:5' : '',
                 'address' => 'required|max:255',
                 'phone' => 'required|max:19|min:12',
-                'email' => 'email',
+                'email' => 'nullable|email',
                 'families.*' =>'exists:families,id',
                 'fullName' => 'required|max:255',
                 'labors' => $type < 3 ? 'required|numeric|min:0' : '',

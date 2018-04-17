@@ -124,7 +124,7 @@ class AdminAjaxController extends Controller
             $groupByCity->addSelect(DB::raw('COUNT(CASE WHEN activity_id = '.$activity->id.' then activity_id end) as activity'.$activity->id));
         }
 
-        $groupByCity->groupBy('cities.id')->get();
+        $groupByCity= $groupByCity->groupBy('cities.id')->get();
 
 
 //        DB::raw('COUNT(CASE WHEN activity_id = 1 then activity_id end) as activity1')

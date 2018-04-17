@@ -49,10 +49,11 @@ class AdminExcelController extends Controller
                         $item->activity, $item->family_count != null ? $item->family_count : 0,
                         $item->inn, $item->name, $item->phone, $item->labors]);
                 $sheet->appendRow(['', 'Жами', '', '', '', '', $total->sum_bees_count, '', '', '', $total->sum_labors, '']);
+                $sheet->setBorder('A4:K'.(count($collection)+4), 'thin');
             });
 
 
-        })->export('xlsx');
+        })->export('xls');
         return redirect()->back()->withMessage('message', "Жадвал йукланди");
     }
 
@@ -88,7 +89,7 @@ class AdminExcelController extends Controller
             });
 
 
-        })->export('xlsx');
+        })->export('xls');
         return redirect()->back()->withMessage('message', "Жадвал йукланди");
     }
 
@@ -160,7 +161,6 @@ class AdminExcelController extends Controller
 
                     $sheet->appendRow((5 + $key), $array);
                 }
-                $sheet->setAutoSize(true);
                 $sheet->setBorder('A3:' . end($column2) . ($collection->count() + 4), 'thin');
 
             });
