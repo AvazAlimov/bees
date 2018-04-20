@@ -134,4 +134,19 @@ class AdminAjaxController extends Controller
             ->make(true);
     }
 
+    public function getUsers($id = null)
+    {
+
+        if ($id == null) {
+            $users = User::orderByDesc('id');
+            $users= $users->select('*')->addSelect(DB::raw('(CASE WHEN type<3 then \'Юридик корхоналар (МЧЖ, ХК, ҚК)\' WHEN type=3 then \'ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари\' WHEN type=4 then \'Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)\' end) as user_type'));
+
+        } else {
+            $users = User::orderByDesc('id')->where('city_id', $id);
+            $users= $users->select('*')->addSelect(DB::raw('(CASE WHEN type<3 then \'Юридик корхоналар (МЧЖ, ХК, ҚК)\' WHEN type=3 then \'ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари\' WHEN type=4 then \'Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)\' end) as user_type'));
+        }
+        $users->get();
+        return DataTables::of($users)->make(true);
+    }
+
 }

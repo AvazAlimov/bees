@@ -26,6 +26,29 @@ class HugeAmounSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
+
+        for($i = 2; $i<=85; $i+=7) {
+            User::create([
+                'username' => 'S' . sprintf("%07d", $i),
+                'email' => $faker->email,
+                'password' => bcrypt('19961128'),
+                'region_id' => City::findOrFail($i)->region->id,
+                'city_id' => $i,
+                'neighborhood' => $faker->streetAddress,
+                'subject' => $faker->userAgent,
+                'bank_name' => 'Aloqa Bank',
+                'reg_date' => $faker->date(),
+                'inn' => '123456789',
+                'mfo' => '12345',
+                'address' => $faker->address,
+                'phone' => '998908082443',
+                'fullName' => $faker->name,
+                'labors' => $faker->numberBetween(1, 200),
+                'type' => random_int(1,4)
+            ]);
+        }
+
+        
         Equipment::truncate();
         foreach(range(1, 20) as $i){
             Equipment::create([
