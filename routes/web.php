@@ -22,6 +22,7 @@ Route::prefix('leader')->group(function(){
 Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit.form');
 
 Route::prefix('admin')->group(function (){
+    Route::any('get/user/{id?}', 'Admin\AdminAjaxController@getUsers')->name('getUsers');
     Route::get('nomma-nom','Admin\AdminController@nomma')->name('nomma');
     Route::any('get/nomma-nom','Admin\AdminAjaxController@getNomma')->name('getNomma');
     Route::post('nomma-nom/submit','Admin\AdminController@submitNomma')->name('submit.nomma');
