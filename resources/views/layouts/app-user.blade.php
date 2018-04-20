@@ -47,9 +47,9 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                         @else
                             <li class="dropdown">
-                                @auth('leader')
+                                @auth('web')
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->firstName }} {{ Auth::user()->lastName }}<span class="caret"></span>
+                                    {{ Auth::user()->username }} <span class="caret"></span>
                                 </a>
                                 @endauth
                                 <ul class="dropdown-menu">

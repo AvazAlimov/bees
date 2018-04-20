@@ -16,6 +16,7 @@ class CreateRealizationsTable extends Migration
         Schema::create('realizations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('family_count')->unsigned();
+            $table->string('honey_type')->nullable();
             $table->double('annual_prog')->unsigned();
             $table->double('produced_honey')->unsigned();
             $table->double('reserve')->unsigned();

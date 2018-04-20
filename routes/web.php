@@ -129,16 +129,19 @@ Route::get('/regions', function(){
 
 });
 Route::prefix('user')->group(function (){
+    Route::get('/', 'HomeController@index')->name('home');
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
+    Route::get('settings','HomeController@settings')->name('settings');
+    Route::get('/realizations','HomeController@realizations')->name('user.realizations');
+    Route::get('/exports','HomeController@exports')->name('user.exports');
+    Route::get('/productions','HomeController@productions')->name('user.productions');
     // Registration Routes...
 //    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 //    Route::post('register', 'Auth\RegisterController@register');
 
 });
 
-Route::get('/user', 'HomeController@index')->name('home');
-Route::get('/user/settings','HomeController@settings')->name('settings');
+
 Route::get('/{type?}', 'Web\WebController@showForm')->name('web.show.form');

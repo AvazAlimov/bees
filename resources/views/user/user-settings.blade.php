@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 @section('styles')
     <link href="{{asset('css/client.css')}}" rel="stylesheet">
 @endsection
@@ -46,13 +46,13 @@
                         <div class="panel-body">
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="#"> </a>
+                                    <a href="{{route('user.realizations')}}"> Асал етиштириш ва реализиция</a>
                                 </li>
                                 <li>
-                                    <a href="#">Консультации по телефону</a>
+                                    <a href="{{route('user.exports')}}"> Асални қадоқлаш ва реализация</a>
                                 </li>
                                 <li>
-                                    <a href="#">Документы</a>
+                                    <a href="{{route('user.productions')}}"> Ишлаб чиқарилган жиҳоз</a>
                                 </li>
                             </ul>
                         </div>
@@ -77,34 +77,46 @@
                             <div class="col-sm-6">
                                 <form action="">
                                     <div class="form-group">
-                                        <label for="surname">Фамилия</label>
-                                        <input type="text" class="form-control " id="surname"/>
+                                        <label for="surname">Логин</label>
+                                        <input type="text" class="form-control" value="U1510352" id="surname" readonly/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Имя</label>
-                                        <input type="text" class="form-control " id="name"/>
+                                        <label for="subject">Субъект (корхона, ЯТТ)</label>
+                                        <input type="text" class="form-control" name="subject" id="subject" value="Ярашов Найим боги"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="patronymic">Отчество</label>
-                                        <input type="text" class="form-control " id="patronymic"/>
+                                        <label for="neighborhood">Маҳалла (МФЙ) номи</label>
+                                        <input type="text" class="form-control " value="Кизилтепа" name="neighborhood" id="neighborhood"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="city">Город</label>
-                                        <input type="text" class="form-control " id="city" list="cities"/>
-                                        <datalist id="cities">
-                                            <option>Москва</option>
-                                            <option>Ташкент</option>
-                                        </datalist>
+                                        <label for="region_id">Вилоят номи</label>
+                                        <select class="form-control" id="region_id" name="region_id">
+                                            <option selected>Андижон вилояти</option>
+                                            <option>Бухоро вилояти</option>
+                                            <option>Жиззах вилояти</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="birthday">Дата рождение</label>
-                                        <input type="date" class="form-control " id="birthday"/>
+                                        <label for="city_id">Туман/шаҳар номи</label>
+                                        <select class="form-control" id="city_id" name="city_id">
+                                            <option selected>ЧИРЧИК ШАХРИ</option>
+                                            <option>ОККУРГОН ТУМАНИ</option>
+                                            <option>ОХАНГАРОН ТУМАНИ</option>
+                                        </select>
                                     </div>
-                                    <div class="form-group form-inline">
-                                        <label>Пол </label>
-                                        <input type="radio" name="gender" checked /> Мужской
-                                        <input type="radio" name="gender"/> Женский
+                                    <div class="form-group">
+                                        <label for="reg_date">Корхона давлат рўйҳатидан ўтган сана</label>
+                                        <input type="date" class="form-control " value="2018-01-01" id="reg_date"/>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="inn">СТИР (ИНН)</label>
+                                        <input type="text" class="form-control inn" value="492792097" id="inn" minlength="9"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inn">Банк МФО</label>
+                                        <input type="text" class="form-control mfo" value="01111" id="mfo" minlength="5"/>
+                                    </div>
+
                                     <div class="form-group">
                                         <button type="button" class="btn btn-default btn-primary pull-right">Сохранить</button>
                                     </div>
@@ -144,4 +156,30 @@
         </div>
     </div>
     <!-- /Content -->
+@endsection
+@section('scripts')
+    <script>
+        var arrays = [{!! $regions !!}];
+        arrays.push({!! $cities !!});
+        arrays.push({!! $banks !!});
+        var mfos = [];
+    </script>
+    <script src="{{ asset('dist/js/jquery.mask.min.js') }}"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('.inn').mask('000000000', {
+                'translation': {
+                    0: {pattern: /[0-9*]/}
+                }
+            });
+            $('.mfo').mask('00000');
+        });
+    </script>
+    <script src="{{ asset('js/vue.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/lodash.min.js') }}" type="text/javascript"></script>
+
+
+
+    <!--suppress JSUnresolvedVariable, JSUnresolvedFunction, JSUnusedLocalSymbols -->
 @endsection

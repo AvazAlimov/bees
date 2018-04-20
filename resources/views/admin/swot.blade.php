@@ -151,7 +151,7 @@
                     </div>
                     <div class="row" style="margin-top: 30px;">
                         <div class="page-header">
-                            <h2 class="pull-left">O'zbekiston asalarichilari uyushmasiga a'zo subyektlar to'g'risida ma'lumot</h2>
+                            <h2 class="pull-left">Ўзбекистон асаларичилари уюшмасига аъзо субектлар тўғрисида маълумот</h2>
                             <div>
                                 <a id="swot-export" href="{{route('swot.export')}}" class="btn btn-success" tabindex="0"
                                    aria-controls="example"
@@ -177,6 +177,40 @@
                                 @foreach($activities as $activity)
                                     <th scope="col">{{$activity->name}}</th>
                                 @endforeach
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="page-header">
+                            <h2 class="pull-left">
+                                Ўзбекистон асаларичилари уюшмасига аъзо субектлар тўғрисида маълумот
+                            </h2>
+                            <div>
+                                <a id="swot-export" href="#" class="btn btn-success" tabindex="0"
+                                   aria-controls="example"
+                                   style="margin-top: 20px; margin-left: 20px;">Excel
+                                </a>
+                            </div>
+                        </div>
+                        <table id="example3" class="table table-bordered realization-theader " cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                               <th>Т/Р</th>
+                                <th>Субъект номи</th>
+                                <th>Вилоят номи</th>
+                                <th>Туман/шаҳар номи</th>
+                                <th>Маҳалла (МФЙ) номи</th>
+                                <th>Корхона давлат рўйҳатидан ўтган сана</th>
+                                <th>СТИР (ИНН)</th>
+                                <th>Банк МФО</th>
+                                <th>Хизмат кўрсатиладиган банк номи</th>
+                                <th>Манзил</th>
+                                <th>Телефон рақами</th>
+                                <th>Электрон почта</th>
+                                <th>Хўжалик раҳбари исми шарифи</th>
+                                <th>Ишчилар сони</th>
+                                <th>Боқлаётган асалари оилалари сони</th>
                             </tr>
                             </thead>
                         </table>
