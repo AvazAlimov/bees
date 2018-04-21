@@ -31,19 +31,25 @@
         /*color: #333;*/
         /*}*/
 
+
+
         .display-5 {
             color: #582E2A;
             font-weight: Bold;
+
         }
+
 
     </style>
 @endsection
 
 @section('content')
     <div class="jumbotron bg-warning text-center">
-        <img src="{{ asset('Resources/logo.png') }}" alt="logo" style="width: 128px;">
-        <h1 class="display-5"><br>ЎЗБЕКИСТОН АСАЛАРИЧИЛАРИ<br>УЮШМАСИ</h1>
+        <img src="{{ asset('Resources/logo-3.png') }}" class="img-fluid" alt="logo" style="width: 800px;">
+
     </div>
+
+
 
     <div id="register">
         <br>
