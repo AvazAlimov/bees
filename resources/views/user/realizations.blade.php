@@ -7,12 +7,11 @@
         .background-white {
             background-color: #fff;
         }
-
-        .list-active {
-            background-color: #f5f5f5;
+        .bg-warning{
+            background-color: #ffc107 !important;
         }
-        #example2{
-
+        .panel{
+            border-color: #ffc107 !important;
         }
     </style>
 
@@ -23,8 +22,8 @@
         <div class="container-fluid">
             <div class="col-sm-3">
                 <!-- Profile -->
-                <div class="panel panel-default panel-success">
-                    <div class="panel-heading">
+                <div class="panel panel-default">
+                    <div class="panel-heading bg-warning">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#profile">
                                 Мой профиль <b class="caret"></b></a>
@@ -50,8 +49,8 @@
                 <!-- /Profile -->
 
                 <!-- Site services -->
-                <div class="panel panel-default panel-primary">
-                    <div class="panel-heading">
+                <div class="panel panel-default">
+                    <div class="panel-heading bg-warning">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#services">
                                 Мой профиль <b class="caret"></b></a>
@@ -76,15 +75,15 @@
                 <!-- /Site services -->
             </div>
             <div class="col-sm-9">
-                <div class="row background-white border-gray" id="services-list">
-                    <div class="page-header clearfix">
+                <div class="row background-white panel" id="services-list">
+                    <div class="page-header clearfix ">
                         <h2 class="pull-left">O'zbekiston asalarichilari uyushmasiga a'zo subyektlar to'g'risida
                             ma'lumot</h2>
                         <div>
                             <a id="swot-export" href="#" class="btn btn-success pull-left" tabindex="0"
                                aria-controls="example">Excel
                             </a>
-                            <a  onclick="" class="btn btn-primary pull-right"
+                            <a  onclick="" class="btn btn-warning pull-right"
                                 tabindex="0"
                                 aria-controls="example">Қўшиш
                             </a>
