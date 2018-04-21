@@ -282,7 +282,7 @@
                                 <label for="bank_2" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
                                     номи</label>
                                 <input type="text" class="form-control form-control-sm" id="bank_2" name="bank_name"
-                                       value="{{old('bank_name')}}" readonly required v-model="bank">
+                                       value="{{old('bank_name')}}" v-model="bank">
                             </div>
                         </div>
                         <div class="row">
@@ -421,7 +421,7 @@
                                 <label for="bank_3" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
                                     номи</label>
                                 <input type="text" class="form-control form-control-sm" id="bank_3" name="bank_name"
-                                       value="{{old('bank_name')}}" readonly required v-model="bank">
+                                       value="{{old('bank_name')}}" v-model="bank">
                             </div>
                         </div>
                         <div class="row">

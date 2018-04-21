@@ -138,12 +138,12 @@ class AdminAjaxController extends Controller
     {
 
         if ($id == null) {
-            $users = User::orderByDesc('id');
-            $users= $users->select('*')->addSelect(DB::raw('(CASE WHEN type<3 then \'Юридик корхоналар (МЧЖ, ХК, ҚК)\' WHEN type=3 then \'ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари\' WHEN type=4 then \'Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)\' end) as user_type'));
+            $users = User::join('regions', 'regions.id', 'users.region_id')->join('cities', 'cities.id', 'users.city_id')->orderByDesc('id');
+            $users= $users->select('users.*','regions.name as region_name', 'cities.name as city_name' )->addSelect(DB::raw('(CASE WHEN type<3 then \'Юридик корхоналар (МЧЖ, ХК, ҚК)\' WHEN type=3 then \'ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари\' WHEN type=4 then \'Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)\' end) as user_type'));
 
         } else {
-            $users = User::orderByDesc('id')->where('city_id', $id);
-            $users= $users->select('*')->addSelect(DB::raw('(CASE WHEN type<3 then \'Юридик корхоналар (МЧЖ, ХК, ҚК)\' WHEN type=3 then \'ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари\' WHEN type=4 then \'Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)\' end) as user_type'));
+            $users = User::join('regions', 'regions.id', 'users.region_id')->join('cities', 'cities.id', 'users.city_id')->orderByDesc('id')->where('city_id', $id);
+            $users= $users->select('users.*','regions.name as region_name', 'cities.name as city_name')->addSelect(DB::raw('(CASE WHEN type<3 then \'Юридик корхоналар (МЧЖ, ХК, ҚК)\' WHEN type=3 then \'ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари\' WHEN type=4 then \'Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)\' end) as user_type'));
         }
         $users->get();
         return DataTables::of($users)->make(true);

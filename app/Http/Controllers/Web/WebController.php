@@ -30,7 +30,6 @@ class WebController extends Controller
 
     public function submitForm(Request $request, $type)
     {
-
             $validator = Validator::make($request->all(), [
                 'region_id' => 'required|exists:regions,id',
                 'city_id' => 'required|exists:cities,id',
@@ -38,7 +37,6 @@ class WebController extends Controller
                 'subject' => $type < 4 ?  'required|max:255' : '',
                 'reg_date' => $type < 4 ? 'required' : '',
                 'inn' => $type < 4 ? 'required|digits:9' : '',
-                'bank_name' => $type < 4 ?  'required' : '',
                 'mfo' => $type < 4 ? 'required|digits:5' : '',
                 'address' => 'required|max:255',
                 'phone' => 'required|max:19|min:12',
