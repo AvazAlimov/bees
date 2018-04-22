@@ -464,7 +464,7 @@
                 var tr = $(this).closest('tr');
                 var row = table1.row( tr );
                 var id =row.data().id;
-                alert(tr);
+
                 $('#example2').DataTable().destroy();
 
                 fetch_data(id);
@@ -478,7 +478,6 @@
                 var tr = $(this).closest('tr');
                 var row = table2.row( tr );
                 var id =row.data().id;
-                alert($(this).closest('tr'));
 
                 $('#example3').DataTable().destroy();
 
