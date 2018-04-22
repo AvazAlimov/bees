@@ -10,6 +10,11 @@
             background-size: cover;
             border-radius: 0;
         }
+        @media(max-width: 800px){
+            .jumbotron{
+                min-height:200px;
+            }
+        }
 
         #register {
             background: rgba(0, 0, 0, 0) url({{ asset('Resources/halftone-yellow.png') }}) repeat scroll 0 0;

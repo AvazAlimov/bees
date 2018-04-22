@@ -4,6 +4,12 @@
         .background-white {
             background-color: #fff;
         }
+        .bg-warning{
+            background-color: #ffc107 !important;
+        }
+        .panel{
+            border-color: #ffc107 !important;
+        }
     </style>
     <link href="{{asset('css/client.css')}}" rel="stylesheet">
 @endsection
@@ -13,8 +19,8 @@
         <div class="container">
             <div class="col-sm-3">
                 <!-- Profile -->
-                <div class="panel panel-default panel-success">
-                    <div class="panel-heading">
+                <div class="panel panel-default">
+                    <div class="panel-heading bg-warning">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#profile">
                                 Мой профиль <b class="caret"></b></a>
@@ -40,8 +46,8 @@
                 <!-- /Profile -->
 
                 <!-- Site services -->
-                <div class="panel panel-default panel-primary">
-                    <div class="panel-heading">
+                <div class="panel panel-default">
+                    <div class="panel-heading bg-warning">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#services">
                                 Мой профиль <b class="caret"></b></a>

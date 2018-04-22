@@ -1,5 +1,18 @@
 @extends('layouts.app-admin')
 @section('styles')
+    <style>
+
+        .background-white {
+            background-color: #fff;
+        }
+        .bg-warning{
+            background-color: #ffc107 !important;
+        }
+        .panel{
+            border-color: #ffc107 !important;
+        }
+
+    </style>
     <link href="{{asset('css/client.css')}}" rel="stylesheet">
 @endsection
 @section('content')
@@ -8,8 +21,8 @@
         <div class="container">
             <div class="col-sm-3">
                 <!-- Profile -->
-                <div class="panel panel-default panel-success">
-                    <div class="panel-heading">
+                <div class="panel panel-default">
+                    <div class="panel-heading bg-warning">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#profile">
                                 Мой профиль <b class="caret"></b></a>
@@ -35,8 +48,8 @@
                 <!-- /Profile -->
 
                 <!-- Site services -->
-                <div class="panel panel-default panel-primary">
-                    <div class="panel-heading">
+                <div class="panel panel-default">
+                    <div class="panel-heading bg-warning">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#services">
                                 Мой профиль <b class="caret"></b></a>
@@ -60,7 +73,7 @@
                 </div>
                 <!-- /Site services -->
             </div>
-            <div class="col-sm-9 border-gray background-white">
+            <div class="col-sm-9 panel background-white">
                 <h5 class="text-success"><i class="fa fa-pencil"></i> Редактирование профиля</h5>
                 <ul class="nav nav-tabs">
                     <li class="active">
@@ -118,7 +131,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-default btn-primary pull-right">Сохранить</button>
+                                        <button type="button" class="btn btn-default pull-right bg-warning">Сохранить</button>
                                     </div>
                                 </form>
                             </div>
@@ -145,7 +158,7 @@
                                         <input type="password" class="form-control " id="current-password"/>
                                     </div>
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-default btn-primary pull-right">Сохранить</button>
+                                        <button type="button" class="btn btn-default  pull-right bg-warning">Сохранить</button>
                                     </div>
                                 </form>
                             </div>
