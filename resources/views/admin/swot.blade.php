@@ -211,6 +211,7 @@
                                 <th>Хўжалик раҳбари исми шарифи</th>
                                 <th>Ишчилар сони</th>
                                 <th>Боқлаётган асалари оилалари сони</th>
+                                <th></th>
                             </tr>
                             </thead>
                         </table>
@@ -311,6 +312,7 @@
                 },
                 "scrollX": true
             });
+            return table2;
         }
 
         function fetch_user_data(params) {
@@ -357,9 +359,8 @@
                         defaultContent: 0
                     },
                     {
-                        data: 'id',
-                        visible: false,
-                        orderable:false
+                        data:'city_id',
+                        visible:false
                     }
                 ],
                 "language": {
@@ -458,16 +459,17 @@
                 },
                 "scrollX": true
             });
-            fetch_data(params);
+            var table2 = fetch_data(params);
+
             fetch_user_data(params);
             $('#example1 tbody').on('click', 'td.details-control', function () {
                 var tr = $(this).closest('tr');
                 var row = table1.row( tr );
                 var id =row.data().id;
-                alert(tr);
+
                 $('#example2').DataTable().destroy();
 
-                fetch_data(id);
+                table2 = fetch_data(id);
                 $("#swot-export").attr("href",  '{!! route('swot.export') !!}'+'/'+id);
                 $('html,body').animate({
                         scrollTop: $("#example2").offset().top-200},
@@ -475,11 +477,10 @@
             });
 
             $('#example2 tbody').on('click', 'td.details-control', function () {
-                var tr = $(this).closest('tr');
-                var row = table2.row( tr );
-                var id =row.data().id;
-                alert($(this).closest('tr'));
-
+                var tr2 = $(this).closest('tr');
+                var row = table2.row( tr2 );
+                var id =row.data().city_id;
+//                alert(JSON.stringify(id));
                 $('#example3').DataTable().destroy();
 
                 fetch_user_data(id);

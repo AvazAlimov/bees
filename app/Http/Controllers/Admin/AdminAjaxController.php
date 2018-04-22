@@ -93,7 +93,7 @@ class AdminAjaxController extends Controller
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
                 ->join('regions', 'regions.id', 'cities.region_id')
                 ->leftJoin('works','works.user_id','users.id')->leftJoin('activities','activities.id','works.activity_id')
-                ->select('regions.name as region_name', 'cities.name as city_name','works.activity_id as activity_id')
+                ->select('regions.name as region_name', 'cities.name as city_name','cities.id as city_id','works.activity_id as activity_id')
                 ->withCount(['user as total', 'user as yuridik' => function ($query) {
                     $query->where('users.type', '<', 3);
                 }, 'user as yakka' => function ($query) {
@@ -108,7 +108,7 @@ class AdminAjaxController extends Controller
                 ->join('regions', 'regions.id', 'cities.region_id')
                 ->where('regions.id', $id)
                 ->leftJoin('works','works.user_id','users.id')->leftJoin('activities','activities.id','works.activity_id')
-                ->select('regions.name as region_name', 'cities.name as city_name','works.activity_id as activity_id')
+                ->select('regions.name as region_name', 'cities.name as city_name','cities.id as city_id','works.activity_id as activity_id')
                 ->withCount(['user as total', 'user as yuridik' => function ($query) {
                     $query->where('users.type', '<', 3);
                 }, 'user as yakka' => function ($query) {
