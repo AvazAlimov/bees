@@ -187,7 +187,7 @@
                                 Ўзбекистон асаларичилари уюшмасига аъзо субектлар тўғрисида маълумот
                             </h2>
                             <div>
-                                <a id="swot-user-export" href="#" class="btn btn-success" tabindex="0"
+                                <a id="swot-user-export" href="{{route('user.export')}}" class="btn btn-success" tabindex="0"
                                    aria-controls="example"
                                    style="margin-top: 20px; margin-left: 20px;">Excel
                                 </a>
@@ -342,7 +342,7 @@
                     {data: 'region_name'},
                     {data: 'city_name'},
                     {data: 'neighborhood'},
-                    {data: 'created_at'},
+                    {data: 'reg_date'},
                     {data: 'inn'},
                     {data: 'mfo'},
                     {data: 'bank_name'},
@@ -484,7 +484,7 @@
                 $('#example3').DataTable().destroy();
 
                 fetch_user_data(id);
-                $("#swot-user-export").attr("href",  '{!! route('swot.export') !!}'+'/'+id);
+                $("#swot-user-export").attr("href",  '{!! route('user.export') !!}'+'/'+id);
                 $('html,body').animate({
                         scrollTop: $("#example3").offset().top-200},
                     'slow');

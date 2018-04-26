@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Activity;
+use App\Bank;
 use App\City;
 use App\Delivery;
 use App\Equipment;
@@ -250,4 +251,5 @@ class AdminController extends Controller
         return redirect()->back()->with('message', "Jadval muvofaqiyatli o'zgartirildi");
 
     }
+
 }
