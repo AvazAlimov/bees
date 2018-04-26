@@ -271,11 +271,11 @@ class AdminExcelController extends Controller
         Excel::create('Аъзолар', function ($excel) use ($array, $column1) {
 
            $excel->sheet(0, function ($sheet) use ($array, $column1) {
-               $sheet->mergeCells('A1:P1')->appendRow(1,['Ўзбекистон асаларичилари уюшмасига аъзо субектлар тўғрисида маълумот']);
-               $sheet->cells('A1:P1', function($cells) {
+               $sheet->mergeCells('A1:O1')->appendRow(1,['Ўзбекистон асаларичилари уюшмасига аъзо субектлар тўғрисида маълумот']);
+               $sheet->cells('A1:O1', function($cells) {
                    $cells->setFontWeight('bold');
                });
-               $sheet->cells('A3:P3', function($cells) {
+               $sheet->cells('A3:O3', function($cells) {
                    $cells->setFontWeight('bold');
                });
                 $sheet->appendRow(3, $column1);
@@ -285,7 +285,7 @@ class AdminExcelController extends Controller
                         $item->reg_date, $item->inn, $item->mfo, $item->bank_name, $item->address, $item->phone, $item->email,
                         $item->fullName, $item->labors, $item->bees_count]);
                 }
-                $sheet->setBorder('A2:P'.($array->count()+3), 'thin');
+                $sheet->setBorder('A2:O'.($array->count()+3), 'thin');
             });
         })->download('xls');
 

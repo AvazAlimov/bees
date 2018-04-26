@@ -144,15 +144,7 @@ Route::prefix('user')->group(function (){
 //    Route::post('register', 'Auth\RegisterController@register');
 
 });
-Route::get('update/sql', function(){
-    $users= App\User::all();
-    foreach ($users as $user){
-        if(App\Bank::where('mfo', $user->mfo)->first() != null) {
-            $user->bank_name = App\Bank::where('mfo', $user->mfo)->first()->name;
-            $user->save();
-        }
-    }
-});
+
 
 
 Route::get('/{type?}', 'Web\WebController@showForm')->name('web.show.form');
