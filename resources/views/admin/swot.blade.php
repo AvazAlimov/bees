@@ -211,7 +211,6 @@
                                 <th>Хўжалик раҳбари исми шарифи</th>
                                 <th>Ишчилар сони</th>
                                 <th>Боқлаётган асалари оилалари сони</th>
-                                <th></th>
                             </tr>
                             </thead>
                         </table>
@@ -357,10 +356,6 @@
                     {
                         data: 'bees_count',
                         defaultContent: 0
-                    },
-                    {
-                        data:'city_id',
-                        visible:false
                     }
                 ],
                 "language": {
