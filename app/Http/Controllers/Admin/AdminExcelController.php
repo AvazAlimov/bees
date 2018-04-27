@@ -285,7 +285,7 @@ class AdminExcelController extends Controller
                         $item->reg_date, $item->inn, $item->mfo, $item->bank_name, $item->address, $item->phone, $item->email,
                         $item->fullName, $item->labors, $item->bees_count]);
                 }
-                $sheet->setBorder('A2:O'.($array->count()+3), 'thin');
+                $sheet->setBorder('A3:O'.($array->count()+3), 'thin');
             });
         })->download('xls');
 
