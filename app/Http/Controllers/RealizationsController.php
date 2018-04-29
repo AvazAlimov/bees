@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Realization;
 use App\User;
+use Auth;
 
 class RealizationsController extends Controller
 {
@@ -138,9 +139,9 @@ class RealizationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($user_id, $month, $year)
+    public function destroy($id)
     {
-        $realization = Realization::all()->where('user_id', $id)->where('month', $month)->where('year', $year);
+        $realization = Auth::user()->realizations()->where('id', $id);
         $realization->family()->detach();
         $realization->delete();
         return redirect()->back()->with('message', 'Хисобот Муваффакиятли Учирилди');

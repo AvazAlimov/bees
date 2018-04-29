@@ -121,7 +121,7 @@ class TestTableSeeder extends Seeder
                 'realized_price' => $faker->numberBetween(1000, 100000),
                 'stock_quantity' =>$faker->numberBetween(100, 2000),
                 'stock_price' => $faker->numberBetween(1000, 100000),
-                'user_id' => $faker->numberBetween(1, 6),
+                'user_id' => 1688
                 'month' => $faker->numberBetween(1, 12),
                 'year' => $faker->numberBetween(2017, 2018),
             ]);

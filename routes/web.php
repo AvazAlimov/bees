@@ -142,7 +142,7 @@ Route::prefix('user')->group(function (){
     // Registration Routes...
 //    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 //    Route::post('register', 'Auth\RegisterController@register');
-
+//    Route::get('/get/realizations', 'UserAjaxController@getExport');
 });
 
 
