@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-user')
 @section('styles')
     <style>
         .background-white {
@@ -19,30 +19,7 @@
         <div class="container">
             <div class="col-sm-3">
                 <!-- Profile -->
-                <div class="panel panel-default">
-                    <div class="panel-heading bg-warning">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#profile">
-                                Мой профиль <b class="caret"></b></a>
-                        </h4>
-                    </div>
-                    <div id="profile" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            <ul class="list-unstyled">
-                                <li>
-                                    <h3>U0001262</h3>
-                                    <h4><b>Ярашов Н.</b></h4>
-                                    <a href="{{route('settings')}}">Редактировать</a>
-                                </li>
-                                <li>
-                                    <h4 class="color-gray">Ярашов Найим боги</h4>
-                                    <a>info@aloqabank.uz</a>
-                                    <h6>998937415527</h6>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                @include('user.profile',['user'=>\Illuminate\Support\Facades\Auth::user()])
                 <!-- /Profile -->
 
                 <!-- Site services -->
@@ -73,7 +50,7 @@
             </div>
             <div class="col-sm-9">
                 <div class="row text-center background-white border-gray" id="services-list">
-                    <div class="col-sm-4">
+                    {{--<div class="col-sm-4">
                         <h4 class="text-success">Вопрос</h4>
                         <p>Задайте любой вопрос, и в течение 15 минут вы получите ответы наших юристов.</p>
                         <button type="button" class="btn btn-default btn-success">Задать вопрос</button>
@@ -87,7 +64,7 @@
                         <h4 class="text-warning">Документ</h4>
                         <p>Закажите документ, после чего наш юрист свяжется с вами, уточнит детали и подготовит его.</p>
                         <button type="button" class="btn btn-default btn-warning">Заказать документ</button>
-                    </div>
+                    </div>--}}
                 </div>
                 <div class="row">
                     <div class="col-sm-12 border-gray background-white" id="orders">

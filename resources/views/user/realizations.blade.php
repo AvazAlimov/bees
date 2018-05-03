@@ -7,53 +7,33 @@
         .background-white {
             background-color: #fff;
         }
-        .bg-warning{
+
+        .bg-warning {
             background-color: #ffc107 !important;
         }
-        .panel{
+
+        .panel {
             border-color: #ffc107 !important;
         }
     </style>
-
+    <!-- Styles -->
 @endsection
+
 @section('content')
     <!-- Content -->
     <div id="wrapper">
         <div class="container-fluid">
             <div class="col-sm-3">
                 <!-- Profile -->
-                <div class="panel panel-default">
-                    <div class="panel-heading bg-warning">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#profile">
-                                Мой профиль <b class="caret"></b></a>
-                        </h4>
-                    </div>
-                    <div id="profile" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            <ul class="list-unstyled">
-                                <li>
-                                    <h3>U0001262</h3>
-                                    <h4><b>Ярашов Н.</b></h4>
-                                    <a href="{{route('settings')}}">Редактировать</a>
-                                </li>
-                                <li>
-                                    <h4 class="color-gray">Ярашов Найим боги</h4>
-                                    <a>info@aloqabank.uz</a>
-                                    <h6>998937415527</h6>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- /Profile -->
+            @include('user.profile',['user'=>\Illuminate\Support\Facades\Auth::user()])
+            <!-- /Profile -->
 
                 <!-- Site services -->
                 <div class="panel panel-default">
                     <div class="panel-heading bg-warning">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#services">
-                                Мой профиль <b class="caret"></b></a>
+                                Профил <b class="caret"></b></a>
                         </h4>
                     </div>
                     <div id="services" class="panel-collapse collapse in">
@@ -75,89 +55,151 @@
                 <!-- /Site services -->
             </div>
             <div class="col-sm-9">
-                <div class="row background-white panel" id="services-list">
-                    <div class="page-header clearfix ">
-                        <h2 class="pull-left">O'zbekiston asalarichilari uyushmasiga a'zo subyektlar to'g'risida
-                            ma'lumot</h2>
-                        <div>
-                            <a id="swot-export" href="#" class="btn btn-success pull-left" tabindex="0"
-                               aria-controls="example">Excel
-                            </a>
-                            <a  onclick="" class="btn btn-warning pull-right"
-                                tabindex="0"
-                                aria-controls="example">Қўшиш
-                            </a>
-                        </div>
-                    </div>
-                    <table id="example2" class="table table-bordered realization-theader " cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th rowspan="2">Т/Р</th>
-                            <th rowspan="2">Боқилаётган асалари оиласи</th>
-                            <th rowspan="2">Асал тури</th>
-                            <th rowspan="2">Йиллик ишлаб чмқариш ҳажми (ПРОГНОЗ) кг</th>
-                            <th rowspan="2">Ишлаб чиқарилган асал миқдори (ФАКТ) кг</th>
-                            <th rowspan="2">Ҳисобот даври бошига асал заҳираси кг</th>
-                            <th colspan="2">Реализация қилган асал миқдори</th>
-                            <th colspan="2">Асал захираси</th>
-                        </tr>
-                        <tr>
-                            <th>кг</th>
-                            <th>сўм</th>
-                            <th>кг</th>
-                            <th>сўм</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>230</td>
-                            <td>Майс</td>
-                            <td>1000</td>
-                            <td>900</td>
-                            <td>100</td>
-                            <td>200</td>
-                            <td>1000000</td>
-                            <td>800</td>
-                            <td>3000000</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>230</td>
-                            <td>Майс</td>
-                            <td>1000</td>
-                            <td>900</td>
-                            <td>100</td>
-                            <td>200</td>
-                            <td>1000000</td>
-                            <td>800</td>
-                            <td>3000000</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <h5>Асал етиштириш ва реализиция</h5>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#add">Қўшиш</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#services-list">Маълумот </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="add">
+                        <form>
 
-                    {{--<div class="col-sm-4">
-                        <h4 class="text-success">Вопрос</h4>
-                        <p>Задайте любой вопрос, и в течение 15 минут вы получите ответы наших юристов.</p>
-                        <button type="button" class="btn btn-default btn-success">Задать вопрос</button>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="family_count">Боқилаётган асалари оиласи</label>
+                                    <input type="number" class="form-control" id="family_count"
+                                           name="family_count" min="0">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="honey_type">Асал тури</label>
+                                    <input type="text" class="form-control" id="honey_type"
+                                           name="honey_type" min="0">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Йиллик ишлаб чмқариш ҳажми (ПРОГНОЗ) кг</label>
+                                    <label for="annual_prog" class="col-2 col-form-label">Text</label>
+                                    <div class="col-10">
+                                    <input type="number" name="annual_prog" class="form-control" id="annual_prog">
+                                    </div>
+                                    <label for="annual_prog" class="col-2 col-form-label">Text</label>
+                                    <div class="col-10">
+                                    <input type="number" name="produced_honey" class="form-control" id="produced_honey">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="produced_honey">Ишлаб чиқарилган асал миқдори (ФАКТ) кг</label>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="reserve">Ҳисобот даври бошига асал заҳираси кг</label>
+                                    <input type="number" name="reserve" class="form-control" id="reserve">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="realized_quantity">Реализация қилган асал миқдори кг</label>
+                                    <input type="number" name="realized_quantity" class="form-control" id="realized_quantity">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="realized_price">Реализация қилган асал миқдори сўм</label>
+                                    <input type="number" name="realized_price" class="form-control" id="realized_price">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="stock_quantity">Асал захираси кг</label>
+                                    <input type="number" name="stock_quantity" class="form-control" id="stock_quantity">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="stock_price">Асал захираси сўм</label>
+                                    <input type="number" name="stock_price" class="form-control" id="stock_price">
+                                </div>
+                            </div>
+                            {{--
+                            <th colspan="2">Реализация қилган асал миқдори</th>
+                            <th colspan="2">Асал захираси</th>--}}
+                           {{-- <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                                    <label class="form-check-label" for="gridCheck">
+                                        Check me out
+                                    </label>
+                                </div>
+                            </div>--}}
+                            <button type="submit" class="btn btn-primary">Sign in</button>
+                        </form>
                     </div>
-                    <div class="col-sm-4">
-                        <h4 class="text-primary">Звонок</h4>
-                        <p>Оставьте номер телефона, и наш юрист свяжется с вами, чтобы проконсультировать вас по любому вопросу.</p>
-                        <button type="button" class="btn btn-default btn-primary">Заказать звонок</button>
+                    <div class="tab-pane fade" id="services-list">
+
+                        <div class="page-header clearfix ">
+                            <h2 class="pull-left">O'zbekiston asalarichilari uyushmasiga a'zo subyektlar to'g'risida
+                                ma'lumot</h2>
+
+                        </div>
+                        <table id="example2" class="table table-bordered realization-theader " cellspacing="0"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <th rowspan="2">Т/Р</th>
+                                <th rowspan="2">Боқилаётган асалари оиласи</th>
+                                <th rowspan="2">Асал тури</th>
+                                <th rowspan="2">Йиллик ишлаб чмқариш ҳажми (ПРОГНОЗ) кг</th>
+                                <th rowspan="2">Ишлаб чиқарилган асал миқдори (ФАКТ) кг</th>
+                                <th rowspan="2">Ҳисобот даври бошига асал заҳираси кг</th>
+                                <th colspan="2">Реализация қилган асал миқдори</th>
+                                <th colspan="2">Асал захираси</th>
+                            </tr>
+                            <tr>
+                                <th>кг</th>
+                                <th>сўм</th>
+                                <th>кг</th>
+                                <th>сўм</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>230</td>
+                                <td>Майс</td>
+                                <td>1000</td>
+                                <td>900</td>
+                                <td>100</td>
+                                <td>200</td>
+                                <td>1000000</td>
+                                <td>800</td>
+                                <td>3000000</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>230</td>
+                                <td>Майс</td>
+                                <td>1000</td>
+                                <td>900</td>
+                                <td>100</td>
+                                <td>200</td>
+                                <td>1000000</td>
+                                <td>800</td>
+                                <td>3000000</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
                     </div>
-                    <div class="col-sm-4">
-                        <h4 class="text-warning">Документ</h4>
-                        <p>Закажите документ, после чего наш юрист свяжется с вами, уточнит детали и подготовит его.</p>
-                        <button type="button" class="btn btn-default btn-warning">Заказать документ</button>
-                    </div>--}}
                 </div>
-                {{--<div class="row">
-                    <div class="col-sm-12 border-gray background-white" id="orders">
-                        <h5 class="text-success">Мои заказы</h5>
-                        <h6 class="color-gray">У вас пока нет ни одного заказа.</h6>
-                    </div>
-                </div>--}}
+
             </div>
         </div>
     </div>
@@ -177,7 +219,7 @@
         $(document).ready(function () {
 
             $('#example2').DataTable({
-                scrollX:true
+                scrollX: true
             });
 
         });

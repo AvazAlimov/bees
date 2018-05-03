@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Activity;
 use App\Bank;
 use App\City;
+use App\Family;
 use App\Region;
 use Illuminate\Http\Request;
 
@@ -35,8 +36,10 @@ class HomeController extends Controller
         $regions = Region::all();
         $cities = City::all();
         $activities = Activity::all();
+        $families = Family::all();
         $banks = Bank::select('mfo','name')->get();
-        return view('user.user-settings')->withRegions($regions)->withCities($cities)->withBanks($banks);
+        return view('user.user-settings')->withRegions($regions)->withCities($cities)->withBanks($banks)
+            ->withActivities($activities)->withFamilies($families);
     }
     public function realizations(){
         return view('user.realizations');

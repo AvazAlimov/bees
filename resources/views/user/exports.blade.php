@@ -22,30 +22,7 @@
         <div class="container-fluid">
             <div class="col-sm-3">
                 <!-- Profile -->
-                <div class="panel panel-default">
-                    <div class="panel-heading bg-warning">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#profile">
-                                Мой профиль <b class="caret"></b></a>
-                        </h4>
-                    </div>
-                    <div id="profile" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            <ul class="list-unstyled">
-                                <li>
-                                    <h3>U0001262</h3>
-                                    <h4><b>Ярашов Н.</b></h4>
-                                    <a href="{{route('settings')}}">Редактировать</a>
-                                </li>
-                                <li>
-                                    <h4 class="color-gray">Ярашов Найим боги</h4>
-                                    <a>info@aloqabank.uz</a>
-                                    <h6>998937415527</h6>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                    @include('user.profile',['user'=>\Illuminate\Support\Facades\Auth::user()])
                 <!-- /Profile -->
 
                 <!-- Site services -->
