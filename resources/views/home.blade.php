@@ -72,7 +72,7 @@
                 <!-- /Site services -->
             </div>
             <div class="col-sm-9">
-                <div class="row text-center background-white border-gray" id="services-list">
+                <div class="row text-center background-white panel" id="services-list">
                     <div class="col-sm-4">
                         <h4 class="text-success">Вопрос</h4>
                         <p>Задайте любой вопрос, и в течение 15 минут вы получите ответы наших юристов.</p>
@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12 border-gray background-white" id="orders">
+                    <div class="col-sm-12 panel background-white" id="orders">
                         <h5 class="text-success">Мои заказы</h5>
                         <h6 class="color-gray">У вас пока нет ни одного заказа.</h6>
                     </div>

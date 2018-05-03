@@ -50,7 +50,7 @@
 
 @section('content')
     <div class="jumbotron bg-warning text-center">
-        <img src="{{ asset('Resources/logo-3.png') }}" class="img-fluid" alt="logo" style="width: 800px;">
+        <img src="{{ asset('Resources/logo-4.png') }}" class="img-fluid" alt="logo" style="width: 800px;">
 
     </div>
 
