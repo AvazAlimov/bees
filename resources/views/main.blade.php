@@ -10,9 +10,10 @@
             background-size: cover;
             border-radius: 0;
         }
-        @media(max-width: 800px){
-            .jumbotron{
-                min-height:200px;
+
+        @media (max-width: 800px) {
+            .jumbotron {
+                min-height: 200px;
             }
         }
 
@@ -35,8 +36,6 @@
         /*.nav-link:hover {*/
         /*color: #333;*/
         /*}*/
-
-
 
         .display-5 {
             color: #582E2A;
@@ -82,154 +81,154 @@
                     </div>
                 @endif
                 <div class="card-body tab-content" id="nav-tabContent">
-                  {{--  <form action="{{route('submit.form',1)}}" method="post" class="container tab-pane fade show active"
-                          aria-labelledby="nav-user_1-tab" id="user_1">
-                        {{csrf_field()}}
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="region_1" class="col-form-label col-form-label-sm">Вилоят номи</label>
-                                <select class="form-control form-control-sm" id="region_1" name="region_id"
-                                        onchange="regionChanged(this.id)" required>
-                                    @foreach($regions as $region)
-                                        <option value="{{$region->id}}">{{ $region->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="city_1" class="col-form-label col-form-label-sm">Туман/шаҳар номи</label>
-                                <select class="form-control form-control-sm" id="city_1" name="city_id" required>
-                                    @foreach($cities as $city)
-                                        <option value="{{$city->id}}">{{$city->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="mahalla_1" class="col-form-label col-form-label-sm">Маҳалла (МФЙ)
-                                    номи</label>
-                                <input type="text" class="form-control form-control-sm" id="mahalla_1"
-                                       name="neighborhood" value="{{old('neighborhood')}}"
-                                       required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="subject_1" class="col-form-label col-form-label-sm">Субъект (корхона, ЯТТ)
-                                    номи</label>
-                                <input type="text" class="form-control form-control-sm" id="subject_1" name="subject"
-                                       value="{{old('subject')}}"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="date_1" class="col-form-label col-form-label-sm">Корхона давлат рўйҳатидан
-                                    ўтган сана</label>
-                                <input type="date" class="form-control form-control-sm" id="date_1" name="reg_date"
-                                       value="{{old('reg_date')}}"
-                                       required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inn_1" class="col-form-label col-form-label-sm">СТИР (ИНН)</label>
-                                <input type="text" class="form-control form-control-sm inn" id="inn_1" name="inn"
-                                       value="{{old('inn')}}" minlength="9"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="mfo_1" class="col-form-label col-form-label-sm">Банк МФО</label>
-                                <input type="text" class="form-control form-control-sm bankmfo" id="mfo_1" name="mfo"
-                                       value="{{old('mfo')}}" required minlength="5" v-model="mfo" list="mfos"/>
-                                <datalist id="mfos">
-                                    @foreach($banks as $bank)
-                                        <option>{{ $bank->mfo }}</option>
-                                    @endforeach
-                                </datalist>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="bank_1" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
-                                    номи</label>
-                                <input type="text" class="form-control form-control-sm" id="bank_1" name="bank_name"
-                                       value="{{old('bank_name')}}"
-                                       required v-model="bank" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="address_1" class="col-form-label col-form-label-sm">Манзил</label>
-                                <input type="text" class="form-control form-control-sm" id="address_1" name="address"
-                                       value="{{old('address')}}"
-                                       required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="phone_1" class="col-form-label col-form-label-sm">Телефон рақами</label>
-                                <input type="text" class="form-control form-control-sm phone" id="phone_1" name="phone"
-                                       value="{{old('phone') or '+'}}"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="email_1" class="col-form-label col-form-label-sm">Электрон почта</label>
-                                <input type="email" class="form-control form-control-sm" id="email_1" name="email"
-                                       value="{{old('email')}}">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="fullName_1" class="col-form-label col-form-label-sm">Корхона директори исми
-                                    шарифи</label>
-                                <input type="text" class="form-control form-control-sm" id="fullName_1" name="fullName"
-                                       value="{{old('fullName')}}"
-                                       required>
-                            </div>
-                        </div>
+                    {{--  <form action="{{route('submit.form',1)}}" method="post" class="container tab-pane fade show active"
+                            aria-labelledby="nav-user_1-tab" id="user_1">
+                          {{csrf_field()}}
+                          <div class="row">
+                              <div class="form-group col-md-6">
+                                  <label for="region_1" class="col-form-label col-form-label-sm">Вилоят номи</label>
+                                  <select class="form-control form-control-sm" id="region_1" name="region_id"
+                                          onchange="regionChanged(this.id)" required>
+                                      @foreach($regions as $region)
+                                          <option value="{{$region->id}}">{{ $region->name }}</option>
+                                      @endforeach
+                                  </select>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="city_1" class="col-form-label col-form-label-sm">Туман/шаҳар номи</label>
+                                  <select class="form-control form-control-sm" id="city_1" name="city_id" required>
+                                      @foreach($cities as $city)
+                                          <option value="{{$city->id}}">{{$city->name}}</option>
+                                      @endforeach
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-md-6">
+                                  <label for="mahalla_1" class="col-form-label col-form-label-sm">Маҳалла (МФЙ)
+                                      номи</label>
+                                  <input type="text" class="form-control form-control-sm" id="mahalla_1"
+                                         name="neighborhood" value="{{old('neighborhood')}}"
+                                         required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="subject_1" class="col-form-label col-form-label-sm">Субъект (корхона, ЯТТ)
+                                      номи</label>
+                                  <input type="text" class="form-control form-control-sm" id="subject_1" name="subject"
+                                         value="{{old('subject')}}"
+                                         required>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-md-6">
+                                  <label for="date_1" class="col-form-label col-form-label-sm">Корхона давлат рўйҳатидан
+                                      ўтган сана</label>
+                                  <input type="date" class="form-control form-control-sm" id="date_1" name="reg_date"
+                                         value="{{old('reg_date')}}"
+                                         required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="inn_1" class="col-form-label col-form-label-sm">СТИР (ИНН)</label>
+                                  <input type="text" class="form-control form-control-sm inn" id="inn_1" name="inn"
+                                         value="{{old('inn')}}" minlength="9"
+                                         required>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-md-6">
+                                  <label for="mfo_1" class="col-form-label col-form-label-sm">Банк МФО</label>
+                                  <input type="text" class="form-control form-control-sm bankmfo" id="mfo_1" name="mfo"
+                                         value="{{old('mfo')}}" required minlength="5" v-model="mfo" list="mfos"/>
+                                  <datalist id="mfos">
+                                      @foreach($banks as $bank)
+                                          <option>{{ $bank->mfo }}</option>
+                                      @endforeach
+                                  </datalist>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="bank_1" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
+                                      номи</label>
+                                  <input type="text" class="form-control form-control-sm" id="bank_1" name="bank_name"
+                                         value="{{old('bank_name')}}"
+                                         required v-model="bank" readonly>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-md-6">
+                                  <label for="address_1" class="col-form-label col-form-label-sm">Манзил</label>
+                                  <input type="text" class="form-control form-control-sm" id="address_1" name="address"
+                                         value="{{old('address')}}"
+                                         required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="phone_1" class="col-form-label col-form-label-sm">Телефон рақами</label>
+                                  <input type="text" class="form-control form-control-sm phone" id="phone_1" name="phone"
+                                         value="{{old('phone') or '+'}}"
+                                         required>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-md-6">
+                                  <label for="email_1" class="col-form-label col-form-label-sm">Электрон почта</label>
+                                  <input type="email" class="form-control form-control-sm" id="email_1" name="email"
+                                         value="{{old('email')}}">
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="fullName_1" class="col-form-label col-form-label-sm">Корхона директори исми
+                                      шарифи</label>
+                                  <input type="text" class="form-control form-control-sm" id="fullName_1" name="fullName"
+                                         value="{{old('fullName')}}"
+                                         required>
+                              </div>
+                          </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="labors_1" class="col-form-label col-form-label-sm">Ишчилар сони</label>
-                                <input type="number" class="form-control form-control-sm" id="labors_1" name="labors"
-                                       value="{{old('labors')}}" min="0"
-                                       required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="bees_count_1" class="col-form-label col-form-label-sm">Боқлаётган асалари
-                                    оилалари сони</label>
-                                <input type="number" class="form-control form-control-sm" id="bees_count_1"
-                                       name="bees_count" min="0"
-                                       value="{{old('bees_count')}}"
-                                       required>
-                            </div>
-                        </div>
+                          <div class="row">
+                              <div class="form-group col-md-6">
+                                  <label for="labors_1" class="col-form-label col-form-label-sm">Ишчилар сони</label>
+                                  <input type="number" class="form-control form-control-sm" id="labors_1" name="labors"
+                                         value="{{old('labors')}}" min="0"
+                                         required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="bees_count_1" class="col-form-label col-form-label-sm">Боқлаётган асалари
+                                      оилалари сони</label>
+                                  <input type="number" class="form-control form-control-sm" id="bees_count_1"
+                                         name="bees_count" min="0"
+                                         value="{{old('bees_count')}}"
+                                         required>
+                              </div>
+                          </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="family_1" class="col-form-label col-form-label-sm">Боқилаётган асалари
-                                    зотлари</label>
-                                <div class="col-md-12">
-                                    @foreach($families as $family)
-                                        <input type="checkbox" name="families[]" value="{{$family->id}}"
-                                               id="family_1"> {{$family->name}}<br>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="activity_1" class="col-form-label col-form-label-sm">Фаолият тури (бир
-                                    нечтасини танласа бўлади)</label>
-                                <div class="col-md-12">
-                                    @foreach($activities as $activity)
-                                        <input type="checkbox" name="activities[]" value="{{$activity->id}}"
-                                               id="activity_1"> {{$activity->name}}<br>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
+                          <div class="row">
+                              <div class="form-group col-md-6">
+                                  <label for="family_1" class="col-form-label col-form-label-sm">Боқилаётган асалари
+                                      зотлари</label>
+                                  <div class="col-md-12">
+                                      @foreach($families as $family)
+                                          <input type="checkbox" name="families[]" value="{{$family->id}}"
+                                                 id="family_1"> {{$family->name}}<br>
+                                      @endforeach
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="activity_1" class="col-form-label col-form-label-sm">Фаолият тури (бир
+                                      нечтасини танласа бўлади)</label>
+                                  <div class="col-md-12">
+                                      @foreach($activities as $activity)
+                                          <input type="checkbox" name="activities[]" value="{{$activity->id}}"
+                                                 id="activity_1"> {{$activity->name}}<br>
+                                      @endforeach
+                                  </div>
+                              </div>
+                          </div>
 
-                        <hr>
+                          <hr>
 
-                        <div class="text-center">
-                            <input type="submit" class="btn btn-warning" value="Рўйхатдан ўтиш">
-                        </div>
-                    </form>
---}}
+                          <div class="text-center">
+                              <input type="submit" class="btn btn-warning" value="Рўйхатдан ўтиш">
+                          </div>
+                      </form>
+  --}}
                     <form action="{{route('submit.form', 2)}}" method="post" class="container tab-pane fade show active"
                           aria-labelledby="nav-user_2-tab" id="user_2">
                         {{csrf_field()}}
@@ -288,6 +287,11 @@
                                 <label for="mfo_2" class="col-form-label col-form-label-sm">Банк МФО</label>
                                 <input type="text" class="form-control form-control-sm bankmfo" id="mfo_2" name="mfo"
                                        value="{{old('mfo')}}" v-model="mfo" list="mfos" minlength="5" required>
+                                <datalist id="mfos">
+                                    @foreach($banks as $bank)
+                                        <option>{{ $bank->mfo }}</option>
+                                    @endforeach
+                                </datalist>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="bank_2" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
@@ -427,6 +431,11 @@
                                 <label for="mfo_3" class="col-form-label col-form-label-sm">Банк МФО</label>
                                 <input type="text" class="form-control form-control-sm bankmfo" id="mfo_3" name="mfo"
                                        value="{{old('mfo')}}" v-model="mfo" list="mfos" minlength="5" required>
+                                <datalist id="mfos">
+                                    @foreach($banks as $bank)
+                                        <option>{{ $bank->mfo }}</option>
+                                    @endforeach
+                                </datalist>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="bank_3" class="col-form-label col-form-label-sm">Хизмат кўрсатиладиган банк
@@ -613,23 +622,37 @@
                 <div>
                     <br>
                     <p class="text-justify">
-                        "Ўзбекистон асаларичилари" уюшмаси Ўзбекистон Республикаси Президентининг 2017 йил 16 октябрдаги ПҚ-3327 сонли қарорига асосан асаларичилик тармоғини бошқариш, тизимини тубдан такомиллаштириш, тармоқда наслчилик ишларини илмий асосда ташкил этиш, асаларичилик хўжаликлари фаолияти самарадорлигини ошириш, асал маҳсулотлари ишлаб чиқариш ҳажми ва турларини янада кўпайтириш, асални қайта ишлаш бўйича замонавий технологияларни жорий этиш, соҳанинг экспорт салоҳиятини ошириш, шунингдек, асаларичилик соҳасидаги илғор тажрибаларни республикамизнинг барча ҳудудларида татбиқ этиш мақсадида ташкил этилган.
+                        "Ўзбекистон асаларичилари" уюшмаси Ўзбекистон Республикаси Президентининг 2017 йил 16 октябрдаги
+                        ПҚ-3327 сонли қарорига асосан асаларичилик тармоғини бошқариш, тизимини тубдан такомиллаштириш,
+                        тармоқда наслчилик ишларини илмий асосда ташкил этиш, асаларичилик хўжаликлари фаолияти
+                        самарадорлигини ошириш, асал маҳсулотлари ишлаб чиқариш ҳажми ва турларини янада кўпайтириш,
+                        асални қайта ишлаш бўйича замонавий технологияларни жорий этиш, соҳанинг экспорт салоҳиятини
+                        ошириш, шунингдек, асаларичилик соҳасидаги илғор тажрибаларни республикамизнинг барча
+                        ҳудудларида татбиқ этиш мақсадида ташкил этилган.
                         <br>
                         <strong>Уюшманинг асосий вазифалари:</strong>
                         <br>
-                        •	асаларичилик тармоғини ривожлантиришга қаратилган норматив-хуқуқий базани ишлаб чиқишда иштирок этиш;
+                        • асаларичилик тармоғини ривожлантиришга қаратилган норматив-хуқуқий базани ишлаб чиқишда
+                        иштирок этиш;
                         <br>
-                        •	асаларичилик тармоғини ривожлантириш дастурларини амалга оширишни мувофиқлаштириш, ягона илмий-техника, технологик, инвестиция ва экспорт сиёсатини амалга оширишни мувофиқлаштириш;
+                        • асаларичилик тармоғини ривожлантириш дастурларини амалга оширишни мувофиқлаштириш, ягона
+                        илмий-техника, технологик, инвестиция ва экспорт сиёсатини амалга оширишни мувофиқлаштириш;
                         <br>
-                        •	олий ва ўрта махсус, касб-ҳунар таълими, шу жумладан, хорижий муассасаларда асаларичилик тармоғига кадрлар тайёрлаш, қайта тайёрлаш ва уларнинг малакасини ошириш ишларини самарали ташкил этиш ва мувофиқлаштиришда иштирок этиш.
+                        • олий ва ўрта махсус, касб-ҳунар таълими, шу жумладан, хорижий муассасаларда асаларичилик
+                        тармоғига кадрлар тайёрлаш, қайта тайёрлаш ва уларнинг малакасини ошириш ишларини самарали
+                        ташкил этиш ва мувофиқлаштиришда иштирок этиш.
                         <br>
                         <strong>Уюшманинг асосий фаолият йўналишлари:</strong>
                         <br>
-                        •	маҳаллий ижро этувчи ҳокимият органлари ва манфаатдор ташкилотлар билан ҳамкорликда асаларичилик хўжаликларини ўрмон фонди ерларига, тоғ ва тоғолди ҳудудларига, табиий пичанзор ва яйловларга ҳамда қишлоқ хўжалиги ерларига жойлаштиришни амалга ошириш;
+                        • маҳаллий ижро этувчи ҳокимият органлари ва манфаатдор ташкилотлар билан ҳамкорликда
+                        асаларичилик хўжаликларини ўрмон фонди ерларига, тоғ ва тоғолди ҳудудларига, табиий пичанзор ва
+                        яйловларга ҳамда қишлоқ хўжалиги ерларига жойлаштиришни амалга ошириш;
                         <br>
-                        •	асаларилар учун сунъий озуқалар ишлаб чиқаришни марказлашган ҳолда ташкил этишга кўмаклашиш ва ушбу тажрибани кенг қўллаш ҳисобига асаларичилик хўжаликларининг озуқа базасини мустаҳкамлаш;
+                        • асаларилар учун сунъий озуқалар ишлаб чиқаришни марказлашган ҳолда ташкил этишга кўмаклашиш ва
+                        ушбу тажрибани кенг қўллаш ҳисобига асаларичилик хўжаликларининг озуқа базасини мустаҳкамлаш;
                         <br>
-                        •	асалари касалликларининг олдини олиш, даволаш ва ташхис қўйиш бўйича замонавий ва илғор усулларни жорий этиш ишларига кўмаклашиш;
+                        • асалари касалликларининг олдини олиш, даволаш ва ташхис қўйиш бўйича замонавий ва илғор
+                        усулларни жорий этиш ишларига кўмаклашиш;
                     </p>
                 </div>
             </div>

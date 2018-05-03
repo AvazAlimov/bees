@@ -252,6 +252,44 @@ class AdminExcelController extends Controller
 
         return redirect()->back()->withMessage('message', "Жадвал йукланди");
     }
+    public function usersExport($id = null){
+        if ($id == null) {
+            $users = User::join('regions', 'regions.id', 'users.region_id')->join('cities', 'cities.id', 'users.city_id')->orderByDesc('id');
+            $users= $users->select('users.*','regions.name as region_name', 'cities.name as city_name' )->addSelect(DB::raw('(CASE WHEN type<3 then \'Юридик корхоналар (МЧЖ, ХК, ҚК)\' WHEN type=3 then \'ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари\' WHEN type=4 then \'Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)\' end) as user_type'));
+
+        } else {
+            $users = User::join('regions', 'regions.id', 'users.region_id')->join('cities', 'cities.id', 'users.city_id')->orderByDesc('id')->where('city_id', $id);
+            $users= $users->select('users.*','regions.name as region_name', 'cities.name as city_name')->addSelect(DB::raw('(CASE WHEN type<3 then \'Юридик корхоналар (МЧЖ, ХК, ҚК)\' WHEN type=3 then \'ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари\' WHEN type=4 then \'Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)\' end) as user_type'));
+        }
+        $array = $users->get();
+
+        $column1 = ['Т/Р', "Субъект номи", "Вилоят номи", "Туман/шаҳар номи", "Маҳалла (МФЙ) номи",
+            "Корхона давлат рўйҳатидан ўтган сана","СТИР (ИНН)","Банк МФО","Хизмат кўрсатиладиган банк номи","Манзил",
+            "Телефон рақами","Электрон почта","Хўжалик раҳбари исми шарифи","Ишчилар сони","Боқлаётган асалари оилалари сони"];
+
+
+        Excel::create('Аъзолар', function ($excel) use ($array, $column1) {
+
+           $excel->sheet(0, function ($sheet) use ($array, $column1) {
+               $sheet->mergeCells('A1:O1')->appendRow(1,['Ўзбекистон асаларичилари уюшмасига аъзо субектлар тўғрисида маълумот']);
+               $sheet->cells('A1:O1', function($cells) {
+                   $cells->setFontWeight('bold');
+               });
+               $sheet->cells('A3:O3', function($cells) {
+                   $cells->setFontWeight('bold');
+               });
+                $sheet->appendRow(3, $column1);
+                foreach ($array as $i => $item) {
+                    $sheet->appendRow(4 + $i, [
+                        $item->id, $item->subject, $item->region_name, $item->city_name, $item->neighborhood,
+                        $item->reg_date, $item->inn, $item->mfo, $item->bank_name, $item->address, $item->phone, $item->email,
+                        $item->fullName, $item->labors, $item->bees_count]);
+                }
+                $sheet->setBorder('A3:O'.($array->count()+3), 'thin');
+            });
+        })->download('xls');
+
+    }
 
     function createLetterRange($length)
     {

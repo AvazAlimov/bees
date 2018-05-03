@@ -126,8 +126,12 @@
                                         <input type="text" class="form-control inn" value="492792097" id="inn" minlength="9"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inn">Банк МФО</label>
+                                        <label for="mfo">Банк МФО</label>
                                         <input type="text" class="form-control mfo" value="01111" id="mfo" minlength="5"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bank_name">Хизмат кўрсатиладиган банк номи</label>
+                                        <input type="text" class="form-control mfo" value="ЗАНГИОТА Т., ИОТА ФИЛИАЛИ" id="mfo" minlength="5"/>
                                     </div>
 
                                     <div class="form-group">

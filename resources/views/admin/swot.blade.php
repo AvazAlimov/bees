@@ -187,7 +187,7 @@
                                 Ўзбекистон асаларичилари уюшмасига аъзо субектлар тўғрисида маълумот
                             </h2>
                             <div>
-                                <a id="swot-export" href="#" class="btn btn-success" tabindex="0"
+                                <a id="swot-user-export" href="{{route('user.export')}}" class="btn btn-success" tabindex="0"
                                    aria-controls="example"
                                    style="margin-top: 20px; margin-left: 20px;">Excel
                                 </a>
@@ -277,7 +277,10 @@
                 },
                 columns: [
                     {data: 'region_name'},
-                    {data: 'city_name'},
+                    {
+                        data: 'city_name',
+                        className: 'details-control'
+                    },
                     {data: 'total'},
                     {data: 'yuridik'},
                     {data: 'yakka'},
@@ -308,8 +311,70 @@
                 },
                 "scrollX": true
             });
-
+            return table2;
         }
+
+        function fetch_user_data(params) {
+            var url;
+
+            if(params) {
+                url = '{!! route('getUsers') !!}' + '/' + params;
+            }else{
+                url = '{!! route('getUsers') !!}';
+            }
+            var table3 = $('#example3').DataTable({
+                rowGroup: {
+                    dataSrc: 'city_name'
+                },
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        '_token': '{{ csrf_token() }}'
+                    }
+                },
+                columns: [
+                    {data: 'id'},
+                    {data: 'subject'},
+                    {data: 'region_name'},
+                    {data: 'city_name'},
+                    {data: 'neighborhood'},
+                    {data: 'reg_date'},
+                    {data: 'inn'},
+                    {data: 'mfo'},
+                    {data: 'bank_name'},
+                    {data: 'address'},
+                    {data: 'phone'},
+                    {data: 'email'},
+                    {data: 'fullName'},
+                    {
+                        data: 'labors',
+                        defaultContent: 0
+                    },
+                    {
+                        data: 'bees_count',
+                        defaultContent: 0
+                    }
+                ],
+                "language": {
+                    "paginate": {
+                        "previous": "Oldingi",
+                        "next": "Keyingi"
+                    },
+                    "processing": "Qidirilyapti",
+                    "lengthMenu": "Хар бир сахифа учун _MENU_ йозувларни кўрсатиш",
+                    "zeroRecords": "Хеч нарса топилмади",
+                    "search": "Қидириш:",
+                    "info": "_PAGES_ дан _PAGE_ таси сахифа кўрсатилган",
+                    "infoEmpty": "Йозувлар мавжуд эмас",
+                    "infoFiltered": "(жами _MAX_ йозувлар филти килинган)"
+                },
+                "scrollX": true
+            });
+        }
+
         $(document).ready(function() {
             var params = '';
 
@@ -389,7 +454,9 @@
                 },
                 "scrollX": true
             });
-            fetch_data(params);
+            var table2 = fetch_data(params);
+
+            fetch_user_data(params);
             $('#example1 tbody').on('click', 'td.details-control', function () {
                 var tr = $(this).closest('tr');
                 var row = table1.row( tr );
@@ -397,10 +464,24 @@
 
                 $('#example2').DataTable().destroy();
 
-                fetch_data(id);
+                table2 = fetch_data(id);
                 $("#swot-export").attr("href",  '{!! route('swot.export') !!}'+'/'+id);
                 $('html,body').animate({
                         scrollTop: $("#example2").offset().top-200},
+                    'slow');
+            });
+
+            $('#example2 tbody').on('click', 'td.details-control', function () {
+                var tr2 = $(this).closest('tr');
+                var row = table2.row( tr2 );
+                var id =row.data().city_id;
+//                alert(JSON.stringify(id));
+                $('#example3').DataTable().destroy();
+
+                fetch_user_data(id);
+                $("#swot-user-export").attr("href",  '{!! route('user.export') !!}'+'/'+id);
+                $('html,body').animate({
+                        scrollTop: $("#example3").offset().top-200},
                     'slow');
             });
         });

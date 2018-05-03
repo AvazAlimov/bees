@@ -1,7 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Collection;
 
 Route::prefix('leader')->group(function(){
     Route::get('login', 'Auth\LeaderLoginController@showLoginForm')->name('leader.login');
@@ -35,6 +35,7 @@ Route::prefix('admin')->group(function (){
     Route::any('get/regions','Admin\AdminAjaxController@getRegion')->name('getRegion');
     Route::get('region/excel','Admin\AdminExcelController@regionExport')->name('region.export');
     Route::get('excel/{id?}','Admin\AdminExcelController@swotExport')->name('swot.export');
+    Route::get('user/excel/{id?}', 'Admin\AdminExcelController@usersExport')->name('user.export');
 
     Route::any('get/ishlabchiqarish','Admin\AdminAjaxController@ishlabchiqarish')->name('ishlabchiqarish.data');
     Route::get('ishlabchiqarish/delete/{id}','Admin\AdminController@deleteIshlabchiqarish')->name('delete.ishlabchiqarish');
@@ -141,8 +142,9 @@ Route::prefix('user')->group(function (){
     // Registration Routes...
 //    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 //    Route::post('register', 'Auth\RegisterController@register');
-
+//    Route::get('/get/realizations', 'UserAjaxController@getExport');
 });
+
 
 
 Route::get('/{type?}', 'Web\WebController@showForm')->name('web.show.form');

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'region_id', 'city_id', 'neighborhood', 'subject','bank_name',
+        'region_id', 'city_id', 'neighborhood', 'subject',
         'reg_date', 'inn', 'mfo', 'address', 'phone','bees_count',
         'email', 'fullName', 'labors', 'username','state','password'
     ];
@@ -55,6 +55,11 @@ class User extends Authenticatable
     public function realizations(){
         return $this->hasMany('App\Realization');
     }
+
+    public function exports(){
+        return $this->hasMany('App\Export');
+    }
+
     public function productions(){
         return $this->hasMany(Production::class);
     }
