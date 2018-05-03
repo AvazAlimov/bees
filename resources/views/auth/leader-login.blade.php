@@ -5,7 +5,10 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Leader Login</div>
+                    <div class="panel-heading text-center">
+                        <img src="{{ asset('Resources/logo1.png') }}" alt="logo" style="width: 96px;">
+                        <h6><b>Leader login</b></h6>
+                    </div>
 
                     <div class="panel-body">
                         @if ($errors->any())
