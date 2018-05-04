@@ -13,62 +13,53 @@
         <ul class="nav navbar-nav" style="display:block; width: 100%">
             <li class="dropdown navs">
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
-                    Asosiy sozlamalar </a>
+                    Асосий бўлим <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section1')"><i
-                                    class="fa fa-users"></i>
-                            Viloyatlar</a>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section2')">
+                            Раҳбарият</a>
                     </li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section2')"><i
-                                    class="fa fa-users"></i>
-                            Rahbarlar</a>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section1')">
+                            Вилоятлар</a>
                     </li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section3')"><i
-                                    class="fa fa-money"></i>
-                            Shaharlar</a>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section3')">
+                            Туманлар</a>
                     </li>
                 </ul>
             </li>
             <li class="dropdown navs">
-                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
-                    Turlar</a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-compass"></i>
+                    Йўналишлар <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section4')"><i
-                                    class="fa fa-building"></i>
-                            Faoliyatlar</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section5')"><i
-                                    class="fa fa-building"></i>
-                            Asalari Zotlari</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section6')"><i
-                                    class="fa fa-building"></i>
-                            Jihoz Turlari</a></li>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section4')">
+                            Фаолият тури</a></li>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section5')">
+                            Боқилаётган асалари турлари</a></li>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section6')">
+                            Жиҳозлар</a></li>
                 </ul>
             </li>
             <li class="dropdown navs">
-                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
-                    Заказы</a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-id-card"></i>
+                    Аъзолик <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section7')"><i
-                                    class="fa fa-building"></i>
-                            Заказы</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section8')"><i
-                                    class="fa fa-building"></i>
-                            Принятые заказы</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section9')"><i
-                                    class="fa fa-building"></i>
-                            Непринятые заказы</a></li>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section7')">
+                            Аризалар </a></li>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section8')">
+                            Қабул қилинган </a></li>
+                    <li data-toggle="tab" class="navs2"><a onclick="switchSection('section9')">
+                            Қабул қилинмаган </a></li>
                 </ul>
             </li>
-            <li class="dropdown navs active">
-                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
-                    Hisobot</a>
+            <li class="dropdown navs">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-line-chart"></i>
+                    Электрон ҳисобот <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li class="navs2"><a href="{{route('swot')}}"><i class="fa fa-building"></i>
-                            Свод</a></li>
-                    <li class="navs2"><a href="{{route('nomma')}}"><i class="fa fa-building"></i>
-                            Номма-ном</a></li>
-                    <li class="navs2 active"><a><i class="fa fa-building"></i>
-                            Ишлаб чиқариш</a></li>
+                    <li class="navs2"><a href="{{route('swot')}}">
+                            Ҳисобот </a></li>
+                    <li class="navs2"><a href="{{route('nomma')}}">
+                            Таҳлилий ҳисобот </a></li>
+                    <li class="navs2"><a href="{{route('ishlabchiqarish')}}">
+                            Ишлаб чиқариш қувватлари </a></li>
                 </ul>
             </li>
         </ul>
