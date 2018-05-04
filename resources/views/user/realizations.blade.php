@@ -67,14 +67,36 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="add">
                         <form>
-
+                            <label for="realized_quantity" class="col-md-12">Ойма ой киритиладиган сана</label>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="family_count">Боқилаётган асалари оиласи</label>
-                                    <input type="number" class="form-control" id="family_count"
-                                           name="family_count" min="0">
+                                    <label for="year">Йил</label>
+                                    <select class="form-control" id="year">
+                                        @for($i = date('Y'); $i>1999; $i--)
+                                            <option>{{$i}}</option>
+                                        @endfor
+                                    </select>
                                 </div>
                                 <div class="form-group col-md-6">
+                                    <label for="month">Ой</label>
+                                    <select class="form-control" id="year">
+                                        <option value="1">Январь</option>
+                                        <option value="2">Февраль</option>
+                                        <option value="3">Март</option>
+                                        <option value="4">Апрель</option>
+                                        <option value="5">Май</option>
+                                        <option value="6">Июнь</option>
+                                        <option value="7">Июль</option>
+                                        <option value="8">Август</option>
+                                        <option value="9">Сентябрь</option>
+                                        <option value="10">Октябрь</option>
+                                        <option value="11">Ноябрь</option>
+                                        <option value="12">Декабрь</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
                                     <label for="honey_type">Асал тури</label>
                                     <input type="text" class="form-control" id="honey_type"
                                            name="honey_type" min="0">
@@ -83,62 +105,71 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label>Йиллик ишлаб чмқариш ҳажми (ПРОГНОЗ) кг</label>
-                                    <label for="annual_prog" class="col-2 col-form-label">Text</label>
-                                    <div class="col-10">
-                                    <input type="number" name="annual_prog" class="form-control" id="annual_prog">
-                                    </div>
-                                    <label for="annual_prog" class="col-2 col-form-label">Text</label>
-                                    <div class="col-10">
-                                    <input type="number" name="produced_honey" class="form-control" id="produced_honey">
-                                    </div>
+                                    <input type="number" name="annual_prog" class="form-control" id="annual_prog" min="0">
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="produced_honey">Ишлаб чиқарилган асал миқдори (ФАКТ) кг</label>
+                                    <input type="number" name="produced_honey" class="form-control" id="produced_honey">
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-6">
                                     <label for="reserve">Ҳисобот даври бошига асал заҳираси кг</label>
                                     <input type="number" name="reserve" class="form-control" id="reserve">
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <label for="family_count">Боқилаётган асалари оиласи</label>
+                                    <input type="number" class="form-control" id="family_count"
+                                           name="family_count" min="0">
+                                </div>
                             </div>
+
+                            <label for="realized_quantity" class="col-md-12">Реализация қилган асал миқдори</label>
                             <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label for="realized_quantity">Реализация қилган асал миқдори кг</label>
-                                    <input type="number" name="realized_quantity" class="form-control" id="realized_quantity">
+
+                                <div class="form-group col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">кг</span>
+                                       <input type="number" name="realized_quantity" class="form-control"
+                                           id="realized_quantity">
+                                    </div>
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">сўм</span>
+                                        <input type="number" name="realized_price" class="form-control" id="realized_price">
+                                    </div>
+                                </div>
+
                             </div>
+                            <label for="realized_quantity" class="col-md-12">Асал захираси </label>
                             <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label for="realized_price">Реализация қилган асал миқдори сўм</label>
-                                    <input type="number" name="realized_price" class="form-control" id="realized_price">
+
+                                <div class="form-group col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">кг</span>
+                                        <input type="number" name="stock_quantity" class="form-control" id="stock_quantity">
+                                    </div>
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">сўм</span>
+                                        <input type="number" name="stock_price" class="form-control" id="stock_price">                                    </div>
+                                </div>
+
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label for="stock_quantity">Асал захираси кг</label>
-                                    <input type="number" name="stock_quantity" class="form-control" id="stock_quantity">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label for="stock_price">Асал захираси сўм</label>
-                                    <input type="number" name="stock_price" class="form-control" id="stock_price">
-                                </div>
-                            </div>
-                            {{--
-                            <th colspan="2">Реализация қилган асал миқдори</th>
-                            <th colspan="2">Асал захираси</th>--}}
-                           {{-- <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                    <label class="form-check-label" for="gridCheck">
-                                        Check me out
-                                    </label>
-                                </div>
-                            </div>--}}
+
+                            {{-- <div class="form-group">
+                                 <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" id="gridCheck">
+                                     <label class="form-check-label" for="gridCheck">
+                                         Check me out
+                                     </label>
+                                 </div>
+                             </div>--}}
                             <button type="submit" class="btn btn-primary">Sign in</button>
                         </form>
                     </div>
