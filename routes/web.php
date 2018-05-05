@@ -137,9 +137,12 @@ Route::prefix('user')->group(function (){
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('settings','HomeController@settings')->name('settings');
     Route::get('/realizations','HomeController@realizations')->name('user.realizations');
+    Route::post('update/realization/{id?}','RealizationsController@update')->name('user.update.realization');
+    Route::post('create/realization','RealizationsController@store')->name('user.store.realization');
     Route::get('/exports','HomeController@exports')->name('user.exports');
     Route::get('/productions','HomeController@productions')->name('user.productions');
     Route::any('get/realizations','UserAjaxController@getRealization')->name('user.get.realization');
+
     // Registration Routes...
 //    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 //    Route::post('register', 'Auth\RegisterController@register');

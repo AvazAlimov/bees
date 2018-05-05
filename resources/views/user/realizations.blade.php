@@ -2,6 +2,7 @@
 
 @section('styles')
     <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/select2.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/client.css')}}" rel="stylesheet">
     <style>
         .background-white {
@@ -69,7 +70,8 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="add">
-                        <form>
+                        <form method="post" id="form">
+                            {{csrf_field()}}
                             <label for="realized_quantity" class="col-md-12">Ойма ой киритиладиган сана</label>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -85,7 +87,7 @@
                                 <div class="form-group col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">Ой</span>
-                                        <select class="form-control" id="year" name="year">
+                                        <select class="form-control" id="month" name="month">
                                             <option value="1" {{date('m') == "01" ? "selected" : ""}} >Январь</option>
                                             <option value="2" {{date('m') == "02" ? "selected" : ""}}>Февраль</option>
                                             <option value="3" {{date('m') == "03" ? "selected" : ""}}>Март</option>
@@ -105,8 +107,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="honey_type">Асал тури</label>
-                                    <input type="text" class="form-control" id="honey_type"
-                                           name="honey_type" min="0" value="{{old('honey_type')}}" required>
+                                    <select class="honey_type" name="honey_types[]" multiple="multiple" style="width: 100%">
+                                        @foreach($families as $family)
+                                            <option value="{{$family->id}}">{{$family->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -204,15 +209,16 @@
 
                     </div>
                     <div class="tab-pane fade" id="edit">
-                        <form>
-                            <label for="realized_quantity" class="col-md-12">Ойма ой киритиладиган сана</label>
+                        <form method="POST" id="form_2">
+                            {{csrf_field()}}
+                            <label class="col-md-12">Ойма ой киритиладиган сана</label>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">Йил</span>
-                                        <select class="form-control" id="year" name="year">
+                                        <select class="form-control" id="year_2" name="year">
                                             @for($i = date('Y'); $i>1999; $i--)
-                                                <option>{{$i}}</option>
+                                                <option value="{{$i}}">{{$i}}</option>
                                             @endfor
                                         </select>
                                     </div>
@@ -220,7 +226,7 @@
                                 <div class="form-group col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">Ой</span>
-                                        <select class="form-control" id="year" name="year">
+                                        <select class="form-control" id="month_2" name="month">
                                             <option value="1" {{date('m') == "01" ? "selected" : ""}} >Январь</option>
                                             <option value="2" {{date('m') == "02" ? "selected" : ""}}>Февраль</option>
                                             <option value="3" {{date('m') == "03" ? "selected" : ""}}>Март</option>
@@ -240,50 +246,53 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="honey_type">Асал тури</label>
-                                    <input type="text" class="form-control" id="honey_type"
-                                           name="honey_type" min="0" value="{{old('honey_type')}}" required>
+                                    <select class="honey_type" name="honey_types[]" multiple="multiple" style="width: 100%" id="honey_type_2">
+                                        @foreach($families as $family)
+                                            <option value="{{$family->id}}">{{$family->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label>Йиллик ишлаб чмқариш ҳажми (ПРОГНОЗ) кг</label>
-                                    <input type="number" name="annual_prog" class="form-control" id="annual_prog"
+                                    <label for="annual_prog_2">Йиллик ишлаб чмқариш ҳажми (ПРОГНОЗ) кг</label>
+                                    <input type="number" name="annual_prog" class="form-control" id="annual_prog_2"
                                            min="0" value="{{old('annual_prog')}}" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="produced_honey">Ишлаб чиқарилган асал миқдори (ФАКТ) кг</label>
-                                    <input type="number" name="produced_honey" value="{{old('produced_honey')}}" class="form-control" id="produced_honey" required>
+                                    <label for="produced_honey_2">Ишлаб чиқарилган асал миқдори (ФАКТ) кг</label>
+                                    <input type="number" name="produced_honey" value="{{old('produced_honey')}}" class="form-control" id="produced_honey_2" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="reserve">Ҳисобот даври бошига асал заҳираси кг</label>
-                                    <input type="number" name="reserve" value="{{old('reserve')}}" class="form-control" id="reserve" required>
+                                    <label for="reserve_2">Ҳисобот даври бошига асал заҳираси кг</label>
+                                    <input type="number" name="reserve" value="{{old('reserve')}}" class="form-control" id="reserve_2" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="family_count">Боқилаётган асалари оиласи</label>
-                                    <input type="number" class="form-control" id="family_count"
+                                    <label for="family_count_2">Боқилаётган асалари оиласи</label>
+                                    <input type="number" class="form-control" id="family_count_2"
                                            name="family_count" value="{{old('family_count')}}" min="0" required>
                                 </div>
                             </div>
 
-                            <label for="realized_quantity" class="col-md-12">Реализация қилган асал миқдори</label>
+                            <label for="realized_quantity_2" class="col-md-12">Реализация қилган асал миқдори</label>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">кг</span>
                                         <input type="number" name="realized_quantity" value="{{old('realized_quantity')}}" class="form-control"
-                                               id="realized_quantity" required>
+                                               id="realized_quantity_2" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">сўм</span>
                                         <input type="number" name="realized_price" value="{{old('realized_price')}}" class="form-control"
-                                               id="realized_price" required>
+                                               id="realized_price_2" required>
                                     </div>
                                 </div>
                             </div>
@@ -293,13 +302,13 @@
                                     <div class="input-group">
                                         <span class="input-group-addon">кг</span>
                                         <input type="number" name="stock_quantity" value="{{old('stock_quantity')}}" class="form-control"
-                                               id="stock_quantity" required>
+                                               id="stock_quantity_2" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">сўм</span>
-                                        <input type="number" name="stock_price" value="{{old('stock_price')}}" class="form-control" id="stock_price" required>
+                                        <input type="number" name="stock_price" value="{{old('stock_price')}}" class="form-control" id="stock_price_2" required>
                                     </div>
                                 </div>
                             </div>
@@ -318,7 +327,7 @@
     <script src="{{asset('js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/dataTables.rowGroup.min.js')}}"></script>
-
+    <script src="{{asset('js/select2.min.js')}}"></script>
     <script src="{{asset('js/dataTables.buttons.min.js')}}"></script>
 
     <script src="{{asset('js/jszip.min.js')}}"></script>
@@ -327,13 +336,34 @@
     <script>
         var table;
         function editRealization(id) {
+            var edit = "#edit";
             $('.edit-nav').removeClass('hide');
             $('.nav-tabs a:last').tab('show');
             var data = table.rows().data()[id];
-            var href='{{route('update.nomma', null)}}';
+            var href='{{route('user.update.realization', null)}}';
+            $(edit).find('#form_2').attr('action',href+'/'+data.id);
+            $(edit).find('#year_2').val(data.year);
+            $(edit).find('#year_2').change();
+            $(edit).find('#month_2').val(data.month);
+            $(edit).find('#month_2').change();
+            var array_ids=[];
+            for(var i = 0; i<data.families.length; i++) {
+                array_ids.push(data.families[i].id);
+            }
+            $(edit).find('#honey_type_2').val(array_ids);
+            $(edit).find('#honey_type_2').trigger('change');
+            $(edit).find().val('#annual_prog_2');
+            $(edit).find().val('#produced_honey_2');
+            $(edit).find().val('#reserve_2');
+            $(edit).find().val('#family_count_2');
+            $(edit).find().val('#realized_quantity_2');
+            $(edit).find().val('#realized_price_2');
+            $(edit).find().val('#stock_quantity_2');
+            $(edit).find().val('#stock_price_2');
         }
         $(document).ready(function () {
-           table = $('#example2').DataTable({
+            $('.honey_type').select2();
+            table = $('#example2').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
@@ -361,7 +391,7 @@
                         data: "family_count"
                     },
                     {
-                        data: "honey_type"
+                        data: "family_type"
                     },
                     {
                         data: "annual_prog"

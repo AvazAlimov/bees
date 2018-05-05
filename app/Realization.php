@@ -7,7 +7,7 @@ use App\User;
 
 class Realization extends Model
 {
-    public function family(){
+    public function families(){
     	return $this->belongsToMany('App\Family', 'family_realization');
     }
 
