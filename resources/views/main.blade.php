@@ -10,6 +10,13 @@
             background-size: cover;
             border-radius: 0;
         }
+        .todo{
+            border:2px solid #ffc107;
+            border-radius:10px;
+            padding: 15px 10px 5px 0px;
+            background-image: url({{ asset('Resources/halftone-yellow1.png') }});
+
+        }
 
         @media (max-width: 800px) {
             .jumbotron {
@@ -58,18 +65,17 @@
         <div class="container">
             <h2 class="display-5 text-center">Рўйхатдан ўтиш йўриқномаси</h2>
             <hr>
-
+           <div class="todo">
             <ol>
-
                 <li><p class="text-justify">Ўзингиз учун логин танланг ва уни тегишли майдонга киритинг.  Логин камидан 6 та белгидан иборат бўлиши лозим,  логин ҳарфлар,  сонлар ва белгилардан иборат бўлиши мумкин.</p> </li>
                 <li><p class="text-justify">Ўзингиз учун парол танланг ва тегишли майдонга киритиг.  Парол камида 6 та белгидан иборат бўлиши лозим.  Киритилган паролни тасдиқланг. </p></li>
                 <li><p class="text-justify">Шахсий маълумотларингизни киритинг:  исмингиз,  фамилиянгиз,  отангизнинг исми,  жинсингиз,  туғилган сана ва яшаш манзилингиз.</p> </li>
                 <li><p class="text-justify">Боғланиш учун маълумотларингизни киритинг:  электрон почта манзилингиз ва мобил телефон рақамингиз.</p> </li>
                 <li><p class="text-justify">Мобил телефонингиз рақамини киритганингиздан сўнг "Рўйхатдан ўтиш" тугмасини босинг. </p></li>
-
-
-
+                <li><p class="text-justify">Боқилайотган асалари зотларини кўрсатинг.</p></li>
+                <li><p class="text-justify">Фаолият турини танланг.</p></li>
             </ol>
+           </div>
             <br>
             <div class="card border-warning">
                 <div class="card-header bg-warning">
