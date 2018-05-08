@@ -84,7 +84,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6">
+     k                           <div class="form-group col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">Ой</span>
                                         <select class="form-control" id="month" name="month">
@@ -352,14 +352,14 @@
             }
             $(edit).find('#honey_type_2').val(array_ids);
             $(edit).find('#honey_type_2').trigger('change');
-            $(edit).find().val('#annual_prog_2');
-            $(edit).find().val('#produced_honey_2');
-            $(edit).find().val('#reserve_2');
-            $(edit).find().val('#family_count_2');
-            $(edit).find().val('#realized_quantity_2');
-            $(edit).find().val('#realized_price_2');
-            $(edit).find().val('#stock_quantity_2');
-            $(edit).find().val('#stock_price_2');
+            $(edit).find('#annual_prog_2').val(data.annual_prog);
+            $(edit).find('#produced_honey_2').val(data.produced_honey);
+            $(edit).find('#reserve_2').val(data.reserve);
+            $(edit).find('#family_count_2').val(data.family_count);
+            $(edit).find('#realized_quantity_2').val(data.realized_quantity);
+            $(edit).find('#realized_price_2').val(data.realized_price);
+            $(edit).find('#stock_quantity_2').val(data.stock_quantity);
+            $(edit).find('#stock_price_2').val(data.stock_price);
         }
         $(document).ready(function () {
             $('.honey_type').select2();
