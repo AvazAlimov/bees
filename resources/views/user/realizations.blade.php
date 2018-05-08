@@ -84,7 +84,7 @@
                                         </select>
                                     </div>
                                 </div>
-     k                           <div class="form-group col-md-6">
+                                <div class="form-group col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">Ой</span>
                                         <select class="form-control" id="month" name="month">
