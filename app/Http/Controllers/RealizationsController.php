@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Realization;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Validator;
 
 class RealizationsController extends Controller
 {
@@ -51,7 +52,6 @@ class RealizationsController extends Controller
             'realized_price' => 'required|numeric',
             'stock_quantity' => 'required|numeric',
             'stock_price' => 'required|numeric',
-            'user_id' => 'required|integer',
             'month' => 'required|integer|min:1|max:12',
             'year' => 'required|integer'
         ]);
@@ -65,7 +65,7 @@ class RealizationsController extends Controller
         $realization->realized_price = $request->realized_price;
         $realization->stock_quantity = $request->stock_quantity;
         $realization->stock_price = $request->stock_price;
-        $realization->user_id = $user_id;
+        $realization->user_id = Auth::user()->id;
         $realization->month = $request->month;
         $realization->year = $request->year;
 
@@ -105,7 +105,7 @@ class RealizationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'family_count' => 'required|numeric',
             'annual_prog' => 'required|numeric',
             'produced_honey' => 'required|numeric',
@@ -114,11 +114,14 @@ class RealizationsController extends Controller
             'realized_price' => 'required|numeric',
             'stock_quantity' => 'required|numeric',
             'stock_price' => 'required|numeric',
-            'user_id' => 'required|integer',
             'month' => 'required|integer|min:1|max:12',
             'year' => 'required|integer'
         ]);
-        $realization = Auth::user()->realizations()->where('id', $id);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator,'edit');
+        }
+
+        $realization = Auth::user()->realizations()->find($id);
         $realization->family_count = $request->family_count;
         $realization->annual_prog = $request->annual_prog;
         $realization->produced_honey = $request->produced_honey;

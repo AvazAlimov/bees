@@ -42,7 +42,7 @@ class HomeController extends Controller
             ->withActivities($activities)->withFamilies($families);
     }
     public function realizations(){
-        return view('user.realizations');
+        return view('user.realizations')->withFamilies(\App\Family::all());
     }
     public function exports(){
         return view('user.exports');
