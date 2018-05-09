@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Activity;
 use App\Bank;
 use App\City;
+use App\Equipment;
 use App\Family;
 use App\Region;
 use Illuminate\Http\Request;
@@ -45,9 +46,9 @@ class HomeController extends Controller
         return view('user.realizations')->withFamilies(\App\Family::all());
     }
     public function exports(){
-        return view('user.exports');
+        return view('user.exports')->withFamilies(\App\Family::all());
     }
     public function productions(){
-        return view('user.productions');
+        return view('user.productions')->withEquipments( Equipment::orderBy('id', 'asc')->get());
     }
 }

@@ -198,6 +198,8 @@
                                 <th colspan="2">Реализация қилган асал миқдори</th>
                                 <th colspan="2">Асал захираси</th>
                                 <th rowspan="2">Созлаш</th>
+                                <th rowspan="2">Йил</th>
+                                <th rowspan="2">Созлаш</th>
                             </tr>
                             <tr>
                                 <th>кг</th>
@@ -364,6 +366,7 @@
         $(document).ready(function () {
             $('.honey_type').select2();
             table = $('#example2').DataTable({
+                order: [],
                 processing: true,
                 serverSide: true,
                 ajax: {
@@ -375,7 +378,11 @@
                 },
                 columns: [
                     {
-                        data: "id"
+                        data: null,
+                        render: function (data, type, full, meta) {
+                            return meta.row+1;
+                        },
+                        orderable:false
                     },
                     {
                         data: "state",
@@ -415,8 +422,14 @@
                         data: "stock_price"
                     },
                     {
+                        data:"month"
+                    },
+                    {
+                        data:"year"
+                    },
+                    {
+                        orderable:false,
                         data: null, render: function (data, type, full, meta) {
-
                         return '<a onclick="editRealization('+meta.row+')" title="Узгартириш" class="btn btn-sm btn-primary pull-right edit"> <span class="">Ўзгартириш</span></a>';
                         }
                     }

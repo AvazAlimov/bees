@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Equipment;
 use Illuminate\Http\Request;
 use App\User;
 use App\realization;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
 class UserAjaxController extends Controller
@@ -31,7 +33,32 @@ class UserAjaxController extends Controller
     }
 
     public function getExport(){
-    	$export = Auth::user()->exports()->orderByDesc('month')->orderByDesc('year')->get();
+    	$export = Auth::user()->exports()->orderByDesc('year')->orderByDesc('month')->get();
     	return DataTables::of($export)->make(true);
+    }
+    public function getProduction(){
+        $productions = Auth::user()->productions()->with(['equipments' => function ($query) {
+            $query->select('name', 'volume', 'equipment_id');
+        }])->orderByDesc('year')->orderByDesc('month')->get()->toArray();
+        $array = $productions;
+        foreach ($array as $i => $item) {
+            $arr = collect($item['equipments']);
+            $new = $arr->keyBy(function ($item) {
+                return $item['equipment_id'];
+            });
+            $array[$i]['equipments'] = $new->toArray();
+        }
+        foreach ($array as $i => $item) {
+            $equipments = Equipment::orderBy('id', 'asc')->pluck('id');
+            foreach ($equipments as $k => $equipment) {
+                if (!array_key_exists($equipment, $item['equipments']))
+                    $array[$i]['equipments'][$equipment] = ['name' => '', 'volume' => '', 'equipment_id' => $equipment];
+                else {
+                    $array[$i]['equipments'][$equipment] = $item['equipments'][$equipment];
+                }
+            }
+
+        }
+        return DataTables::of($array)->make(true);
     }
 }

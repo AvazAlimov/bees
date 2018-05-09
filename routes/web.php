@@ -142,7 +142,8 @@ Route::prefix('user')->group(function (){
     Route::get('/exports','HomeController@exports')->name('user.exports');
     Route::get('/productions','HomeController@productions')->name('user.productions');
     Route::any('get/realizations','UserAjaxController@getRealization')->name('user.get.realization');
-
+    Route::any('get/exports','UserAjaxController@getExport')->name('user.get.export');
+    Route::any('get/productions','UserAjaxController@getProduction')->name('user.get.production');
     // Registration Routes...
 //    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 //    Route::post('register', 'Auth\RegisterController@register');
