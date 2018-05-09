@@ -72,101 +72,102 @@
                     <div id="main" class="tab-pane fade in active">
                         <div class="row">
                             <div class="col-sm-8">
-                                <form action="">
+                                {!! Form::model($user, ['route' => ['user.update', 'main'], 'method'=>'PUT', 'files' =>true, 'data-parsley-validate'=>'']) !!}
                                     <div class="form-group">
-                                        <label for="surname">Логин</label>
-                                        <input type="text" class="form-control" value="U1510352" id="surname" readonly/>
+                                        {{ Form::label('username', 'Логин')}}
+                                        {{ Form::text('username', null, ['class'=>'form-control'])}}
+                                    </div>  
+                                    <div class="form-group">
+                                        {{ Form::label('subject', 'Субъект (корхона, ЯТТ)')}}
+                                        {{ Form::text('subject', null, ['class'=>'form-control',])}}
                                     </div>
                                     <div class="form-group">
-                                        <label for="subject">Субъект (корхона, ЯТТ)</label>
-                                        <input type="text" class="form-control" name="subject" id="subject"
-                                               value="Ярашов Найим боги"/>
+                                        {{ Form::label('neighborhood', 'Маҳалла (МФЙ) номи')}}
+                                        {{ Form::text('neighborhood', null, ['class'=>'form-control',])}}
                                     </div>
                                     <div class="form-group">
-                                        <label for="neighborhood">Маҳалла (МФЙ) номи</label>
-                                        <input type="text" class="form-control " value="Кизилтепа" name="neighborhood"
-                                               id="neighborhood"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="region_id">Вилоят номи</label>
-                                        <select class="form-control" id="region_id" name="region_id">
-                                            <option selected>Андижон вилояти</option>
-                                            <option>Бухоро вилояти</option>
-                                            <option>Жиззах вилояти</option>
+                                        <label for="region_4" class="col-form-label col-form-label-sm">Вилоят номи</label>
+                                        <select class="form-control form-control-sm" id="region_4" name="region_id"
+                                        onchange="regionChanged(this.id)" required>
+                                            @foreach($regions as $region)
+                                                <option value="{{$region->id}}">{{ $region->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="city_id">Туман/шаҳар номи</label>
-                                        <select class="form-control" id="city_id" name="city_id">
-                                            <option selected>ЧИРЧИК ШАХРИ</option>
-                                            <option>ОККУРГОН ТУМАНИ</option>
-                                            <option>ОХАНГАРОН ТУМАНИ</option>
+                                        <label for="city_4" class="col-form-label col-form-label-sm">Туман/шаҳар номи</label>
+                                        <select class="form-control form-control-sm" id="city_4" name="city_id" required>
+                                            @foreach($cities as $city)
+                                                <option value="{{$city->id}}">{{$city->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="address">Манзил</label>
-                                        <input type="text" class="form-control address" value="8-Kurgancha"
-                                               id="address"/>
+                                        {{ Form::label('address', 'Манзил')}}
+                                        {{ Form::text('address', null, ['class'=>'form-control'])}}
                                     </div>
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-default pull-right bg-warning">Сохранить
+                                        <button type="submit" class="btn btn-default pull-right bg-warning">Сохранить
                                         </button>
                                     </div>
-                                </form>
+                                {!! Form::close()!!}
                             </div>
                         </div>
                     </div>
                     <div id="additional" class="tab-pane fade">
                         <div class="row">
                             <div class="col-sm-8">
-                                <form action="">
+                                {!! Form::model($user, ['route' => ['user.update', 'additional'], 'method'=>'PUT', 'files' =>true, 'data-parsley-validate'=>'']) !!}
                                     <div class="form-group">
-                                        <label for="fullName">Хўжалик раҳбари исми шарифи</label>
-                                        <input type="text" class="form-control fullName" value="Shokhrukh Shomakhmudov"
-                                               id="fullName"/>
+                                        {{ Form::label('fullName', 'Хўжалик раҳбари исми шарифи')}}
+                                        {{ Form::text('fullName', null, ['class'=>'form-control'])}}
                                     </div>
                                     <div class="form-group">
-                                        <label for="reg_date">Корхона давлат рўйҳатидан ўтган сана</label>
-                                        <input type="date" class="form-control " value="2018-01-01" id="reg_date"/>
+                                        {{ Form::label('reg_date', 'Корхона давлат рўйҳатидан ўтган сана')}}
+                                        {{ Form::date('reg_date', null, ['class'=>'form-control'])}}
                                     </div>
                                     <div class="form-group">
-                                        <label for="inn">СТИР (ИНН)</label>
-                                        <input type="text" class="form-control inn" value="492792097" id="inn"
-                                               minlength="9"/>
+                                        {{ Form::label('inn', 'СТИР (ИНН)')}}
+                                        {{ Form::text('inn', null, ['class'=>'form-control', 'minlength' => '9'])}}
                                     </div>
                                     <div class="form-group">
-                                        <label for="mfo">Банк МФО</label>
-                                        <input type="text" class="form-control mfo" value="01111" id="mfo"
-                                               minlength="5"/>
+                                        {{ Form::label('mfo', 'Банк МФО')}}
+                                        <input type="text" class="form-control form-control-sm bankmfo" id="mfo_2" name="mfo"
+                                       value="{{$user->mfo}}" list="mfos" minlength="5" required>
+                                        <datalist id="mfos">
+                                            @foreach($banks as $bank)
+                                                <option>{{ $bank->mfo }}</option>
+                                            @endforeach
+                                        </datalist>
                                     </div>
                                     <div class="form-group">
-                                        <label for="bank_name">Хизмат кўрсатиладиган банк номи</label>
-                                        <input type="text" class="form-control bank_name" value="ЗАНГИОТА Т"
-                                               id="bank_name"/>
+                                        {{ Form::label('bank_name', 'Хизмат кўрсатиладиган банк номи')}}
+                                        <input type="text" class="form-control form-control-sm" id="bank_3" name="bank_name"
+                                       value="{{$user->bank_name}}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="labors">Ишчилар сони</label>
-                                        <input type="number" class="form-control labors" id="labors" name="labors"
-                                               value="120" min="0"
-                                               required>
+                                        {{ Form::label('labors', 'Ишчилар сони')}}
+                                        {{ Form::number('labors', null, ['class'=>'form-control', 'minlength' => '0', 'required' => ''])}}
                                     </div>
                                     <div class="form-group">
-                                        <label for="bees_count">Боқлаётган асалари оилалари сони</label>
-                                        <input type="number" class="form-control bees_count" id="bees_count"
-                                               name="bees_count"
-                                               value="" min="0"
-                                               required>
+                                        {{ Form::label('bees_count', 'Боқлаётган асалари оилалари сони')}}
+                                        {{ Form::number('bees_count', null, ['class'=>'form-control', 'minlength' => '0', 'required' => ''])}}
                                     </div>
-                                </form>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-default pull-right bg-warning">Сохранить
+                                        </button>
+                                    </div>
+                                {!! Form::close()!!}
                             </div>
                         </div>
                     </div>
                     <div id="activities" class="tab-pane fade">
                         <div class="row">
                             <div class="col-sm-8">
-                                <form action="">
+                                {!! Form::model($user, ['route' => ['user.update', 'activities'], 'method'=>'PUT', 'files' =>true, 'data-parsley-validate'=>'']) !!}
                                     <div class="form-group">
-                                        <label for="family">Боқилаётган асалари зотлари</label>
+                                        {{ Form::label('families', 'Боқилаётган асалари зотлари')}}
+                                        
                                         <div class="">
                                             @foreach($families as $family)
                                                 <input type="checkbox" name="families[]" value="{{$family->id}}"
@@ -187,10 +188,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-default pull-right bg-warning">Сохранить
+                                        <button type="submit" class="btn btn-default pull-right bg-warning">Сохранить
                                         </button>
                                     </div>
-                                </form>
+                                {!! Form::close()!!}
                             </div>
                         </div>
                     </div>
@@ -238,29 +239,89 @@
         arrays.push({!! $cities !!});
         arrays.push({!! $banks !!});
         var mfos = [];
+
+        function regionChanged(id) {
+            var selected = document.getElementById(id).value;
+            var select = "city_" + id.substring(7, 8);
+            document.getElementById(select).innerHTML = "";
+
+            for (var i = 0; i < arrays[1].length; i++) {
+                if (selected == arrays[1][i]["region_id"]) {
+                    var opt = document.createElement('option');
+                    opt.value = arrays[1][i]['id'];
+                    opt.innerHTML = arrays[1][i]['name'];
+                    document.getElementById(select).appendChild(opt);
+                }
+            }
+        }
+
+        function changeType(id) {
+            var selected = document.getElementById(id).selectedIndex + 2;
+            for (var i = 2; i < 5; i++)
+                document.getElementById("user_" + i).classList.remove("active");
+            document.getElementById("user_" + selected).classList.add("active");
+        }
     </script>
     <script src="{{ asset('dist/js/jquery.mask.min.js') }}"></script>
     <script>
 
         $(document).ready(function () {
-            $('.inn').mask('000000000', {
-                'translation': {
-                    0: {pattern: /[0-9*]/}
-                }
-            });
-            $('.mfo').mask('00000');
             $('.phone').mask('+AAB (00) 000-00-00', {
                 'translation': {
                     A: {pattern: /[9]/},
                     B: {pattern: /[8]/}
                 }
             });
+
+            $('.bankmfo').mask('00000');
+            $('.inn').mask('000000000', {
+                'translation': {
+                    0: {pattern: /[0-9*]/}
+                }
+            });
+
+            for (var i = 0; i < arrays[2].length; i++)
+                mfos.push(arrays[2][i]['mfo']);
         });
     </script>
     <script src="{{ asset('js/vue.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/lodash.min.js') }}" type="text/javascript"></script>
 
-
+    <!--suppress JSUnusedLocalSymbols -->
+    <script>
+        var app = new Vue({
+            el: '#wrapper',
+            data: {
+                mfo: '',
+                bank: '',
+                address: '',
+                refresh: false
+            },
+            watch: {
+                mfo: function () {
+                    this.address = '';
+                    if (this.mfo.length > 0) {
+                        this.lookupAddress();
+                    }
+                }
+            },
+            methods: {
+                lookupAddress: _.debounce(function () {
+                    var app = this;
+                    app.bank = "Searching...";
+                    var found = false;
+                    for (var i = 0; i < mfos.length; i++)
+                        if (mfos[i] === app.mfo) {
+                            found = true;
+                            app.bank = arrays[2][i]['name'];
+                            break;
+                        }
+                    if (!found)
+                        app.bank = '';
+                }, 500)
+            }
+        });
+    </script>
 
     <!--suppress JSUnresolvedVariable, JSUnresolvedFunction, JSUnusedLocalSymbols -->
 @endsection

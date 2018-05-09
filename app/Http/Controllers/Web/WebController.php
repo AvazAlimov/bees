@@ -12,6 +12,7 @@ use App\Region;
 use App\City;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class WebController extends Controller
 {
@@ -63,5 +64,35 @@ class WebController extends Controller
         $user->families()->sync($request->families, false);
 
         return redirect()->back()->with('message',"Sizning ro'yhatdan o'tish so'rovingiz qabul qilindi. Sizni qabul qilishganidan so'ng, telefon raqamingizga yoki pochtangizga login, parol yuboriladi");
+    }
+
+    public function updateForm(Request $request, $tab){
+        $validator = Validator::make($request->all(), [
+                'region_id' => $tab == 'main'? 'required|exists:regions,id' : '',
+                'city_id' => $tab == 'main'? 'required|exists:cities,id' : '',
+                'neighborhood' => $tab == 'main'? 'required|max:255' : '',
+                'subject' => $tab == 'main' ? 'required|max:255' : '',
+                'address' => $tab == 'main'? 'required|max:255' : '',
+                'username' => $tab == 'main'? 'required|max:255' : '',
+                'reg_date' => $tab == 'additional'? 'required' : '',
+                'inn' => $tab == 'additional'? 'required|digits:9' : '',
+                'mfo' => $tab == 'additional'? 'required|digits:5' : '',               
+                'fullName' => $tab == 'additional'? 'required|max:255' : '',
+                'labors' => $tab == 'additional'? 'required|numeric|min:0' : '',
+                'bees_count' =>$tab == 'additional'? 'required|numeric|min:0' : '',
+                'phone' => $tab == 'password'? 'required|max:19|min:12' : '',
+                'email' => $tab == 'password'? 'nullable|email' : '',
+                'password' => $tab == 'password'? 'required|min:6' : '',
+                'families.*' =>$tab == 'activities'? 'exists:families,id' : '',                
+                'activities.*' =>$tab == 'activities'? 'exists:activities,id' : '',
+            ]);
+
+        $user = Auth::user();
+        $user->update($request->all());
+        if($tab=='activities'){
+            $user->activities()->sync($request->activities, true);
+            $user->families()->sync($request->families, true);
+        }
+        return redirect()->back()->with('message',"Sizning o'zgartirishlaringiz qabul qilindi. tez orada o'zgartirishlaringiz admin tomonidan tasdiqlanadi");
     }
 }

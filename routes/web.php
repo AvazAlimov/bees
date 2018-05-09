@@ -19,6 +19,7 @@ Route::prefix('leader')->group(function(){
 
 });
 //Route::get('/', 'Web\WebController@showForm')->name('web.show.form');
+Route::put('/user-settings/update/{tab}', 'Web\WebController@updateForm')->name('user.update');
 Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit.form');
 
 Route::prefix('admin')->group(function (){
