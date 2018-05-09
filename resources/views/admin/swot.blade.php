@@ -15,53 +15,12 @@
     </style>
 @endsection
 @section('nav')
-    <nav class="navbar navbar-default" id="navigation">
-        <ul class="nav navbar-nav" style="display:block; width: 100%">
-            <li class="dropdown navs">
-                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-users"></i>
-                    Асосий бўлим <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section1')">Раҳбарият</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section2')">Вилоятлар</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section3')">Туманлар</a></li>
-                </ul>
-            </li>
-            <li class="dropdown navs">
-                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-compass"></i>Йўналишлар<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section4')">Фаолият тури</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section5')">Боқилаётган асалари турлари</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section6')">Жиҳозлар</a></li>
-                </ul>
-            </li>
-            <li class="dropdown navs">
-                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-id-card"></i>
-                    Аъзолик <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section7')">Аризалар</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section8')">Қабул қилинган</a></li>
-                    <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section9')">Қабул қилинмаган</a></li>
-                </ul>
-            </li>
-            <li class="dropdown navs active">
-                <a class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-line-chart"></i>
-                    Электрон ҳисобот <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li class="navs2 active"><a>Ҳисобот</a></li>
-                    <li class="navs2"><a href="{{route('nomma')}}">Таҳлилий ҳисобот</a></li>
-                    <li class="navs2"><a href="{{route('ishlabchiqarish')}}">Ишлаб чиқариш қувватлари</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+    @include('admin.navbar',['section'=>1])
 @endsection
 @section('content')
     <div class="container-fluid" id="container" style="padding: 0 20px 20px 20px;">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                @for($i=1; $i<10; $i++)
-                    <div id="section{{$i}}" class="section"></div>
-                @endfor
                 <div id="section10" class="section">
                     {{--<div class="page-header clearfix">
                         <div class="col-md-4">
@@ -199,7 +158,7 @@
     <script src="{{asset('js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/dataTables.rowGroup.min.js')}}"></script>
-
+    <script src="{{asset('js/jquery.cookie.js')}}"></script>
     <script src="{{asset('js/dataTables.buttons.min.js')}}"></script>
 
     <script src="{{asset('js/jszip.min.js')}}"></script>
@@ -208,27 +167,9 @@
 
     <script>
         function switchSection(id) {
-            document.cookie = "admin=" + id + ";";
-            var section = document.getElementsByClassName('section');
-            for (var i = 0; i < section.length; i++)
-                section[i].style.display = "none";
-            document.getElementById(id).style.display = "block";
+            $.cookie("admin", id,{ expires: 7, path: '/admin' });
         }
 
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "section1";
-        }
         function fetch_data(params) {
             var url;
 
@@ -408,11 +349,6 @@
                         visible: false,
                         orderable:false
                     }
-                    /* {
-                     data: null, render: function (data, type, full, meta) {
-                     return '<a href="' + data.id + '">Here</a>';
-                     }
-                     }*/
                 ],
                 "language": {
                     "paginate": {
@@ -450,7 +386,6 @@
                 var tr2 = $(this).closest('tr');
                 var row = table2.row( tr2 );
                 var id =row.data().city_id;
-//                alert(JSON.stringify(id));
                 $('#example3').DataTable().destroy();
 
                 fetch_user_data(id);

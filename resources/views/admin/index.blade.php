@@ -690,179 +690,36 @@
                 </div>
                 <div id="section10" class="section"></div>
             </div>
-
-               {{-- <div id="section10" class="section">
-                    <div class="page-header">
-                        <h2>Hisobotlar</h2>
-                    </div>
-                    <table class="table table-bordered realization-theader example" cellspacing="0" width="100%">                        
-                          <thead>
-                          <tr>
-                            <th rowspan="2">Худуд</th>
-                            <th rowspan="2">Уюшмага аъзо субъектлар сони</th>
-                            <th colspan="4" scope="colgroup">Субъектлар</th>
-                            <th rowspan="2">Мавсум бошидаги асал захираси</th>
-                            <th rowspan="2">Ишлаб чикариш хажми (Прогноз)</th>
-                            <th rowspan="2">Ишлаб чикариш хажми (Факт)</th>
-                            <th colspan="2" scope="colgroup">Реализация килинган асал микдори</th>
-                            <th colspan="2" scope="colgroup">Асал захираси</th>
-                          </tr>
-                          <tr>
-                            <th scope="col">Дехкон (щахсий йордамчи) хужаликлари</th>
-                            <th scope="col">Куп тамокли фермер хужаликлари</th>
-                            <th scope="col">Юридик шахслар</th>
-                            <th scope="col">Якка тартибдаги тадбиркор</th>
-                            <th scope="col">Кг</th>
-                            <th scope="col">Сум</th>
-                            <th scope="col">Кг</th>
-                            <th scope="col">Сум</th>
-                          </tr>
-                        </thead>
-                        <tbody class="realization-tbody">
-                            @foreach($tableRows as $row)
-                            <tr>
-                                <td>{{$row->region}}</td>
-                                <td>{{$row->total}}</td>
-                                <td>{{$row->type4_count}}</td>
-                                <td>{{$row->type2_count}}</td>
-                                <td>{{$row->type1_count}}</td>
-                                <td>{{$row->type3_count}}</td>
-                                <td>{!!$row->reserves==null?0:$row->reserves!!}</td>
-                                <td>{!!$row->annual_prog==null?0:$row->annual_prog!!}</td>
-                                <td>{!!$row->produced_honey==null?0:$row->produced_honey!!}</td>
-                                <td>{!!$row->realized_quantity==null?0:$row->realized_quantity!!}</td>
-                                <td>{!!$row->realized_price==null?0:$row->realized_price!!}</td>
-                                <td>{!!$row->stock_quantity==null?0:$row->stock_quantity!!}</td>
-                                <td>{!!$row->stock_price==null?0:$row->stock_price!!}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                      </table>
-                </div>
-                <div id="section11" class="section">
-                    <div class="page-header">
-                        <h2>O'zbekiston asalarichilari uyushmasiga a'zo subyektlar to'g'risida ma'lumot</h2>
-                    </div>
-                    <table class="table table-bordered realization-theader example" cellspacing="0" width="100%">                        
-                          <thead>
-                          <tr>
-                            <th rowspan="2">Худуд</th>
-                            <th rowspan="2">Туман номи</th>
-                            <th rowspan="2">Уюшмага аъзо субъектлар сони</th>
-                            <th colspan="3" scope="colgroup">Субъектлар</th>
-                            <th colspan="3" scope="colgroup">Фаолият тури</th>
-                            <th rowspan="2" scope="colgroup">Боқилаётган асалари оилалари сони</th>
-                            <th rowspan="2" scope="colgroup">Ишчилар сони</th>
-                          </tr>
-                          <tr>
-                            <th scope="col">Юридик шахслар (МЧЖ, ХК, ҚК, ДХ)</th>
-                            <th scope="col">ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари</th>
-                            <th scope="col">Шахсий ёрдамчи хўжаликлари (жисмоний шахслар)</th>
-                            <th scope="col">Асалари боқиш ва асал етиштириш</th>
-                            <th scope="col">Асални қайта ишлаш ва сотиш</th>
-                            <th scope="col">Асаларичилик учун асбоб-ускуна ва инвентарлар ишлаб чиқариш</th>
-                          </tr>
-                        </thead>
-                        <tbody class="realization-tbody">
-                            @foreach($section11 as $row)
-                            <tr>
-                                <td>{{$row->region_name}}</td>
-                                <td>{{$row->city_name}}</td>
-                                <td>{{$row->total}}</td>
-                                <td>{{$row->yuridik}}</td>
-                                <td>{{$row->yakka}}</td>
-                                <td>{{$row->jismoniy}}</td>
-                                <td>{!!null!!}</td>
-                                <td>{!!null!!}</td>
-                                <td>{!!null!!}</td>
-                                <td>{!!$row->bees_count==null?0:$row->bees_count!!}</td>
-                                <td>{!!$row->labors==null?0:$row->labors!!}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                      </table>
-                </div>--}}
-
         </div>
     </div>
 @endsection
 @section('scripts')
-   {{-- <script src="{{asset('js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>--}}
-    {{-- <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script> --}}
-
+    <script src="{{asset('js/jquery.cookie.js')}}"></script>
     <script>
         function switchSection(id) {
-            document.cookie = "admin=" + id + ";";
+            $.cookie("admin",id,{ expires: 7, path: '/admin' });
+
             var section = document.getElementsByClassName('section');
             for (var i = 0; i < section.length; i++)
                 section[i].style.display = "none";
             document.getElementById(id).style.display = "block";
-        }
 
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "section1";
         }
 
         window.onload = function () {
-            switchSection(getCookie("admin"));
+            if(typeof $.cookie("admin") === "undefined"){
+                $.cookie("admin","section2",{ expires: 7, path: '/admin' });
+            }
+            var cookie = $.cookie("admin");
+
+            switchSection(cookie);
             var navs = document.getElementsByClassName("navs2");
-            navs[getCookie("admin").replace("section", "") - 1].className = "navs2 active";
-            $(navs[getCookie("admin").replace("section", "") - 1]).filter(function(){
+            navs[cookie.replace("section", "") - 1].className = "navs2 active";
+            $(navs[cookie.replace("section", "") - 1]).filter(function(){
                 return $(this).parent().parent().is('li')
             }).parent().parent().addClass('active');
-           /* $('.example').DataTable({
-                "dom":"lBfrtip",
-                "buttons":[
-                    {
-                        extend: 'excelHtml5',
-                        title:"Ишлаб чиқариш",
-                        filename:"Ишлаб чиқариш",
-                        className:"btn btn-success pull-left",
-                        //--------------------------
-                        customize : function (xlsx) {
-                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                            var col = $('col', sheet);
-                            col.each(function (index) {
-                                if(index > 3 && index%2 !== 0)
-                                    $(this).attr('width',8);
-                            });
-                        },
-                        text: 'Excel',
-                        buttons: [
-                            'excel'
-                        ]
-                    }
-                ],
-                    "columnDefs": [ {
-                        "targets": [-2,-1],
-                        "orderable": false
-                    }],
-                    rowGroup: {
-                        dataSrc: 1
-                    }
-                });*/
+
         }
-
-        /* Formatting function for row details - modify as you need */
-
  
 
     </script>
