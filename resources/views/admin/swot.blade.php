@@ -15,7 +15,7 @@
     </style>
 @endsection
 @section('nav')
-    @include('admin.navbar',['section'=>1])
+    @include('admin.navbar',['section'=>1,$waiting, $accepted, $notAccepted])
 @endsection
 @section('content')
     <div class="container-fluid" id="container" style="padding: 0 20px 20px 20px;">

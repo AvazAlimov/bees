@@ -40,11 +40,11 @@
                     Аъзолик <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li data-toggle="tab" class="navs2"><a onclick="switchSection('section7')">
-                            Аризалар </a></li>
+                            Аризалар <span class="badge badge-info">{{$waiting->total() != 0 ? $waiting->total() : ''}}</span></a></li>
                     <li data-toggle="tab" class="navs2"><a onclick="switchSection('section8')">
-                            Қабул қилинган </a></li>
+                            Қабул қилинган <span class="badge badge-info">{{$accepted->total() != 0 ? $accepted->total() : ''}}</span> </a></li>
                     <li data-toggle="tab" class="navs2"><a onclick="switchSection('section9')">
-                            Қабул қилинмаган </a></li>
+                            Қабул қилинмаган <span class="badge badge-info">{{$notAccepted->count() != 0 ? $notAccepted->count() : ''}}</span> </a></li>
                 </ul>
             </li>
             <li class="dropdown navs">
@@ -330,7 +330,7 @@
                 </div>
                 <div id="section7" class="section">
                     <div class="page-header">
-                        <h2>Запросы </h2>
+                        <h2>Аризалар </h2>
                     </div>
                     @foreach($waiting as $user)
                         <div class="col-md-12">

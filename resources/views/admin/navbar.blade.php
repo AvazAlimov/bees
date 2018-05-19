@@ -24,9 +24,12 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-id-card"></i>
                 Аъзолик <span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section7')">Аризалар</a></li>
-                <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section8')">Қабул қилинган</a></li>
-                <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section9')">Қабул қилинмаган</a></li>
+                <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section7')">Аризалар
+                        <span class="badge badge-info">{{$waiting != 0 ? $waiting : ''}}</span></a></li>
+                <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section8')">Қабул қилинган
+                        <span class="badge badge-info">{{$accepted != 0 ? $accepted : ''}}</span></a></li>
+                <li class="navs2"><a href="{{route('admin.index')}}" onclick="switchSection('section9')">Қабул қилинмаган
+                        <span class="badge badge-info">{{$notAccepted != 0 ? $notAccepted : ''}}</span></a></li>
             </ul>
         </li>
         <li class="dropdown navs active">

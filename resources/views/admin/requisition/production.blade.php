@@ -19,12 +19,6 @@
                     <div class="page-header clearfix">
                         <div class="col-md-4">
                             <h2 class="pull-left">Ишлаб чиқариш </h2>
-                            <div>
-                                <a href="{{route('ishlabchiqarish.export')}}" class="btn btn-success" tabindex="0"
-                                   aria-controls="example"
-                                   style="margin-top: 20px; margin-left: 20px;">Excel
-                                </a>
-                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -32,11 +26,12 @@
                             <thead>
                             <tr>
                                 <th rowspan="2">#</th>
+                                <th rowspan="2">Созлаш</th>
+                                <th rowspan="2">Статус</th>
                                 <th rowspan="2">Ишлаб чиқарувчи номи</th>
                                 <th rowspan="2">Ҳудуд номи</th>
                                 <th rowspan="2">Вилоят номи</th>
-                               <th colspan="{{$equipments->count()}}">Ишлаб чиқариладиган жиҳозлап</th>
-                                <th rowspan="2">Созлаш</th>
+                                <th colspan="{{$equipments->count()}}">Ишлаб чиқариладиган жиҳозлап</th>
                             </tr>
                             <tr>
                                 @foreach($equipments as $equipment)
@@ -44,18 +39,6 @@
                                 @endforeach
                             </tr>
                             </thead>
-                            <tfoot>
-                            <tr>
-                                <th></th>
-                                <th>Жами</th>
-                                <th></th>
-                                <th></th>
-                                @foreach($sum as $item)
-                                    <th>{{$item}}</th>
-                                @endforeach
-                                <th></th>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -142,7 +125,7 @@
         var table1 ;
         function editNomma(id) {
             var data = table1.rows().data()[id];
-            var href='{{route('update.ishlabchiqarish', null)}}';
+            var href='#';
             var myModal = "#myModal";
             $(myModal).modal();
             $(myModal).find('#form').attr('action',href+'/'+data.id);
@@ -173,6 +156,14 @@
                 },
                 columns: [
                     {data: 'id'},
+                    {
+                        data: null,
+                        render: function (data, type, full, meta) {
+                            var href = '{{route('delete.ishlabchiqarish', null)}}';
+                            return '<a href="' + href + '/' + data.id + '" onclick="return confirm(\'Ростанхам ўчиришни истайсизми\')" title="Удалить" class="btn btn-sm btn-danger pull-right delete"> <span class="">Ўчириш</span> </a>' +
+                                '<a onclick="editNomma(' + meta.row + ')" title="Редактирование" class="btn btn-sm btn-primary pull-right edit"> <span class="">Ўзгартириш</span></a>';
+                        }
+                    },
                     {data: 'user.subject'},
                     {data: 'user.region.name'},
                     {data: 'user.city.name'},
@@ -181,14 +172,6 @@
                         data: 'equipments.{{$equipment->id}}.volume'
                     },
                         @endforeach
-                    {
-                        data: null,
-                        render: function (data, type, full, meta) {
-                            var href = '{{route('delete.ishlabchiqarish', null)}}';
-                            return '<a href="' + href + '/' + data.id + '" onclick="return confirm(\'Ростанхам ўчиришни истайсизми\')" title="Удалить" class="btn btn-sm btn-danger pull-right delete"> <span class="">Ўчириш</span> </a>' +
-                                '<a onclick="editNomma(' + meta.row + ')" title="Редактирование" class="btn btn-sm btn-primary pull-right edit"> <span class="">Ўзгартириш</span></a>';
-                        }
-                    }
                 ],
                 "dom": "frtip",
                 "language": {

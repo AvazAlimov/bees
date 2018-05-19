@@ -2,25 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
+Route::get('setlocale/{locale}', function ($locale) {
+    in_array($locale, \Config::get('app.locales'));
+    return redirect()->back()->withCookie(cookie()->forever('language', $locale));
+})->name('lang.switch');
 
-Route::prefix('leader')->group(function(){
-    Route::get('login', 'Auth\LeaderLoginController@showLoginForm')->name('leader.login');
-    Route::post('login/submit', 'Auth\LeaderLoginController@login')->name('leader.login.submit');
-    Route::get('logout', 'Auth\LeaderLoginController@logout')->name('leader.logout');
-    Route::get('/', 'Leader\LeaderController@requestList')->name('leader.index');
-    Route::post('/confirm/user/{id}', 'Leader\LeaderController@acceptUser')->name('leader.user.accept');
-    Route::post('/delete/user/{id}', 'Leader\LeaderController@destroyUser')->name('leader.user.delete');
-    Route::post('/refuse/user/{id}', 'Leader\LeaderController@refuseUser')->name('leader.user.refuse');
-    Route::post('/retrieve/user/{id}', 'Leader\LeaderController@retrieveUser')->name('leader.user.retrieve');
-    Route::get('/accepted','Leader\LeaderController@search')->name('leader.search');
-    Route::get('/not_accepted','Leader\LeaderController@searchNotAccepted')->name('leader.search.notAccepted');
-    Route::get('/user/edit/{id}','Leader\LeaderController@editUser')->name('leader.user.edit');
-    Route::post('/user/update/{id}','Leader\LeaderController@updateUser')->name('leader.user.update');
 
-});
-//Route::get('/', 'Web\WebController@showForm')->name('web.show.form');
-Route::put('/user-settings/update/{tab}', 'Web\WebController@updateForm')->name('user.update');
-Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit.form');
 
 Route::prefix('admin')->group(function (){
     Route::any('get/user/{id?}', 'Admin\AdminAjaxController@getUsers')->name('getUsers');
@@ -42,6 +29,19 @@ Route::prefix('admin')->group(function (){
     Route::get('ishlabchiqarish/delete/{id}','Admin\AdminController@deleteIshlabchiqarish')->name('delete.ishlabchiqarish');
     Route::post('ishlabchiqarish/update/{id}','Admin\AdminController@updateIshlabchiqarish')->name('update.ishlabchiqarish');
     Route::get('ishlabchiqarish/excel','Admin\AdminExcelController@ishlabchiqarishExport')->name('ishlabchiqarish.export');
+    Route::prefix('requisition')->group(function () {
+        Route::get('productions', 'Admin\AdminController@productions')->name('requisition.production');
+        Route::get('exports', 'Admin\AdminController@exports')->name('requisition.export');
+        Route::get('realizations', 'Admin\AdminController@realizations')->name('requisition.realization');
+
+        Route::put('productions/accept/{id}', 'Admin\AdminController@productionAccept')->name('requisition.production.accept');
+        Route::put('exports/accept/{id}', 'Admin\AdminController@exportAccept')->name('requisition.export.accept');
+        Route::put('realizations/accept/{id}', 'Admin\AdminController@realizationAccept')->name('requisition.realization.accept');
+
+        Route::put('productions/deny/{id}', 'Admin\AdminController@productionDeny')->name('requisition.production.deny');
+        Route::put('exports/deny/{id}', 'Admin\AdminController@exportDeny')->name('requisition.export.deny');
+        Route::put('realizations/deny/{id}', 'Admin\AdminController@realizationDeny')->name('requisition.realization.deny');
+    });
 
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
     Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -100,42 +100,12 @@ Route::prefix('admin')->group(function (){
     });
 });
 
-Route::get('setlocale/{locale}', function ($locale) {
-    in_array($locale, \Config::get('app.locales'));
-    return redirect()->back()->withCookie(cookie()->forever('language', $locale));
-})->name('lang.switch');
-
-Route::get('/regions', function(){
-    $result = Excel::load('hudud.xlsx')->getExcel()->getSheet(0)->toArray();
-    $result = collect($result);
-    $items = $result->sortBy(function ($item){
-        return $item[3];
-    })->except(['0','1'])->unique('3')->pluck('1','3');
-
-    foreach ($items as $key => $item){
-        echo intval($key) . ' --- '. substr($item, 0,191) ."</br>";
-        $result2 = Excel::load('hudud.xlsx')->getExcel()->getSheet(0)->toArray();
-        $result2 = collect($result2);
-        $items2 = $result2->sortBy(function ($item){
-            return $item[3];
-        })->except(['0','1'])->where('3', sprintf("%02d", $key))->pluck('2','0');
-        foreach ($items2 as $key2 => $item2){
-            echo intval($key2) . ' ` ~ ` ~ `'. substr($item2, 0,191) ."</br>";
-        }
-    }
-    $result3 = Excel::load('banklar.xlsx')->getExcel()->getSheet(0)->toArray();
-    $result3 = collect($result3);
-    $items3 = $result3->except(['0','1'])->all();
-    foreach ($items3 as $key3 => $item3){
-        echo intval($key3) . ' ` ~ ` ~ `'. substr($item3[1], 0,5) .'~ ~ ~'. substr($item3[8], 0,191)."</br>";
-    }
-
-});
 Route::prefix('user')->group(function (){
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+    Route::put('settings/update/{tab}', 'Web\WebController@updateForm')->name('user.update');
     Route::get('settings','HomeController@settings')->name('settings');
     Route::get('/realizations','HomeController@realizations')->name('user.realizations');
     Route::post('update/realization/{id?}','RealizationsController@update')->name('user.update.realization');
@@ -145,12 +115,24 @@ Route::prefix('user')->group(function (){
     Route::any('get/realizations','UserAjaxController@getRealization')->name('user.get.realization');
     Route::any('get/exports','UserAjaxController@getExport')->name('user.get.export');
     Route::any('get/productions','UserAjaxController@getProduction')->name('user.get.production');
-    // Registration Routes...
-//    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-//    Route::post('register', 'Auth\RegisterController@register');
-//    Route::get('/get/realizations', 'UserAjaxController@getExport');
+
+});
+Route::prefix('leader')->group(function(){
+    Route::get('login', 'Auth\LeaderLoginController@showLoginForm')->name('leader.login');
+    Route::post('login/submit', 'Auth\LeaderLoginController@login')->name('leader.login.submit');
+    Route::get('logout', 'Auth\LeaderLoginController@logout')->name('leader.logout');
+    Route::get('/', 'Leader\LeaderController@requestList')->name('leader.index');
+    Route::post('/confirm/user/{id}', 'Leader\LeaderController@acceptUser')->name('leader.user.accept');
+    Route::post('/delete/user/{id}', 'Leader\LeaderController@destroyUser')->name('leader.user.delete');
+    Route::post('/refuse/user/{id}', 'Leader\LeaderController@refuseUser')->name('leader.user.refuse');
+    Route::post('/retrieve/user/{id}', 'Leader\LeaderController@retrieveUser')->name('leader.user.retrieve');
+    Route::get('/accepted','Leader\LeaderController@search')->name('leader.search');
+    Route::get('/not_accepted','Leader\LeaderController@searchNotAccepted')->name('leader.search.notAccepted');
+    Route::get('/user/edit/{id}','Leader\LeaderController@editUser')->name('leader.user.edit');
+    Route::post('/user/update/{id}','Leader\LeaderController@updateUser')->name('leader.user.update');
+
 });
 
-
+Route::post('/form_submit/{type}', 'Web\WebController@submitForm')->name('submit.form');
 
 Route::get('/{type?}', 'Web\WebController@showForm')->name('web.show.form');

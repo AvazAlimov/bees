@@ -14,7 +14,7 @@ use App\Production;
 use App\Region;
 use App\User;
 use App\Realization;
-use function foo\func;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -34,9 +34,14 @@ class AdminController extends Controller
         $sums = Delivery::join('regions', 'regions.id', 'deliveries.region_id')
             ->join('cities', 'cities.id', 'deliveries.city_id')
             ->select(DB::raw('SUM(deliveries.family_count) as sum_bees_count'), DB::raw('SUM(deliveries.labors) as sum_labors'))
-            ->first();;
+            ->first();
 
-        return view('admin.nomma-nom')->withSums($sums)->withRegions(Region::all())->withCities(City::all());
+        $waiting_users = User::where('state', 0)->count();
+        $accepted = User::where('state', 1)->count();
+        $notAccepted = User::where('state', -1)->count();
+
+        return view('admin.nomma-nom')->withSums($sums)->withRegions(Region::all())->withCities(City::all())
+            ->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted);
     }
 
     public function submitNomma(Request $request)
@@ -110,7 +115,15 @@ class AdminController extends Controller
     {
         $total = DB::select(DB::raw('SELECT count(*) as total, (SELECT count(*) from users where users.type<3) as yuridik, (SELECT count(*) from users where users.type=3) as yakka, (SELECT count(*) from users where users.type=4) as jismoniy, (SELECT sum(reserve) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as reserves, (SELECT sum(annual_prog) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as annual_prog, (SELECT sum(produced_honey) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as produced_honey, (SELECT sum(realized_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as realized_quantity, (SELECT sum(realized_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as realized_price, (SELECT sum(stock_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as stock_quantity, (SELECT sum(stock_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as stock_price from users'));
         $activities = Activity::orderBy('id','desc')->get();
-        return view('admin.swot')->withTotal($total)->withActivities($activities);
+
+
+        $waiting_users = User::where('state', 0)->count();
+        $accepted = User::where('state', 1)->count();
+        $notAccepted = User::where('state', -1)->count();
+
+        return view('admin.swot')->withTotal($total)->withActivities($activities)
+            ->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted);
+
     }
 
     public function index()
@@ -219,7 +232,13 @@ class AdminController extends Controller
                     $sum[$eqp->id] =$sum[$eqp->id]+($item['equipments'][$eqp->id]['volume']);
             }
 
-        return view('admin.ishlab-chiqarish')->withEquipments( Equipment::orderBy('id', 'asc')->get())->withSum($sum);
+
+
+        $waiting_users = User::where('state', 0)->count();
+        $accepted = User::where('state', 1)->count();
+        $notAccepted = User::where('state', -1)->count();
+        return view('admin.ishlab-chiqarish')->withEquipments( Equipment::orderBy('id', 'asc')->get())->withSum($sum)
+            ->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted);
     }
 
     public function deleteIshlabchiqarish($id)
