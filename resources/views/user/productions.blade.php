@@ -269,8 +269,10 @@
                     {
                         data: "state",
                         render: function (data, type, row) {
-                            if (data === 0)
+                            if (data == 0)
                                 return "<span class='label label-warning'>Тасдикланмаган</span>";
+                            else if(data == -1)
+                                return "<span class='label label-danger'>Рад килинган</span>";
                             else
                                 return "<span class='label label-success'>Тасдикланган</span>";
                         }
@@ -292,8 +294,8 @@
                         data: null,
                         orderable:false,
                         render: function (data, type, full, meta) {
-                        return '<a onclick="editExport(' + meta.row + ')" title="Узгартириш" class="btn btn-sm btn-primary pull-right edit"> <span class="">Ўзгартириш</span></a>';
-                    }
+                            return '<a onclick="editExport(' + meta.row + ')" title="Узгартириш" class="btn btn-sm btn-primary pull-right edit"> <span class="">Ўзгартириш</span></a>';
+                        }
                     }
                 ],
                 "language": {

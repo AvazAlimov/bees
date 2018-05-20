@@ -59,6 +59,18 @@
                             Ишлаб чиқариш қувватлари </a></li>
                 </ul>
             </li>
+            <li class="dropdown navs">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-bell"></i>
+                    Янги ҳисоботлар <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li class="navs2"><a href="{{route('requisition.production')}}">
+                            Ишлаб чиқариш</a></li>
+                    <li class="navs2"><a href="{{route('requisition.export')}}">
+                            Қадоқлаш ва реализация </a></li>
+                    <li class="navs2"><a href="{{route('requisition.realization')}}">
+                            Eтиштириш ва реализиция</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 @endsection

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Equipment;
+use App\User;
 use App\Export;
 use App\Production;
 use App\Realization;
@@ -16,15 +18,28 @@ class AdminRequisitionController extends Controller
     }
 
     public function productions(){
-
-        return view('admin.requisition.production')->withEquipments( Equipment::orderBy('id', 'asc')->get());
+        $waiting_users = User::where('state', 0)->count();
+        $accepted = User::where('state', 1)->count();
+        $notAccepted = User::where('state', -1)->count();
+        return view('admin.requisition.production')->withEquipments(Equipment::orderBy('id', 'asc')->get())
+            ->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted);
     }
     public function exports(){
-        return view('admin.requisition.export');
+        $waiting_users = User::where('state', 0)->count();
+        $accepted = User::where('state', 1)->count();
+        $notAccepted = User::where('state', -1)->count();
+        return view('admin.requisition.export')
+            ->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted);
     }
     public function realizations(){
-        return view('admin.requisition.realization');
+        $waiting_users = User::where('state', 0)->count();
+        $accepted = User::where('state', 1)->count();
+        $notAccepted = User::where('state', -1)->count();
+        return view('admin.requisition.realization')
+            ->withWaiting($waiting_users)->withAccepted($accepted)->withNotAccepted($notAccepted);
     }
+
+
     public function productionAccept(Request $request,$id){
         $production = Production::findOrFail($id);
         $production->state = 1;

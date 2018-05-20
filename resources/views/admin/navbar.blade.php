@@ -32,13 +32,22 @@
                         <span class="badge badge-info">{{$notAccepted != 0 ? $notAccepted : ''}}</span></a></li>
             </ul>
         </li>
-        <li class="dropdown navs active">
+        <li class="dropdown navs {{$section < 4 ? 'active' : ''}}">
             <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-line-chart"></i>
                 Электрон ҳисобот <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li class="navs2 {{$section==1 ? "active" : ""}}"><a {{$section==1 ? "" : "href=".route('swot')}}>Ҳисобот</a></li>
                 <li class="navs2 {{$section==2 ? "active" : ""}}"><a {{$section==2 ? "" : "href=".route('nomma')}}>Таҳлилий ҳисобот</a></li>
                 <li class="navs2 {{$section==3 ? "active" : ""}}"><a {{$section==3 ? "" : "href=".route('ishlabchiqarish')}}>Ишлаб чиқариш қувватлари</a></li>
+            </ul>
+        </li>
+        <li class="dropdown navs {{$section >=4 ? 'active' : ''}}">
+            <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-bell"></i>
+                Янги ҳисоботлар <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li class="navs2 {{$section==4 ? "active" : ""}}"><a {{$section==4 ? "" : "href=".route('requisition.production')}}>Ишлаб чиқариш</a></li>
+                <li class="navs2 {{$section==5 ? "active" : ""}}"><a {{$section==5 ? "" : "href=".route('requisition.export')}}>Қадоқлаш ва реализация</a></li>
+                <li class="navs2 {{$section==6 ? "active" : ""}}"><a {{$section==6 ? "" : "href=".route('requisition.realization')}}>Eтиштириш ва реализиция</a></li>
             </ul>
         </li>
     </ul>

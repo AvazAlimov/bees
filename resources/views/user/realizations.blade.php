@@ -387,10 +387,12 @@
                     {
                         data: "state",
                         render: function (data, type, row) {
-                           if(data === 0)
+                            if (data == 0)
                                 return "<span class='label label-warning'>Тасдикланмаган</span>";
-                           else
-                               return "<span class='label label-success'>Тасдикланган</span>";
+                            else if(data == -1)
+                                return "<span class='label label-danger'>Рад килинган</span>";
+                            else
+                                return "<span class='label label-success'>Тасдикланган</span>";
                         }
 
                     },

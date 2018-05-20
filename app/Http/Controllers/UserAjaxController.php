@@ -20,6 +20,7 @@ class UserAjaxController extends Controller
 
         foreach ($realization as $key=>$item)
         {
+            $array[$key]['family_type']='';
             foreach ($item->families as $i=>$family)
             {
                 if ($i < 1){

@@ -6,10 +6,16 @@
             font-weight: bold;
             background-color: #e0e0e0
         }
+        .delete{
+            margin: 5px;
+        }
+        .edit{
+            margin: 5px 5px;
+        }
     </style>
 @endsection
 @section('nav')
-    @include('admin.navbar',['section'=>3,$waiting, $accepted, $notAccepted])
+    @include('admin.navbar',['section'=>4,$waiting, $accepted, $notAccepted])
 @endsection
 @section('content')
     <div class="container-fluid" id="container" style="padding: 0 20px 20px 20px;">
@@ -17,7 +23,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div id="section10" class="section">
                     <div class="page-header clearfix">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <h2 class="pull-left">Ишлаб чиқариш </h2>
                         </div>
                     </div>
@@ -29,11 +35,15 @@
                                 <th rowspan="2">Созлаш</th>
                                 <th rowspan="2">Статус</th>
                                 <th rowspan="2">Ишлаб чиқарувчи номи</th>
+                                <th colspan="2">Сана</th>
                                 <th rowspan="2">Ҳудуд номи</th>
                                 <th rowspan="2">Вилоят номи</th>
+
                                 <th colspan="{{$equipments->count()}}">Ишлаб чиқариладиган жиҳозлап</th>
                             </tr>
                             <tr>
+                                <th>Ой</th>
+                                <th>Йил</th>
                                 @foreach($equipments as $equipment)
                                     <th>{{$equipment->name }} ({{$equipment->volume_name}})</th>
                                 @endforeach
@@ -142,29 +152,46 @@
         }
         window.onload = function () {
            table1 = $('#example').DataTable({
-                rowGroup: {
-                    dataSrc: 'user.region.name'
-                },
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{!! route('ishlabchiqarish.data') !!}',
+                    url: '{!! route('requisition.production.ajax') !!}',
                     type: 'POST',
                     data: {
                         '_token': '{{ csrf_token() }}'
                     }
                 },
                 columns: [
-                    {data: 'id'},
                     {
                         data: null,
                         render: function (data, type, full, meta) {
-                            var href = '{{route('delete.ishlabchiqarish', null)}}';
-                            return '<a href="' + href + '/' + data.id + '" onclick="return confirm(\'Ростанхам ўчиришни истайсизми\')" title="Удалить" class="btn btn-sm btn-danger pull-right delete"> <span class="">Ўчириш</span> </a>' +
-                                '<a onclick="editNomma(' + meta.row + ')" title="Редактирование" class="btn btn-sm btn-primary pull-right edit"> <span class="">Ўзгартириш</span></a>';
+                            return meta.row+1;
+                        },
+                        orderable:false
+                    },
+                    {
+                        data: null,
+                        orderable:false,
+                        render: function (data, type, full, meta) {
+                            var accept = '{{route('requisition.production.accept',null)}}';
+                            var deny = '{{route('requisition.production.deny',null)}}';
+                            return '<a href="' + accept + '/' + data.id + '" onclick="return confirm(\'Ростанхам қабул қилишни истайсизми\')" title="Қабул" class="btn btn-sm btn-success  delete"> <span class="">Қабул</span> </a>' +
+                                '<a href="' + deny + '/' + data.id + '" onclick="return confirm(\'Ростанхам рад қилишни истайсизми\')" title="Рад" class="btn btn-sm btn-danger edit"> <span class="">Рад</span></a>';
                         }
                     },
+                    {
+                        data: "state",
+                        render: function (data, type, row) {
+                            if (data == 0)
+                                return "<span class='label label-warning'>Тасдикланмаган</span>";
+                            if(data == -2)
+                                return "<span class='label label-danger'>Рад килинган</span>";
+                        }
+
+                    },
                     {data: 'user.subject'},
+                    {data: 'month'},
+                    {data: 'year'},
                     {data: 'user.region.name'},
                     {data: 'user.city.name'},
                         @foreach($equipments as $i=> $equipment)

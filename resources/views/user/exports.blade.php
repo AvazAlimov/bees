@@ -192,7 +192,7 @@
                                     <th >Реализация қилинган асал миқдори</th>
                                     <th colspan="2"> Ички бозор</th>
                                     <th colspan="2">Ташқи бозор</th>
-                                    <th rowspan="2">Созлаш</th>
+                                    <th rowspan="2">Ой</th>
                                     <th rowspan="2">Йил</th>
                                     <th rowspan="2">Созлаш</th>
 
@@ -385,8 +385,10 @@
                     {
                         data: "state",
                         render: function (data, type, row) {
-                            if(data === 0)
+                            if (data == 0)
                                 return "<span class='label label-warning'>Тасдикланмаган</span>";
+                            else if(data == -1)
+                                return "<span class='label label-danger'>Рад килинган</span>";
                             else
                                 return "<span class='label label-success'>Тасдикланган</span>";
                         }

@@ -30,17 +30,22 @@ Route::prefix('admin')->group(function (){
     Route::post('ishlabchiqarish/update/{id}','Admin\AdminController@updateIshlabchiqarish')->name('update.ishlabchiqarish');
     Route::get('ishlabchiqarish/excel','Admin\AdminExcelController@ishlabchiqarishExport')->name('ishlabchiqarish.export');
     Route::prefix('requisition')->group(function () {
-        Route::get('productions', 'Admin\AdminController@productions')->name('requisition.production');
-        Route::get('exports', 'Admin\AdminController@exports')->name('requisition.export');
-        Route::get('realizations', 'Admin\AdminController@realizations')->name('requisition.realization');
+        Route::get('productions', 'Admin\AdminRequisitionController@productions')->name('requisition.production');
+        Route::any('productions/ajax', 'Admin\AdminRequisitionAjaxController@productions')->name('requisition.production.ajax');
 
-        Route::put('productions/accept/{id}', 'Admin\AdminController@productionAccept')->name('requisition.production.accept');
-        Route::put('exports/accept/{id}', 'Admin\AdminController@exportAccept')->name('requisition.export.accept');
-        Route::put('realizations/accept/{id}', 'Admin\AdminController@realizationAccept')->name('requisition.realization.accept');
+        Route::get('exports', 'Admin\AdminRequisitionController@exports')->name('requisition.export');
+        Route::any('exports/ajax', 'Admin\AdminRequisitionAjaxController@exports')->name('requisition.export.ajax');
 
-        Route::put('productions/deny/{id}', 'Admin\AdminController@productionDeny')->name('requisition.production.deny');
-        Route::put('exports/deny/{id}', 'Admin\AdminController@exportDeny')->name('requisition.export.deny');
-        Route::put('realizations/deny/{id}', 'Admin\AdminController@realizationDeny')->name('requisition.realization.deny');
+        Route::get('realizations', 'Admin\AdminRequisitionController@realizations')->name('requisition.realization');
+        Route::any('realizations/ajax', 'Admin\AdminRequisitionAjaxController@realizations')->name('requisition.realization.ajax');
+
+        Route::get('productions/accept/{id}', 'Admin\AdminRequisitionController@productionAccept')->name('requisition.production.accept');
+        Route::get('exports/accept/{id}', 'Admin\AdminRequisitionController@exportAccept')->name('requisition.export.accept');
+        Route::get('realizations/accept/{id}', 'Admin\AdminRequisitionController@realizationAccept')->name('requisition.realization.accept');
+
+        Route::get('productions/deny/{id}', 'Admin\AdminRequisitionController@productionDeny')->name('requisition.production.deny');
+        Route::get('exports/deny/{id}', 'Admin\AdminRequisitionController@exportDeny')->name('requisition.export.deny');
+        Route::get('realizations/deny/{id}', 'Admin\AdminRequisitionController@realizationDeny')->name('requisition.realization.deny');
     });
 
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
