@@ -1,4 +1,4 @@
-@extends('layouts.app-admin')
+@extends('layouts.app')
 @section('styles')
     <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     <style>
@@ -15,7 +15,43 @@
     </style>
 @endsection
 @section('nav')
-    @include('admin.navbar',['section'=>4,$waiting, $accepted, $notAccepted])
+    <nav id="navigation" class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li class="navs">
+                <a href="{{ route('leader.index') }}" onclick="switchSection('section1')">
+                    <i class="fa fa-columns icon"></i>
+                    Заказы
+                </a>
+            </li>
+            <li class="navs">
+                <a href="{{ route('leader.index') }}" onclick="switchSection('section2')">
+                    <i class="fa fa-columns icon"></i>
+                    Принятые заказы
+                </a>
+            </li>
+            <li class="navs">
+                <a href="{{ route('leader.index') }}" onclick="switchSection('section3')">
+                    <i class="fa fa-columns icon"></i>
+                    Непринятые заказы
+                </a>
+            </li>
+            <li class="dropdown navs active">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-bell"></i>
+                   Янги ҳисоботлар</a>
+                <ul class="dropdown-menu">
+                    <li class="navs2 active"><a> Ишлаб чиқариш</a>
+                    </li>
+                    <li class="navs2"><a href="{{route('leader.requisition.export')}}">
+                            Қадоқлаш ва реализация </a>
+                    </li>
+                    <li class="navs2"><a href="{{route('leader.requisition.realization')}}">
+                            Eтиштириш ва реализиция </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </nav>
 @endsection
 @section('content')
     <div class="container-fluid" id="container" style="padding: 0 20px 20px 20px;">
@@ -70,7 +106,7 @@
 
     <script>
         function switchSection(id) {
-            $.cookie("admin", id,{ expires: 7, path: '/admin' });
+            $.cookie("leader", id,{ expires: 7, path: '/leader' });
         }
         var table1 ;
         function editNomma(id) {
@@ -95,7 +131,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{!! route('requisition.production.ajax') !!}',
+                    url: '{!! route('leader.requisition.production.ajax') !!}',
                     type: 'POST',
                     data: {
                         '_token': '{{ csrf_token() }}'
@@ -113,8 +149,8 @@
                         data: null,
                         orderable:false,
                         render: function (data, type, full, meta) {
-                            var accept = '{{route('requisition.production.accept',null)}}';
-                            var deny = '{{route('requisition.production.deny',null)}}';
+                            var accept = '{{route('leader.requisition.production.accept',null)}}';
+                            var deny = '{{route('leader.requisition.production.deny',null)}}';
                             return '<a href="' + accept + '/' + data.id + '" onclick="return confirm(\'Ростанхам қабул қилишни истайсизми\')" title="Қабул" class="btn btn-sm btn-success  delete"> <span class="">Қабул</span> </a>' +
                                 '<a href="' + deny + '/' + data.id + '" onclick="return confirm(\'Ростанхам рад қилишни истайсизми\')" title="Рад" class="btn btn-sm btn-danger edit"> <span class="">Рад</span></a>';
                         }

@@ -20,6 +20,21 @@
                     Непринятые заказы
                 </a>
             </li>
+            <li class="dropdown navs">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-bell"></i>
+                   Янги ҳисоботлар</a>
+                <ul class="dropdown-menu">
+                    <li class="navs2"><a href="{{route('leader.requisition.production')}}"> Ишлаб чиқариш</a>
+                    </li>
+                    <li class="navs2"><a href="{{route('leader.requisition.export')}}">
+                            Қадоқлаш ва реализация </a>
+                    </li>
+                    <li class="navs2"><a href="{{route('leader.requisition.realization')}}">
+                            Eтиштириш ва реализиция </a>
+                    </li>
+                </ul>
+            </li>
+
         </ul>
     </nav>
 @endsection
@@ -474,34 +489,26 @@
 
 @endsection
 @section('scripts')
+ <script src="{{asset('js/jquery.cookie.js')}}"></script>
     <script>
         function switchSection(id) {
-            document.cookie = "leader=" + id + ";";
+            $.cookie("leader",id,{ expires: 7, path: '/leader' });
             var section = document.getElementsByClassName('section');
             for (var i = 0; i < section.length; i++)
                 section[i].style.display = "none";
             document.getElementById(id).style.display = "block";
-        }
 
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "section1";
         }
 
         window.onload = function () {
-            switchSection(getCookie("leader"));
+            if(typeof $.cookie("leader") === "undefined"){
+                $.cookie("leader","section2",{ expires: 7, path: '/leader' });
+            }
+            var cookie = $.cookie("leader");
+
+            switchSection(cookie);
             var navs = document.getElementsByClassName("navs");
-            navs[getCookie("leader").replace("section", "") - 1].className = "navs active";
+            navs[cookie.replace("section", "") - 1].className = "navs active";
         }
     </script>
 @endsection
