@@ -11,6 +11,7 @@ use App\Region;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Validator;
 
 
 class HomeController extends Controller
@@ -57,13 +58,13 @@ class HomeController extends Controller
     }
 
     public function updateForm(Request $request, $tab){
+
         $validator = Validator::make($request->all(), [
                 'region_id' => $tab == 'main'? 'required|exists:regions,id' : '',
                 'city_id' => $tab == 'main'? 'required|exists:cities,id' : '',
                 'neighborhood' => $tab == 'main'? 'required|max:255' : '',
                 'subject' => $tab == 'main' ? 'required|max:255' : '',
                 'address' => $tab == 'main'? 'required|max:255' : '',
-                'username' => $tab == 'main'? 'required|max:255' : '',
                 'reg_date' => $tab == 'additional'? 'required' : '',
                 'inn' => $tab == 'additional'? 'required|digits:9' : '',
                 'mfo' => $tab == 'additional'? 'required|digits:5' : '',               
@@ -72,18 +73,24 @@ class HomeController extends Controller
                 'bees_count' =>$tab == 'additional'? 'required|numeric|min:0' : '',
                 'phone' => $tab == 'password'? 'required|max:19|min:12' : '',
                 'email' => $tab == 'password'? 'nullable|email' : '',
-                'password' => $tab == 'password'? 'required|min:6' : '',
-                'families.*' =>$tab == 'activities'? 'exists:families,id' : '',                
+                'password' => 'nullable|min:6|confirmed',
+                'families.*' =>$tab == 'activities'? 'exists:families,id' : '',
                 'activities.*' =>$tab == 'activities'? 'exists:activities,id' : '',
             ]);
-        $user = Auth::user();
-        $user->update($request->except('phone'));
-        $user->phone = preg_replace('/\D/', '', $request->phone);
-        if($tab == 'password' && $request->new_password == $request->new_password_confirm){
-            $user->password = bcrypt($request->new_password);
+        if ($validator->fails()) {
+            return redirect()->route('settings')->with('tab', $tab)
+                ->withErrors($validator)
+                ->withInput();
         }
+        $user = Auth::user();
+        $user->update($request->except(['phone','password']));
+        if($request->phone != null)
+            $user->phone = preg_replace('/\D/', '', $request->phone);
+        if($request->password != null)
+            $user->password = bcrypt($request->password);
         $user->save();
         if($tab=='activities'){
+
             $user->activities()->sync($request->activities, true);
             $user->families()->sync($request->families, true);
         }

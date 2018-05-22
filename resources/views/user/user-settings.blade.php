@@ -67,6 +67,15 @@
                 </ul>
 
                 <div class="tab-content">
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div id="main" class="tab-pane fade in active">
                         <div class="row">
                             <div class="col-sm-8">
@@ -130,7 +139,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inn">СТИР (ИНН)</label>
-                                        <input type="text" class="form-control inn" value="{{$user->inn}}" id="inn"
+                                        <input type="text" class="form-control inn" value="{{$user->inn}}" id="inn" name="inn"
                                                minlength="9"/>
                                     </div>
                                     <div class="form-group">
@@ -151,7 +160,7 @@
                                     <div class="form-group">
                                         <label for="labors">Ишчилар сони</label>
                                         <input type="number" class="form-control labors" id="labors" name="labors"
-                                               value="{{$user->labors}}" min="0"
+                                              min="0" value="{{$user->labors}}"
                                                required>
 
                                     </div>
@@ -180,7 +189,7 @@
                                         <div class="">
                                             @foreach($families as $family)
                                                 <input type="checkbox" name="families[]" value="{{$family->id}}"
-                                                > {{$family->name}}<br>
+                                                {{$user->families()->find($family->id) != null ? 'checked' : ''}}> {{$family->name}}<br>
                                             @endforeach
                                         </div>
                                     </div>
@@ -191,6 +200,7 @@
                                         <div class="">
                                             @foreach($activities as $activity)
                                                 <input type="checkbox" name="activities[]" value="{{$activity->id}}"
+                                                        {{$user->activities()->find($activity->id) != null ? 'checked' : ''}}
                                                 > {{$activity->name}}<br>
                                             @endforeach
                                         </div>
@@ -222,11 +232,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="new-password">Новый пароль</label>
-                                        <input type="password" name="new_password" value="{{$user->new_password}}" class="form-control " id="new-password"/>
+                                        <input type="password" name="password"  class="form-control " id="new-password"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="news-password-confirm">Новый пароль еще раз</label>
-                                        <input type="password" name="new_password_confirm" value="{{$user->new_password_confirm}}" class="form-control " id="news-password-confirm"/>
+                                        <input type="password" name="password_confirmation" class="form-control " id="news-password-confirm"/>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-default  pull-right bg-warning">Сохранить
@@ -280,6 +290,10 @@
             }
         }
         $(document).ready(function () {
+            @if($errors->any())
+                var session = '#'+'{{Session::get('tab')}}';
+                $('.nav-tabs a[href="'+session+'"]').tab('show');
+            @endif
             regionChanged();
             $('.inn').mask('000000000', {
                 'translation': {
