@@ -13,7 +13,7 @@ use Yajra\DataTables\DataTables;
 class UserAjaxController extends Controller
 {
     public function getRealization(){
-    	$realization = Auth::user()->realizations()->orderByDesc('year')->orderByDesc('month')->with(['families'=> function($query){
+    	$realization = Auth::user()->realizations()->orderByDesc('year')->orderByDesc('month')->orderByDesc('id')->with(['families'=> function($query){
     	    $query->select('id','name');
         }])->get();
     	$array= $realization;
@@ -34,13 +34,13 @@ class UserAjaxController extends Controller
     }
 
     public function getExport(){
-    	$export = Auth::user()->exports()->orderByDesc('year')->orderByDesc('month')->get();
+    	$export = Auth::user()->exports()->orderByDesc('year')->orderByDesc('month')->orderByDesc('id')->get();
     	return DataTables::of($export)->make(true);
     }
     public function getProduction(){
         $productions = Auth::user()->productions()->with(['equipments' => function ($query) {
             $query->select('name', 'volume', 'equipment_id');
-        }])->orderByDesc('year')->orderByDesc('month')->get()->toArray();
+        }])->orderByDesc('year')->orderByDesc('month')->orderByDesc('id')->get()->toArray();
         $array = $productions;
         foreach ($array as $i => $item) {
             $arr = collect($item['equipments']);

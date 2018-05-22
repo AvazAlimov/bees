@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Realization;
 use App\User;
+use Illuminate\Validation\Rule;
+
 use Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -41,21 +43,30 @@ class RealizationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $user_id)
+    public function store(Request $request)
     {
-        $request->validate([
-            'family_count' => 'required|numeric',
-            'annual_prog' => 'required|numeric',
-            'produced_honey' => 'required|numeric',
-            'reserve' => 'required|numeric',
-            'realized_quantity' => 'required|numeric',
-            'realized_price' => 'required|numeric',
-            'stock_quantity' => 'required|numeric',
-            'stock_price' => 'required|numeric',
-            'month' => 'required|integer|min:1|max:12',
-            'year' => 'required|integer'
-        ]);
 
+        $validator = Validator::make($request->all(),[
+            'family_count' => 'required|numeric|min:0',
+            'annual_prog' => 'required|numeric|min:0',
+            'produced_honey' => 'required|numeric|min:0',
+            'reserve' => 'required|numeric|min:0',
+            'realized_quantity' => 'required|numeric|min:0',
+            'realized_price' => 'required|numeric|min:0',
+            'stock_quantity' => 'required|numeric|min:0',
+            'stock_price' => 'required|numeric|min:0',
+            'month' => 'required|integer|min:1|max:12',
+            'year' => ['required',Rule::unique('realizations')->where(function($query) use($request){
+                $query->where('month',$request->month)->where('user_id',Auth::user()->id);
+            })]
+        ],[
+            'unique'=>'Бу санага маълумот олдин киритилган',
+        ]);
+        if($validator->fails()){
+             return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         $realization = new Realization;
         $realization->family_count = $request->family_count;
         $realization->annual_prog = $request->annual_prog;
@@ -70,7 +81,7 @@ class RealizationsController extends Controller
         $realization->year = $request->year;
 
         $realization->save();
-        $realization->family()->sync($request->family_type, false);
+        $realization->families()->sync($request->honey_types, false);
         return redirect()->back()->with('message', 'Хисобот Муваффакиятли Кушилди');
     }
 
@@ -105,23 +116,31 @@ class RealizationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'family_count' => 'required|numeric',
-            'annual_prog' => 'required|numeric',
-            'produced_honey' => 'required|numeric',
-            'reserve' => 'required|numeric',
-            'realized_quantity' => 'required|numeric',
-            'realized_price' => 'required|numeric',
-            'stock_quantity' => 'required|numeric',
-            'stock_price' => 'required|numeric',
+        $validator = Validator::make($request->all(),[
+            'family_count' => 'required|numeric|min:0',
+            'annual_prog' => 'required|numeric|min:0',
+            'produced_honey' => 'required|numeric|min:0',
+            'reserve' => 'required|numeric|min:0',
+            'realized_quantity' => 'required|numeric|min:0',
+            'realized_price' => 'required|numeric|min:0',
+            'stock_quantity' => 'required|numeric|min:0',
+            'stock_price' => 'required|numeric|min:0',
             'month' => 'required|integer|min:1|max:12',
-            'year' => 'required|integer'
+            'year' => ['required',Rule::unique('realizations')->ignore($id,'id')->where(function($query) use($request){
+                $query->where('month',$request->month)->where('user_id',Auth::user()->id);
+            })]
+        ],[
+            'unique'=>'Бу санага маълумот олдин киритилган',
         ]);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator,'edit');
+        if($validator->fails()){
+             return redirect()->back()
+                        ->withErrors($validator, 'edit')->with('id', $id)
+                        ->withInput();
         }
 
-        $realization = Auth::user()->realizations()->find($id);
+        $realization = Auth::user()->realizations()->findOrFail($id);
+        $realization->year = $request->year;
+        $realization->month = $request->month;
         $realization->family_count = $request->family_count;
         $realization->annual_prog = $request->annual_prog;
         $realization->produced_honey = $request->produced_honey;
@@ -131,8 +150,11 @@ class RealizationsController extends Controller
         $realization->stock_quantity = $request->stock_quantity;
         $realization->stock_price = $request->stock_price;
 
+        if($realization->state == -1)
+            $realization->state = -2;
+
         $realization->save();
-        $realization->family()->sync($request->family_type, true);
+        $realization->families()->sync($request->family_type, true);
         return redirect()->back()->with('message', 'Хисобот Муваффакиятли Узгартирилди');
     }
 

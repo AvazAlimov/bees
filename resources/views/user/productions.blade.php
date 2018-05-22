@@ -1,4 +1,4 @@
-@extends('layouts.app-admin')
+@extends('layouts.app-user')
 
 @section('styles')
     <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
@@ -70,7 +70,16 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="add">
-                        <form method="post" id="form">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="post" id="form" action="{{ route('user.store.production') }}">
                             {{csrf_field()}}
                             <label class="col-md-12">Ойма ой киритиладиган сана</label>
                             <div class="form-row">
@@ -114,8 +123,8 @@
                                         @for($i=$j; $i<=$j+4 && $i<$equipments->count(); $i++)
                                             <div class="form-group col-md-2">
                                                 <label for="reserve">{{$equipments[$i]->name}} ({{$equipments[$i]->volume_name}})</label>
-                                                <input type="number" name="equipments[{{$equipments[$i]->id}}]" value="{{old('reserve')}}"
-                                                       class="form-control" id="reserve" required>
+                                                <input type="number" name="equipments[{{$equipments[$i]->id}}]" value="{{old('equipments.'.$equipments[$i]->id)}}"
+                                                       class="form-control" id="reserve" min="0">
                                             </div>
                                         @endfor
                                     </div>
@@ -151,6 +160,15 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="edit">
+                        @if ($errors->edit->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->edit->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form method="post" id="form_2">
                             {{csrf_field()}}
                             <label class="col-md-12">Ойма ой киритиладиган сана</label>
@@ -195,8 +213,8 @@
                                         @for($i=$j; $i<=$j+4 && $i<$equipments->count(); $i++)
                                             <div class="form-group col-md-2">
                                                 <label for="reserve">{{$equipments[$i]->name}} ({{$equipments[$i]->volume_name}})</label>
-                                                <input type="number" name="equipments[{{$equipments[$i]->id}}]" value="{{old('reserve')}}"
-                                                       class="form-control" id="equipment_{{$equipments[$i]->id}}" required>
+                                                <input type="number" name="equipments[{{$equipments[$i]->id}}]" value="{{old('equipments.'.$equipments[$i]->id)}}"
+                                                       class="form-control" id="equipment_{{$equipments[$i]->id}}" min="0" step="any">
                                             </div>
                                         @endfor
                                     </div>
@@ -232,7 +250,7 @@
             $('.nav-tabs a:last').tab('show');
             var data = table.rows().data()[id];
 
-            var href = '{{route('user.update.realization', null)}}';
+            var href = '{{route('user.update.production', null)}}';
             $(edit).find('#form_2').attr('action', href + '/' + data.id);
             $(edit).find('#year_2').val(data.year);
             $(edit).find('#year_2').change();
@@ -245,7 +263,12 @@
 
         }
         $(document).ready(function () {
-
+            @if ($errors->edit->any())
+                $('.edit-nav').removeClass('hide');
+                $('.nav-tabs a:last').tab('show');
+                var href='{{route('user.update.production', Session::get('id'))}}';
+                $('#edit').find('#form_2').attr('action',href);
+            @endif
             $('.honey_type').select2();
             table = $('#example2').DataTable({
                 order: [],
@@ -269,12 +292,12 @@
                     {
                         data: "state",
                         render: function (data, type, row) {
-                            if (data == 0)
-                                return "<span class='label label-warning'>Тасдикланмаган</span>";
+                            if (data == 1)
+                                return "<span class='label label-success'>Тасдикланган</span>";
                             else if(data == -1)
                                 return "<span class='label label-danger'>Рад килинган</span>";
                             else
-                                return "<span class='label label-success'>Тасдикланган</span>";
+                                return "<span class='label label-warning'>Тасдикланмаган</span>";
                         }
 
                     },

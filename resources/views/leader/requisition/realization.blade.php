@@ -1,4 +1,4 @@
-@extends('layouts.app-admin')
+@extends('layouts.app')
 @section('styles')
     <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     <style>
@@ -15,7 +15,43 @@
     </style>
 @endsection
 @section('nav')
-    @include('admin.navbar',['section'=>4,$waiting, $accepted, $notAccepted])
+    <nav id="navigation" class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li class="navs">
+                <a href="{{ route('leader.index') }}" onclick="switchSection('section1')">
+                    <i class="fa fa-columns icon"></i>
+                    Заказы
+                </a>
+            </li>
+            <li class="navs">
+                <a href="{{ route('leader.index') }}" onclick="switchSection('section2')">
+                    <i class="fa fa-columns icon"></i>
+                    Принятые заказы
+                </a>
+            </li>
+            <li class="navs">
+                <a href="{{ route('leader.index') }}" onclick="switchSection('section3')">
+                    <i class="fa fa-columns icon"></i>
+                    Непринятые заказы
+                </a>
+            </li>
+            <li class="dropdown navs active">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-bell"></i>
+                   Янги ҳисоботлар</a>
+                <ul class="dropdown-menu">
+                    <li class="navs2"><a href="{{route('leader.requisition.production')}}"> Ишлаб чиқариш</a>
+                    </li>
+                    <li class="navs2"><a href="{{route('leader.requisition.export')}}">
+                            Қадоқлаш ва реализация </a>
+                    </li>
+                    <li class="navs2 active"><a >
+                            Eтиштириш ва реализиция </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </nav>
 @endsection
 @section('content')
     <div class="container-fluid" id="container" style="padding: 0 20px 20px 20px;">
@@ -24,14 +60,15 @@
                 <div id="section10" class="section">
                     <div class="page-header clearfix">
                         <div class="col-md-6">
-                            <h2 class="pull-left">Ишлаб чиқариш </h2>
+                            <h2 class="pull-left">Асал етиштириш ва реализиция</h2>
                         </div>
                     </div>
                     <div class="row">
-                        <table id="example" class="table table-striped table-bordered cell-border" cellspacing="0">
+                        <table id="example2" class="table table-bordered realization-theader " cellspacing="0"
+                               width="100%">
                             <thead>
                             <tr>
-                                <th rowspan="2">#</th>
+                                <th rowspan="2">Т/Р</th>
                                 <th rowspan="2">Созлаш</th>
                                 <th rowspan="2">Статус</th>
                                 <th rowspan="2">Ишлаб чиқарувчи номи</th>
@@ -39,16 +76,22 @@
                                 <th rowspan="2">Ҳудуд номи</th>
                                 <th rowspan="2">Вилоят номи</th>
 
-                                <th colspan="{{$equipments->count()}}">Ишлаб чиқариладиган жиҳозлап</th>
+                                <th rowspan="2">Боқилаётган асалари оиласи</th>
+                                <th rowspan="2">Асал тури</th>
+                                <th rowspan="2">Йиллик ишлаб чмқариш ҳажми (ПРОГНОЗ) кг</th>
+                                <th rowspan="2">Ишлаб чиқарилган асал миқдори (ФАКТ) кг</th>
+                                <th rowspan="2">Ҳисобот даври бошига асал заҳираси кг</th>
+                                <th colspan="2">Реализация қилган асал миқдори</th>
+                                <th colspan="2">Асал захираси</th>
                             </tr>
                             <tr>
                                 <th>Ой</th>
                                 <th>Йил</th>
-                                @foreach($equipments as $equipment)
-                                    <th>{{$equipment->name }} ({{$equipment->volume_name}})</th>
-                                @endforeach
+                                <th>кг</th>
+                                <th>сўм</th>
+                                <th>кг</th>
+                                <th>сўм</th>
                             </tr>
-                            </thead>
                         </table>
                     </div>
                 </div>
@@ -70,32 +113,16 @@
 
     <script>
         function switchSection(id) {
-            $.cookie("admin", id,{ expires: 7, path: '/admin' });
+            $.cookie("leader", id,{ expires: 7, path: '/leader' });
         }
-        var table1 ;
-        function editNomma(id) {
-            var data = table1.rows().data()[id];
-            var href='#';
-            var myModal = "#myModal";
-            $(myModal).modal();
-            $(myModal).find('#form').attr('action',href+'/'+data.id);
-            $(myModal).find('.subject').val(data.user.subject);
-            $(myModal).find('.region').val(data.user.region.name);
-            $(myModal).find('.city').val(data.user.city.name);
-            var i;
-            @foreach($equipments as $equipment)
-            i='{{$equipment->id}}';
-            $(myModal).find('#equipments1_{{$equipment->id}}').val(data.equipments[i].volume);
-            $(myModal).find('#equipments2_{{$equipment->id}}').val(data.equipments[i].equipment_id);
-            @endforeach
-             $("#btn_edit").html('Ўзгартириш');
-        }
+        var table;
         window.onload = function () {
-           table1 = $('#example').DataTable({
+            table = $('#example2').DataTable({
+                order: [],
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{!! route('requisition.production.ajax') !!}',
+                    url: '{{route('leader.requisition.realization.ajax')}}',
                     type: 'POST',
                     data: {
                         '_token': '{{ csrf_token() }}'
@@ -113,8 +140,8 @@
                         data: null,
                         orderable:false,
                         render: function (data, type, full, meta) {
-                            var accept = '{{route('requisition.production.accept',null)}}';
-                            var deny = '{{route('requisition.production.deny',null)}}';
+                            var accept = '{{route('leader.requisition.realization.accept',null)}}';
+                            var deny = '{{route('leader.requisition.realization.deny',null)}}';
                             return '<a href="' + accept + '/' + data.id + '" onclick="return confirm(\'Ростанхам қабул қилишни истайсизми\')" title="Қабул" class="btn btn-sm btn-success  delete"> <span class="">Қабул</span> </a>' +
                                 '<a href="' + deny + '/' + data.id + '" onclick="return confirm(\'Ростанхам рад қилишни истайсизми\')" title="Рад" class="btn btn-sm btn-danger edit"> <span class="">Рад</span></a>';
                         }
@@ -134,18 +161,40 @@
                     {data: 'year'},
                     {data: 'user.region.name'},
                     {data: 'user.city.name'},
-                        @foreach($equipments as $i=> $equipment)
                     {
-                        data: 'equipments.{{$equipment->id}}.volume'
+                        data: "family_count"
                     },
-                        @endforeach
+                    {
+                        data: "family_type"
+                    },
+                    {
+                        data: "annual_prog"
+                    },
+                    {
+                        data: "produced_honey"
+                    },
+                    {
+                        data: "reserve"
+                    },
+                    {
+                        data: "realized_quantity"
+                    },
+                    {
+                        data: "realized_price"
+                    },
+                    {
+                        data: "stock_quantity"
+                    },
+                    {
+                        data: "stock_price"
+                    }
                 ],
-                "dom": "frtip",
                 "language": {
                     "paginate": {
                         "previous": "Oldingi",
                         "next": "Keyingi"
                     },
+                    "processing": "Qidirilyapti",
                     "lengthMenu": "Хар бир сахифа учун _MENU_ йозувларни кўрсатиш",
                     "zeroRecords": "Хеч нарса топилмади",
                     "search": "Қидириш:",

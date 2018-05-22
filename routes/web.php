@@ -115,8 +115,16 @@ Route::prefix('user')->group(function (){
     Route::get('/realizations','HomeController@realizations')->name('user.realizations');
     Route::post('update/realization/{id?}','RealizationsController@update')->name('user.update.realization');
     Route::post('create/realization','RealizationsController@store')->name('user.store.realization');
+
     Route::get('/exports','HomeController@exports')->name('user.exports');
+    Route::post('update/export/{id?}','ExportController@update')->name('user.update.export');
+    Route::post('create/export','ExportController@store')->name('user.store.export');
+
+    
     Route::get('/productions','HomeController@productions')->name('user.productions');
+    Route::post('update/production/{id?}','ProductionController@update')->name('user.update.production');
+    Route::post('create/production','ProductionController@store')->name('user.store.production');
+
     Route::any('get/realizations','UserAjaxController@getRealization')->name('user.get.realization');
     Route::any('get/exports','UserAjaxController@getExport')->name('user.get.export');
     Route::any('get/productions','UserAjaxController@getProduction')->name('user.get.production');
@@ -135,6 +143,25 @@ Route::prefix('leader')->group(function(){
     Route::get('/not_accepted','Leader\LeaderController@searchNotAccepted')->name('leader.search.notAccepted');
     Route::get('/user/edit/{id}','Leader\LeaderController@editUser')->name('leader.user.edit');
     Route::post('/user/update/{id}','Leader\LeaderController@updateUser')->name('leader.user.update');
+
+
+    Route::prefix('requisition')->group(function () {
+        Route::get('productions', 'Leader\LeaderRequisitionController@productions')->name('leader.requisition.production');
+        Route::any('productions/ajax', 'Leader\LeaderRequisitionAjaxController@productions')->name('leader.requisition.production.ajax');
+        Route::get('exports', 'Leader\LeaderRequisitionController@exports')->name('leader.requisition.export');
+        Route::any('exports/ajax', 'Leader\LeaderRequisitionAjaxController@exports')->name('leader.requisition.export.ajax');
+
+        Route::get('realizations', 'Leader\LeaderRequisitionController@realizations')->name('leader.requisition.realization');
+        Route::any('realizations/ajax', 'Leader\LeaderRequisitionAjaxController@realizations')->name('leader.requisition.realization.ajax');
+
+        Route::get('productions/accept/{id}', 'Leader\LeaderRequisitionController@productionAccept')->name('leader.requisition.production.accept');
+        Route::get('exports/accept/{id}', 'Leader\LeaderRequisitionController@exportAccept')->name('leader.requisition.export.accept');
+        Route::get('realizations/accept/{id}', 'Leader\LeaderRequisitionController@realizationAccept')->name('leader.requisition.realization.accept');
+
+        Route::get('productions/deny/{id}', 'Leader\LeaderRequisitionController@productionDeny')->name('leader.requisition.production.deny');
+        Route::get('exports/deny/{id}', 'Leader\LeaderRequisitionController@exportDeny')->name('leader.requisition.export.deny');
+        Route::get('realizations/deny/{id}', 'Leader\LeaderRequisitionController@realizationDeny')->name('leader.requisition.realization.deny');
+    });
 
 });
 
