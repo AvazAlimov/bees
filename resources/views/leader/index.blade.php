@@ -4,20 +4,20 @@
         <ul class="nav navbar-nav">
             <li data-toggle="tab" class="navs">
                 <a onclick="switchSection('section1')">
-                    <i class="fa fa-columns icon"></i>
-                    Заказы
+                    <span class="badge">{{$waiting->total()}}</span>
+                    Аризалар
                 </a>
             </li>
             <li data-toggle="tab" class="navs">
                 <a onclick="switchSection('section2')">
-                    <i class="fa fa-columns icon"></i>
-                    Принятые заказы
+                    <span class="badge">{{$accepted->total()}}</span>
+                    Қабул қилинган
                 </a>
             </li>
             <li data-toggle="tab" class="navs">
                 <a onclick="switchSection('section3')">
-                    <i class="fa fa-columns icon"></i>
-                    Непринятые заказы
+                    <span class="badge">{{$notAccepted->total()}}</span>
+                    Қабул қилинмаган
                 </a>
             </li>
             <li class="dropdown navs">

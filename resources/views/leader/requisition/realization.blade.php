@@ -19,20 +19,20 @@
         <ul class="nav navbar-nav">
             <li class="navs">
                 <a href="{{ route('leader.index') }}" onclick="switchSection('section1')">
-                    <i class="fa fa-columns icon"></i>
-                    Заказы
+                    <span class="badge">{{$waiting}}</span>
+                    Аризалар
                 </a>
             </li>
             <li class="navs">
                 <a href="{{ route('leader.index') }}" onclick="switchSection('section2')">
-                    <i class="fa fa-columns icon"></i>
-                    Принятые заказы
+                    <span class="badge">{{$accepted}}</span>
+                    Қабул қилинган
                 </a>
             </li>
             <li class="navs">
                 <a href="{{ route('leader.index') }}" onclick="switchSection('section3')">
-                    <i class="fa fa-columns icon"></i>
-                    Непринятые заказы
+                    <span class="badge">{{$notAccepted}}</span>
+                    Қабул қилинмаган
                 </a>
             </li>
             <li class="dropdown navs active">
