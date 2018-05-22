@@ -86,9 +86,13 @@ class WebController extends Controller
                 'families.*' =>$tab == 'activities'? 'exists:families,id' : '',                
                 'activities.*' =>$tab == 'activities'? 'exists:activities,id' : '',
             ]);
-
         $user = Auth::user();
-        $user->update($request->all());
+        $user->update($request->except('phone'));
+        $user->phone = preg_replace('/\D/', '', $request->phone);
+        if($tab == 'password' && $request->new_password == $request->new_password_confirm){
+            $user->password = bcrypt($request->new_password);
+        }
+        $user->save();
         if($tab=='activities'){
             $user->activities()->sync($request->activities, true);
             $user->families()->sync($request->families, true);

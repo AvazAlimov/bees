@@ -70,19 +70,20 @@
                     <div id="main" class="tab-pane fade in active">
                         <div class="row">
                             <div class="col-sm-8">
-                                <form action="">
+                                <form action="{{ route('user.update', 'main')}}" method="POST">
+                                    {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="surname">Логин</label>
-                                        <input type="text" class="form-control" value="U1510352" id="surname" readonly/>
+                                        <input type="text" class="form-control" value="{{$user->username}}" id="surname" readonly/>
                                     </div>
                                     <div class="form-group">
                                         <label for="subject">Субъект (корхона, ЯТТ)</label>
                                         <input type="text" class="form-control" name="subject" id="subject"
-                                               value="Ярашов Найим боги"/>
+                                               value="{{$user->subject}}"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="neighborhood">Маҳалла (МФЙ) номи</label>
-                                        <input type="text" class="form-control " value="Кизилтепа" name="neighborhood"
+                                        <input type="text" class="form-control " value="{{$user->neighborhood}}" name="neighborhood"
                                                id="neighborhood"/>
                                     </div>
                                     <div class="form-group">
@@ -105,39 +106,36 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="address">Манзил</label>
-                                        <input type="text" class="form-control address" value="8-Kurgancha"
+                                        <input type="text" class="form-control address" name="address" value="{{$user->address}}"
                                                id="address"/>
                                     </div>
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-default pull-right bg-warning">Сохранить
+                                        <button type="submit" class="btn btn-default pull-right bg-warning">Сохранить
                                         </button>
-                                    </div>
                                 </form>
-                                <h2>{{$user->region->name}} {{$user->city->name}}</h2>
                             </div>
                         </div>
                     </div>
                     <div id="additional" class="tab-pane fade">
                         <div class="row">
                             <div class="col-sm-8">
-                                <form action="">
+                                <form action="{{ route('user.update', 'additional')}}" method="POST">
+                                    {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="fullName">Хўжалик раҳбари исми шарифи</label>
-                                        <input type="text" class="form-control fullName" value="Shokhrukh Shomakhmudov"
-                                               id="fullName"/>
+                                        <input type="text" class="form-control fullName" value="{{$user->fullName}}" name="fullName" id="fullName"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="reg_date">Корхона давлат рўйҳатидан ўтган сана</label>
-                                        <input type="date" class="form-control " value="2018-01-01" id="reg_date"/>
+                                        <input type="date" class="form-control" name="reg_date" value="{{$user->reg_date}}" id="reg_date"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="inn">СТИР (ИНН)</label>
-                                        <input type="text" class="form-control inn" value="492792097" id="inn"
+                                        <input type="text" class="form-control inn" value="{{$user->inn}}" id="inn"
                                                minlength="9"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="mfo">Банк МФО</label>
-                                        <input type="text" class="form-control mfo" value="01111" id="mfo" list="mfos"
+                                        <input type="text" class="form-control mfo" name="mfo" value="{{$user->mfo}}" id="mfo" list="mfos"
                                                minlength="5" onchange="bankChanged()"/>
                                         <datalist id="mfos">
                                             @foreach($banks as $bank)
@@ -147,13 +145,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="bank_name">Хизмат кўрсатиладиган банк номи</label>
-                                        <input type="text" class="form-control bank_name" value="ЗАНГИОТА Т"
-                                               id="bank_name"/>
+                                        <input type="text" class="form-control bank_name" value="{{$user->bank_name}}"
+                                               id="bank_name" name="bank_name" />
                                     </div>
                                     <div class="form-group">
                                         <label for="labors">Ишчилар сони</label>
                                         <input type="number" class="form-control labors" id="labors" name="labors"
-                                               value="120" min="0"
+                                               value="{{$user->labors}}" min="0"
                                                required>
 
                                     </div>
@@ -161,8 +159,12 @@
                                         <label for="bees_count">Боқлаётган асалари оилалари сони</label>
                                         <input type="number" class="form-control bees_count" id="bees_count"
                                                name="bees_count"
-                                               value="" min="0"
+                                               value="{{$user->bees_count}}" min="0"
                                                required>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-default pull-right bg-warning">Сохранить
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -171,7 +173,8 @@
                     <div id="activities" class="tab-pane fade">
                         <div class="row">
                             <div class="col-sm-8">
-                                <form action="">
+                                <form action="{{ route('user.update', 'activities')}}" method="POST">
+                                    {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="family">Боқилаётган асалари зотлари</label>
                                         <div class="">
@@ -194,7 +197,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-default pull-right bg-warning">Сохранить
+                                        <button type="submit" class="btn btn-default pull-right bg-warning">Сохранить
                                         </button>
                                     </div>
                                 </form>
@@ -204,28 +207,29 @@
                     <div id="password" class="tab-pane fade">
                         <div class="row">
                             <div class="col-sm-8">
-                                <form action="">
+                                <form action="{{ route('user.update', 'password')}}" method="POST">
+                                    {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" value="shohrux.shomaxmudvo@gmail.com" class="form-control "
-                                               id="email"/>
+                                        <input type="email" value="{{$user->email}}" class="form-control "
+                                               id="email" name="email" />
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Телефон рақами</label>
                                         <input type="text" class="form-control phone" id="phone" name="phone"
-                                               value="998908082443"
+                                               value="{{$user->phone}}"
                                                required>
                                     </div>
                                     <div class="form-group">
                                         <label for="new-password">Новый пароль</label>
-                                        <input type="password" class="form-control " id="new-password"/>
+                                        <input type="password" name="new_password" value="{{$user->new_password}}" class="form-control " id="new-password"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="news-password-confirm">Новый пароль еще раз</label>
-                                        <input type="password" class="form-control " id="news-password-confirm"/>
+                                        <input type="password" name="new_password_confirm" value="{{$user->new_password_confirm}}" class="form-control " id="news-password-confirm"/>
                                     </div>
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-default  pull-right bg-warning">Сохранить
+                                        <button type="submit" class="btn btn-default  pull-right bg-warning">Сохранить
                                         </button>
                                     </div>
                                 </form>
@@ -271,7 +275,6 @@
             document.getElementById('bank_name').innerHTML = "";
             for (var i = 0; i < arrays[2].length; i++) {
                 if (selected == arrays[2][i]["mfo"]) {
-                    alert(arrays[2][i]["name"]);
                     document.getElementById('bank_name').value = arrays[2][i]["name"];
                 }
             }

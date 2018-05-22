@@ -106,11 +106,10 @@ Route::prefix('admin')->group(function (){
 });
 
 Route::prefix('user')->group(function (){
-    Route::get('/', 'HomeController@index')->name('home');
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-    Route::put('settings/update/{tab}', 'Web\WebController@updateForm')->name('user.update');
+    Route::post('settings/update/{tab?}', 'Web\WebController@updateForm')->name('user.update');
     Route::get('settings','HomeController@settings')->name('settings');
     Route::get('/realizations','HomeController@realizations')->name('user.realizations');
     Route::post('update/realization/{id?}','RealizationsController@update')->name('user.update.realization');
@@ -120,6 +119,7 @@ Route::prefix('user')->group(function (){
     Route::any('get/realizations','UserAjaxController@getRealization')->name('user.get.realization');
     Route::any('get/exports','UserAjaxController@getExport')->name('user.get.export');
     Route::any('get/productions','UserAjaxController@getProduction')->name('user.get.production');
+    Route::get('/', 'HomeController@index')->name('home');
 
 });
 Route::prefix('leader')->group(function(){
