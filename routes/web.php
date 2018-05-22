@@ -109,7 +109,7 @@ Route::prefix('user')->group(function (){
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-    Route::post('settings/update/{tab?}', 'Web\WebController@updateForm')->name('user.update');
+    Route::post('settings/update/{tab?}', 'HomeController@updateForm')->name('user.update');
     Route::get('settings','HomeController@settings')->name('settings');
     Route::get('/realizations','HomeController@realizations')->name('user.realizations');
     Route::post('update/realization/{id?}','RealizationsController@update')->name('user.update.realization');
