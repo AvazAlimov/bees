@@ -146,6 +146,12 @@
                                            value="{{$user->bees_count}}"
                                            required>
                                 </div>
+                                <div class="form-group col-md-12">
+                                    <label for="honey_quantity" class="col-form-label col-form-label-sm">Етиштирилган асал миқдори (кг)</label>
+                                    <input type="number" class="form-control form-control-sm" id="honey_quantity" name="honey_quantity"
+                                           value="{{$user->honey_quantity}}"
+                                           required>
+                                </div>
                                 <div class="form-group col-md-6">
                                     <label for="activity_1" class="col-form-label col-form-label-sm">Фаолият тури (бир
                                         нечтасини танласа бўлади)</label>
