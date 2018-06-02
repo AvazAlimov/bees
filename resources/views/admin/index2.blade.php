@@ -300,12 +300,12 @@
                         "previous": "Oldingi",
                         "next": "Keyingi"
                     },
-                    "lengthMenu": "Хар бир сахифа учун _MENU_ йозувларни кўрсатиш",
+                    "lengthMenu": "Ҳар бир сахифа учун _MENU_ ёзувларни кўрсатиш",,
                     "zeroRecords": "Хеч нарса топилмади",
                     "search": "Қидириш:",
                     "info": "_PAGES_ дан _PAGE_ таси сахифа кўрсатилган",
-                    "infoEmpty": "Йозувлар мавжуд эмас",
-                    "infoFiltered": "(жами _MAX_ йозувлар филти килинган)"
+                    "infoEmpty": "Ёзувлар мавжуд эмас",
+                    "infoFiltered": "(жами _MAX_ ёзувлар филти килинган)"
                 },
                 "scrollX": true,
                 rowGroup: {

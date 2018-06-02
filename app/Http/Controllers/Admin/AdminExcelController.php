@@ -59,11 +59,11 @@ class AdminExcelController extends Controller
 
     public function regionExport()
     {
-        $groupByRegion = DB::select(DB::raw('SELECT count(*) as total,(SELECT id from regions where regions.id=us.region_id) as id, (SELECT name from regions where regions.id=us.region_id) as region, (SELECT count(*) from users as usr where usr.type<3 AND us.region_id=usr.region_id) as yuridik, (SELECT count(*) from users as usr where usr.type=3 AND us.region_id=usr.region_id) as yakka, (SELECT count(*) from users as usr where usr.type=4 AND us.region_id=usr.region_id) as jismoniy, (SELECT sum(reserve) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as reserves, (SELECT sum(annual_prog) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as annual_prog, (SELECT sum(produced_honey) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as produced_honey, (SELECT sum(realized_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_quantity, (SELECT sum(realized_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_price, (SELECT sum(stock_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_quantity, (SELECT sum(stock_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_price from users as us  group by region_id'));
+        $groupByRegion = DB::select(DB::raw('SELECT count(*) as total,(SELECT id from regions where regions.id=us.region_id) as id, (SELECT name from regions where regions.id=us.region_id) as region, (SELECT count(*) from users as usr where usr.type<3 AND us.region_id=usr.region_id) as yuridik, (SELECT count(*) from users as usr where usr.type=3 AND us.region_id=usr.region_id) as yakka, (SELECT count(*) from users as usr where usr.type=4 AND us.region_id=usr.region_id) as jismoniy, (SELECT sum(reserve) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as reserves, (SELECT sum(annual_prog) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as annual_prog, (SELECT sum(produced_honey) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as produced_honey, (SELECT sum(honey_quantity) from users as usr where us.region_id=usr.region_id) as honey_quantity, (SELECT sum(realized_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_quantity, (SELECT sum(realized_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as realized_price, (SELECT sum(stock_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_quantity, (SELECT sum(stock_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1) AND us.region_id=users.region_id) as stock_price from users as us  group by region_id'));
         /*Excel::create('Етиштирилган ҳамда реализация қилинган асал миқдори тўғрисидаги ҳисобот.', function ($excel) use ($groupByRegion) {
             Excel::selectSheetsByIndex(0)->load('swot.xlsx');
         })->download('xls');*/
-        $total = DB::select(DB::raw('SELECT count(*) as total, (SELECT count(*) from users where users.type<3) as yuridik, (SELECT count(*) from users where users.type=3) as yakka, (SELECT count(*) from users where users.type=4) as jismoniy, (SELECT sum(reserve) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as reserves, (SELECT sum(annual_prog) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as annual_prog, (SELECT sum(produced_honey) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as produced_honey, (SELECT sum(realized_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as realized_quantity, (SELECT sum(realized_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as realized_price, (SELECT sum(stock_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as stock_quantity, (SELECT sum(stock_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as stock_price from users'));
+        $total = DB::select(DB::raw('SELECT count(*) as total, (SELECT count(*) from users where users.type<3) as yuridik, (SELECT count(*) from users where users.type=3) as yakka, (SELECT count(*) from users where users.type=4) as jismoniy, (SELECT sum(reserve) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as reserves, (SELECT sum(annual_prog) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as annual_prog, (SELECT sum(produced_honey) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as produced_honey, (SELECT sum(honey_quantity) from users) as honey_quantity, (SELECT sum(realized_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as realized_quantity, (SELECT sum(realized_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as realized_price, (SELECT sum(stock_quantity) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as stock_quantity, (SELECT sum(stock_price) from realizations inner join users on users.id=realizations.user_id where realizations.id =(select id from realizations as r WHERE r.user_id=realizations.user_id ORDER BY id DESC LIMIT 1)) as stock_price from users'));
 
 //        $collection = json_decode( json_encode($groupByRegion), true);
         $collection = $groupByRegion;
@@ -74,14 +74,14 @@ class AdminExcelController extends Controller
                 foreach ($collection as $key => $item)
                     $sheet->appendRow((5 + $key), [$item->region, $item->total, $item->yuridik, $item->yakka, $item->jismoniy,
                         $item->reserves != null ? $item->reserves : 0, $item->annual_prog != null ? $item->annual_prog : 0,
-                        $item->produced_honey != null ? $item->produced_honey : 0, $item->realized_quantity != null ? $item->realized_quantity : 0,
+                        $item->produced_honey != null ? $item->produced_honey : 0, $item->honey_quantity != null ? $item->honey_quantity : 0, $item->realized_quantity != null ? $item->realized_quantity : 0,
                         $item->realized_price != null ? $item->realized_price : 0,
                         $item->stock_quantity != null ? $item->stock_quantity : 0, $item->stock_price != null ? $item->stock_price : 0]);
                 $sheet->appendRow(['Жами',
                     $total[0]->total != null ? $total[0]->total : 0, $total[0]->yuridik != null ? $total[0]->yuridik : 0,
                     $total[0]->yakka != null ? $total[0]->yakka : 0, $total[0]->jismoniy != null ? $total[0]->jismoniy : 0,
                     $total[0]->reserves != null ? $total[0]->reserves : 0, $total[0]->annual_prog != null ? $total[0]->annual_prog : 0,
-                    $total[0]->produced_honey != null ? $total[0]->produced_honey : 0, $total[0]->realized_quantity != null ? $total[0]->realized_quantity : 0,
+                    $total[0]->produced_honey != null ? $total[0]->produced_honey : 0, $item->honey_quantity != null ? $item->honey_quantity : 0, $total[0]->realized_quantity != null ? $total[0]->realized_quantity : 0,
                     $total[0]->realized_price != null ? $total[0]->realized_price : 0, $total[0]->stock_quantity != null ? $total[0]->stock_quantity : 0,
                     $total[0]->stock_price != null ? $total[0]->stock_price : 0]);
 
@@ -109,7 +109,7 @@ class AdminExcelController extends Controller
                 }, 'user as jismoniy' => function ($query) {
                     $query->where('users.type', 4);
                 }])
-                ->addSelect(DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'));
+                ->addSelect(DB::raw('SUM(honey_quantity) as honey_quantity'), DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'));
 
         } else {
             $groupByCity = City::join('users', 'cities.id', 'users.city_id')
@@ -124,7 +124,7 @@ class AdminExcelController extends Controller
                 }, 'user as jismoniy' => function ($query) {
                     $query->where('users.type', 4);
                 }])
-                ->addSelect(DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'));
+                ->addSelect(DB::raw('SUM(honey_quantity) as honey_quantity'), DB::raw('SUM(bees_count) as bees_count'), DB::raw('SUM(labors) as labors'));
 
 
         }
@@ -139,7 +139,7 @@ class AdminExcelController extends Controller
         foreach (range(0, 7) as $i)
             unset($column2[$i]);
 
-        $column = ['Ҳудуд','Туман номи','Уюшмага аъзо субъектлар сони','Субъектлар','','','Боқилаётган асалари оилалари сони','Ишчилар сони','Фаолият тури'];
+        $column = ['Ҳудуд','Туман номи','Уюшмага аъзо субъектлар сони','Субъектлар','','','Етиштирилган асал миқдори (кг)','Боқилаётган асалари оилалари сони','Ишчилар сони','Фаолият тури'];
         $column1= ['','','','Юридик шахслар (МЧЖ, ХК, ҚК, ДХ)','ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари','Шахсий ёрдамчи хўжаликлари (жисмоний шахслар)','',''];
         foreach ($activities as $activity) {
             array_push($column1, $activity->name);
@@ -154,7 +154,7 @@ class AdminExcelController extends Controller
                     ->appendRow(4, $column1);
                 foreach ($collection as $key => $item) {
                     $array = [$item->region_name, $item->city_name, $item->total != null ? $item->total : 0,
-                        $item->yuridik, $item->yakka, $item->jismoniy, $item->bees_count != null ? $item->bees_count : 0,
+                        $item->yuridik, $item->yakka, $item->jismoniy, $item->honey_quantity!=null ? $item->honey_quantity:0, $item->bees_count != null ? $item->bees_count : 0,
                         $item->labors != null ? $item->labors : 0];
                     foreach ($activities as $activity)
                         array_push($array, $item['activity' . $activity->id]);
@@ -265,7 +265,7 @@ class AdminExcelController extends Controller
 
         $column1 = ['Т/Р', "Субъект номи", "Вилоят номи", "Туман/шаҳар номи", "Маҳалла (МФЙ) номи",
             "Корхона давлат рўйҳатидан ўтган сана","СТИР (ИНН)","Банк МФО","Хизмат кўрсатиладиган банк номи","Манзил",
-            "Телефон рақами","Электрон почта","Хўжалик раҳбари исми шарифи","Ишчилар сони","Боқлаётган асалари оилалари сони"];
+            "Телефон рақами","Электрон почта","Хўжалик раҳбари исми шарифи","Етиштирилган асал миқдори (кг)","Ишчилар сони","Боқлаётган асалари оилалари сони"];
 
 
         Excel::create('Аъзолар', function ($excel) use ($array, $column1) {
@@ -283,7 +283,7 @@ class AdminExcelController extends Controller
                     $sheet->appendRow(4 + $i, [
                         $item->id, ($item->subject != null || $item->subject != '' ) ? $item->subject : $item->fullName, $item->region_name, $item->city_name, $item->neighborhood,
                         $item->reg_date, $item->inn, $item->mfo, $item->bank_name, $item->address, '+'.$item->phone.'', $item->email,
-                        $item->fullName, $item->labors, $item->bees_count]);
+                        $item->fullName, $item->honey_quantity!=null ? $item->honey_quantity:0, $item->labors, $item->bees_count]);
                 }
                 $sheet->setBorder('A3:O'.($array->count()+3), 'thin');
             });
