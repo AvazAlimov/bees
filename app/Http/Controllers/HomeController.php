@@ -70,6 +70,7 @@ class HomeController extends Controller
                 'mfo' => $tab == 'additional'? 'required|digits:5' : '',               
                 'fullName' => $tab == 'additional'? 'required|max:255' : '',
                 'labors' => $tab == 'additional'? 'required|numeric|min:0' : '',
+                'honey_quantity' => $tab == 'additional'? 'required|numeric|min:0' : '',
                 'bees_count' =>$tab == 'additional'? 'required|numeric|min:0' : '',
                 'phone' => $tab == 'password'? 'required|max:19|min:12' : '',
                 'email' => $tab == 'password'? 'nullable|email' : '',

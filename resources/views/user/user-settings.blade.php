@@ -172,6 +172,12 @@
                                                required>
                                     </div>
                                     <div class="form-group">
+                                        <label for="honey_quantity" class="col-form-label col-form-label-sm">Етиштирган асал миқдори (кг)</label>
+                                        <input type="number" class="form-control form-control-sm" id="honey_quantity" name="honey_quantity"
+                                               value="{{$user->honey_quantity}}"
+                                               required>
+                                    </div>
+                                    <div class="form-group">
                                         <button type="submit" class="btn btn-default pull-right bg-warning">Сохранить
                                         </button>
                                     </div>

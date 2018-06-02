@@ -363,20 +363,33 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="family_2" class="col-form-label col-form-label-sm">Боқилаётган асалари
-                                    зотлари</label>
-                                <div class="col-md-12">
-                                    @foreach($families as $family)
-                                        <input type="checkbox" name="families[]" value="{{$family->id}}"
-                                               id="family_2"> {{$family->name}}<br>
-                                    @endforeach
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="honey_quantity_2" class="col-form-label col-form-label-sm">Етиштирган асал миқдори (кг)</label>
+                                    <input type="number" class="form-control form-control-sm col-md-11" id="honey_quantity_2" name="honey_quantity"
+                                           value="{{old('honey_quantity')}}"
+                                           required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="family_2" class="col-form-label col-form-label-sm">Боқилаётган асалари
+                                        зотлари</label>
+                                    <div class="">
+                                        @foreach($families as $family)
+                                            <input type="checkbox" name="families[]" value="{{$family->id}}"
+                                                   id="family_2"> {{$family->name}}<br>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
+
                                 <label for="activity_2" class="col-form-label col-form-label-sm">Фаолият тури (бир
                                     нечтасини танласа бўлади)</label>
-                                <div class="col-md-12">
+                                <div class="">
                                     @foreach($activities as $activity)
                                         <input type="checkbox" name="activities[]" value="{{$activity->id}}"
                                                id="activity_2"> {{$activity->name}}<br>
@@ -499,6 +512,12 @@
                                        value="{{old('bees_count')}}" min="0"
                                        required>
                             </div>
+                            <div class="form-group col-md-6">
+                                <label for="honey_quantity_3" class="col-form-label col-form-label-sm">Етиштирган асал миқдори (кг)</label>
+                                <input type="number" class="form-control form-control-sm col-md-11" id="honey_quantity_3" name="honey_quantity"
+                                       value="{{old('honey_quantity')}}"
+                                       required>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -595,21 +614,30 @@
                                        required>
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="family_4" class="col-form-label col-form-label-sm">Боқилаётган асалари
-                                    зотлари</label>
-                                <div class="col-md-12">
-                                    @foreach($families as $family)
-                                        <input type="checkbox" name="families[]" value="{{$family->id}}"
-                                               id="family_4"> {{$family->name}}<br>
-                                    @endforeach
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="honey_quantity_2" class="col-form-label col-form-label-sm">Етиштирган асал миқдори (кг)</label>
+                                    <input type="number" class="form-control form-control-sm col-md-11" id="honey_quantity_2" name="honey_quantity"
+                                           value="{{old('honey_quantity')}}"
+                                           required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="family_4" class="col-form-label col-form-label-sm">Боқилаётган асалари
+                                        зотлари</label>
+                                    <div class="">
+                                        @foreach($families as $family)
+                                            <input type="checkbox" name="families[]" value="{{$family->id}}"
+                                                   id="family_4"> {{$family->name}}<br>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="activity_4" class="col-form-label col-form-label-sm">Фаолият тури (бир
                                     нечтасини танласа бўлади)</label>
-                                <div class="col-md-12">
+                                <div class="">
                                     @foreach($activities as $activity)
                                         <input type="checkbox" name="activities[]" value="{{$activity->id}}"
                                                id="activity_4"> {{$activity->name}}<br>
@@ -617,7 +645,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <hr>
 
                         <div class="text-center">
