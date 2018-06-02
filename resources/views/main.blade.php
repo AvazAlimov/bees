@@ -70,7 +70,7 @@
                 <li><p class="text-justify">Шахсий маълумотларингизни киритинг:  исмингиз,  фамилиянгиз,  отангизнинг исми,  жинсингиз,  туғилган сана ва яшаш манзилингиз.</p> </li>
                 <li><p class="text-justify">Боғланиш учун маълумотларингизни киритинг:  электрон почта манзилингиз ва мобил телефон рақамингиз.</p> </li>
                 <li><p class="text-justify">Мобил телефонингиз рақамини киритинг. </p></li>
-                <li><p class="text-justify">Боқилайотган асалари зотларини кўрсатинг.</p></li>
+                <li><p class="text-justify">Боқилайотган асалари зотларини ва етиштирилган асал миқдорини кўрсатинг.</p></li>
                 <li><p class="text-justify">Фаолият турини танланг ва рўйҳатдан ўтиш тугмасини босинг.</p></li>
             </ol>
            </div>
@@ -362,14 +362,11 @@
                                        required>
                             </div>
                         </div>
-                        <div class="row">
-
-                        </div>
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="honey_quantity_2" class="col-form-label col-form-label-sm">Етиштирган асал миқдори (кг)</label>
+                                    <label for="honey_quantity_2" class="col-form-label col-form-label-sm">Етиштирилган асал миқдори (кг)</label>
                                     <input type="number" class="form-control form-control-sm col-md-11" id="honey_quantity_2" name="honey_quantity"
                                            value="{{old('honey_quantity')}}"
                                            required>
@@ -513,7 +510,7 @@
                                        required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="honey_quantity_3" class="col-form-label col-form-label-sm">Етиштирган асал миқдори (кг)</label>
+                                <label for="honey_quantity_3" class="col-form-label col-form-label-sm">Етиштирилган асал миқдори (кг)</label>
                                 <input type="number" class="form-control form-control-sm col-md-11" id="honey_quantity_3" name="honey_quantity"
                                        value="{{old('honey_quantity')}}"
                                        required>
@@ -618,7 +615,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="honey_quantity_2" class="col-form-label col-form-label-sm">Етиштирган асал миқдори (кг)</label>
+                                    <label for="honey_quantity_2" class="col-form-label col-form-label-sm">Етиштирилган асал миқдори (кг)</label>
                                     <input type="number" class="form-control form-control-sm col-md-11" id="honey_quantity_2" name="honey_quantity"
                                            value="{{old('honey_quantity')}}"
                                            required>
