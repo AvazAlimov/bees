@@ -22,6 +22,18 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="col-md-12 form-group{{ $errors->has('volume_name') ? ' has-error' : '' }}">
+                                <label for="volume_name" class="col-md-3 control-label">Ед. изм:</label>
+                                <div class="col-md-9">
+                                    <input id="volume_name" type="text" class="form-control" name="volume_name"
+                                           value="{{ old('volume_name') }}" required autofocus>
+                                    @if ($errors->has('volume_name'))
+                                        <span class="help-block">
+	                                        <strong>{{ $errors->first('volume_name') }}</strong>
+	                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
                         </div>
                         <div class="panel-footer">
