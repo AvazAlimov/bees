@@ -80,7 +80,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div id="section1" class="section" style="display: block;">
                     <div class="page-header">
-                        <h2>Viloyatlar</h2>
+                        <h2>Вилоятлар</h2>
                     </div>
                     @foreach ($regions as $region)
                         <div class="col-md-6">
@@ -115,7 +115,7 @@
                 </div>
                 <div id="section2" class="section">
                     <div class="page-header">
-                        <h2>Rahbarlar</h2>
+                        <h2>Раҳбарлар</h2>
                     </div>
                     @foreach ($leaders as $leader)
                         <div class="col-md-6">
@@ -169,7 +169,7 @@
                 </div>
                 <div id="section3" class="section">
                     <div class="page-header">
-                        <h2>Shaharlar</h2>
+                        <h2>Туманлар</h2>
                     </div>
                     @foreach($regions as $region)
                         <div class="col-md-6" style="padding: 20px;">
@@ -216,7 +216,7 @@
                 </div>
                 <div id="section4" class="section">
                     <div class="page-header">
-                        <h2>Faoliyatlar</h2>
+                        <h2>Фаолият тури</h2>
                     </div>
                     @foreach ($activities as $activity)
                         <div class="col-md-6">
@@ -258,7 +258,7 @@
                 </div>
                 <div id="section5" class="section">
                     <div class="page-header">
-                        <h2>Asalari Zotlari</h2>
+                        <h2>Асалари зотлари</h2>
                     </div>
                     @foreach ($families as $activity)
                         <div class="col-md-6">
@@ -300,7 +300,7 @@
                 </div>
                 <div id="section6" class="section">
                     <div class="page-header">
-                        <h2>Jihoz Turlari</h2>
+                        <h2>Жихоз турлари</h2>
                     </div>
                     @foreach ($equipments as $activity)
                         <div class="col-md-6">
@@ -336,7 +336,7 @@
                     @endforeach
                     <form action="{{ route('equipment.create') }}" method="GET">
                         <button type="submit" class="btn btn-primary pull-right">
-                            Jihoz Turlarini Qo'shish
+                            Жихоз турини кошиш
                         </button>
                     </form>
                 </div>
@@ -472,7 +472,7 @@
                 </div>
                 <div id="section8" class="section">
                     <div class="page-header">
-                        <h2>Принятые заказы</h2>
+                        <h2>Қабул қилинган</h2>
                     </div>
                     @foreach($accepted as $user)
                         <div class="col-md-12">
@@ -587,7 +587,7 @@
                 </div>
                 <div id="section9" class="section">
                     <div class="page-header">
-                        <h2>Непринятые заказы</h2>
+                        <h2>Қабул қилинмаган</h2>
                     </div>
                     @foreach($notAccepted as $user)
                         <div class="col-md-12">

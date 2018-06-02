@@ -115,7 +115,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="honey_type">Асал тури</label>
+                                    <label for="honey_type">Асалари тури</label>
                                     <select class="honey_type" name="honey_types[]" multiple="multiple" style="width: 100%">
                                         @foreach($families as $family)
                                             <option value="{{$family->id}}">{{$family->name}}</option>
@@ -200,7 +200,7 @@
                                 <th rowspan="2">Т/Р</th>
                                 <th rowspan="2">Статус</th>
                                 <th rowspan="2">Боқилаётган асалари оиласи</th>
-                                <th rowspan="2">Асал тури</th>
+                                <th rowspan="2">Асалари тури</th>
                                 <th rowspan="2">Йиллик ишлаб чмқариш ҳажми (ПРОГНОЗ) кг</th>
                                 <th rowspan="2">Ишлаб чиқарилган асал миқдори (ФАКТ) кг</th>
                                 <th rowspan="2">Ҳисобот даври бошига асал заҳираси кг</th>

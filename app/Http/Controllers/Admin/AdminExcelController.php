@@ -136,7 +136,7 @@ class AdminExcelController extends Controller
         $collection = $groupByCity->groupBy('cities.id')->get();;
 
         $column2 = $this->createLetterRange($activities->count() + 8);
-       foreach (range(0, 7) as $i)
+        foreach (range(0, 7) as $i)
             unset($column2[$i]);
 
         $column = ['Ҳудуд','Туман номи','Уюшмага аъзо субъектлар сони','Субъектлар','','','Боқилаётган асалари оилалари сони','Ишчилар сони','Фаолият тури'];
@@ -270,19 +270,19 @@ class AdminExcelController extends Controller
 
         Excel::create('Аъзолар', function ($excel) use ($array, $column1) {
 
-           $excel->sheet(0, function ($sheet) use ($array, $column1) {
-               $sheet->mergeCells('A1:O1')->appendRow(1,['Ўзбекистон асаларичилари уюшмасига аъзо субектлар тўғрисида маълумот']);
-               $sheet->cells('A1:O1', function($cells) {
-                   $cells->setFontWeight('bold');
-               });
-               $sheet->cells('A3:O3', function($cells) {
-                   $cells->setFontWeight('bold');
-               });
+            $excel->sheet(0, function ($sheet) use ($array, $column1) {
+                $sheet->mergeCells('A1:O1')->appendRow(1,['Асаларичи субъектларининг сони']);
+                $sheet->cells('A1:O1', function($cells) {
+                    $cells->setFontWeight('bold');
+                });
+                $sheet->cells('A3:O3', function($cells) {
+                    $cells->setFontWeight('bold');
+                });
                 $sheet->appendRow(3, $column1);
                 foreach ($array as $i => $item) {
                     $sheet->appendRow(4 + $i, [
-                        $item->id, $item->subject, $item->region_name, $item->city_name, $item->neighborhood,
-                        $item->reg_date, $item->inn, $item->mfo, $item->bank_name, $item->address, $item->phone, $item->email,
+                        $item->id, ($item->subject != null || $item->subject != '' ) ? $item->subject : $item->fullName, $item->region_name, $item->city_name, $item->neighborhood,
+                        $item->reg_date, $item->inn, $item->mfo, $item->bank_name, $item->address, '+'.$item->phone.'', $item->email,
                         $item->fullName, $item->labors, $item->bees_count]);
                 }
                 $sheet->setBorder('A3:O'.($array->count()+3), 'thin');

@@ -34,7 +34,7 @@
                     </div>--}}
                     <div class="row">
                         <div class="page-header">
-                            <h2 class="pull-left">Hisobotlar</h2>
+                            <h2 class="pull-left">Хисоботлар</h2>
                             <div>
                                 <a href="{{route('region.export')}}" class="btn btn-success" tabindex="0"
                                    aria-controls="example"
@@ -253,7 +253,16 @@
                 },
                 columns: [
                     {data: 'id'},
-                    {data: 'subject'},
+                    {
+                        data: 'subject',
+                        render:function (data, type, row) {
+                            if(data == null || data == ''){
+                                return row.fullName;
+                            }else{
+                                return data;
+                            }
+                        }
+                    },
                     {data: 'region_name'},
                     {data: 'city_name'},
                     {data: 'neighborhood'},

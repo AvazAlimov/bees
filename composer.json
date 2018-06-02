@@ -10,7 +10,6 @@
         "kozz/laravel-guzzle-provider": "~6.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.4.0",
         "maatwebsite/excel": "~2.1.0",
         "symfony/css-selector": "3.4.4",
         "yajra/laravel-datatables-oracle": "^8.4"

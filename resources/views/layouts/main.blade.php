@@ -31,13 +31,10 @@
                     aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="/">
-                <img src="{{ asset('/Resources/logo1.png') }}" width="40" height="40" alt="">
-            </a>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#register">Аъзо бўлиш<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#register">Рўйхатдан ўтиш<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">Биз ҳақимизда</a>
@@ -59,11 +56,11 @@
                                 {{ \Illuminate\Support\Facades\Auth::user()->username }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="{{ route('home') }}">Home</a>
+                                <a class="dropdown-item" href="{{ route('home') }}">Бош саҳифа</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                    Logout
+                                    Чиқиш
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                           style="display: none;">
                                         {{ csrf_field() }}
