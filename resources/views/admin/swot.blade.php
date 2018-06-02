@@ -381,7 +381,7 @@
                         "next": "Keyingi"
                     },
                     "processing": "Qidirilyapti",
-                    "lengthMenu": "Ҳар бир сахифа учун _MENU_ ёзувларни кўрсатиш",,
+                    "lengthMenu": "Ҳар бир сахифа учун _MENU_ ёзувларни кўрсатиш",
                     "zeroRecords": "Хеч нарса топилмади",
                     "search": "Қидириш:",
                     "info": "_PAGES_ дан _PAGE_ таси сахифа кўрсатилган",
