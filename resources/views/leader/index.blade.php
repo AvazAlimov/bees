@@ -22,7 +22,7 @@
             </li>
             <li class="dropdown navs">
                 <a class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-bell"></i>
-                   Янги ҳисоботлар</a>
+                    Янги ҳисоботлар</a>
                 <ul class="dropdown-menu">
                     <li class="navs2"><a href="{{route('leader.requisition.production')}}"> Ишлаб чиқариш</a>
                     </li>
@@ -71,28 +71,29 @@
                                         <div class="col-md-8">{{ $user->neighborhood }}</div>
                                     </div>
                                     @if($user->type != 4)
-                                    <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Subyekt nomi:</strong></div>
-                                        <div class="col-md-8">{{ $user->subject }}</div>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong></div>
-                                        <div class="col-md-8">
-                                            {{ $user->reg_date}}
+                                        <div class="form-group col-md-12">
+                                            <div class="col-md-4"><strong>Subyekt nomi:</strong></div>
+                                            <div class="col-md-8">{{ $user->subject }}</div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>INN:</strong></div>
-                                        <div class="col-md-8">{{ $user->inn}}</div>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Bank nomi:</strong></div>
-                                        <div class="col-md-8">{{ $user->bank_name }}</div>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Bank MFO:</strong></div>
-                                        <div class="col-md-8">{{ $user->mfo }}</div>
-                                    </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong>
+                                            </div>
+                                            <div class="col-md-8">
+                                                {{ $user->reg_date}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="col-md-4"><strong>INN:</strong></div>
+                                            <div class="col-md-8">{{ $user->inn}}</div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="col-md-4"><strong>Bank nomi:</strong></div>
+                                            <div class="col-md-8">{{ $user->bank_name }}</div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="col-md-4"><strong>Bank MFO:</strong></div>
+                                            <div class="col-md-8">{{ $user->mfo }}</div>
+                                        </div>
                                     @endif
                                     <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Manzil:</strong></div>
@@ -115,7 +116,7 @@
                                         <div class="col-md-8">{{ $user->fullName }} </div>
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Ишчилар сони сони:</strong></div>
+                                        <div class="col-md-4"><strong>Ishchilar soni:</strong></div>
                                         <div class="col-md-8">{{ $user->labors}}</div>
                                     </div>
                                     <div class="form-group col-md-12">
@@ -125,8 +126,12 @@
                                         @endforeach
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Боқлаётган асалари оилалари сони:</strong></div>
+                                        <div class="col-md-4"><strong>Boqlayotgan asalari oilalari soni:</strong></div>
                                         <div class="col-md-8">{{ $user->bees_count}}</div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Etishtirilgan asal miqdori (kg)</strong></div>
+                                        <div class="col-md-8">{{$user->honey_quantity}}</div>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Boqilayotgan asalari zotlari:</strong></div>
@@ -146,7 +151,8 @@
                                             </form>
                                         </div>
                                         <div class="col-md-2">
-                                            <form method="post" action="{{route('leader.user.refuse', $user->id)}}" onsubmit="return confirm('Хотите отказать?');">
+                                            <form method="post" action="{{route('leader.user.refuse', $user->id)}}"
+                                                  onsubmit="return confirm('Хотите отказать?');">
                                                 {{csrf_field()}}
                                                 <input type="submit" class="btn btn-block btn-warning form-group"
                                                        value="Отказать">
@@ -159,7 +165,8 @@
                                             </form>
                                         </div>
                                         <div class="col-md-2">
-                                            <form method="post" action="{{route('leader.user.delete', $user->id)}}" onsubmit="return confirm('Хотите удалить?');">
+                                            <form method="post" action="{{route('leader.user.delete', $user->id)}}"
+                                                  onsubmit="return confirm('Хотите удалить?');">
                                                 {{csrf_field()}}
                                                 <input type="submit" class="btn btn-block btn-danger" value="Удалить">
                                             </form>
@@ -204,16 +211,17 @@
                         <form class="col-md-3" action="{{route('leader.search')}}" method="get">
                             <button type="submit" name="filter" value="bank_name" class="btn btn-sm btn-default"
                                     style="display: block; width: 100%;">
-                                Bank nomi
+                                Банк номи
                             </button>
                         </form>
                         <form class="col-md-3" action="{{route('leader.search')}}" method="get">
                             <select class="form-control input-sm" name="type" onchange="this.form.submit()">
-                                <option>Asalari turi</option>
-                                <option value="1" {{Request::get('type') == 1 ? "selected" : ""}}>Корхона/ЯТТ</option>
-                                <option value="2" {{Request::get('type') == 2 ? "selected" : ""}}>Кўп тармоқли фермер хўжаликлари</option>
-                                <option value="3" {{Request::get('type') == 3 ? "selected" : ""}}>Деҳқон (шахсий ёрдамчи) хўжаликлари</option>
-                                <option value="4" {{Request::get('type') == 4 ? "selected" : ""}}>Жисмоний шахс</option>
+                                <option value="">Асал тури</option>
+                                <option value="2" {{Request::get('type') == 2 ? "selected" : ""}}>Юридик корхоналар (МЧЖ, ХК, ҚК)
+                                </option>
+                                <option value="3" {{Request::get('type') == 3 ? "selected" : ""}}>ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари
+                                </option>
+                                <option value="4" {{Request::get('type') == 4 ? "selected" : ""}}>Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)</option>
                             </select>
                         </form>
                     </div>
@@ -242,28 +250,29 @@
                                         <div class="col-md-8">{{ $user->neighborhood }}</div>
                                     </div>
                                     @if($user->type != 4)
-                                    <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Subyekt nomi:</strong></div>
-                                        <div class="col-md-8">{{ $user->subject }}</div>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong></div>
-                                        <div class="col-md-8">
-                                            {{ $user->reg_date}}
+                                        <div class="form-group col-md-12">
+                                            <div class="col-md-4"><strong>Subyekt nomi:</strong></div>
+                                            <div class="col-md-8">{{ $user->subject }}</div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>INN:</strong></div>
-                                        <div class="col-md-8">{{ $user->inn}}</div>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Bank nomi:</strong></div>
-                                        <div class="col-md-8">{{ $user->bank_name }}</div>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Bank MFO:</strong></div>
-                                        <div class="col-md-8">{{ $user->mfo }}</div>
-                                    </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong>
+                                            </div>
+                                            <div class="col-md-8">
+                                                {{ $user->reg_date}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="col-md-4"><strong>INN:</strong></div>
+                                            <div class="col-md-8">{{ $user->inn}}</div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="col-md-4"><strong>Bank nomi:</strong></div>
+                                            <div class="col-md-8">{{ $user->bank_name }}</div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="col-md-4"><strong>Bank MFO:</strong></div>
+                                            <div class="col-md-8">{{ $user->mfo }}</div>
+                                        </div>
                                     @endif
                                     <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Manzil:</strong></div>
@@ -286,16 +295,28 @@
                                         <div class="col-md-8">{{ $user->fullName }} </div>
                                     </div>
                                     <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Boqlayotgan asalari oilalari soni:</strong></div>
+                                        <div class="col-md-8">{{ $user->bees_count}}</div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Etishtirilgan asal miqdori (kg)</strong></div>
+                                        <div class="col-md-8">{{$user->honey_quantity}}</div>
+                                    </div>
+                                    <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Faloliyat turlari:</strong></div>
-                                        @foreach($user->activities as $activity)
-                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
-                                        @endforeach
+                                        <div class="col-md-8">
+                                            @foreach($user->activities as $activity)
+                                                <div><span>{{$activity->name}}</span></div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Boqilayotgan asalari zotlari:</strong></div>
-                                        @foreach($user->families as $activity)
-                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
-                                        @endforeach
+                                        <div class="col-md-8">
+                                            @foreach($user->families as $activity)
+                                                <div><span>{{$activity->name}}</span></div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="panel-footer">
@@ -316,6 +337,14 @@
                                                     {{csrf_field()}}
                                                     <input type="submit" class="btn btn-danger" value="Удалить">
                                                 </form>
+                                            </td>
+                                            <td>
+
+                                                <form action="{{route('leader.user.edit', $user->id)}}" method="get">
+                                                    <input type="submit" class="btn btn-block btn-primary form-group"
+                                                           value="Изменить">
+                                                </form>
+
                                             </td>
                                         </tr>
                                         </tbody>
@@ -359,16 +388,17 @@
                         <form class="col-md-3" action="{{route('leader.search.notAccepted')}}" method="get">
                             <button type="submit" name="filter" value="bank_name" class="btn btn-sm btn-default"
                                     style="display: block; width: 100%;">
-                                Bank nomi
+                                Банк номи
                             </button>
                         </form>
                         <form class="col-md-3" action="{{route('leader.search.notAccepted')}}" method="get">
                             <select class="form-control input-sm" name="type" onchange="this.form.submit()">
-                                <option>Asalari turi</option>
-                                <option value="1" {{Request::get('type') == 1 ? "selected" : ""}}>Корхона/ЯТТ</option>
-                                <option value="2" {{Request::get('type') == 2 ? "selected" : ""}}>Кўп тармоқли фермер хўжаликлари</option>
-                                <option value="3" {{Request::get('type') == 3 ? "selected" : ""}}>Деҳқон (шахсий ёрдамчи) хўжаликлари</option>
-                                <option value="4" {{Request::get('type') == 4 ? "selected" : ""}}>Жисмоний шахс</option>
+                                <option value="">Асал тури</option>
+                                <option value="2" {{Request::get('type') == 2 ? "selected" : ""}}>Юридик корхоналар (МЧЖ, ХК, ҚК)
+                                </option>
+                                <option value="3" {{Request::get('type') == 3 ? "selected" : ""}}>ЯТТ ва юридик шахс мақомимига эга бўлмаган Деҳконхўжаликлари
+                                </option>
+                                <option value="4" {{Request::get('type') == 4 ? "selected" : ""}}>Шаҳсий ёрдамчи хўжалик (Жисмоний Шаҳслар)</option>
                             </select>
                         </form>
                     </div>
@@ -402,7 +432,8 @@
                                             <div class="col-md-8">{{ $user->subject }}</div>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong></div>
+                                            <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong>
+                                            </div>
                                             <div class="col-md-8">
                                                 {{ $user->reg_date}}
                                             </div>
@@ -441,16 +472,28 @@
                                         <div class="col-md-8">{{ $user->fullName }} </div>
                                     </div>
                                     <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Boqlayotgan asalari oilalari soni:</strong></div>
+                                        <div class="col-md-8">{{ $user->bees_count}}</div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Etishtirilgan asal miqdori (kg)</strong></div>
+                                        <div class="col-md-8">{{$user->honey_quantity}}</div>
+                                    </div>
+                                    <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Faloliyat turlari:</strong></div>
-                                        @foreach($user->activities as $activity)
-                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
-                                        @endforeach
+                                        <div class="col-md-8">
+                                            @foreach($user->activities as $activity)
+                                                <div><span>{{$activity->name}}</span></div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Boqilayotgan asalari zotlari:</strong></div>
-                                        @foreach($user->families as $activity)
-                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
-                                        @endforeach
+                                        <div class="col-md-8">
+                                            @foreach($user->families as $activity)
+                                                <div><span>{{$activity->name}}</span></div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="panel-footer">
@@ -489,10 +532,10 @@
 
 @endsection
 @section('scripts')
- <script src="{{asset('js/jquery.cookie.js')}}"></script>
+    <script src="{{asset('js/jquery.cookie.js')}}"></script>
     <script>
         function switchSection(id) {
-            $.cookie("leader",id,{ expires: 7, path: '/leader' });
+            $.cookie("leader", id, {expires: 7, path: '/leader'});
             var section = document.getElementsByClassName('section');
             for (var i = 0; i < section.length; i++)
                 section[i].style.display = "none";
@@ -501,8 +544,8 @@
         }
 
         window.onload = function () {
-            if(typeof $.cookie("leader") === "undefined"){
-                $.cookie("leader","section2",{ expires: 7, path: '/leader' });
+            if (typeof $.cookie("leader") === "undefined") {
+                $.cookie("leader", "section2", {expires: 7, path: '/leader'});
             }
             var cookie = $.cookie("leader");
 

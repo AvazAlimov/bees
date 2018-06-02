@@ -1,9 +1,9 @@
 @extends('layouts.app-admin')
 @section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-{{--    <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-    <link href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css" rel="stylesheet">
-    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">--}}
+    {{--    <link href="{{asset('css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+        <link href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css" rel="stylesheet">
+        <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">--}}
 @stop
 @section('nav')
     <nav class="navbar navbar-default" id="navigation">
@@ -40,11 +40,17 @@
                     Аъзолик <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li data-toggle="tab" class="navs2"><a onclick="switchSection('section7')">
-                            Аризалар <span class="badge badge-info">{{$waiting->total() != 0 ? $waiting->total() : ''}}</span></a></li>
+                            Аризалар <span
+                                    class="badge badge-info">{{$waiting->total() != 0 ? $waiting->total() : ''}}</span></a>
+                    </li>
                     <li data-toggle="tab" class="navs2"><a onclick="switchSection('section8')">
-                            Қабул қилинган <span class="badge badge-info">{{$accepted->total() != 0 ? $accepted->total() : ''}}</span> </a></li>
+                            Қабул қилинган <span
+                                    class="badge badge-info">{{$accepted->total() != 0 ? $accepted->total() : ''}}</span>
+                        </a></li>
                     <li data-toggle="tab" class="navs2"><a onclick="switchSection('section9')">
-                            Қабул қилинмаган <span class="badge badge-info">{{$notAccepted->count() != 0 ? $notAccepted->count() : ''}}</span> </a></li>
+                            Қабул қилинмаган <span
+                                    class="badge badge-info">{{$notAccepted->count() != 0 ? $notAccepted->count() : ''}}</span>
+                        </a></li>
                 </ul>
             </li>
             <li class="dropdown navs">
@@ -195,9 +201,9 @@
                                                 </td>
                                                 <td>
                                                     {{--<form action="{{ route('city.delete', $city->id) }}"--}}
-                                                          {{--onclick="return confirm('Хотите удалить')" method="get">--}}
-                                                        {{--<button type="submit" class="btn btn-danger pull-right">Удалить--}}
-                                                        {{--</button>--}}
+                                                    {{--onclick="return confirm('Хотите удалить')" method="get">--}}
+                                                    {{--<button type="submit" class="btn btn-danger pull-right">Удалить--}}
+                                                    {{--</button>--}}
                                                     {{--</form>--}}
                                                 </td>
                                             </tr>
@@ -374,7 +380,8 @@
                                             <div class="col-md-8">{{ $user->subject }}</div>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong></div>
+                                            <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong>
+                                            </div>
                                             <div class="col-md-8">
                                                 {{ $user->reg_date}}
                                             </div>
@@ -418,19 +425,27 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Faloliyat turlari:</strong></div>
-                                        @foreach($user->activities as $activity)
-                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
-                                        @endforeach
+                                        <div class="col-md-8">
+                                            @foreach($user->activities as $activity)
+                                                <div><span>{{$activity->name}}</span></div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <div class="col-md-4"><strong>Боқлаётган асалари оилалари сони:</strong></div>
+                                        <div class="col-md-4"><strong>Boqlayotgan asalari oilalari soni:</strong></div>
                                         <div class="col-md-8">{{ $user->bees_count}}</div>
                                     </div>
                                     <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Etishtirilgan asal miqdori (kg)</strong></div>
+                                        <div class="col-md-8">{{$user->honey_quantity}}</div>
+                                    </div>
+                                    <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Boqilayotgan asalari zotlari:</strong></div>
-                                        @foreach($user->families as $activity)
-                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
-                                        @endforeach
+                                        <div class="col-md-8">
+                                            @foreach($user->families as $activity)
+                                                <div><span>{{$activity->name}}</span></div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="panel-footer">
@@ -443,7 +458,8 @@
                                             </form>
                                         </div>
                                         <div class="col-md-2">
-                                            <form method="post" action="{{route('admin.user.refuse', $user->id)}}" onsubmit="return confirm('Хотите отказать?');">
+                                            <form method="post" action="{{route('admin.user.refuse', $user->id)}}"
+                                                  onsubmit="return confirm('Хотите отказать?');">
                                                 {{csrf_field()}}
                                                 <input type="submit" class="btn btn-block btn-warning form-group"
                                                        value="Отказать">
@@ -456,7 +472,8 @@
                                             </form>
                                         </div>
                                         <div class="col-md-2">
-                                            <form method="post" action="{{route('admin.user.delete', $user->id)}}" onsubmit="return confirm('Хотите удалить?');">
+                                            <form method="post" action="{{route('admin.user.delete', $user->id)}}"
+                                                  onsubmit="return confirm('Хотите удалить?');">
                                                 {{csrf_field()}}
                                                 <input type="submit" class="btn btn-block btn-danger" value="Удалить">
                                             </form>
@@ -504,7 +521,8 @@
                                             <div class="col-md-8">{{ $user->subject }}</div>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong></div>
+                                            <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong>
+                                            </div>
                                             <div class="col-md-8">
                                                 {{ $user->reg_date}}
                                             </div>
@@ -544,15 +562,27 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Faloliyat turlari:</strong></div>
-                                        @foreach($user->activities as $activity)
-                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
-                                        @endforeach
+                                        <div class="col-md-8">
+                                            @foreach($user->activities as $activity)
+                                                <div><span>{{$activity->name}}</span></div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Boqlayotgan asalari oilalari soni:</strong></div>
+                                        <div class="col-md-8">{{ $user->bees_count}}</div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Etishtirilgan asal miqdori (kg)</strong></div>
+                                        <div class="col-md-8">{{$user->honey_quantity}}</div>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Boqilayotgan asalari zotlari:</strong></div>
-                                        @foreach($user->families as $activity)
-                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
-                                        @endforeach
+                                        <div class="col-md-8">
+                                            @foreach($user->families as $activity)
+                                                <div><span>{{$activity->name}}</span></div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="panel-footer">
@@ -572,6 +602,13 @@
                                                       action="{{route('admin.user.delete', $user->id)}}">
                                                     {{csrf_field()}}
                                                     <input type="submit" class="btn btn-danger" value="Удалить">
+                                                </form>
+                                            </td>
+                                            <td>
+
+                                                <form action="{{route('admin.user.edit', $user->id)}}" method="get">
+                                                    <input type="submit" class="btn btn-block btn-primary form-group"
+                                                           value="Изменить">
                                                 </form>
                                             </td>
                                         </tr>
@@ -619,7 +656,8 @@
                                             <div class="col-md-8">{{ $user->subject }}</div>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong></div>
+                                            <div class="col-md-4"><strong>Subyekt Ro'yhatdan O'tkazilgan Sana</strong>
+                                            </div>
                                             <div class="col-md-8">
                                                 {{ $user->reg_date}}
                                             </div>
@@ -659,15 +697,27 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Faloliyat turlari:</strong></div>
-                                        @foreach($user->activities as $activity)
-                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
-                                        @endforeach
+                                        <div class="col-md-8">
+                                            @foreach($user->activities as $activity)
+                                                <div><span>{{$activity->name}}</span></div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Boqlayotgan asalari oilalari soni:</strong></div>
+                                        <div class="col-md-8">{{ $user->bees_count}}</div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-4"><strong>Etishtirilgan asal miqdori (kg)</strong></div>
+                                        <div class="col-md-8">{{$user->honey_quantity}}</div>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <div class="col-md-4"><strong>Boqilayotgan asalari zotlari:</strong></div>
-                                        @foreach($user->families as $activity)
-                                            <div class="col-md-8"><span>{{$activity->name}}</span></div>
-                                        @endforeach
+                                        <div class="col-md-8">
+                                            @foreach($user->families as $activity)
+                                                <div><span>{{$activity->name}}</span></div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="panel-footer">
@@ -709,7 +759,7 @@
     <script src="{{asset('js/jquery.cookie.js')}}"></script>
     <script>
         function switchSection(id) {
-            $.cookie("admin",id,{ expires: 7, path: '/admin' });
+            $.cookie("admin", id, {expires: 7, path: '/admin'});
 
             var section = document.getElementsByClassName('section');
             for (var i = 0; i < section.length; i++)
@@ -719,20 +769,20 @@
         }
 
         window.onload = function () {
-            if(typeof $.cookie("admin") === "undefined"){
-                $.cookie("admin","section2",{ expires: 7, path: '/admin' });
+            if (typeof $.cookie("admin") === "undefined") {
+                $.cookie("admin", "section2", {expires: 7, path: '/admin'});
             }
             var cookie = $.cookie("admin");
 
             switchSection(cookie);
             var navs = document.getElementsByClassName("navs2");
             navs[cookie.replace("section", "") - 1].className = "navs2 active";
-            $(navs[cookie.replace("section", "") - 1]).filter(function(){
+            $(navs[cookie.replace("section", "") - 1]).filter(function () {
                 return $(this).parent().parent().is('li')
             }).parent().parent().addClass('active');
 
         }
- 
+
 
     </script>
 @endsection

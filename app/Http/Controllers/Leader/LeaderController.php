@@ -160,7 +160,10 @@ Parol: '. $data['password'].'
             }
         }
         if ($request->type) {
-            $accepted_users = $accepted_users->where('type', $request->type);
+            if($request->type < 3)
+                $accepted_users = $accepted_users->where('type','<', $request->type);
+            else
+                $accepted_users = $accepted_users->where('type', $request->type);
         }
 
         $accepted_users = $accepted_users->paginate(10, ['*'], 'accepted');
@@ -245,7 +248,10 @@ Parol: '. $data['password'].'
             }
         }
         if ($request->type) {
-            $accepted_users = $accepted_users->where('type', $request->type);
+            if($request->type < 3)
+                $accepted_users = $accepted_users->where('type','<', $request->type);
+            else
+                $accepted_users = $accepted_users->where('type', $request->type);
         }
 
         $notAccepted = $accepted_users->paginate(10, ['*'], 'accepted');
@@ -277,7 +283,7 @@ Parol: '. $data['password'].'
             'mfo' => $request->type < 4 ? 'required|digits:5' : '',
             'address' => 'required|max:255',
             'phone' => 'required|max:19|min:12',
-            'email' => 'required|email',
+            'email' => 'nullable|email',
             'fullName' => 'required|max:255',
             'labors' => $request->type < 4 ? 'required|numeric|min:0' : '',
             'activities.*' =>'exists:activities,id',

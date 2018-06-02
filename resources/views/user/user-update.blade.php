@@ -22,7 +22,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="region_1" class="col-form-label col-form-label-sm">Вилоят номи</label>
                                     <select class="form-control form-control-sm" id="region_id" name="region_id"
-                                            onchange="regionChanged(this.id)" required>
+                                            onchange="regionChanged()" required>
                                         @foreach($regions as $region)
                                             <option value="{{$region->id}}" {{$user->region->id == $region->id ? "selected" : ""}}>{{ $region->name }}</option>
                                         @endforeach
@@ -33,7 +33,7 @@
                                         номи</label>
                                     <select class="form-control form-control-sm" id="city_id" name="city_id" required>
                                         @foreach($cities as $city)
-                                            <option value="{{$city->id}}" {{$user->city->id == $city->id ? "selected" : ""}}>{{$city->name}}</option>
+                                            <option value="{{$city->id}}">{{$city->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -58,13 +58,20 @@
 
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-6">
                                     <label for="subject_1" class="col-form-label col-form-label-sm">Субъект (корхона,
                                         ЯТТ)
                                         номи</label>
                                     <input type="text" class="form-control form-control-sm" id="subject_1"
                                            name="subject"
                                            value="{{$user->subject}}"
+                                           required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="bees_count">Боқлаётган асалари оилалари сони</label>
+                                    <input type="number" class="form-control bees_count" id="bees_count"
+                                           name="bees_count"
+                                           value="{{$user->bees_count}}" min="0"
                                            required>
                                 </div>
                             </div>
@@ -126,8 +133,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="email_1" class="col-form-label col-form-label-sm">Электрон почта</label>
                                     <input type="email" class="form-control form-control-sm" id="email_1" name="email"
-                                           value="{{$user->email}}"
-                                           required>
+                                           value="{{$user->email}}">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="fullName_1" class="col-form-label col-form-label-sm">Корхона директори
@@ -147,6 +153,14 @@
                                            value="{{$user->labors}}"
                                            required>
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <label for="honey_quantity" class="col-form-label col-form-label-sm">Етиштирилган асал миқдори (кг)</label>
+                                    <input type="number" class="form-control form-control-sm" id="honey_quantity" name="honey_quantity"
+                                           value="{{$user->honey_quantity}}"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="activity_1" class="col-form-label col-form-label-sm">Фаолият тури (бир
                                         нечтасини танласа бўлади)</label>
@@ -170,6 +184,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="text-center">
                                 <input type="submit" class="btn btn-warning" value="Рўйхатдан ўтиш">
                             </div>

@@ -706,8 +706,7 @@
                 <h2 class="display-5">Боғланиш</h2>
                 <hr>
                 <br>
-                <h3>Тошкент Шаҳар, Алишер Навоий шоҳ кўчаси, 40 А уй</h3>
-                <h3>(0371) 200 70 00</h3>
+                <h3>Тошкент шаҳар, Навоий кўчаси, 40 уй</h3>
                 <br>
             </div>
             <div id="map" style="width:100%;height:500px"></div>
@@ -815,7 +814,7 @@
     <!--suppress JSUnresolvedVariable, JSUnresolvedFunction, JSUnusedLocalSymbols -->
     <script>
         function myMap() {
-            var myCenter = new google.maps.LatLng(41.310441, 69.278460);
+            var myCenter = new google.maps.LatLng(41.322599, 69.239949);
             var mapCanvas = document.getElementById("map");
             var mapOptions = {center: myCenter, zoom: 16};
             var map = new google.maps.Map(mapCanvas, mapOptions);
