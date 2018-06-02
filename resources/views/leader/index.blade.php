@@ -44,7 +44,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div id="section1" class="section">
                     <div class="page-header">
-                        <h2>Запросы </h2>
+                        <h2> Аризалар </h2>
                     </div>
                     @foreach($waiting as $user)
                         <div class="col-md-12">
@@ -182,7 +182,7 @@
                 </div>
                 <div id="section2" class="section">
                     <div class="page-header">
-                        <h2>Принятые заказы</h2>
+                        <h2>Қабул қилинган</h2>
                     </div>
                     <form action="{{route('leader.search')}}" method="get">
                         <div class="input-group">
@@ -359,7 +359,7 @@
                 </div>
                 <div id="section3" class="section">
                     <div class="page-header">
-                        <h2>Непринятые заказы</h2>
+                        <h2>Қабул қилинмаган</h2>
                     </div>
                     <form action="{{route('leader.search.notAccepted')}}" method="get">
                         <div class="input-group">

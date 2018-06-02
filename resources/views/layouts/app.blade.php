@@ -49,7 +49,7 @@
                             <li class="dropdown">
                                 @auth('leader')
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->firstName }} {{ Auth::user()->lastName }}<span class="caret"></span>
+                                    {{ Auth::user()->firstName }} {{ Auth::user()->lastName }} {{Auth::user()->region != null ? '('.Auth::user()->region->name.')' : ''}}<span class="caret"></span>
                                 </a>
                                 @endauth
                                 <ul class="dropdown-menu">
