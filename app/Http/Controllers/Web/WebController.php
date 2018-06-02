@@ -39,6 +39,7 @@ class WebController extends Controller
                 'reg_date' => $type < 4 ? 'required' : '',
                 'inn' => $type < 4 ? 'required|digits:9' : '',
                 'mfo' => $type < 4 ? 'required|digits:5' : '',
+                'honey_quantity' => 'required|numeric|min:0',
                 'address' => 'required|max:255',
                 'phone' => 'required|max:19|min:12',
                 'email' => 'nullable|email',
