@@ -52,6 +52,7 @@
                                 <th rowspan="2">Мавсум бошидаги асал захираси</th>
                                 <th rowspan="2">Ишлаб чикариш хажми (Прогноз)</th>
                                 <th rowspan="2">Ишлаб чикариш хажми (Факт)</th>
+                                <th rowspan="2">Етиштирилган асал миқдори (кг)</th>
                                 <th colspan="2" scope="colgroup">Реализация килинган асал микдори</th>
                                 <th colspan="2" scope="colgroup">Асал захираси</th>
                             </tr>
@@ -75,6 +76,7 @@
                                 <th>{{$total[0]->reserves != null ? $total[0]->reserves : 0}}</th>
                                 <th>{{$total[0]->annual_prog != null ? $total[0]->annual_prog : 0}}</th>
                                 <th>{{$total[0]->produced_honey != null ? $total[0]->produced_honey  : 0}}</th>
+                                <th>{{$total[0]->honey_quantity != null ? $total[0]->honey_quantity  : 0}}</th>
                                 <th>{{$total[0]->realized_quantity != null ? $total[0]->realized_quantity: 0}}</th>
                                 <th>{{$total[0]->realized_price != null ? $total[0]->realized_price : 0}}</th>
                                 <th>{{$total[0]->stock_quantity != null ? $total[0]->stock_quantity : 0}}</th>
@@ -101,6 +103,7 @@
                                 <th rowspan="2">Уюшмага аъзо субъектлар сони</th>
                                 <th colspan="3" scope="colgroup">Субъектлар</th>
                                 <th colspan="{{$activities->count()}}" scope="colgroup">Фаолият тури</th>
+                                <th rowspan="2" scope="colgroup">Етиштирилган асал миқдори (кг)</th>
                                 <th rowspan="2" scope="colgroup">Боқилаётган асалари оилалари сони</th>
                                 <th rowspan="2" scope="colgroup">Ишчилар сони</th>
                             </tr>
@@ -143,6 +146,7 @@
                                 <th>Телефон рақами</th>
                                 <th>Электрон почта</th>
                                 <th>Хўжалик раҳбари исми шарифи</th>
+                                <th>Етиштирилган асал миқдори (кг)</th>
                                 <th>Ишчилар сони</th>
                                 <th>Боқлаётган асалари оилалари сони</th>
                             </tr>
@@ -206,6 +210,10 @@
                         data: 'activity{{$activity->id}}'
                     },
                         @endforeach
+                    {
+                        data: 'honey_quantity',
+                        defaultContent: 0
+                    },
                     {
                         data: 'bees_count',
                         defaultContent: 0
@@ -275,6 +283,10 @@
                     {data: 'email'},
                     {data: 'fullName'},
                     {
+                        data: 'honey_quantity',
+                        defaultContent: 0
+                    },
+                    {
                         data: 'labors',
                         defaultContent: 0
                     },
@@ -335,6 +347,10 @@
                     },
                     {
                         data: 'produced_honey',
+                        defaultContent: 0
+                    },
+                    {
+                        data: 'honey_quantity',
                         defaultContent: 0
                     },
                     {
