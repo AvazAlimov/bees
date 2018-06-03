@@ -65,15 +65,15 @@
         <div class="container">
             <h2 class="display-5 text-center">Рўйхатдан ўтиш йўриқномаси</h2>
             <hr>
-           <div class="todo">
-            <ol>
-                <li><p class="text-justify">Шахсий маълумотларингизни киритинг:  исм,  фамилия,  отангизнинг исми, туғилган сана ва яшаш манзили.</p> </li>
-                <li><p class="text-justify">Боғланиш учун маълумотларингизни киритинг:  электрон почта манзилингиз ва телефон рақамингиз.</p> </li>
-                <li><p class="text-justify">Мобил телефонингиз рақамини киритинг. </p></li>
-                <li><p class="text-justify">Боқилайотган асалари зотларини ва етиштирилган асал миқдорини кўрсатинг.</p></li>
-                <li><p class="text-justify">Фаолият турини танланг ва рўйҳатдан ўтиш тугмасини босинг.</p></li>
-            </ol>
-           </div>
+            <div class="todo">
+                <ol>
+                    <li><p class="text-justify">Шахсий маълумотларингизни киритинг:  исм,  фамилия,  отангизнинг исми, туғилган сана ва яшаш манзили.</p> </li>
+                    <li><p class="text-justify">Боғланиш учун маълумотларингизни киритинг:  электрон почта манзилингиз ва телефон рақамингиз.</p> </li>
+                    <li><p class="text-justify">Мобил телефонингиз рақамини киритинг. </p></li>
+                    <li><p class="text-justify">Боқилайотган асалари зотларини ва етиштирилган асал миқдорини кўрсатинг.</p></li>
+                    <li><p class="text-justify">Фаолият турини танланг ва рўйҳатдан ўтиш тугмасини босинг.</p></li>
+                </ol>
+            </div>
             <br>
             <div class="card border-warning">
                 <div class="card-header bg-warning">
@@ -336,7 +336,7 @@
                                 <label for="email_2" class="col-form-label col-form-label-sm">Электрон почта</label>
                                 <input type="email" class="form-control form-control-sm" id="email_2" name="email"
                                        value="{{old('email')}}"
-                                       required>
+                                >
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="fullName_2" class="col-form-label col-form-label-sm">Хўжалик раҳбари исми
@@ -490,7 +490,7 @@
                                 <label for="email_3" class="col-form-label col-form-label-sm">Электрон почта</label>
                                 <input type="email" class="form-control form-control-sm" id="email_3" name="email"
                                        value="{{old('email')}}"
-                                       required>
+                                >
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="fullName_3" class="col-form-label col-form-label-sm">Хўжалик раҳбари исми
@@ -600,7 +600,7 @@
                                 <label for="email_4" class="col-form-label col-form-label-sm">Электрон почта</label>
                                 <input type="email" class="form-control form-control-sm" id="email_4" name="email"
                                        value="{{old('email')}}"
-                                       required>
+                                >
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="bees_count_4" class="col-form-label col-form-label-sm">Боқлаётган асалари
